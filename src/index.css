@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optimize font loading */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation; /* Improve touch responsiveness */
+  }
+
+  body {
+    @apply bg-black text-white;
+    font-family: Futura, system-ui, -apple-system, BlinkMacSystemFont,
+      sans-serif !important;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior-y: none; /* Prevent pull-to-refresh on mobile */
+  }
+
+  /* Improve touch targets on mobile */
+  @media (max-width: 768px) {
+    button,
+    a,
+    input,
+    [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 8px;
+    }
+  }
+
+  /* Reduce motion if user prefers it */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Performance optimized animations with will-change */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Performance optimized classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(90deg, #00d1ff, #ff00d6);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: width;
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+.project-card {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.project-card:hover {
+  transform: translateY(-8px) scale(1.01);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #00d1ff, #ff00d6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-link {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #00d1ff;
+  border-radius: 50%;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+.nav-link:hover::before {
+  transform: translateY(-50%) scale(1);
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+.slide-in {
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.fade-up {
+  animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.scale-in {
+  animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Optimize footer styles */
+footer {
+  position: relative;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 14px;
+  text-align: right;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  .project-card {
+    transform: none !important; /* Disable hover effects on mobile */
+  }
+  
+  .nav-link::before {
+    display: none; /* Remove decorative elements that might cause jank */
+  }
+  
+  /* Optimize image loading */
+  img {
+    content-visibility: auto;
+    contain: content;
+  }
+}
