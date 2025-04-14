@@ -3,6 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Career from './pages/Career';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import InteractiveDemo from './pages/InteractiveDemo';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -12,6 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/career" element={<Career />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/interactive" element={<InteractiveDemo />} />
       </Routes>
       <>
         <ScrollToTop />

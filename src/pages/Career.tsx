@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { TestTube2, Bug, Code2 } from 'lucide-react';
+import { TestTube2, Bug, Code2, Briefcase, Award, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Career = () => {
   const careerHistory = [
@@ -18,9 +19,8 @@ const Career = () => {
         'Documenting test results, tracking bugs, and providing detailed feedback to enhance software performance.',
       ],
       skills: [
-        'Selenium',
         'Cypress',
-        'TestNG',
+        'JMeter',
         'JIRA',
         'Git',
         'Postman',
@@ -115,42 +115,96 @@ const Career = () => {
   }, []);
 
   return (
-    <div className="pt-20 md:pt-24 pb-16 md:pb-20">
-      <div className="container mx-auto px-4">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-black"
+    >
+      <div className="container mx-auto px-4 pt-20 md:pt-24 pb-16 md:pb-20">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 md:mb-8 gradient-text reveal">
-            Career Journey
-          </h1>
-          <p className="text-lg md:text-xl text-gray-400 mb-12 md:mb-16 reveal">
-            A timeline of my professional growth and achievements in the Tech
-            Industry
-          </p>
+          <motion.div
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12 md:mb-16"
+          >
+            <motion.h1
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl md:text-6xl font-bold mb-6 gradient-text reveal"
+            >
+              Career Journey
+            </motion.h1>
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-lg md:text-xl text-gray-400 reveal"
+            >
+              A timeline of my professional growth and achievements in the Tech Industry
+            </motion.p>
+          </motion.div>
 
           <div className="space-y-16 md:space-y-20">
             {careerHistory.map((role, index) => (
-              <div key={index} className="reveal">
-                <div className="bg-gray-900/30 rounded-xl p-6 md:p-8 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00D1FF]/10 to-[#FF00D6]/10 blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="reveal"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.02, rotateX: 5 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-gray-800/30 rounded-xl p-6 md:p-8 relative overflow-hidden group perspective backdrop-blur-sm border border-gray-700/50 hover:border-[#00D1FF]/50"
+                >
+                  <motion.div
+                    className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00D1FF]/10 to-[#FF00D6]/10 blur-3xl group-hover:scale-150 transition-transform duration-700"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 45, 0],
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  />
 
                   <div className="relative">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
                       <div>
-                        <h3 className="text-2xl md:text-3xl font-bold gradient-text mb-2">
-                          {role.title}
-                        </h3>
-                        <p className="text-lg md:text-xl text-gray-400">
-                          {role.company}
-                        </p>
-                        <p className="text-sm text-gray-500 mt-1">
-                          {role.period}
-                        </p>
+                        <motion.div
+                          whileHover={{ scale: 1.05 }}
+                          className="flex items-center gap-3 mb-2"
+                        >
+                          <Briefcase className="w-6 h-6 text-[#00D1FF]" />
+                          <h3 className="text-2xl md:text-3xl font-bold gradient-text">
+                            {role.title}
+                          </h3>
+                        </motion.div>
+                        <div className="flex items-center gap-3 text-lg md:text-xl text-gray-400 mb-2">
+                          <Award className="w-5 h-5 text-[#FF00D6]" />
+                          <span>{role.company}</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-gray-500">
+                          <Clock className="w-4 h-4" />
+                          <span>{role.period}</span>
+                        </div>
                       </div>
                       {index === 0 && (
-                        <div className="flex gap-2 mt-4 md:mt-0">
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          className="flex gap-2 mt-4 md:mt-0"
+                        >
                           <span className="px-3 py-1 bg-gradient-to-r from-[#00D1FF]/10 to-[#FF00D6]/10 rounded-full text-[#00D1FF] text-sm border border-[#00D1FF]/20">
                             Current Role
                           </span>
-                        </div>
+                        </motion.div>
                       )}
                     </div>
 
@@ -165,10 +219,17 @@ const Career = () => {
                       </h4>
                       <ul className="space-y-3">
                         {role.responsibilities.map((resp, idx) => (
-                          <li key={idx} className="flex items-start">
-                            <Bug className="w-4 h-4 mr-3 mt-1 flex-shrink-0 text-[#FF00D6]" />
-                            <span className="text-gray-400">{resp}</span>
-                          </li>
+                          <motion.li
+                            key={idx}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            viewport={{ once: true }}
+                            className="flex items-start group"
+                          >
+                            <Bug className="w-4 h-4 mr-3 mt-1 flex-shrink-0 text-[#FF00D6] group-hover:scale-110 transition-transform" />
+                            <span className="text-gray-400 group-hover:text-gray-300 transition-colors">{resp}</span>
+                          </motion.li>
                         ))}
                       </ul>
                     </div>
@@ -180,23 +241,24 @@ const Career = () => {
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {role.skills.map((skill, idx) => (
-                          <span
+                          <motion.span
                             key={idx}
-                            className="px-3 py-1 bg-gray-800/50 rounded-full text-sm text-gray-300 hover:bg-gray-700/50 transition-colors"
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            className="px-3 py-1 bg-gray-700/50 rounded-full text-sm text-gray-300 hover:bg-gray-600/50 transition-colors"
                           >
                             {skill}
-                          </span>
+                          </motion.span>
                         ))}
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

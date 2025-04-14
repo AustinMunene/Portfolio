@@ -38,6 +38,26 @@ const Navbar = () => {
             >
               Career
             </NavLink>
+            <NavLink
+              to="/blog"
+              className={({ isActive }) =>
+                `nav-link text-gray-400 hover:text-white transition-colors ${
+                  isActive ? 'text-white' : ''
+                }`
+              }
+            >
+              Blog
+            </NavLink>
+            <NavLink
+              to="/interactive"
+              className={({ isActive }) =>
+                `nav-link text-gray-400 hover:text-white transition-colors ${
+                  isActive ? 'text-white' : ''
+                }`
+              }
+            >
+              Interactive
+            </NavLink>
 
             <div className="flex gap-6">
               <a
@@ -85,6 +105,28 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             Career
+          </NavLink>
+          <NavLink
+            to="/blog"
+            className={({ isActive }) =>
+              `block py-2 text-gray-400 hover:text-white transition-colors ${
+                isActive ? 'text-white' : ''
+              }`
+            }
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Blog
+          </NavLink>
+          <NavLink
+            to="/interactive"
+            className={({ isActive }) =>
+              `block py-2 text-gray-400 hover:text-white transition-colors ${
+                isActive ? 'text-white' : ''
+              }`
+            }
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Interactive
           </NavLink>
 
           <div className="flex gap-6 py-2">

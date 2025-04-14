@@ -1,73 +1,67 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  ArrowUpRight,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 
 const Home = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const autoPlayInterval = useRef<number | null>(null);
+
   const projects = [
     {
-      title: 'faced by cynie',
+      title: 'Faced by cynie',
       description:
-        'Faced by Cynie is a vibrant online portfolio showcasing Her artistic journey through captivating visuals and creative expression. Built using Vue.js and TypeScript, along with HTML, CSS, and JavaScript, the site features a seamless blend of photography, graphic design, and personal projects.',
+        'A modern web application that allows users to create and share their stories through beautiful, customizable cards. Built with a focus on user experience and visual appeal.',
       images: [
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.05.39.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjA1LjM5LnBuZyIsImlhdCI6MTczODM0NzkxMiwiZXhwIjo0ODkxOTQ3OTEyfQ.5msgI3mM10Bxt8VLmaOcOZv7XwC-PrlMIoUCg9Q4vDg',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.05.54.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjA1LjU0LnBuZyIsImlhdCI6MTczODM0Nzg3NiwiZXhwIjo0ODkxOTQ3ODc2fQ.lhKPRwEHdD1D8XrURhQOdRk6P3-nN9BWUD62H_4raZQ',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.06.12.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjA2LjEyLnBuZyIsImlhdCI6MTczODM0Nzg0OCwiZXhwIjo0ODkxOTQ3ODQ4fQ.GZX5Gs7e2PeUwKX3nJCLqX9DtYdAxXRuZYq8ZtCm-gY',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.06.41.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjA2LjQxLnBuZyIsImlhdCI6MTczODM0NzgyNSwiZXhwIjo0ODkxOTQ3ODI1fQ.n4AdpnRPa2Vml_t0uWXoZqqBD8KtoQ6RsoJjUOhP0ug',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.07.05.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjA3LjA1LnBuZyIsImlhdCI6MTczODM0NzczMywiZXhwIjo0ODkxOTQ3NzMzfQ.vJg2FVhzmRdVAZco3AUcJawkXzaRE68T7lnofXKH-YA',
+        '/images/faced-by-cynie-1.png',
+        '/images/faced-by-cynie-2.png',
+        '/images/faced-by-cynie-3.png',
       ],
-      link: 'https://facedbycynie.netlify.app/',
-      tech: 'React • CSS •JavaScript • Node.js',
+      link: 'https://facedbycynie.com',
+      github: 'https://github.com/yourusername/faced-by-cynie',
+      stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     },
     {
       title: 'MKU Hostel Management System',
       description:
-        'Welcome to MKU HMS—your all-in-one hostel management solution designed to simplify the life of hostel administrators and residents alike. This platform streamlines the entire hostel experience, from room allocations to payments, enhancing communication and convenience for everyone involved.',
+        'A comprehensive hostel management system for Mount Kenya University, featuring room allocation, student registration, and administrative tools. Streamlines the hostel management process for better efficiency.',
       images: [
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.07.58.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjA3LjU4LnBuZyIsImlhdCI6MTczODM0NzY4NSwiZXhwIjo0ODkxOTQ3Njg1fQ._5StNfwUAc4UXzgosPTg5hV0LB1HMEVUcuWglPSfXUw',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.08.15.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjA4LjE1LnBuZyIsImlhdCI6MTczODM0NzY2MSwiZXhwIjo0ODkxOTQ3NjYxfQ.jzaJwoDAYhHbG93hWs01Sjq_ekqjdvIWSgYUODN6Jvw',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.08.48.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjA4LjQ4LnBuZyIsImlhdCI6MTczODM0NzYzMSwiZXhwIjo0ODkxOTQ3NjMxfQ.1sWg98VkKhEedldJQGcbo_qJYaqQv6QQ4TeJt7jslsk',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.10.50.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjEwLjUwLnBuZyIsImlhdCI6MTczODM0NzYwNCwiZXhwIjo0ODkxOTQ3NjA0fQ.dSI0F5vTEKFX6uivx8CgetbdtU64gh004RlKc6yfzOk',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2021.11.03.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIxLjExLjAzLnBuZyIsImlhdCI6MTczODM0NzU1NiwiZXhwIjo0ODkxOTQ3NTU2fQ.HxxiAt9EClTXKw2O5eYiT9khTwmOPuVROKGiThFAKyw',
+        '/images/mku-hostel-1.png',
+        '/images/mku-hostel-2.png',
+        '/images/mku-hostel-3.png',
       ],
-      link: 'https://mkuhms.netlify.app/',
-      tech: 'Bootstrap • React.js • CSS • Node.js • Express.js • MongoDB',
+      link: 'https://mku-hostel.com',
+      github: 'https://github.com/yourusername/mku-hostel',
+      stack: ['React', 'Node.js', 'MongoDB', 'Express'],
     },
     {
       title: 'Portfolio',
       description:
-        'Explore the innovative world of Austin Munene! This portfolio not only demonstrates a passion for design and development but also serves as a testament to creativity and professionalism. If you are looking for a stunning, personalized website to showcase your work, get in touch! Let us bring your vision to life!',
+        'A modern, responsive portfolio website showcasing my work and skills. Features smooth animations, interactive elements, and a clean, professional design.',
       images: [
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-30%20at%2015.53.37.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMwIGF0IDE1LjUzLjM3LnBuZyIsImlhdCI6MTczODI0MTY3MiwiZXhwIjoyMDUzNjAxNjcyfQ.vxv_rVaJQ3qUlcpJ5Jc00_7l-gIHl1XwqbmYWfcEUKU',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.58.40.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjU4LjQwLnBuZyIsImlhdCI6MTczODM0NjM2NywiZXhwIjo0ODkxOTQ2MzY3fQ.ceBZP29CG3OJVztm2Nd8zOvKpYSpPdMO24Geae-Rb1U',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.58.19.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjU4LjE5LnBuZyIsImlhdCI6MTczODM0NjM5MiwiZXhwIjo0ODkxOTQ2MzkyfQ.obPSOuoTbtc4W-18k33psig3sXDHzQvVHqjAzIrvUro',
+        '/images/portfolio-1.png',
+        '/images/portfolio-2.png',
+        '/images/portfolio-3.png',
       ],
-      link: 'https://austinmunene.netlify.app/',
-      tech: 'Bootstrap • React.js • CSS',
+      link: 'https://austinmunene.com',
+      github: 'https://github.com/yourusername/portfolio',
+      stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     },
   ];
 
-  const [currentImageIndexes, setCurrentImageIndexes] = useState(
-    projects.map(() => 0)
-  );
-
   useEffect(() => {
-    // Auto-rotate images
-    const interval = setInterval(() => {
-      setCurrentImageIndexes((prevIndexes) =>
-        prevIndexes.map(
-          (index, projectIndex) =>
-            (index + 1) % projects[projectIndex].images.length
-        )
-      );
-    }, 5000); // Change image every 5 seconds
+    if (isAutoPlaying) {
+      autoPlayInterval.current = window.setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % 3);
+      }, 5000);
+    }
 
-    return () => clearInterval(interval);
-  }, [projects]);
+    return () => {
+      if (autoPlayInterval.current) {
+        clearInterval(autoPlayInterval.current);
+      }
+    };
+  }, [isAutoPlaying]);
 
   useEffect(() => {
     const observerCallback: IntersectionObserverCallback = (entries) => {
@@ -89,158 +83,185 @@ const Home = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handlePrevImage = (projectIndex: number) => {
-    setCurrentImageIndexes((prevIndexes) =>
-      prevIndexes.map((index, idx) =>
-        idx === projectIndex
-          ? (index - 1 + projects[projectIndex].images.length) %
-            projects[projectIndex].images.length
-          : index
-      )
-    );
-  };
-
-  const handleNextImage = (projectIndex: number) => {
-    setCurrentImageIndexes((prevIndexes) =>
-      prevIndexes.map((index, idx) =>
-        idx === projectIndex
-          ? (index + 1) % projects[projectIndex].images.length
-          : index
-      )
-    );
-  };
-
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen"
+    >
       {/* Hero Section */}
-      <div className="container mx-auto px-4 pt-24 md:pt-32 pb-20 relative">
-        <div className="max-w-3xl">
-          <div className="reveal">
-            <h1 className="text-5xl md:text-8xl font-bold mb-6 md:mb-8 gradient-text slide-in">
-              Austin Munene
-            </h1>
-            <h2 className="text-2xl md:text-3xl text-gray-400 mb-4 fade-up"></h2>
-          </div>
-          <div className="reveal">
-            <p className="text-lg md:text-xl text-gray-400 mb-8 md:mb-12 fade-up">
-              Motivated and adaptable Frontend Web ProDev and Software Test
-              Engineer with a Bachelor of Science in Information Technology. I
-              possess a strong foundation in technical and interpersonal skills,
-              with proficiency in programming languages such as JavaScript and
-              React. My expertise spans software engineering, software analysis,
-              technical software support and Web Development.
-            </p>
-            <Link
-              to="/career"
-              className="inline-flex items-center px-5 md:px-6 py-3 bg-gradient-to-r from-[#00D1FF] to-[#FF00D6] rounded-full text-white font-medium hover:opacity-90 transition-opacity"
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900 to-black opacity-90"></div>
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#00D1FF]/10 to-[#FF00D6]/10 blur-3xl"></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.h1
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-5xl md:text-7xl font-bold mb-6 gradient-text reveal"
             >
-              View My Career Journey
-              <ArrowUpRight className="ml-2 w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 floating">
-          <ChevronDown className="w-8 h-8 text-gray-400" />
-        </div>
-      </div>
-
-      {/* Projects Section */}
-      <div className="container mx-auto px-4 py-16 md:py-20">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 md:mb-16 reveal gradient-text">
-          Projects
-        </h2>
-        <div className="grid grid-cols-1 gap-12 md:gap-16">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="reveal project-card bg-gray-900/30 rounded-xl p-4 md:p-6"
+              Austin Munene
+            </motion.h1>
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xl md:text-2xl text-gray-300 mb-8 reveal"
+            >
+              Software Developer & Quality Assurance Analyst
+            </motion.p>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-col md:flex-row items-center justify-center gap-4 reveal"
             >
               <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block group"
+                href="mailto:austinmunene@gmail.com"
+                className="px-8 py-3 bg-gradient-to-r from-[#00D1FF] to-[#FF00D6] text-white rounded-full font-medium hover:opacity-90 transition-opacity flex items-center gap-2 group"
               >
-                <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-                  <div className="md:w-1/2">
-                    <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-2xl md:text-3xl font-bold group-hover:gradient-text transition-all duration-300">
-                        {project.title}
-                      </h3>
-                      <ArrowUpRight className="w-6 h-6 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </div>
-                    <p className="text-gray-400 mb-4 text-base md:text-lg">
+                Get in Touch
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="#projects"
+                className="px-8 py-3 border border-gray-700 text-gray-300 rounded-full font-medium hover:border-[#00D1FF] hover:text-[#00D1FF] transition-colors"
+              >
+                View Projects
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 md:py-32 bg-gray-900">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold mb-12 md:mb-16 text-center gradient-text reveal"
+          >
+            Featured Projects
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group reveal"
+              >
+                <div className="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-[#00D1FF]/50 transition-colors h-full flex flex-col">
+                  <div className="relative aspect-video overflow-hidden">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={currentImageIndex}
+                        src={project.images[currentImageIndex]}
+                        alt={`${project.title} screenshot ${currentImageIndex + 1}`}
+                        className="w-full h-full object-cover"
+                        initial={{ opacity: 0, scale: 1.1 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                    </AnimatePresence>
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className="text-xl font-bold mb-2 gradient-text">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-400 mb-4 flex-1">
                       {project.description}
                     </p>
-                    <p className="text-sm text-gray-500 font-medium">
-                      {project.tech}
-                    </p>
-                  </div>
-
-                  <div className="md:w-1/2">
-                    <div className="relative overflow-hidden rounded-lg">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
-                      <img
-                        src={project.images[currentImageIndexes[index]]}
-                        alt={`${project.title} - Image ${
-                          currentImageIndexes[index] + 1
-                        }`}
-                        className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-x-0 bottom-0 flex justify-between items-center p-4 z-20">
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handlePrevImage(index);
-                          }}
-                          className="p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.stack.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1 bg-gray-700/50 rounded-full text-sm text-gray-300"
                         >
-                          <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        <span className="text-sm text-white/80">
-                          {currentImageIndexes[index] + 1} /{' '}
-                          {project.images.length}
+                          {tech}
                         </span>
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleNextImage(index);
-                          }}
-                          className="p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
-                        >
-                          <ChevronRight className="w-5 h-5" />
-                        </button>
-                      </div>
+                      ))}
+                    </div>
+                    <div className="flex gap-4">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-gray-400 hover:text-[#00D1FF] transition-colors"
+                      >
+                        <Github className="w-5 h-5" />
+                        <span>Code</span>
+                      </a>
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-gray-400 hover:text-[#00D1FF] transition-colors"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                        <span>Live Demo</span>
+                      </a>
                     </div>
                   </div>
                 </div>
-              </a>
-            </div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Contact Section */}
-      <div className="container mx-auto px-4 py-16 md:py-20">
-        <div className="max-w-2xl mx-auto text-center reveal">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 gradient-text">
-            Let's Work Together
-          </h2>
-          <p className="text-gray-400 mb-8 md:mb-12 text-base md:text-lg">
-            I'm currently available for freelance work and interesting projects.
-            If you have a project that needs clean code and modern design, let's
-            have a conversation.
-          </p>
-          <a
-            href="mailto:austinmunene56@icloud.com"
-            className="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-[#00D1FF] to-[#FF00D6] rounded-full text-white font-medium hover:opacity-90 transition-opacity"
+      <section className="py-20 bg-gray-900/50">
+        <div className="container mx-auto px-4 text-center">
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold mb-8 gradient-text reveal"
           >
-            Get in Touch
-            <ArrowUpRight className="ml-2 w-5 h-5" />
-          </a>
+            Let's Connect
+          </motion.h2>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-xl text-gray-400 mb-8 reveal"
+          >
+            Have a project in mind? Let's discuss how we can work together.
+          </motion.p>
+          <motion.a
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+            href="mailto:austinmunene@gmail.com"
+            className="inline-flex items-center gap-2 text-[#00D1FF] hover:text-[#FF00D6] transition-colors reveal"
+          >
+            austinmunene@gmail.com
+          </motion.a>
         </div>
-      </div>
-    </>
+      </section>
+    </motion.div>
   );
 };
 
