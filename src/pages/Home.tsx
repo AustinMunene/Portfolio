@@ -11,14 +11,14 @@ const Home = () => {
     {
       title: 'Faced by cynie',
       description:
-        'A modern web application that allows users to create and share their stories through beautiful, customizable cards. Built with a focus on user experience and visual appeal.',
+        'Faced by Cynie is a vibrant online portfolio showcasing Her artistic journey through captivating visuals and creative expression. Built using Vue.js and TypeScript, along with HTML, CSS, and JavaScript, the site features a seamless blend of photography, graphic design, and personal projects.',
       images: [
-        '/images/faced-by-cynie-1.png',
-        '/images/faced-by-cynie-2.png',
-        '/images/faced-by-cynie-3.png',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-30%20at%2015.32.18.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMwIGF0IDE1LjMyLjE4LnBuZyIsImlhdCI6MTc0NDcxNzAxMiwiZXhwIjoyMDYwMDc3MDEyfQ._PZYvH02-fF4AnRYw4WXDmkEOJPn8LornsLorLtyqcY',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-30%20at%2015.35.28.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMwIGF0IDE1LjM1LjI4LnBuZyIsImlhdCI6MTc0NDcxNzA1MSwiZXhwIjoyMDYwMDc3MDUxfQ.1vRemIplDZKtoOlUmiyv1CfidtNG6qSuuESMhB9O3EU',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.48.39.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjQ4LjM5LnBuZyIsImlhdCI6MTc0NDcxNzEyOSwiZXhwIjoyMDYwMDc3MTI5fQ.vlZSct3QJ-oBo6XpXLzscSodZfEOHljhko2jTlIGLvM',
       ],
-      link: 'https://facedbycynie.com',
-      github: 'https://github.com/yourusername/faced-by-cynie',
+      link: 'https://facedbycynie.netlify.app',
+      github: 'https://github.com/Austin254/facedbycynie',
       stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     },
     {
@@ -26,12 +26,14 @@ const Home = () => {
       description:
         'A comprehensive hostel management system for Mount Kenya University, featuring room allocation, student registration, and administrative tools. Streamlines the hostel management process for better efficiency.',
       images: [
-        '/images/mku-hostel-1.png',
-        '/images/mku-hostel-2.png',
-        '/images/mku-hostel-3.png',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-30%20at%2015.38.29.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMwIGF0IDE1LjM4LjI5LnBuZyIsImlhdCI6MTc0NDcxNzE3MSwiZXhwIjoyMDYwMDc3MTcxfQ.1KST2oWBIZNJZ0nDHkhQ9Qxt6y0VquHWuDsXnnO2yTc',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.49.13.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjQ5LjEzLnBuZyIsImlhdCI6MTc0NDcxNzIxNywiZXhwIjoyMDYwMDc3MjE3fQ.vVpW6HTBK6GC5Ly2dlb3f6jQ-5TlvaN76bfEoh29cU4',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.49.55.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjQ5LjU1LnBuZyIsImlhdCI6MTc0NDcxNzI1OSwiZXhwIjoyMDYwMDc3MjU5fQ.n00QrXai9MCFFeFIRaKSsdcWglhWjfvtyxpPS3STrG4',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.50.41.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjUwLjQxLnBuZyIsImlhdCI6MTc0NDcxNzMwOCwiZXhwIjoyMDYwMDc3MzA4fQ.wx_8oX4MFWNXFmwKZYtMqaLHd26NA5wWeYcwFlzdu10',
+      
       ],
-      link: 'https://mku-hostel.com',
-      github: 'https://github.com/yourusername/mku-hostel',
+      link: 'https://mku-hostel.netlify.app',
+      github: 'https://github.com/Austin254/MKU-HMS-FINAL',
       stack: ['React', 'Node.js', 'MongoDB', 'Express'],
     },
     {
@@ -39,12 +41,12 @@ const Home = () => {
       description:
         'A modern, responsive portfolio website showcasing my work and skills. Features smooth animations, interactive elements, and a clean, professional design.',
       images: [
-        '/images/portfolio-1.png',
-        '/images/portfolio-2.png',
-        '/images/portfolio-3.png',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-30%20at%2015.53.37.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMwIGF0IDE1LjUzLjM3LnBuZyIsImlhdCI6MTc0NDcxNzM5MiwiZXhwIjoyMDYwMDc3MzkyfQ.9iOBad6i_juokjTvfM2Ts_2Z1GSbdW6GcudQ2IUtq0Q',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020%20(1).58?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwICgxKS41OCIsImlhdCI6MTc0NDcxNzQ5OCwiZXhwIjoyMDYwMDc3NDk4fQ.BflFJJ7qCmr3hksPNGTzKfWTUDARah9iXGACuHCvAwU',
+        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020%20(2).58?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwICgyKS41OCIsImlhdCI6MTc0NDcxNzQ0NiwiZXhwIjoyMDYwMDc3NDQ2fQ.rMNzch-VhHkMECL5xLMHmlUnW7pUTl-t9G2SAUBBjyk',
       ],
-      link: 'https://austinmunene.com',
-      github: 'https://github.com/yourusername/portfolio',
+      link: 'https://austinmunene.netlify.app',
+      github: 'https://github.com/Austin254/Portfolio',
       stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     },
   ];
@@ -127,7 +129,7 @@ const Home = () => {
               className="flex flex-col md:flex-row items-center justify-center gap-4 reveal"
             >
               <a
-                href="mailto:austinmunene@gmail.com"
+                href="mailto:muneneaustin56@gmail.com"
                 className="px-8 py-3 bg-gradient-to-r from-[#00D1FF] to-[#FF00D6] text-white rounded-full font-medium hover:opacity-90 transition-opacity flex items-center gap-2 group"
               >
                 Get in Touch
@@ -217,7 +219,7 @@ const Home = () => {
                         className="flex items-center gap-2 text-gray-400 hover:text-[#00D1FF] transition-colors"
                       >
                         <ExternalLink className="w-5 h-5" />
-                        <span>Live Demo</span>
+                        <span>Visit</span>
                       </a>
                     </div>
                   </div>
@@ -257,7 +259,7 @@ const Home = () => {
             href="mailto:austinmunene@gmail.com"
             className="inline-flex items-center gap-2 text-[#00D1FF] hover:text-[#FF00D6] transition-colors reveal"
           >
-            austinmunene@gmail.com
+            muneneaustin56@gmail.com
           </motion.a>
         </div>
       </section>
