@@ -66,6 +66,15 @@ const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     category: "Development",
     imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+  },
+  {
+    id: 7,
+    title: "Mastering Cypress: Best Practices for Automation Testing",
+    excerpt: "Explore Cypress from setup to best practices, including tips for writing stable, scalable tests and integrating with modern CI/CD pipelines.",
+    date: "April 14, 2024",
+    readTime: "7 min read",
+    category: "QA & Testing",
+    imageUrl: "https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Mastering-Cypress-Testing-Speed-Reliability-Best-Practices-Featured-Image.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvTWFzdGVyaW5nLUN5cHJlc3MtVGVzdGluZy1TcGVlZC1SZWxpYWJpbGl0eS1CZXN0LVByYWN0aWNlcy1GZWF0dXJlZC1JbWFnZS5wbmciLCJpYXQiOjE3NDQ3MzgwMzgsImV4cCI6MjA2MDA5ODAzOH0.uj8-JAn7v5Dr5VKAR67Cs-OFGLJ1IKJa5pA6yWm7r94"
   }
 ];
 
