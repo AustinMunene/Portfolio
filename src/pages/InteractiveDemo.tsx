@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import InteractiveCodeEditor from '../components/InteractiveCodeEditor';
 import Interactive3DScene from '../components/Interactive3DScene';
 import InteractiveDataViz from '../components/InteractiveDataViz';
-import CypressTestSimulation from '/Users/austin/Personal Project/Portfolio/src/components/CypressTestSimulation.tsx';
-import PerformanceChart from '/Users/austin/Personal Project/Portfolio/src/components/PerfomanceChart.tsx';
-import TailwindDemo from '/Users/austin/Personal Project/Portfolio/src/components/TailwindDemo.tsx';
+import CypressTestSimulation from '../components/CypressTestSimulation';
+import PerformanceChart from '../components/PerfomanceChart';
+import TailwindDemo from '../components/TailwindDemo';
 
 const InteractiveDemo: React.FC = () => {
   return (
