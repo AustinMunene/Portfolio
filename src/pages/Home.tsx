@@ -32,12 +32,12 @@ const Home = () => {
         'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.50.41.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjUwLjQxLnBuZyIsImlhdCI6MTc0NDcxNzMwOCwiZXhwIjoyMDYwMDc3MzA4fQ.wx_8oX4MFWNXFmwKZYtMqaLHd26NA5wWeYcwFlzdu10',
       
       ],
-      link: 'https://mku-hostel.netlify.app',
+      link: 'https://mkuhms.netlify.app/',
       github: 'https://github.com/Austin254/MKU-HMS-FINAL',
       stack: ['React', 'Node.js', 'MongoDB', 'Express'],
     },
     {
-      title: 'Portfolio',
+      title: 'Digital Resume',
       description:
         'A modern, responsive portfolio website showcasing my work and skills. Features smooth animations, interactive elements, and a clean, professional design.',
       images: [
@@ -45,7 +45,7 @@ const Home = () => {
         'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020%20(1).58?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwICgxKS41OCIsImlhdCI6MTc0NDcxNzQ5OCwiZXhwIjoyMDYwMDc3NDk4fQ.BflFJJ7qCmr3hksPNGTzKfWTUDARah9iXGACuHCvAwU',
         'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020%20(2).58?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwICgyKS41OCIsImlhdCI6MTc0NDcxNzQ0NiwiZXhwIjoyMDYwMDc3NDQ2fQ.rMNzch-VhHkMECL5xLMHmlUnW7pUTl-t9G2SAUBBjyk',
       ],
-      link: 'https://austinmunene.netlify.app',
+      link: 'https://austinmunene.netlify.app/',
       github: 'https://github.com/Austin254/Portfolio',
       stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     },
