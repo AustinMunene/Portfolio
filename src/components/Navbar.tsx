@@ -61,7 +61,7 @@ const Navbar = () => {
 
             <div className="flex gap-6">
               <a
-                href="https://github.com/Austin254"
+                href="https://github.com/AustinMunene"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="nav-link text-gray-400 hover:text-white transition-colors"
