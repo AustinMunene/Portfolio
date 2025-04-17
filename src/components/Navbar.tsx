@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <NavLink to="/" className="text-xl font-bold gradient-text">
-            Home
+            AM
           </NavLink>
 
           {/* Mobile menu button */}
