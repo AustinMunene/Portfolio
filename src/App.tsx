@@ -26,7 +26,7 @@ function App() {
       {/* Footer */}
       <footer className="container mx-auto px-4 py-8 mt-20 border-t border-gray-800/50">
         <div className="flex justify-between items-center">
-          <p className="text-gray-500">© 2025 Austin Munene</p>
+          <p className="text-gray-500">© 2026 Austin Munene</p>
           <a
             href="#top"
             className="text-gray-500 hover:text-white transition-colors nav-link"
