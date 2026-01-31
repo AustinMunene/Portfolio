@@ -1,69 +1,76 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 
 const Home = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const autoPlayInterval = useRef<number | null>(null);
-
   const projects = [
+    {
+      title: 'Jubilee Knowledge Library',
+      description:
+        'Built an internal library system to manage inventory, requests, and access control. I focused on frontend structure and QA coverage for critical staff and member workflows.',
+      link: 'https://jubileelibrary.netlify.app/login',
+      github: 'https://github.com/AustinMunene/Jubilee-knowledge-library',
+      caseStudy: '#',
+      roles: ['Frontend Architecture', 'QA Strategy'],
+      stack: ['React', 'TypeScript', 'Tailwind CSS'],
+    },
     {
       title: 'Faced by cynie',
       description:
-        'Faced by Cynie is a vibrant online portfolio showcasing Her artistic journey through captivating visuals and creative expression. Built using Vue.js and TypeScript, along with HTML, CSS, and JavaScript, the site features a seamless blend of photography, graphic design, and personal projects.',
-      images: [
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-30%20at%2015.32.18.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMwIGF0IDE1LjMyLjE4LnBuZyIsImlhdCI6MTc0NDcxNzAxMiwiZXhwIjoyMDYwMDc3MDEyfQ._PZYvH02-fF4AnRYw4WXDmkEOJPn8LornsLorLtyqcY',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-30%20at%2015.35.28.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMwIGF0IDE1LjM1LjI4LnBuZyIsImlhdCI6MTc0NDcxNzA1MSwiZXhwIjoyMDYwMDc3MDUxfQ.1vRemIplDZKtoOlUmiyv1CfidtNG6qSuuESMhB9O3EU',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.48.39.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjQ4LjM5LnBuZyIsImlhdCI6MTc0NDcxNzEyOSwiZXhwIjoyMDYwMDc3MTI5fQ.vlZSct3QJ-oBo6XpXLzscSodZfEOHljhko2jTlIGLvM',
-      ],
+        'Designed a visual portfolio that helps visitors explore creative work quickly and clearly. I handled UI structure, motion, and quality checks to keep the experience smooth.',
       link: 'https://facedbycynie.netlify.app',
       github: 'https://github.com/Austin254/facedbycynie',
+      caseStudy: '#',
+      roles: ['UI Engineering', 'Interaction Design'],
       stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    },
+    {
+      title: 'Shades of Cake',
+      description:
+        'Delivered a bakery site that makes browsing products and placing inquiries straightforward. I built responsive layouts and validated the contact flow end to end.',
+      link: 'https://shadesofcake.org/',
+      github: 'https://github.com/AustinMunene/shadesofcake.git',
+      caseStudy: '#',
+      roles: ['Frontend Delivery', 'QA Checks'],
+      stack: ['HTML', 'CSS', 'JavaScript'],
+    },
+    {
+      title: 'Akili Sawa',
+      description:
+        'Created a mental-health platform to connect users with support resources across Kenya. I built reliable frontend flows and validated critical journeys with QA strategy.',
+      link: 'https://akilisawa.com/',
+      github: 'https://github.com/AustinMunene/Akilisawa',
+      caseStudy: '#',
+      roles: ['Frontend Architecture', 'System Reliability'],
+      stack: [
+        'React',
+        'React Router',
+        'Backbone.js',
+        'Marionette.js',
+        'Framer Motion',
+      ],
     },
     {
       title: 'MKU Hostel Management System',
       description:
-        'A comprehensive hostel management system for Mount Kenya University, featuring room allocation, student registration, and administrative tools. Streamlines the hostel management process for better efficiency.',
-      images: [
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-30%20at%2015.38.29.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMwIGF0IDE1LjM4LjI5LnBuZyIsImlhdCI6MTc0NDcxNzE3MSwiZXhwIjoyMDYwMDc3MTcxfQ.1KST2oWBIZNJZ0nDHkhQ9Qxt6y0VquHWuDsXnnO2yTc',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.49.13.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjQ5LjEzLnBuZyIsImlhdCI6MTc0NDcxNzIxNywiZXhwIjoyMDYwMDc3MjE3fQ.vVpW6HTBK6GC5Ly2dlb3f6jQ-5TlvaN76bfEoh29cU4',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.49.55.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjQ5LjU1LnBuZyIsImlhdCI6MTc0NDcxNzI1OSwiZXhwIjoyMDYwMDc3MjU5fQ.n00QrXai9MCFFeFIRaKSsdcWglhWjfvtyxpPS3STrG4',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020.50.41.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwLjUwLjQxLnBuZyIsImlhdCI6MTc0NDcxNzMwOCwiZXhwIjoyMDYwMDc3MzA4fQ.wx_8oX4MFWNXFmwKZYtMqaLHd26NA5wWeYcwFlzdu10',
-      
-      ],
+        'Developed a hostel management system for allocations, registration, and admin oversight. I focused on role-based flows and test coverage for key operations.',
       link: 'https://mkuhms.netlify.app/',
       github: 'https://github.com/Austin254/MKU-HMS-FINAL',
+      caseStudy: '#',
+      roles: ['Product Thinking', 'QA Strategy'],
       stack: ['React', 'Node.js', 'MongoDB', 'Express'],
     },
     {
       title: 'Digital Resume',
       description:
-        'A modern, responsive portfolio website showcasing my work and skills. Features smooth animations, interactive elements, and a clean, professional design.',
-      images: [
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-30%20at%2015.53.37.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMwIGF0IDE1LjUzLjM3LnBuZyIsImlhdCI6MTc0NDcxNzM5MiwiZXhwIjoyMDYwMDc3MzkyfQ.9iOBad6i_juokjTvfM2Ts_2Z1GSbdW6GcudQ2IUtq0Q',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020%20(1).58?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwICgxKS41OCIsImlhdCI6MTc0NDcxNzQ5OCwiZXhwIjoyMDYwMDc3NDk4fQ.BflFJJ7qCmr3hksPNGTzKfWTUDARah9iXGACuHCvAwU',
-        'https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Screenshot%202025-01-31%20at%2020%20(2).58?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvU2NyZWVuc2hvdCAyMDI1LTAxLTMxIGF0IDIwICgyKS41OCIsImlhdCI6MTc0NDcxNzQ0NiwiZXhwIjoyMDYwMDc3NDQ2fQ.rMNzch-VhHkMECL5xLMHmlUnW7pUTl-t9G2SAUBBjyk',
-      ],
+        'Personal portfolio built for clarity, speed, and maintainability. I structured reusable components and validated cross-device reliability.',
       link: 'https://austinmunene.netlify.app/',
       github: 'https://github.com/Austin254/Portfolio',
+      caseStudy: '#',
+      roles: ['Component Design', 'Performance'],
       stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     },
   ];
-
-  useEffect(() => {
-    if (isAutoPlaying) {
-      autoPlayInterval.current = window.setInterval(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % 3);
-      }, 5000);
-    }
-
-    return () => {
-      if (autoPlayInterval.current) {
-        clearInterval(autoPlayInterval.current);
-      }
-    };
-  }, [isAutoPlaying]);
 
   useEffect(() => {
     const observerCallback: IntersectionObserverCallback = (entries) => {
@@ -84,6 +91,8 @@ const Home = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const name = 'Austin Munene';
 
   return (
     <motion.div
@@ -108,11 +117,42 @@ const Home = () => {
           >
             <motion.h1
               initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="text-5xl md:text-7xl font-bold mb-6 gradient-text reveal"
+              animate={{
+                scale: 1,
+                opacity: 1,
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              whileHover={{
+                textShadow: [
+                  '0 0 0 rgba(0, 209, 255, 0)',
+                  '0 0 26px rgba(0, 209, 255, 0.45)',
+                  '0 0 0 rgba(0, 209, 255, 0)',
+                ],
+              }}
+              transition={{
+                backgroundPosition: {
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                },
+                textShadow: {
+                  duration: 1.6,
+                  repeat: Infinity,
+                  repeatType: 'mirror',
+                  ease: 'easeInOut',
+                },
+              }}
+              className="text-5xl md:text-7xl font-bold mb-6 gradient-text reveal cursor-default"
+              style={{ backgroundSize: '200% 200%' }}
             >
-              Austin Munene
+              {name.split('').map((char, index) => (
+                <span
+                  key={`${char}-${index}`}
+                  className="inline-block transition-transform duration-200 ease-out hover:scale-110"
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              ))}
             </motion.h1>
             <motion.p
               initial={{ y: 20, opacity: 0 }}
@@ -120,7 +160,8 @@ const Home = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl md:text-2xl text-gray-300 mb-8 reveal"
             >
-              Software Developer & Quality Assurance Analyst
+              Frontend + QA Engineer delivering reliable, production-ready user
+              experiences
             </motion.p>
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -129,19 +170,28 @@ const Home = () => {
               className="flex flex-col md:flex-row items-center justify-center gap-4 reveal"
             >
               <a
-                href="mailto:muneneaustin56@gmail.com"
-                className="px-8 py-3 bg-gradient-to-r from-[#00D1FF] to-[#FF00D6] text-white rounded-full font-medium hover:opacity-90 transition-opacity flex items-center gap-2 group"
+                href="#projects"
+                className="px-8 py-3 bg-gradient-to-r from-[#00D1FF] to-[#FF00D6] text-white rounded-full font-medium hover:opacity-90 transition-opacity flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D1FF]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
               >
-                Get in Touch
+                View Projects
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="#projects"
-                className="px-8 py-3 border border-gray-700 text-gray-300 rounded-full font-medium hover:border-[#00D1FF] hover:text-[#00D1FF] transition-colors"
+                href="mailto:muneneaustin56@gmail.com"
+                className="px-8 py-3 border border-gray-700 text-gray-300 rounded-full font-medium hover:border-[#00D1FF] hover:text-[#00D1FF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D1FF]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
               >
-                View Projects
+                Get in Touch
               </a>
             </motion.div>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs md:text-sm text-gray-500/80 reveal">
+              <span>Production QA</span>
+              <span className="text-gray-600">•</span>
+              <span>React + TypeScript</span>
+              <span className="text-gray-600">•</span>
+              <span>Automation Mindset</span>
+              <span className="text-gray-600">•</span>
+              <span>System Reliability</span>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -158,8 +208,18 @@ const Home = () => {
           >
             Featured Projects
           </motion.h2>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-base md:text-lg text-gray-400 text-center max-w-3xl mx-auto mb-10 md:mb-12 reveal"
+          >
+            Selected work focused on reliable delivery, clear UX, and quality
+            practices that scale with real-world use.
+          </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          <div className="space-y-6 md:space-y-8">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
@@ -169,30 +229,52 @@ const Home = () => {
                 viewport={{ once: true }}
                 className="group reveal"
               >
-                <div className="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-[#00D1FF]/50 transition-colors h-full flex flex-col">
-                  <div className="relative aspect-video overflow-hidden">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={currentImageIndex}
-                        src={project.images[currentImageIndex]}
-                        alt={`${project.title} screenshot ${currentImageIndex + 1}`}
-                        className="w-full h-full object-cover"
-                        initial={{ opacity: 0, scale: 1.1 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.5 }}
-                      />
-                    </AnimatePresence>
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold mb-2 gradient-text">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-400 mb-4 flex-1">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
+                <div className="bg-gray-800/40 rounded-xl border border-gray-700/50 hover:border-[#00D1FF]/60 transition-all transform-gpu [transform-style:preserve-3d] hover:shadow-[0_20px_46px_-30px_rgba(0,209,255,0.5)] hover:[transform:perspective(1200px)_rotateX(1deg)_rotateY(-1deg)_translateY(-3px)]">
+                  <div className="p-6 md:p-8 flex flex-col gap-5">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-[#00D1FF] to-[#FF00D6]"></span>
+                        <h3 className="text-xl md:text-2xl font-bold gradient-text">
+                          {project.title}
+                        </h3>
+                      </div>
+                      <div className="flex flex-wrap gap-4">
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-gray-400 hover:text-[#00D1FF] transition-colors group-hover:text-[#00D1FF]"
+                          >
+                            <Github className="w-5 h-5" />
+                            <span>Code</span>
+                          </a>
+                        )}
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-[#00D1FF] hover:text-[#FF00D6] transition-colors group-hover:translate-x-0.5"
+                        >
+                          <ExternalLink className="w-5 h-5" />
+                          <span>Visit</span>
+                        </a>
+                      </div>
+                    </div>
+                    <p className="text-gray-400">{project.description}</p>
+                    {project.roles && (
+                      <div className="flex flex-wrap gap-2">
+                        {project.roles.map((role, roleIndex) => (
+                          <span
+                            key={roleIndex}
+                            className="px-3 py-1 rounded-full text-xs text-gray-300/80 border border-gray-700/60 bg-gray-800/40"
+                          >
+                            {role}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <div className="flex flex-wrap gap-2">
                       {project.stack.map((tech, techIndex) => (
                         <span
                           key={techIndex}
@@ -202,24 +284,12 @@ const Home = () => {
                         </span>
                       ))}
                     </div>
-                    <div className="flex gap-4">
+                    <div>
                       <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-gray-400 hover:text-[#00D1FF] transition-colors"
+                        href={project.caseStudy}
+                        className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#00D1FF] transition-colors group-hover:text-[#00D1FF]"
                       >
-                        <Github className="w-5 h-5" />
-                        <span>Code</span>
-                      </a>
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-gray-400 hover:text-[#00D1FF] transition-colors"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                        <span>Visit</span>
+                        Case Study →
                       </a>
                     </div>
                   </div>
