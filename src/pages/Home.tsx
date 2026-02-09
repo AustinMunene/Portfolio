@@ -5,7 +5,7 @@ import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 const Home = () => {
   const projects = [
     {
-      title: 'Jubilee Knowledge Library',
+      title: 'Knowledge Library',
       description:
         'Designing and developing a full-stack knowledge library system to track books, borrowing, approvals, and user activity through a secure web platform for internal teams.',
       link: 'https://jubileelibrary.netlify.app/login',
@@ -29,7 +29,7 @@ const Home = () => {
       stack: ['React', 'Tailwind CSS', 'Framer Motion'],
     },
     {
-      title: 'MKU Hostel Management System',
+      title: 'Hostel Management System',
       description:
         'Full-stack hostel booking and allocation platform for students and administrators, with room discovery, booking requests, approvals, and occupancy tracking.',
       link: 'https://mkuhms.netlify.app/',
@@ -40,7 +40,6 @@ const Home = () => {
         'Next.js',
         'Supabase',
         'Tailwind CSS',
-        'Netlify/Vercel',
       ],
     },
     {
@@ -59,7 +58,7 @@ const Home = () => {
       ],
     },
     {
-      title: 'Faced by cynie',
+      title: 'Faced by Cynie',
       description:
         'Portfolio experience designed to present creative work with clear navigation, smooth interactions, and a polished visual layout.',
       link: 'https://facedbycynie.netlify.app',
