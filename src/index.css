@@ -12,8 +12,10 @@
 
   body {
     @apply bg-black text-white;
-    font-family: Futura, system-ui, -apple-system, BlinkMacSystemFont,
-      sans-serif !important;
+    /* Previous font: Futura */
+    font-family: 'JetBrains Mono', Futura, system-ui, -apple-system,
+      BlinkMacSystemFont, sans-serif !important;
+    font-size: 0.95rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -112,7 +114,7 @@
   height: 2px;
   bottom: -4px;
   left: 0;
-  background: linear-gradient(90deg, #00d1ff, #ff00d6);
+  background: linear-gradient(90deg, #ffffff, #a3a3a3);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
 }
@@ -133,7 +135,7 @@
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, #00d1ff, #ff00d6);
+  background: linear-gradient(90deg, #ffffff, #bfbfbf);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -149,7 +151,7 @@
   position: absolute;
   width: 5px;
   height: 5px;
-  background: #00d1ff;
+  background: #ffffff;
   border-radius: 50%;
   left: -15px;
   top: 50%;

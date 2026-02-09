@@ -190,9 +190,14 @@ const Career = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-black"
+      className="relative min-h-screen overflow-hidden"
     >
-      <div className="container mx-auto px-4 pt-20 md:pt-24 pb-16 md:pb-20">
+      <div
+        className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat opacity-70 saturate-150 contrast-125"
+        style={{ backgroundImage: "url('/antman.png')" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/80" />
+      <div className="container mx-auto px-4 pt-20 md:pt-24 pb-16 md:pb-20 relative z-10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ y: -20, opacity: 0 }}
@@ -204,7 +209,7 @@ const Career = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="text-4xl md:text-6xl font-bold mb-6 gradient-text reveal"
+              className="text-3xl md:text-5xl font-bold mb-6 gradient-text reveal"
             >
               Career Journey
             </motion.h1>
@@ -231,10 +236,10 @@ const Career = () => {
                 <motion.div
                   whileHover={{ scale: 1.02, rotateX: 5 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-gray-800/30 rounded-xl p-6 md:p-8 relative overflow-hidden group perspective backdrop-blur-sm border border-gray-700/50 hover:border-[#00D1FF]/50"
+                  className="bg-black/40 rounded-xl p-6 md:p-8 relative overflow-hidden group perspective backdrop-blur-sm border border-white/10 hover:border-white/30"
                 >
                   <motion.div
-                    className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00D1FF]/10 to-[#FF00D6]/10 blur-3xl group-hover:scale-150 transition-transform duration-700"
+                    className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/10 to-transparent blur-3xl group-hover:scale-150 transition-transform duration-700"
                     animate={{
                       scale: [1, 1.2, 1],
                       rotate: [0, 45, 0],
@@ -253,13 +258,13 @@ const Career = () => {
                           whileHover={{ scale: 1.05 }}
                           className="flex items-center gap-3 mb-2"
                         >
-                          <Briefcase className="w-6 h-6 text-[#00D1FF]" />
-                          <h3 className="text-2xl md:text-3xl font-bold gradient-text">
+                          <Briefcase className="w-6 h-6 text-white/80" />
+                          <h3 className="text-xl md:text-2xl font-bold gradient-text">
                             {role.title}
                           </h3>
                         </motion.div>
                         <div className="flex items-center gap-3 text-lg md:text-xl text-gray-400 mb-2">
-                          <Award className="w-5 h-5 text-[#FF00D6]" />
+                          <Award className="w-5 h-5 text-white/70" />
                           <span>{role.company}</span>
                         </div>
                         <div className="flex items-center gap-3 text-sm text-gray-500">
@@ -272,7 +277,7 @@ const Career = () => {
                           whileHover={{ scale: 1.1 }}
                           className="flex gap-2 mt-4 md:mt-0"
                         >
-                          <span className="px-3 py-1 bg-gradient-to-r from-[#00D1FF]/10 to-[#FF00D6]/10 rounded-full text-[#00D1FF] text-sm border border-[#00D1FF]/20">
+                          <span className="px-3 py-1 bg-white/10 rounded-full text-white/80 text-sm border border-white/15">
                             Current Role
                           </span>
                         </motion.div>
@@ -285,7 +290,7 @@ const Career = () => {
 
                     <div className="mb-8">
                       <h4 className="text-base md:text-lg font-semibold mb-4 flex items-center">
-                        <TestTube2 className="w-5 h-5 mr-2 text-[#00D1FF]" />
+                        <TestTube2 className="w-5 h-5 mr-2 text-white/80" />
                         Key Responsibilities
                       </h4>
                       <ul className="space-y-3">
@@ -298,7 +303,7 @@ const Career = () => {
                             viewport={{ once: true }}
                             className="flex items-start group"
                           >
-                            <Bug className="w-4 h-4 mr-3 mt-1 flex-shrink-0 text-[#FF00D6] group-hover:scale-110 transition-transform" />
+                            <Bug className="w-4 h-4 mr-3 mt-1 flex-shrink-0 text-white/70 group-hover:scale-110 transition-transform" />
                             <span className="text-gray-400 group-hover:text-gray-300 transition-colors">{resp}</span>
                           </motion.li>
                         ))}
@@ -307,7 +312,7 @@ const Career = () => {
 
                     <div>
                       <h4 className="text-base md:text-lg font-semibold mb-4 flex items-center">
-                        <Code2 className="w-5 h-5 mr-2 text-[#00D1FF]" />
+                        <Code2 className="w-5 h-5 mr-2 text-white/80" />
                         Skills & Tools
                       </h4>
                       <div className="flex flex-wrap gap-2">

@@ -99,6 +99,11 @@ const Home = () => {
   }, []);
 
   const name = 'Austin Munene';
+  const panelBackgrounds = {
+    hero: '/Anime.jpg',
+    projects: '/dev.png',
+    contact: '/asus.jpg',
+  };
 
   return (
     <motion.div
@@ -109,10 +114,13 @@ const Home = () => {
     >
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900 to-black opacity-90"></div>
+        <div
+          className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat opacity-75 saturate-150 contrast-125"
+          style={{ backgroundImage: `url(${panelBackgrounds.hero})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/75" />
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-20"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#00D1FF]/10 to-[#FF00D6]/10 blur-3xl"></div>
+          <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -130,9 +138,9 @@ const Home = () => {
               }}
               whileHover={{
                 textShadow: [
-                  '0 0 0 rgba(0, 209, 255, 0)',
-                  '0 0 26px rgba(0, 209, 255, 0.45)',
-                  '0 0 0 rgba(0, 209, 255, 0)',
+                  '0 0 0 rgba(255, 255, 255, 0)',
+                  '0 0 22px rgba(255, 255, 255, 0.35)',
+                  '0 0 0 rgba(255, 255, 255, 0)',
                 ],
               }}
               transition={{
@@ -148,7 +156,7 @@ const Home = () => {
                   ease: 'easeInOut',
                 },
               }}
-              className="text-5xl md:text-7xl font-bold mb-6 gradient-text reveal cursor-default"
+              className="text-4xl md:text-8xl font-bold mb-6 gradient-text reveal cursor-default"
               style={{ backgroundSize: '200% 200%' }}
             >
               {name.split('').map((char, index) => (
@@ -177,14 +185,14 @@ const Home = () => {
             >
               <a
                 href="#projects"
-                className="px-8 py-3 bg-gradient-to-r from-[#00D1FF] to-[#FF00D6] text-white rounded-full font-medium hover:opacity-90 transition-opacity flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D1FF]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+                className="px-8 py-3 bg-gradient-to-r from-white to-gray-300 text-black rounded-full font-medium hover:opacity-90 transition-opacity flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               >
                 View Projects
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="mailto:muneneaustin56@gmail.com"
-                className="px-8 py-3 border border-gray-700 text-gray-300 rounded-full font-medium hover:border-[#00D1FF] hover:text-[#00D1FF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D1FF]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+                className="px-8 py-3 border border-white/20 text-gray-300 rounded-full font-medium hover:border-white hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               >
                 Get in Touch
               </a>
@@ -203,14 +211,18 @@ const Home = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 md:py-32 bg-gray-900">
-        <div className="container mx-auto px-4">
+      <section
+        id="projects"
+        className="relative min-h-screen py-20 md:py-32 overflow-hidden border-t border-white/5"
+      >
+        <div className="absolute inset-0 bg-black" />
+        <div className="container mx-auto px-4 relative z-10">
           <motion.h2
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold mb-12 md:mb-16 text-center gradient-text reveal"
+            className="text-2xl md:text-3xl font-bold mb-12 md:mb-16 text-center gradient-text reveal"
           >
             Featured Projects
           </motion.h2>
@@ -235,11 +247,11 @@ const Home = () => {
                 viewport={{ once: true }}
                 className="group reveal"
               >
-                <div className="bg-gray-800/40 rounded-xl border border-gray-700/50 hover:border-[#00D1FF]/60 transition-all transform-gpu [transform-style:preserve-3d] hover:shadow-[0_20px_46px_-30px_rgba(0,209,255,0.5)] hover:[transform:perspective(1200px)_rotateX(1deg)_rotateY(-1deg)_translateY(-3px)]">
+                <div className="bg-gray-800/40 rounded-xl border border-white/10 hover:border-white/30 transition-all transform-gpu [transform-style:preserve-3d] hover:shadow-[0_20px_46px_-30px_rgba(255,255,255,0.35)] hover:[transform:perspective(1200px)_rotateX(1deg)_rotateY(-1deg)_translateY(-3px)]">
                   <div className="p-6 md:p-8 flex flex-col gap-5">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-[#00D1FF] to-[#FF00D6]"></span>
+                        <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-white to-gray-300"></span>
                         <h3 className="text-lg md:text-xl font-bold gradient-text">
                           {project.title}
                         </h3>
@@ -250,7 +262,7 @@ const Home = () => {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-gray-400 hover:text-[#00D1FF] transition-colors group-hover:text-[#00D1FF]"
+                            className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors group-hover:text-white"
                           >
                             <Github className="w-5 h-5" />
                             <span>Code</span>
@@ -260,7 +272,7 @@ const Home = () => {
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[#00D1FF] hover:text-[#FF00D6] transition-colors group-hover:translate-x-0.5"
+                          className="inline-flex items-center gap-2 text-white hover:text-gray-200 transition-colors group-hover:translate-x-0.5"
                         >
                           <ExternalLink className="w-5 h-5" />
                           <span>Visit</span>
@@ -299,8 +311,9 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-gray-900/50">
-        <div className="container mx-auto px-4 text-center">
+      <section className="relative min-h-screen py-20 overflow-hidden border-t border-white/5">
+        <div className="absolute inset-0 bg-black" />
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h2
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -325,7 +338,7 @@ const Home = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             viewport={{ once: true }}
             href="mailto:austinmunene@gmail.com"
-            className="inline-flex items-center gap-2 text-[#00D1FF] hover:text-[#FF00D6] transition-colors reveal"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors reveal"
           >
             muneneaustin56@gmail.com
           </motion.a>

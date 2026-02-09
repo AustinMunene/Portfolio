@@ -34,7 +34,7 @@ const Navigation = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-gray-900/80 backdrop-blur-md' : 'bg-transparent'
+        scrolled ? 'bg-black/70 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -54,12 +54,12 @@ const Navigation = () => {
                 to={link.path}
                 className={`flex items-center justify-center transition-all ${
                   link.isHome 
-                    ? 'w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-[#00D1FF]/50' 
+                    ? 'w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30'
                     : ''
                 } ${
                   location.pathname === link.path
-                    ? 'text-[#00D1FF]'
-                    : 'text-gray-400 hover:text-[#00D1FF]'
+                    ? 'text-white'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 {link.label}
@@ -69,7 +69,7 @@ const Navigation = () => {
 
           {/* Mobile Navigation Button */}
           <button
-            className="md:hidden text-gray-400 hover:text-[#00D1FF] transition-colors"
+            className="md:hidden text-gray-400 hover:text-white transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? (
@@ -93,12 +93,12 @@ const Navigation = () => {
                 to={link.path}
                 className={`flex items-center transition-all ${
                   link.isHome 
-                    ? 'w-10 h-10 rounded-full bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-[#00D1FF]/50' 
+                    ? 'w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30'
                     : 'block'
                 } ${
                   location.pathname === link.path
-                    ? 'text-[#00D1FF]'
-                    : 'text-gray-400 hover:text-[#00D1FF]'
+                    ? 'text-white'
+                    : 'text-gray-400 hover:text-white'
                 }`}
                 onClick={() => setIsOpen(false)}
               >

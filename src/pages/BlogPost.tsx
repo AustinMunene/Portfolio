@@ -207,63 +207,77 @@ const BlogPost: React.FC = () => {
 
   if (!post) {
     return (
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
-          <button
-            onClick={() => navigate('/blog')}
-            className="text-blue-400 hover:text-blue-300 transition-colors"
-          >
-            ← Back to Blog
-          </button>
+      <section className="relative min-h-screen overflow-hidden">
+        <div
+          className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat opacity-70 saturate-150 contrast-125"
+          style={{ backgroundImage: "url('/antman.png')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/80" />
+        <div className="container mx-auto px-4 py-16 relative z-10">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold mb-4 gradient-text">Post Not Found</h1>
+            <button
+              onClick={() => navigate('/blog')}
+              className="text-white/80 hover:text-white transition-colors"
+            >
+              ← Back to Blog
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <motion.article
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto"
-      >
-        <button
-          onClick={() => navigate('/blog')}
-          className="flex items-center text-gray-400 hover:text-white transition-colors mb-8"
+    <section className="relative min-h-screen overflow-hidden">
+      <div
+        className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat opacity-70 saturate-150 contrast-125"
+        style={{ backgroundImage: "url('/antman.png')" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/80" />
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <motion.article
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Blog
-        </button>
+          <button
+            onClick={() => navigate('/blog')}
+            className="flex items-center text-white/80 hover:text-white transition-colors mb-8"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Blog
+          </button>
 
-        <div className="relative h-96 mb-8 rounded-lg overflow-hidden">
-          <img
-            src={post.imageUrl}
-            alt={post.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute top-4 left-4">
-            <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
-              {post.category}
-            </span>
+          <div className="relative h-96 mb-8 rounded-lg overflow-hidden border border-white/10">
+            <img
+              src={post.imageUrl}
+              alt={post.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute top-4 left-4">
+              <span className="bg-white/10 text-white px-3 py-1 rounded-full text-xs border border-white/10">
+                {post.category}
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div className="flex items-center text-sm text-gray-400 mb-4">
-          <span>{post.date}</span>
-          <span className="mx-2">•</span>
-          <span>{post.readTime}</span>
-        </div>
+          <div className="flex items-center text-sm text-gray-400 mb-4">
+            <span>{post.date}</span>
+            <span className="mx-2">•</span>
+            <span>{post.readTime}</span>
+          </div>
 
-        <h1 className="text-4xl font-bold mb-8">{post.title}</h1>
+          <h1 className="text-3xl font-bold mb-8 gradient-text">{post.title}</h1>
 
-        <div 
-          className="prose prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-      </motion.article>
-    </div>
+          <div
+            className="prose prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        </motion.article>
+      </div>
+    </section>
   );
 };
 

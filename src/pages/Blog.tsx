@@ -82,59 +82,66 @@ const Blog: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto"
-      >
-        <h1 className="text-4xl font-bold mb-8">Blog</h1>
-        <p className="text-gray-400 mb-12">
-          Thoughts, ideas, and insights about technology, development, and design.
-        </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {blogPosts.map((post) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-gray-900 rounded-lg overflow-hidden hover:transform hover:scale-105 transition-transform duration-300"
-            >
-              <div className="relative h-48">
-                <img
-                  src={post.imageUrl}
-                  alt={post.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
-                    {post.category}
-                  </span>
+    <section className="relative min-h-screen overflow-hidden">
+      <div
+        className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat opacity-70 saturate-150 contrast-125"
+        style={{ backgroundImage: "url('/antman.png')" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/80" />
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto"
+        >
+          <h1 className="text-3xl font-bold mb-8 gradient-text">Blog</h1>
+          <p className="text-gray-300 mb-12">
+            Thoughts, ideas, and insights about technology, development, and design.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {blogPosts.map((post) => (
+              <motion.article
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="bg-black/50 rounded-lg overflow-hidden border border-white/5 hover:border-white/15 hover:transform hover:scale-[1.02] transition-all duration-300"
+              >
+                <div className="relative h-48">
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-white/10 text-white px-3 py-1 rounded-full text-xs border border-white/10">
+                      {post.category}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center text-sm text-gray-400 mb-2">
-                  <span>{post.date}</span>
-                  <span className="mx-2">•</span>
-                  <span>{post.readTime}</span>
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-gray-400 mb-2">
+                    <span>{post.date}</span>
+                    <span className="mx-2">•</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h2 className="text-lg font-semibold mb-2">{post.title}</h2>
+                  <p className="text-gray-300">{post.excerpt}</p>
+                  <button
+                    onClick={() => navigate(`/blog/${post.id}`)}
+                    className="mt-4 text-white/80 hover:text-white transition-colors"
+                  >
+                    Read more →
+                  </button>
                 </div>
-                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-                <p className="text-gray-400">{post.excerpt}</p>
-                <button 
-                  onClick={() => navigate(`/blog/${post.id}`)}
-                  className="mt-4 text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  Read more →
-                </button>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </motion.div>
-    </div>
+              </motion.article>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
