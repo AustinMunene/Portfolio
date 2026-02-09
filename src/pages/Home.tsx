@@ -7,66 +7,72 @@ const Home = () => {
     {
       title: 'Jubilee Knowledge Library',
       description:
-        'Built an internal library system to manage inventory, requests, and access control. I focused on frontend structure and QA coverage for critical staff and member workflows.',
+        'Designing and developing a full-stack knowledge library system to track books, borrowing, approvals, and user activity through a secure web platform for internal teams.',
       link: 'https://jubileelibrary.netlify.app/login',
       github: 'https://github.com/AustinMunene/Jubilee-knowledge-library',
-      caseStudy: '#',
-      roles: ['Frontend Architecture', 'QA Strategy'],
-      stack: ['React', 'TypeScript', 'Tailwind CSS'],
-    },
-    {
-      title: 'Faced by cynie',
-      description:
-        'Designed a visual portfolio that helps visitors explore creative work quickly and clearly. I handled UI structure, motion, and quality checks to keep the experience smooth.',
-      link: 'https://facedbycynie.netlify.app',
-      github: 'https://github.com/Austin254/facedbycynie',
-      caseStudy: '#',
-      roles: ['UI Engineering', 'Interaction Design'],
-      stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-    },
-    {
-      title: 'Shades of Cake',
-      description:
-        'Delivered a bakery site that makes browsing products and placing inquiries straightforward. I built responsive layouts and validated the contact flow end to end.',
-      link: 'https://shadesofcake.org/',
-      github: 'https://github.com/AustinMunene/shadesofcake.git',
-      caseStudy: '#',
-      roles: ['Frontend Delivery', 'QA Checks'],
-      stack: ['HTML', 'CSS', 'JavaScript'],
+      roles: ['System Design', 'QA Strategy'],
+      stack: [
+        'JavaScript',
+        'Supabase',
+        'Tailwind CSS',
+        'Netlify',
+        'MobX',
+      ],
     },
     {
       title: 'Akili Sawa',
       description:
-        'Created a mental-health platform to connect users with support resources across Kenya. I built reliable frontend flows and validated critical journeys with QA strategy.',
-      link: 'https://akilisawa.com/',
+        'Redesigned and developed the official corporate website to deliver a modern, professional presence that clearly communicates mental wellness services and improves usability.',
+      link: 'https://www.akilisawa.com/',
       github: 'https://github.com/AustinMunene/Akilisawa',
-      caseStudy: '#',
-      roles: ['Frontend Architecture', 'System Reliability'],
-      stack: [
-        'React',
-        'React Router',
-        'Backbone.js',
-        'Marionette.js',
-        'Framer Motion',
-      ],
+      roles: ['Frontend Architecture', 'UX Improvement'],
+      stack: ['React', 'Tailwind CSS', 'Framer Motion'],
     },
     {
       title: 'MKU Hostel Management System',
       description:
-        'Developed a hostel management system for allocations, registration, and admin oversight. I focused on role-based flows and test coverage for key operations.',
+        'Full-stack hostel booking and allocation platform for students and administrators, with room discovery, booking requests, approvals, and occupancy tracking.',
       link: 'https://mkuhms.netlify.app/',
       github: 'https://github.com/Austin254/MKU-HMS-FINAL',
-      caseStudy: '#',
-      roles: ['Product Thinking', 'QA Strategy'],
-      stack: ['React', 'Node.js', 'MongoDB', 'Express'],
+      roles: ['Full-stack Delivery', 'Product Thinking'],
+      stack: [
+        'React',
+        'Next.js',
+        'Supabase',
+        'Tailwind CSS',
+        'Netlify/Vercel',
+      ],
+    },
+    {
+      title: 'Shades of Cake',
+      description:
+        'Modern, responsive business website for a cake and events brand to showcase products, strengthen digital presence, and improve client inquiries across devices.',
+      link: 'https://shadesofcake.org/',
+      github: 'https://github.com/AustinMunene/shadesofcake.git',
+      roles: ['Frontend Delivery', 'UI Craft'],
+      stack: [
+        'JavaScript',
+        'Tailwind CSS',
+        'Framer Motion',
+        'Lucide Icons',
+        'Netlify',
+      ],
+    },
+    {
+      title: 'Faced by cynie',
+      description:
+        'Portfolio experience designed to present creative work with clear navigation, smooth interactions, and a polished visual layout.',
+      link: 'https://facedbycynie.netlify.app',
+      github: 'https://github.com/Austin254/facedbycynie',
+      roles: ['UI Engineering', 'Interaction Design'],
+      stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     },
     {
       title: 'Digital Resume',
       description:
-        'Personal portfolio built for clarity, speed, and maintainability. I structured reusable components and validated cross-device reliability.',
+        'Personal resume site focused on clarity, performance, and responsive presentation across devices.',
       link: 'https://austinmunene.netlify.app/',
       github: 'https://github.com/Austin254/Portfolio',
-      caseStudy: '#',
       roles: ['Component Design', 'Performance'],
       stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     },
@@ -219,7 +225,7 @@ const Home = () => {
             practices that scale with real-world use.
           </motion.p>
 
-          <div className="space-y-6 md:space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
@@ -234,7 +240,7 @@ const Home = () => {
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                       <div className="flex items-center gap-3">
                         <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-[#00D1FF] to-[#FF00D6]"></span>
-                        <h3 className="text-xl md:text-2xl font-bold gradient-text">
+                        <h3 className="text-lg md:text-xl font-bold gradient-text">
                           {project.title}
                         </h3>
                       </div>
@@ -283,14 +289,6 @@ const Home = () => {
                           {tech}
                         </span>
                       ))}
-                    </div>
-                    <div>
-                      <a
-                        href={project.caseStudy}
-                        className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#00D1FF] transition-colors group-hover:text-[#00D1FF]"
-                      >
-                        Case Study →
-                      </a>
                     </div>
                   </div>
                 </div>
