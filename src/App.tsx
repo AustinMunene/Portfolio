@@ -24,17 +24,18 @@ function App() {
         {/* Your Routes Here */}
       </>
       {/* Footer */}
-      <footer className="container mx-auto px-4 py-8 mt-20 border-t border-gray-800/50">
-        <div className="flex justify-between items-center">
-          <p className="text-gray-500">© 2026 Austin Munene</p>
-          <a
-            href="#top"
-            className="text-gray-500 hover:text-white transition-colors nav-link"
-          >
-            Back to Top
-          </a>
-        </div>
-      </footer>
+        <footer className="relative container mx-auto px-4 py-8 mt-20">
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/20 to-transparent" />
+          <div className="flex justify-between items-center">
+            <p className="text-gray-600 text-sm">© 2026 Austin Munene</p>
+            <a
+              href="#top"
+              className="text-gray-500 hover:text-accent-400 transition-colors text-sm"
+            >
+              Back to Top
+            </a>
+          </div>
+        </footer>
     </div>
   );
 }

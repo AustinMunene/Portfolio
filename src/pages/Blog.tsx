@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-interface BlogPost {
+export interface BlogPost {
   id: number;
   title: string;
   excerpt: string;
@@ -12,7 +12,7 @@ interface BlogPost {
   imageUrl: string;
 }
 
-const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[] = [
   {
     id: 1,
     title: "Building Modern Web Applications",
@@ -74,67 +74,79 @@ const blogPosts: BlogPost[] = [
     date: "April 14, 2024",
     readTime: "7 min read",
     category: "QA & Testing",
-    imageUrl: "https://zkiwxxithffuxbkdolxs.supabase.co/storage/v1/object/sign/images/Mastering-Cypress-Testing-Speed-Reliability-Best-Practices-Featured-Image.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvTWFzdGVyaW5nLUN5cHJlc3MtVGVzdGluZy1TcGVlZC1SZWxpYWJpbGl0eS1CZXN0LVByYWN0aWNlcy1GZWF0dXJlZC1JbWFnZS5wbmciLCJpYXQiOjE3NDQ3MzgwMzgsImV4cCI6MjA2MDA5ODAzOH0.uj8-JAn7v5Dr5VKAR67Cs-OFGLJ1IKJa5pA6yWm7r94"
+    imageUrl: "/cypress.jpeg"
   }
 ];
+
+const categoryColors: Record<string, string> = {
+  Development: 'bg-accent-500/10 text-accent-300 border-accent-500/20',
+  AI: 'bg-purple-500/10 text-purple-300 border-purple-500/20',
+  Design: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20',
+  Career: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
+  'QA & Testing': 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20',
+};
 
 const Blog: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      <div
-        className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat opacity-70 saturate-150 contrast-125"
-        style={{ backgroundImage: "url('/antman.png')" }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/80" />
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="absolute inset-0 bg-black" />
+      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-accent-600/10 rounded-full blur-[128px]" />
+
+      <div className="container mx-auto px-4 py-24 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-5xl mx-auto"
         >
-          <h1 className="text-3xl font-bold mb-8 gradient-text">Blog</h1>
-          <p className="text-gray-300 mb-12">
-            Thoughts, ideas, and insights about technology, development, and design.
-          </p>
+          <div className="text-center mb-16">
+            <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
+              Writing
+            </span>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">Blog</h1>
+            <p className="text-gray-400 max-w-lg mx-auto">
+              Thoughts, ideas, and insights about technology, development, and design.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {blogPosts.map((post) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {blogPosts.map((post, index) => (
               <motion.article
                 key={post.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-black/50 rounded-lg overflow-hidden border border-white/5 hover:border-white/15 hover:transform hover:scale-[1.02] transition-all duration-300"
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                onClick={() => navigate(`/blog/${post.id}`)}
+                className="group cursor-pointer bg-white/[0.03] rounded-2xl overflow-hidden border border-white/[0.06] hover:border-accent-500/20 transition-all duration-300 hover:bg-accent-500/[0.02]"
               >
-                <div className="relative h-48">
+                <div className="relative h-48 overflow-hidden">
                   <img
                     src={post.imageUrl}
                     alt={post.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-white/10 text-white px-3 py-1 rounded-full text-xs border border-white/10">
+                    <span className={`px-3 py-1 rounded-full text-xs border ${categoryColors[post.category] || 'bg-white/10 text-white border-white/10'}`}>
                       {post.category}
                     </span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center text-sm text-gray-400 mb-2">
+                  <div className="flex items-center text-xs text-gray-500 mb-3">
                     <span>{post.date}</span>
-                    <span className="mx-2">•</span>
+                    <span className="mx-2 text-accent-500/30">|</span>
                     <span>{post.readTime}</span>
                   </div>
-                  <h2 className="text-lg font-semibold mb-2">{post.title}</h2>
-                  <p className="text-gray-300">{post.excerpt}</p>
-                  <button
-                    onClick={() => navigate(`/blog/${post.id}`)}
-                    className="mt-4 text-white/80 hover:text-white transition-colors"
-                  >
+                  <h2 className="text-lg font-semibold mb-2 text-white group-hover:text-accent-300 transition-colors">
+                    {post.title}
+                  </h2>
+                  <p className="text-sm text-gray-400 leading-relaxed line-clamp-2">{post.excerpt}</p>
+                  <span className="inline-block mt-4 text-sm text-accent-400 group-hover:translate-x-1 transition-transform">
                     Read more →
-                  </button>
+                  </span>
                 </div>
               </motion.article>
             ))}
@@ -145,4 +157,4 @@ const Blog: React.FC = () => {
   );
 };
 
-export default Blog; 
+export default Blog;

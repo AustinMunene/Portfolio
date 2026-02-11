@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { TestTube2, Bug, Code2, Briefcase, Award, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const Career = () => {
-  const careerHistory = [
+export const careerHistory = [
     {
       title: 'Lead QA Engineer',
       company: 'Nathan Digital, Nairobi',
@@ -22,14 +21,8 @@ const Career = () => {
         'Champion continuous improvement to expand coverage and release confidence',
       ],
       skills: [
-        'Cypress',
-        'Playwright',
-        'QA Leadership',
-        'Automation Frameworks',
-        'API Testing',
-        'Performance Testing',
-        'Cross-browser Testing',
-        'UAT Coordination',
+        'Cypress', 'Playwright', 'QA Leadership', 'Automation Frameworks',
+        'API Testing', 'Performance Testing', 'Cross-browser Testing', 'UAT Coordination',
       ],
     },
     {
@@ -49,14 +42,8 @@ const Career = () => {
         'Maintained defect logs and supported root cause analysis',
       ],
       skills: [
-        'Cypress',
-        'API Testing',
-        'Regression Testing',
-        'Test Planning',
-        'Defect Management',
-        'Exploratory Testing',
-        'Cross-browser Testing',
-        'Jira',
+        'Cypress', 'API Testing', 'Regression Testing', 'Test Planning',
+        'Defect Management', 'Exploratory Testing', 'Cross-browser Testing', 'Jira',
       ],
     },
     {
@@ -77,14 +64,8 @@ const Career = () => {
         'Provided technical support and acted as QA liaison for business users',
       ],
       skills: [
-        'ERP Testing',
-        'Postman',
-        'UAT Management',
-        'Regression Testing',
-        'Defect Tracking',
-        'Database Validation',
-        'Systems Support',
-        'Jira',
+        'ERP Testing', 'Postman', 'UAT Management', 'Regression Testing',
+        'Defect Tracking', 'Database Validation', 'Systems Support', 'Jira',
       ],
     },
     {
@@ -103,12 +84,8 @@ const Career = () => {
         'Joined requirement reviews to clarify testing expectations',
       ],
       skills: [
-        'Manual Testing',
-        'Regression Testing',
-        'Defect Management',
-        'QA Documentation',
-        'Usability Testing',
-        'Web & Mobile Testing',
+        'Manual Testing', 'Regression Testing', 'Defect Management',
+        'QA Documentation', 'Usability Testing', 'Web & Mobile Testing',
       ],
     },
     {
@@ -129,14 +106,8 @@ const Career = () => {
         'Acted as quality gate before deployment and go-live',
       ],
       skills: [
-        'Cypress',
-        'API Validation',
-        'Integration Testing',
-        'Mobile Testing',
-        'Cross-browser Testing',
-        'Defect Prevention',
-        'QA Strategy',
-        'Client Consulting',
+        'Cypress', 'API Validation', 'Integration Testing', 'Mobile Testing',
+        'Cross-browser Testing', 'Defect Prevention', 'QA Strategy', 'Client Consulting',
       ],
     },
     {
@@ -155,16 +126,13 @@ const Career = () => {
         'Emphasized clean code practices and continuous improvement',
       ],
       skills: [
-        'STEM Education',
-        'Robotics',
-        'Testing Fundamentals',
-        'Mentoring',
-        'Problem Solving',
-        'Mobile App Basics',
+        'STEM Education', 'Robotics', 'Testing Fundamentals',
+        'Mentoring', 'Problem Solving', 'Mobile App Basics',
       ],
     },
   ];
 
+const Career = () => {
   useEffect(() => {
     const observerCallback: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
@@ -192,11 +160,11 @@ const Career = () => {
       transition={{ duration: 0.5 }}
       className="relative min-h-screen overflow-hidden"
     >
-      <div
-        className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat opacity-70 saturate-150 contrast-125"
-        style={{ backgroundImage: "url('/antman.png')" }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/80" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-black" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-600/10 rounded-full blur-[128px]" />
+      <div className="absolute bottom-1/3 left-0 w-[400px] h-[400px] bg-accent-800/10 rounded-full blur-[128px]" />
+
       <div className="container mx-auto px-4 pt-20 md:pt-24 pb-16 md:pb-20 relative z-10">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -205,6 +173,9 @@ const Career = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-12 md:mb-16"
           >
+            <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
+              Experience
+            </span>
             <motion.h1
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -223,114 +194,92 @@ const Career = () => {
             </motion.p>
           </motion.div>
 
-          <div className="space-y-16 md:space-y-20">
-            {careerHistory.map((role, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="reveal"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.02, rotateX: 5 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-black/40 rounded-xl p-6 md:p-8 relative overflow-hidden group perspective backdrop-blur-sm border border-white/10 hover:border-white/30"
-                >
-                  <motion.div
-                    className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/10 to-transparent blur-3xl group-hover:scale-150 transition-transform duration-700"
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      rotate: [0, 45, 0],
-                    }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                  />
+          {/* Timeline line */}
+          <div className="relative">
+            <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent-500/40 via-accent-500/20 to-transparent" />
 
-                  <div className="relative">
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
+            <div className="space-y-12 md:space-y-16">
+              {careerHistory.map((role, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.08 }}
+                  viewport={{ once: true }}
+                  className="reveal relative pl-8 md:pl-20"
+                >
+                  {/* Timeline dot */}
+                  <div className="absolute left-0 md:left-8 top-8 -translate-x-1/2">
+                    <div className={`w-3 h-3 rounded-full ${index === 0 ? 'bg-accent-500 shadow-lg shadow-accent-500/50' : 'bg-gray-600 border border-gray-500'}`} />
+                  </div>
+
+                  <div className="bg-white/[0.03] rounded-2xl p-6 md:p-8 border border-white/[0.06] hover:border-accent-500/20 transition-all duration-300 group hover:bg-accent-500/[0.02]">
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6 gap-3">
                       <div>
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          className="flex items-center gap-3 mb-2"
-                        >
-                          <Briefcase className="w-6 h-6 text-white/80" />
-                          <h3 className="text-xl md:text-2xl font-bold gradient-text">
+                        <div className="flex items-center gap-3 mb-2">
+                          <Briefcase className="w-5 h-5 text-accent-400" />
+                          <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-accent-300 transition-colors">
                             {role.title}
                           </h3>
-                        </motion.div>
-                        <div className="flex items-center gap-3 text-lg md:text-xl text-gray-400 mb-2">
-                          <Award className="w-5 h-5 text-white/70" />
+                        </div>
+                        <div className="flex items-center gap-3 text-base md:text-lg text-gray-400 mb-1">
+                          <Award className="w-4 h-4 text-accent-400/60" />
                           <span>{role.company}</span>
                         </div>
                         <div className="flex items-center gap-3 text-sm text-gray-500">
-                          <Clock className="w-4 h-4" />
+                          <Clock className="w-3.5 h-3.5" />
                           <span>{role.period}</span>
                         </div>
                       </div>
                       {index === 0 && (
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          className="flex gap-2 mt-4 md:mt-0"
-                        >
-                          <span className="px-3 py-1 bg-white/10 rounded-full text-white/80 text-sm border border-white/15">
-                            Current Role
-                          </span>
-                        </motion.div>
+                        <span className="inline-flex px-3 py-1 bg-accent-500/10 rounded-full text-accent-300 text-xs border border-accent-500/20 self-start">
+                          Current Role
+                        </span>
                       )}
                     </div>
 
-                    <p className="text-base md:text-lg text-gray-300 mb-6">
+                    <p className="text-gray-400 mb-6 leading-relaxed">
                       {role.description}
                     </p>
 
-                    <div className="mb-8">
-                      <h4 className="text-base md:text-lg font-semibold mb-4 flex items-center">
-                        <TestTube2 className="w-5 h-5 mr-2 text-white/80" />
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold mb-3 flex items-center text-gray-300">
+                        <TestTube2 className="w-4 h-4 mr-2 text-accent-400/70" />
                         Key Responsibilities
                       </h4>
-                      <ul className="space-y-3">
+                      <ul className="space-y-2">
                         {role.responsibilities.map((resp, idx) => (
-                          <motion.li
+                          <li
                             key={idx}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            viewport={{ once: true }}
-                            className="flex items-start group"
+                            className="flex items-start text-sm"
                           >
-                            <Bug className="w-4 h-4 mr-3 mt-1 flex-shrink-0 text-white/70 group-hover:scale-110 transition-transform" />
-                            <span className="text-gray-400 group-hover:text-gray-300 transition-colors">{resp}</span>
-                          </motion.li>
+                            <Bug className="w-3.5 h-3.5 mr-3 mt-0.5 flex-shrink-0 text-accent-500/50" />
+                            <span className="text-gray-400">{resp}</span>
+                          </li>
                         ))}
                       </ul>
                     </div>
 
                     <div>
-                      <h4 className="text-base md:text-lg font-semibold mb-4 flex items-center">
-                        <Code2 className="w-5 h-5 mr-2 text-white/80" />
+                      <h4 className="text-sm font-semibold mb-3 flex items-center text-gray-300">
+                        <Code2 className="w-4 h-4 mr-2 text-accent-400/70" />
                         Skills & Tools
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {role.skills.map((skill, idx) => (
-                          <motion.span
+                          <span
                             key={idx}
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            className="px-3 py-1 bg-gray-700/50 rounded-full text-sm text-gray-300 hover:bg-gray-600/50 transition-colors"
+                            className="px-3 py-1 bg-white/[0.04] rounded-full text-xs text-gray-400 hover:text-accent-300 hover:bg-accent-500/10 transition-colors"
                           >
                             {skill}
-                          </motion.span>
+                          </span>
                         ))}
                       </div>
                     </div>
                   </div>
                 </motion.div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
