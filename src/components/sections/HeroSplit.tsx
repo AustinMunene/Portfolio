@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles, TrendingUp, Zap, Shield } from 'lucide-react';
+import { ArrowRight, Sparkles, TrendingUp, Zap, Shield, Mail, Phone, ChevronDown } from 'lucide-react';
 
 const name = 'Austin Munene';
 
@@ -52,6 +52,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
   ];
 
   const [activeHighlight, setActiveHighlight] = useState(0);
+  const [getInTouchOpen, setGetInTouchOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -161,12 +162,45 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                 View Projects
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a
-                href="mailto:muneneaustin56@gmail.com"
-                className="px-8 py-3 border border-white/10 text-gray-300 rounded-full font-medium hover:border-accent-500/50 hover:text-white hover:bg-accent-500/5 transition-all"
-              >
-                Get in Touch
-              </a>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setGetInTouchOpen((o) => !o)}
+                  onBlur={() => setTimeout(() => setGetInTouchOpen(false), 150)}
+                  className="px-8 py-3 border border-white/10 text-gray-300 rounded-full font-medium hover:border-accent-500/50 hover:text-white hover:bg-accent-500/5 transition-all flex items-center gap-2"
+                >
+                  Get in Touch
+                  <ChevronDown className={`w-4 h-4 transition-transform ${getInTouchOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {getInTouchOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-0 top-full mt-2 min-w-[220px] rounded-xl border border-white/[0.08] bg-black/95 backdrop-blur-md shadow-xl py-2 z-50"
+                    >
+                      <a
+                        href="mailto:muneneaustin56@gmail.com"
+                        className="flex items-center gap-3 px-4 py-3 text-left text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                      >
+                        <Mail className="w-4 h-4 text-accent-400 shrink-0" />
+                        <span className="text-sm">Email</span>
+                        <span className="text-xs text-gray-500 truncate ml-auto">muneneaustin56@gmail.com</span>
+                      </a>
+                      <a
+                        href="tel:+254743988415"
+                        className="flex items-center gap-3 px-4 py-3 text-left text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                      >
+                        <Phone className="w-4 h-4 text-accent-400 shrink-0" />
+                        <span className="text-sm">Call</span>
+                        <span className="text-xs text-gray-500 ml-auto">+254 743 988 415</span>
+                      </a>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </motion.div>
 
             {/* Keyword tags */}

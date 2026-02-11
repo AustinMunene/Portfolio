@@ -163,16 +163,26 @@ const Home = () => {
           >
             Have a project in mind? Let's discuss how we can work together.
           </motion.p>
-          <motion.a
+          <motion.div
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             viewport={{ once: true }}
-            href="mailto:muneneaustin56@gmail.com"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-accent-500/25 transition-all reveal"
+            className="flex flex-wrap items-center justify-center gap-4 reveal"
           >
-            muneneaustin56@gmail.com
-          </motion.a>
+            <a
+              href="mailto:muneneaustin56@gmail.com"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-accent-500/25 transition-all"
+            >
+              muneneaustin56@gmail.com
+            </a>
+            <a
+              href="tel:+254743988415"
+              className="inline-flex items-center gap-2 px-8 py-3 border border-white/10 text-gray-300 rounded-full font-medium hover:border-accent-500/50 hover:text-white hover:bg-accent-500/5 transition-all"
+            >
+              +254 743 988 415
+            </a>
+          </motion.div>
         </div>
       </section>
     </motion.div>
