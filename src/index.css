@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,13 +13,16 @@
 
   body {
     @apply bg-black text-white;
-    font-family: 'JetBrains Mono', Futura, system-ui, -apple-system,
-      BlinkMacSystemFont, sans-serif !important;
+    font-family: 'DM Sans', -apple-system, system-ui, BlinkMacSystemFont, sans-serif !important;
     font-size: 0.95rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior-y: none;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace !important;
   }
 
   @media (max-width: 768px) {

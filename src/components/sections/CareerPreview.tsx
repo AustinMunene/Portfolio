@@ -15,9 +15,31 @@ type CareerPreviewProps = {
 const CareerPreview = ({ items }: CareerPreviewProps) => {
   return (
     <section id="career-preview" className="relative py-24 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-black" />
+      {/* Background: image + overlay so content stays readable (same pattern as Hero) */}
+      <div className="absolute inset-0 bg-black" aria-hidden />
+      <img
+        src="/cypress.jpeg"
+        alt=""
+        role="presentation"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"
+        aria-hidden
+      />
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-accent-600/15 rounded-full blur-[128px]" />
+        <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-accent-800/10 rounded-full blur-[100px]" />
+      </div>
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #6366f1 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+        }}
+      />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/30 to-transparent" />
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-accent-600/10 rounded-full blur-[128px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -25,7 +47,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16"
+          className="flex flex-col gap-6 mb-12 md:mb-16"
         >
           <div>
             <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
@@ -43,18 +65,12 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
               A timeline of professional growth and achievements in tech.
             </p>
           </div>
-          <Link
-            to="/career"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/[0.1] text-gray-300 hover:border-accent-500/40 hover:text-accent-300 transition-all text-sm font-medium"
-          >
-            View full journey
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          {/* Button moved to bottom-right for desktop; stays stacked on mobile */}
         </motion.div>
 
         {/* Alternating timeline */}
-        <div className="max-w-4xl mx-auto relative">
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-accent-500/30 via-accent-500/10 to-transparent -translate-x-px" />
+        <div className="max-w-4xl mx-0 relative">
+          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-accent-500/30 via-accent-500/10 to-transparent -translate-x-px" />
 
           <div className="space-y-8 md:space-y-12">
             {items.map((role, index) => (
@@ -64,15 +80,10 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
                 viewport={{ once: true }}
-                className={`relative flex items-center gap-8 md:gap-12 ${
-                  index % 2 === 1 ? 'md:flex-row-reverse' : ''
-                }`}
+                className={`relative flex items-start gap-8 md:gap-12 pl-8`}
               >
-                {/* Spacer for alternating content */}
-                <div className={`flex-1 hidden md:block ${index % 2 === 1 ? 'order-2' : ''}`} />
-
-                <div className="flex-1 w-full md:max-w-[calc(50%-2rem)]">
-                  <div className="bg-white/[0.03] rounded-xl border border-white/[0.06] p-5 md:p-6 hover:border-accent-500/20 transition-all duration-300 hover:bg-accent-500/[0.02]">
+                <div className="w-full">
+                  <div className="bg-white/[0.03] rounded-xl border border-white/[0.06] p-5 md:p-6 hover:border-accent-500/20 transition-all duration-300 hover:bg-accent-500/[0.02] ml-6">
                     <div className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-accent-500/10 flex items-center justify-center mt-0.5">
                         <Briefcase className="w-4 h-4 text-accent-400" />
@@ -89,10 +100,21 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                 </div>
 
                 {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent-500/80 border-2 border-black" />
+                <div className="absolute left-6 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent-500/80 border-2 border-black" />
               </motion.div>
             ))}
           </div>
+        </div>
+
+        <div className="mt-6 md:mt-0">
+          <Link
+            to="/career"
+            aria-label="View full career journey"
+            className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.06] text-gray-300 hover:border-accent-500/40 hover:text-accent-300 transition-all text-sm font-medium md:absolute md:bottom-8 md:right-8"
+          >
+            View full journey
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>

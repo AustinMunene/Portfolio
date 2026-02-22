@@ -3,6 +3,11 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['DM Sans', '-apple-system', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        'space-grotesk': ['Space Grotesk', 'sans-serif'],
+      },
       colors: {
         accent: {
           DEFAULT: '#6366f1',
@@ -17,9 +22,6 @@ export default {
           800: '#3730a3',
           900: '#312e81',
         },
-      },
-      fontFamily: {
-        'space-grotesk': ['Space Grotesk', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in',

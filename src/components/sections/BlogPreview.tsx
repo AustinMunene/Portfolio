@@ -41,9 +41,31 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
 
   return (
     <section id="blog-preview" className="relative py-24 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-black" />
+      {/* Background: image + overlay (same pattern as Hero, Career Preview, Let's Connect) */}
+      <div className="absolute inset-0 bg-black" aria-hidden />
+      <img
+        src="/VibeCoding.jpeg"
+        alt=""
+        role="presentation"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"
+        aria-hidden
+      />
+      <div className="absolute inset-0">
+        <div className="absolute bottom-1/3 left-0 w-[400px] h-[400px] bg-accent-600/15 rounded-full blur-[128px]" />
+        <div className="absolute top-1/4 right-1/3 w-[300px] h-[300px] bg-accent-800/10 rounded-full blur-[100px]" />
+      </div>
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #6366f1 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+        }}
+      />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/30 to-transparent" />
-      <div className="absolute bottom-1/3 left-0 w-[400px] h-[400px] bg-accent-800/10 rounded-full blur-[128px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
