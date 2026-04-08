@@ -17,13 +17,13 @@ const rawProjects: Array<{
   stack: string[];
 }> = [
     {
-      title: 'BoxLap',
+      title: 'Knowledge Library',
       description:
-        'A slick motorsport companion app that lets you track lap times, compare sessions, and feel the rush of data-driven racing — because every tenth of a second counts.',
-      link: 'https://boxlap.vercel.app',
-      github: 'https://github.com/AustinMunene/BoxLap',
-      roles: ['Full-stack Delivery', 'Product Thinking'],
-      stack: ['Vue', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+        'Designing and developing a full-stack knowledge library system to track books, borrowing, approvals, and user activity through a secure web platform for internal teams.',
+      link: 'https://jubileelibrary.netlify.app/login',
+      github: 'https://github.com/AustinMunene/Jubilee-knowledge-library',
+      roles: ['System Design', 'QA Strategy'],
+      stack: ['JavaScript', 'Supabase', 'Tailwind CSS', 'Netlify', 'MobX'],
     },
     {
       title: 'Akili Sawa',
@@ -71,13 +71,13 @@ const rawProjects: Array<{
       stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     },
     {
-      title: 'Knowledge Library',
+      title: 'BoxLap',
       description:
-        'Designing and developing a full-stack knowledge library system to track books, borrowing, approvals, and user activity through a secure web platform for internal teams.',
-      link: 'https://jubileelibrary.netlify.app/login',
-      github: 'https://github.com/AustinMunene/Jubilee-knowledge-library',
-      roles: ['System Design', 'QA Strategy'],
-      stack: ['JavaScript', 'Supabase', 'Tailwind CSS', 'Netlify', 'MobX'],
+        'Built a full-stack F1 analytics platform from scratch - real telemetry data, qualifying mini sectors, race pace storytelling, and driver comparisons across every season from 2023 to present. Powered by OpenF1 and Ergast APIs with a Gemini AI layer that turns raw lap times into fan-friendly narratives. F1 data, finally explained.',
+      link: 'https://boxlap.vercel.app',
+      github: 'https://github.com/AustinMunene/BoxLap',
+      roles: ['Full-stack Delivery', 'Product Thinking'],
+      stack: ['Vue', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     },
   ];
 
@@ -205,7 +205,7 @@ const Home = () => {
               href="mailto:muneneaustin56@gmail.com"
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-accent-500/25 transition-all"
             >
-              muneneaustin56@gmail.com
+              saviusmunene@gmail.com
             </a>
             <a
               href="tel:+254743988415"
