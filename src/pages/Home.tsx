@@ -16,66 +16,75 @@ const rawProjects: Array<{
   roles?: string[];
   stack: string[];
 }> = [
-  {
-    title: 'Knowledge Library',
-    description:
-      'Designing and developing a full-stack knowledge library system to track books, borrowing, approvals, and user activity through a secure web platform for internal teams.',
-    link: 'https://jubileelibrary.netlify.app/login',
-    github: 'https://github.com/AustinMunene/Jubilee-knowledge-library',
-    roles: ['System Design', 'QA Strategy'],
-    stack: ['JavaScript', 'Supabase', 'Tailwind CSS', 'Netlify', 'MobX'],
-  },
-  {
-    title: 'Akili Sawa',
-    description:
-      'Redesigned and developed the official corporate website to deliver a modern, professional presence that clearly communicates mental wellness services and improves usability.',
-    link: 'https://www.akilisawa.com/',
-    github: 'https://github.com/AustinMunene/Akilisawa',
-    roles: ['Frontend Architecture', 'UX Improvement'],
-    stack: ['React', 'Tailwind CSS', 'Framer Motion'],
-  },
-  {
-    title: 'Hostel Management System',
-    description:
-      'Full-stack hostel booking and allocation platform for students and administrators, with room discovery, booking requests, approvals, and occupancy tracking.',
-    link: 'https://mkuhms.netlify.app/',
-    github: 'https://github.com/Austin254/MKU-HMS-FINAL',
-    roles: ['Full-stack Delivery', 'Product Thinking'],
-    stack: ['React', 'Next.js', 'Supabase', 'Tailwind CSS'],
-  },
-  {
-    title: 'Shades of Cake',
-    description:
-      'Modern, responsive business website for a cake and events brand to showcase products, strengthen digital presence, and improve client inquiries across devices.',
-    link: 'https://shadesofcake.org/',
-    github: 'https://github.com/AustinMunene/shadesofcake.git',
-    roles: ['Frontend Delivery', 'UI Craft'],
-    stack: ['JavaScript', 'Tailwind CSS', 'Framer Motion', 'Lucide Icons', 'Netlify'],
-  },
-  {
-    title: 'Faced by Cynie',
-    description:
-      'Portfolio experience designed to present creative work with clear navigation, smooth interactions, and a polished visual layout.',
-    link: 'https://facedbycynie.netlify.app',
-    github: 'https://github.com/Austin254/facedbycynie',
-    roles: ['UI Engineering', 'Interaction Design'],
-    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-  },
-  {
-    title: 'Digital Resume',
-    description:
-      'Personal resume site focused on clarity, performance, and responsive presentation across devices.',
-    link: 'https://austinmunene.netlify.app/',
-    github: 'https://github.com/Austin254/Portfolio',
-    roles: ['Component Design', 'Performance'],
-    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-  },
-];
+    {
+      title: 'BoxLap',
+      description:
+        'A slick motorsport companion app that lets you track lap times, compare sessions, and feel the rush of data-driven racing — because every tenth of a second counts.',
+      link: 'https://boxlap.vercel.app',
+      github: 'https://github.com/AustinMunene/BoxLap',
+      roles: ['Full-stack Delivery', 'Product Thinking'],
+      stack: ['Vue', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    },
+    {
+      title: 'Akili Sawa',
+      description:
+        'Redesigned and developed the official corporate website to deliver a modern, professional presence that clearly communicates mental wellness services and improves usability.',
+      link: 'https://www.akilisawa.com/',
+      github: 'https://github.com/AustinMunene/Akilisawa',
+      roles: ['Frontend Architecture', 'UX Improvement'],
+      stack: ['React', 'Tailwind CSS', 'Framer Motion'],
+    },
+    {
+      title: 'Hostel Management System',
+      description:
+        'Full-stack hostel booking and allocation platform for students and administrators, with room discovery, booking requests, approvals, and occupancy tracking.',
+      link: 'https://mkuhms.netlify.app/',
+      github: 'https://github.com/Austin254/MKU-HMS-FINAL',
+      roles: ['Full-stack Delivery', 'Product Thinking'],
+      stack: ['React', 'Next.js', 'Supabase', 'Tailwind CSS'],
+    },
+    {
+      title: 'Shades of Cake',
+      description:
+        'Modern, responsive business website for a cake and events brand to showcase products, strengthen digital presence, and improve client inquiries across devices.',
+      link: 'https://shadesofcake.org/',
+      github: 'https://github.com/AustinMunene/shadesofcake.git',
+      roles: ['Frontend Delivery', 'UI Craft'],
+      stack: ['JavaScript', 'Tailwind CSS', 'Framer Motion', 'Lucide Icons', 'Netlify'],
+    },
+    {
+      title: 'Faced by Cynie',
+      description:
+        'Portfolio experience designed to present creative work with clear navigation, smooth interactions, and a polished visual layout.',
+      link: 'https://facedbycynie.netlify.app',
+      github: 'https://github.com/Austin254/facedbycynie',
+      roles: ['UI Engineering', 'Interaction Design'],
+      stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    },
+    {
+      title: 'Digital Resume',
+      description:
+        'Personal resume site focused on clarity, performance, and responsive presentation across devices.',
+      link: 'https://austinmunene.netlify.app/',
+      github: 'https://github.com/Austin254/Portfolio',
+      roles: ['Component Design', 'Performance'],
+      stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    },
+    {
+      title: 'Knowledge Library',
+      description:
+        'Designing and developing a full-stack knowledge library system to track books, borrowing, approvals, and user activity through a secure web platform for internal teams.',
+      link: 'https://jubileelibrary.netlify.app/login',
+      github: 'https://github.com/AustinMunene/Jubilee-knowledge-library',
+      roles: ['System Design', 'QA Strategy'],
+      stack: ['JavaScript', 'Supabase', 'Tailwind CSS', 'Netlify', 'MobX'],
+    },
+  ];
 
 function projectCategory(roles: string[] = []): BentoProject['category'] {
   const r = roles.join(' ').toLowerCase();
-  if (r.includes('qa') || r.includes('quality')) return 'QA';
   if (r.includes('full-stack') || r.includes('system design')) return 'Full-stack';
+  if (r.includes('qa') || r.includes('quality')) return 'QA';
   return 'Frontend';
 }
 

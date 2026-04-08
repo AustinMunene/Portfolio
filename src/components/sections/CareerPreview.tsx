@@ -78,12 +78,13 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                 key={role.company + role.period}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -4 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
                 viewport={{ once: true }}
                 className={`relative flex items-start gap-8 md:gap-12 pl-8`}
               >
                 <div className="w-full">
-                  <div className="bg-white/[0.03] rounded-xl border border-white/[0.06] p-5 md:p-6 hover:border-accent-500/20 transition-all duration-300 hover:bg-accent-500/[0.02] ml-6">
+                  <div className="bg-white/[0.03] rounded-xl border border-white/[0.06] p-5 md:p-6 hover:border-accent-500/30 transition-all duration-300 hover:bg-accent-500/[0.03] hover:shadow-[0_8px_40px_-12px_rgba(99,102,241,0.2)] ml-6">
                     <div className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-accent-500/10 flex items-center justify-center mt-0.5">
                         <Briefcase className="w-4 h-4 text-accent-400" />

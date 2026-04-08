@@ -12,7 +12,7 @@ export type BentoProject = {
   category?: 'Frontend' | 'QA' | 'Full-stack';
 };
 
-const FILTERS: Array<'All' | 'Frontend' | 'QA' | 'Full-stack'> = ['All', 'Frontend', 'QA', 'Full-stack'];
+const FILTERS: Array<'All' | 'Frontend' | 'QA' | 'Full-stack'> = ['All', 'Frontend', /* 'QA', */ 'Full-stack'];
 
 type FeaturedBentoProps = {
   projects: BentoProject[];
@@ -27,7 +27,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
   }, [projects, filter]);
 
   const primary = filtered[0];
-  const secondary = filtered.slice(1, 5);
+  const secondary = filtered.slice(1);
 
   return (
     <section id="projects" className="relative py-24 md:py-32 overflow-hidden">
@@ -84,6 +84,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
               <motion.div
                 initial={{ y: 40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
+                whileHover={{ y: -6 }}
                 transition={{ duration: 0.5, delay: 0.05 }}
                 viewport={{ once: true }}
                 className="md:col-span-2 md:row-span-1"
@@ -157,6 +158,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                 key={project.title + index}
                 initial={{ y: 40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
+                whileHover={{ y: -6 }}
                 transition={{ duration: 0.5, delay: 0.08 * (index + 1) }}
                 viewport={{ once: true }}
                 className="group"

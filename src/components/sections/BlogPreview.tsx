@@ -44,7 +44,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
       {/* Background: image + overlay (same pattern as Hero, Career Preview, Let's Connect) */}
       <div className="absolute inset-0 bg-black" aria-hidden />
       <img
-        src="/VibeCoding.jpeg"
+        src="/cypress.jpeg"
         alt=""
         role="presentation"
         decoding="async"
