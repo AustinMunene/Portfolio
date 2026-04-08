@@ -182,12 +182,12 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                       className="absolute left-0 top-full mt-2 min-w-[220px] rounded-xl border border-white/[0.08] bg-black/95 backdrop-blur-md shadow-xl py-2 z-50"
                     >
                       <a
-                        href="mailto:muneneaustin56@gmail.com"
+                        href="mailto:saviusmunene@gmail.com"
                         className="flex items-center gap-3 px-4 py-3 text-left text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
                       >
                         <Mail className="w-4 h-4 text-accent-400 shrink-0" />
                         <span className="text-sm">Email</span>
-                        <span className="text-xs text-gray-500 truncate ml-auto">muneneaustin56@gmail.com</span>
+                        <span className="text-xs text-gray-500 truncate ml-auto">saviusmunene@gmail.com</span>
                       </a>
                       <a
                         href="tel:+254743988415"
@@ -237,11 +237,10 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                   <button
                     key={i}
                     onClick={() => setActiveHighlight(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === activeHighlight
+                    className={`h-1.5 rounded-full transition-all duration-300 ${i === activeHighlight
                         ? 'w-8 bg-accent-500'
                         : 'w-1.5 bg-white/20 hover:bg-white/40'
-                    }`}
+                      }`}
                   />
                 ))}
               </div>
