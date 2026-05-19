@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Career from './pages/Career';
 import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost2';
+import BlogPost from './pages/BlogPost';
 import InteractiveDemo from './pages/InteractiveDemo';
 import ScrollToTop from './components/ScrollToTop';
 
