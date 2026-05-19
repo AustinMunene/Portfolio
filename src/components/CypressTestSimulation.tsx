@@ -39,7 +39,7 @@ const CypressTestSimulation: React.FC = () => {
                 : "bg-red-700 border-red-400"
             }`}
           >
-            <span className="font-semibold">{test.title}</span> —{" "}
+            <span className="font-semibold">{test.title}</span> -{" "}
             <span className="uppercase">{test.status}</span>
           </li>
         ))}
