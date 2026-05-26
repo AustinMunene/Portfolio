@@ -56,7 +56,7 @@ const rawProjects: Array<{
       title: 'Hostel Management System',
       description:
         'Full-stack hostel booking and allocation platform for students and administrators, with room discovery, booking requests, approvals, and occupancy tracking.',
-      link: 'https://mkuhms.netlify.app/',
+      link: 'https://bookingsmku.netlify.app/',
       github: 'https://github.com/Austin254/MKU-HMS-FINAL',
       roles: ['Full-stack Delivery', 'Product Thinking'],
       stack: ['React', 'Next.js', 'Supabase', 'Tailwind CSS'],
