@@ -17,13 +17,31 @@ const rawProjects: Array<{
   stack: string[];
 }> = [
     {
+      title: 'Girlie Conversations',
+      description:
+        'Designed and built the official site for a women-led community brand - editorial storytelling, event calendar, testimonials, newsletter signup, and partner sections that match the brand’s warm, intentional tone.',
+      link: 'https://girlieconversations.com',
+      github: 'https://github.com/AustinMunene',
+      roles: ['Functional Frontend Architecture', 'ModernUI Craft'],
+      stack: ['React', 'Tailwind CSS', 'Framer Motion'],
+    },
+    {
       title: 'BoxLap',
       description:
         'Built a full-stack F1 analytics platform from scratch - real telemetry data, qualifying mini sectors, race pace storytelling, and driver comparisons across every season from 2023 to present. Powered by OpenF1 and Ergast APIs with a Gemini AI layer that turns raw lap times into fan-friendly narratives. F1 data, finally explained.',
       link: 'https://boxlap.vercel.app',
       github: 'https://github.com/AustinMunene/BoxLap',
+      roles: ['Full-stack', 'Product Thinking'],
+      stack: ['Vue.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    },
+    {
+      title: 'Cradle HR',
+      description:
+        'Built a modern HR platform for African businesses - employee profiles, attendance and leave, document storage, performance reviews, recruitment workflows, and compliance tooling behind secure auth.',
+      link: 'https://cradle.app.maunode.com',
+      github: 'https://github.com/AustinMunene',
       roles: ['Full-stack Delivery', 'Product Thinking'],
-      stack: ['Vue', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+      stack: ['Vue.js', 'Nuxt.js', 'Tailwind CSS', 'Pinia', 'Cloudflare'],
     },
     {
       title: 'Akili Sawa',
