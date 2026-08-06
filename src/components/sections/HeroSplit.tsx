@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, Suspense, lazy } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Sparkles, TrendingUp, Zap, Shield, Mail, Phone, ChevronDown } from 'lucide-react';
+
+// three/fiber/drei is ~600KB. Split it out so it never blocks first paint;
+// the hero renders its gradient ground immediately and the scene fades in.
+const HeroScene = lazy(() => import('../three/HeroScene'));
 
 const name = 'Austin Munene';
 
@@ -53,6 +57,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
 
   const [activeHighlight, setActiveHighlight] = useState(0);
   const [getInTouchOpen, setGetInTouchOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,18 +68,27 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background: image + overlay so content stays readable */}
+      {/* Live WebGL centrepiece, layered under the copy. */}
       <div className="absolute inset-0 bg-black" aria-hidden />
-      <img
-        src="/coding.jpeg"
-        alt=""
-        role="presentation"
-        decoding="async"
-        fetchPriority="high"
-        className="absolute inset-0 w-full h-full object-cover object-center"
+      <motion.div
+        className="absolute inset-0"
+        aria-hidden
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+      >
+        <Suspense fallback={null}>
+          <HeroScene reducedMotion={Boolean(reduceMotion)} />
+        </Suspense>
+      </motion.div>
+      {/* Scrim: only as dark as the copy needs. Heavy on the left where the
+          headline sits, clearing through the middle so the geometry reads. */}
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/25 to-transparent"
+        aria-hidden
       />
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"
+        className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70"
         aria-hidden
       />
       <div className="absolute inset-0">
@@ -118,24 +132,35 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight cursor-default"
             >
-              {name.split('').map((char, index) => (
-                <motion.span
-                  key={`${char}-${index}`}
-                  className="inline-block"
-                  whileHover={{
-                    y: -8,
-                    color: '#818cf8',
-                    transition: { duration: 0.2, ease: 'easeOut' },
-                  }}
-                  style={{
-                    background: 'linear-gradient(135deg, #ffffff 0%, #a5b4fc 60%, #6366f1 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
+              {/* Split per word, not per character, so "Munene" can never break
+                  across lines the way it did at wide viewports. */}
+              {name.split(' ').map((word, wordIndex) => (
+                <span
+                  key={word}
+                  className="inline-block whitespace-nowrap"
+                  style={{ marginRight: wordIndex === 0 ? '0.25em' : undefined }}
                 >
-                  {char === ' ' ? '\u00A0' : char}
-                </motion.span>
+                  {word.split('').map((char, index) => (
+                    <motion.span
+                      key={`${char}-${index}`}
+                      className="inline-block"
+                      whileHover={{
+                        y: -8,
+                        color: '#818cf8',
+                        transition: { duration: 0.2, ease: 'easeOut' },
+                      }}
+                      style={{
+                        background:
+                          'linear-gradient(135deg, #ffffff 0%, #a5b4fc 60%, #6366f1 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </span>
               ))}
             </motion.h1>
 

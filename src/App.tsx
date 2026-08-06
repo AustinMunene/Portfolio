@@ -1,24 +1,32 @@
-import React from 'react';
+import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Career from './pages/Career';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import InteractiveDemo from './pages/InteractiveDemo';
 import ScrollToTop from './components/ScrollToTop';
+
+/*
+  Home ships in the initial bundle; the rest are split. This matters most for
+  InteractiveDemo, which pulls three/fiber/drei: importing it statically forced
+  three into the main chunk and defeated the lazy-loaded hero scene.
+*/
+const Career = lazy(() => import('./pages/Career'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const InteractiveDemo = lazy(() => import('./pages/InteractiveDemo'));
 
 function App() {
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/career" element={<Career />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:id" element={<BlogPost />} />
-        <Route path="/interactive" element={<InteractiveDemo />} />
-      </Routes>
+      <Suspense fallback={<div className="min-h-screen" role="status" aria-label="Loading" />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/career" element={<Career />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
+          <Route path="/interactive" element={<InteractiveDemo />} />
+        </Routes>
+      </Suspense>
       <>
         <ScrollToTop />
         {/* Your Routes Here */}

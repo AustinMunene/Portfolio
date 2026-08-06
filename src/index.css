@@ -183,6 +183,106 @@ footer {
   margin-top: 20px;
 }
 
+/* ---------------------------------------------------------------------------
+   Feel pass. Additive polish only: nothing here changes layout or structure.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* The built-in CSS easings are too weak to read as intentional. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Press feedback. Nothing on the site currently confirms a press, which is a
+   large part of why interactions felt inert. */
+@media (hover: hover) and (pointer: fine) {
+  a[href],
+  button,
+  [role='button'] {
+    transition: transform 160ms var(--ease-out);
+  }
+
+  a[href]:active,
+  button:active,
+  [role='button']:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Visible, on-brand focus ring for keyboard users. */
+:focus-visible {
+  outline: 2px solid rgba(129, 140, 248, 0.8);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #fff;
+}
+
+/* Pointer-tracked sheen for cards. The hook sets --mx / --my in percent;
+   without JS the layer simply stays invisible. */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(129, 140, 248, 0.14),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 260ms var(--ease-out);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Depth: a soft ambient shadow plus an inner top highlight reads as a lit
+   surface rather than a flat rectangle with a border. */
+.surface-depth {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+    0 20px 50px -24px rgba(0, 0, 0, 0.9);
+}
+
+html {
+  scrollbar-color: rgba(99, 102, 241, 0.45) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.35);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(129, 140, 248, 0.6);
+  background-clip: content-box;
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .project-card {

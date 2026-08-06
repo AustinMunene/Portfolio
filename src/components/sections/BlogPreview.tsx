@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SpotlightSurface from '../SpotlightSurface';
+import useParallax from '../../hooks/useParallax';
 import { ArrowRight } from 'lucide-react';
 
 export type BlogPreviewPost = {
@@ -30,6 +32,7 @@ const categoryStyles: Record<string, string> = {
 const BlogPreview = ({ posts }: BlogPreviewProps) => {
   const navigate = useNavigate();
   const [topic, setTopic] = useState('All');
+  const { ref: sectionRef, y } = useParallax<HTMLElement>(90);
 
   const filtered = useMemo(() => {
     if (topic === 'All') return posts;
@@ -40,15 +43,20 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
   const recent = filtered.slice(1, 5);
 
   return (
-    <section id="blog-preview" className="relative py-24 md:py-32 overflow-hidden">
+    <section
+      id="blog-preview"
+      ref={sectionRef}
+      className="relative py-24 md:py-32 overflow-hidden"
+    >
       {/* Background: image + overlay (same pattern as Hero, Career Preview, Let's Connect) */}
       <div className="absolute inset-0 bg-black" aria-hidden />
-      <img
+      <motion.img
         src="/cypress.jpeg"
         alt=""
         role="presentation"
         decoding="async"
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={y ? { y } : undefined}
+        className="absolute -inset-y-16 inset-x-0 w-full h-[calc(100%+8rem)] object-cover object-center"
       />
       <div
         className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"
@@ -131,7 +139,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
                 onClick={() => navigate(`/blog/${featured.id}`)}
                 className="lg:col-span-2 group cursor-pointer"
               >
-                <div className="h-full rounded-2xl overflow-hidden border border-white/[0.06] bg-white/[0.03] hover:border-accent-500/20 hover:bg-accent-500/[0.02] transition-all duration-300">
+                <SpotlightSurface className="h-full rounded-2xl overflow-hidden border border-white/[0.06] bg-white/[0.03] hover:border-accent-500/20 transition-colors duration-300">
                   <div className="relative h-56 md:h-64 overflow-hidden">
                     <img
                       src={featured.imageUrl}
@@ -161,7 +169,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
                       Read more <ArrowRight className="w-4 h-4" />
                     </span>
                   </div>
-                </div>
+                </SpotlightSurface>
               </motion.article>
             )}
 
@@ -175,7 +183,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
                   transition={{ duration: 0.4, delay: index * 0.06 }}
                   viewport={{ once: true }}
                   onClick={() => navigate(`/blog/${post.id}`)}
-                  className="group cursor-pointer rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 hover:border-accent-500/20 hover:bg-accent-500/[0.02] transition-all duration-300"
+                  className="spotlight surface-depth group cursor-pointer rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 hover:border-accent-500/20 transition-colors duration-300"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-medium border ${categoryStyles[post.category] || 'bg-white/10 text-gray-400 border-white/10'}`}>

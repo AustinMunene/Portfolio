@@ -17,6 +17,14 @@ const rawProjects: Array<{
   stack: string[];
 }> = [
     {
+      title: 'HerCartExpress Essentials',
+      description:
+        'Built a custom Shopify storefront for a beauty and lifestyle retailer - bespoke theme development covering the full shopping journey from category collections and gift sets to predictive search, product pages, customer reviews, and newsletter capture, with a light and dark mode toggle and a fully configured checkout handling live payments.',
+      link: 'https://hercartexpressessentials.com',
+      roles: ['Full-stack Delivery', 'E-commerce Build'],
+      stack: ['Shopify', 'Liquid', 'JavaScript', 'CSS', 'Shopify Payments'],
+    },
+    {
       title: 'Girlie Conversations',
       description:
         'Designed and built the official site for a women-led community brand - editorial storytelling, event calendar, testimonials, newsletter signup, and partner sections that match the brand’s warm, intentional tone.',

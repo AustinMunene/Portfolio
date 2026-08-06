@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
+import SpotlightSurface from '../SpotlightSurface';
 
 export type BentoProject = {
   title: string;
@@ -13,6 +14,7 @@ export type BentoProject = {
 };
 
 const FILTERS: Array<'All' | 'Frontend' | 'QA' | 'Full-stack'> = ['All', 'Frontend', /* 'QA', */ 'Full-stack'];
+
 
 type FeaturedBentoProps = {
   projects: BentoProject[];
@@ -90,7 +92,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                 className="md:col-span-2 md:row-span-1"
               >
                 <div className="h-full group">
-                  <div className="h-full rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 md:p-8 hover:border-accent-500/30 hover:bg-accent-500/[0.03] transition-all duration-300 hover:shadow-[0_8px_40px_-12px_rgba(99,102,241,0.15)]">
+                  <SpotlightSurface className="h-full rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 md:p-8 hover:border-accent-500/30 transition-colors duration-300">
                     <div className="flex flex-col h-full">
                       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                         <div className="flex items-center gap-3">
@@ -147,7 +149,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                         ))}
                       </div>
                     </div>
-                  </div>
+                  </SpotlightSurface>
                 </div>
               </motion.div>
             )}
@@ -163,7 +165,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                 viewport={{ once: true }}
                 className="group"
               >
-                <div className="h-full rounded-2xl border border-white/[0.06] bg-white/[0.03] p-5 md:p-6 hover:border-accent-500/30 hover:bg-accent-500/[0.03] transition-all duration-300 hover:shadow-[0_8px_40px_-12px_rgba(99,102,241,0.15)]">
+                <SpotlightSurface className="h-full rounded-2xl border border-white/[0.06] bg-white/[0.03] p-5 md:p-6 hover:border-accent-500/30 transition-colors duration-300">
                   <div className="flex flex-col h-full">
                     <div className="flex items-start justify-between gap-2 mb-3">
                       <div className="flex items-center gap-2 min-w-0">
@@ -208,7 +210,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                       ))}
                     </div>
                   </div>
-                </div>
+                </SpotlightSurface>
               </motion.div>
             ))}
           </div>

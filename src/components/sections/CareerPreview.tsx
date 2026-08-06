@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SpotlightSurface from '../SpotlightSurface';
+import useParallax from '../../hooks/useParallax';
 import { ArrowRight, Briefcase } from 'lucide-react';
 
 export type CareerPreviewItem = {
@@ -13,16 +15,23 @@ type CareerPreviewProps = {
 };
 
 const CareerPreview = ({ items }: CareerPreviewProps) => {
+  const { ref: sectionRef, y } = useParallax<HTMLElement>(90);
+
   return (
-    <section id="career-preview" className="relative py-24 md:py-32 overflow-hidden">
+    <section
+      id="career-preview"
+      ref={sectionRef}
+      className="relative py-24 md:py-32 overflow-hidden"
+    >
       {/* Background: image + overlay so content stays readable (same pattern as Hero) */}
       <div className="absolute inset-0 bg-black" aria-hidden />
-      <img
+      <motion.img
         src="/cypress.jpeg"
         alt=""
         role="presentation"
         decoding="async"
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={y ? { y } : undefined}
+        className="absolute -inset-y-16 inset-x-0 w-full h-[calc(100%+8rem)] object-cover object-center"
       />
       <div
         className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"
@@ -84,7 +93,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                 className={`relative flex items-start gap-8 md:gap-12 pl-8`}
               >
                 <div className="w-full">
-                  <div className="bg-white/[0.03] rounded-xl border border-white/[0.06] p-5 md:p-6 hover:border-accent-500/30 transition-all duration-300 hover:bg-accent-500/[0.03] hover:shadow-[0_8px_40px_-12px_rgba(99,102,241,0.2)] ml-6">
+                  <SpotlightSurface className="bg-white/[0.03] rounded-xl border border-white/[0.06] p-5 md:p-6 hover:border-accent-500/30 transition-colors duration-300 ml-6">
                     <div className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-accent-500/10 flex items-center justify-center mt-0.5">
                         <Briefcase className="w-4 h-4 text-accent-400" />
@@ -97,7 +106,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                         <p className="text-gray-500 text-xs">{role.period}</p>
                       </div>
                     </div>
-                  </div>
+                  </SpotlightSurface>
                 </div>
 
                 {/* Timeline dot */}
