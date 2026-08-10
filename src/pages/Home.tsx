@@ -182,14 +182,14 @@ const Home = () => {
           aria-hidden
           style={{
             background:
-              'radial-gradient(50% 60% at 50% 0%, rgba(232, 135, 42, 0.10), transparent 70%)',
+              'radial-gradient(50% 60% at 50% 0%, rgba(212, 212, 216, 0.10), transparent 70%)',
           }}
         />
         <div
           className="absolute inset-0 opacity-[0.05]"
           aria-hidden
           style={{
-            backgroundImage: 'radial-gradient(circle, #e8872a 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, #d4d4d8 1px, transparent 1px)',
             backgroundSize: '32px 32px',
           }}
         />
@@ -228,7 +228,7 @@ const Home = () => {
           >
             <a
               href="mailto:saviusmunene@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-accent-500 hover:bg-accent-600 text-white rounded-full font-medium shadow-[0_8px_24px_-8px_rgba(232,135,42,0.5)] transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-neutral-950 text-white rounded-full font-medium hover:opacity-90 transition-opacity"
             >
               saviusmunene@gmail.com
             </a>

@@ -4,8 +4,11 @@ import { Icosahedron, MeshDistortMaterial, Points, PointMaterial } from '@react-
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
-const ACCENT = '#e8872a';
-const ACCENT_LIGHT = '#fdc071';
+// Monochrome. A greyscale emissive core reads as machined metal under bloom
+// rather than as a coloured light source, which is what keeps the scene in the
+// same black-and-white world as the rest of the page.
+const ACCENT = '#c9c9cf';
+const ACCENT_LIGHT = '#f2f2f5';
 
 /** Coarse pointers (phones/tablets) get a lighter scene: fewer particles, no AA. */
 const isCoarsePointer = () =>
@@ -189,13 +192,13 @@ const HeroScene = ({ reducedMotion = false }: HeroSceneProps) => {
     >
       {/* Far enough back that it only softens the outer particle shell. Starting
           it at 9 washed the core out before its shape was readable. */}
-      <fog attach="fog" args={['#05050a', 17, 46]} />
+      <fog attach="fog" args={['#050505', 17, 46]} />
 
       <ambientLight intensity={0.5} />
       <pointLight position={[7, 5, 9]} intensity={3.4} color={ACCENT_LIGHT} />
       <pointLight position={[-9, -5, 4]} intensity={2} color={ACCENT} />
       {/* Rim light: separates the core silhouette from the background. */}
-      <pointLight position={[-3, 3, -8]} intensity={2.6} color="#fedba8" />
+      <pointLight position={[-3, 3, -8]} intensity={2.6} color="#fafafa" />
 
       <Core interactive={animate} />
       <ParticleField count={coarse ? 1600 : 3500} />
@@ -206,8 +209,10 @@ const HeroScene = ({ reducedMotion = false }: HeroSceneProps) => {
           orbs that used to sit on top of this canvas and mush it. */}
       <EffectComposer>
         <Bloom
-          intensity={coarse ? 0.5 : 0.85}
-          luminanceThreshold={0.2}
+          // Pulled back from 0.85: a near-white emissive blooms far harder than
+          // the amber one did and blew out the core's silhouette.
+          intensity={coarse ? 0.42 : 0.72}
+          luminanceThreshold={0.22}
           luminanceSmoothing={0.85}
           mipmapBlur
         />

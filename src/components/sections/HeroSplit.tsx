@@ -1,6 +1,6 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Sparkles, TrendingUp, Zap, Shield, Mail, Phone, ChevronDown } from 'lucide-react';
+import { ArrowRight, Mail, Phone, ChevronDown } from 'lucide-react';
 
 // three/fiber/drei is ~600KB. Split it out so it never blocks first paint;
 // the hero renders its gradient ground immediately and the scene fades in.
@@ -28,13 +28,6 @@ const availability = {
   detail: 'Open to product-minded QA and frontend roles.',
   accent: 'from-emerald-500 to-accent-400',
 };
-
-const stats = [
-  { icon: TrendingUp, value: '6+', label: 'Years Experience' },
-  { icon: Zap, value: '6', label: 'Projects Shipped' },
-  { icon: Shield, value: '5', label: 'Companies' },
-  { icon: Sparkles, value: '10+', label: 'Tech Skills' },
-];
 
 const credibilityChips = ['Frontend', 'QA Automation', 'Full-stack delivery'];
 
@@ -75,15 +68,15 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Poster ground. The WebGL chunk is lazy and can take several seconds, and
           a plain black fill meant the hero was an empty rectangle until it landed.
-          This approximates the scene's composition - warm mass right of centre -
+          This approximates the scene's composition - a pale mass right of centre -
           so first paint is already the right image and the canvas fades in over it. */}
       <div
         className="absolute inset-0"
         aria-hidden
         style={{
           background:
-            'radial-gradient(58% 68% at 68% 46%, rgba(232, 135, 42, 0.20), transparent 70%),' +
-            'radial-gradient(45% 55% at 18% 18%, rgba(232, 135, 42, 0.06), transparent 72%),' +
+            'radial-gradient(58% 68% at 68% 46%, rgba(212, 212, 216, 0.20), transparent 70%),' +
+            'radial-gradient(45% 55% at 18% 18%, rgba(212, 212, 216, 0.06), transparent 72%),' +
             '#060402',
         }}
       />
@@ -109,7 +102,10 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
         aria-hidden
       />
 
-      <div className="container mx-auto px-4 relative z-10 py-24 md:py-0">
+      {/* Vertical padding is needed at every breakpoint now that the right column
+          carries a portrait as well as the panel - without it the stack grows
+          taller than the viewport and slides up under the floating nav island. */}
+      <div className="container mx-auto px-4 relative z-10 py-28 md:py-32">
         {/* Split hero: left + right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Name, positioning, CTA */}
@@ -128,7 +124,10 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-500" />
               </span>
-              Available for opportunities
+              {/* Was "Available for opportunities" - job-seeking language that also
+                  duplicated the portrait caption. The homepage speaks in project
+                  terms; role availability belongs on /about. */}
+              QA automation &amp; software delivery
             </motion.div>
 
             <motion.h1
@@ -151,12 +150,12 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                       className="inline-block"
                       whileHover={{
                         y: -8,
-                        color: '#fb9d3c',
+                        color: '#e4e4e7',
                         transition: { duration: 0.2, ease: 'easeOut' },
                       }}
                       style={{
                         background:
-                          'linear-gradient(135deg, #ffffff 0%, #fdc071 60%, #e8872a 100%)',
+                          'linear-gradient(135deg, #ffffff 0%, #f4f4f5 60%, #d4d4d8 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
@@ -187,7 +186,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
             >
               <a
                 href="#projects"
-                className="px-8 py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-accent-500/25 transition-all flex items-center gap-2 group"
+                className="px-8 py-3 bg-white text-black rounded-full font-medium hover:opacity-90 transition-opacity flex items-center gap-2 group"
               >
                 View Projects
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -250,13 +249,59 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
             </motion.div>
           </motion.div>
 
-          {/* Right: Rotating highlight panel */}
+          {/* Right: portrait, then the rotating highlight panel beneath it. */}
           <motion.div
             initial={{ x: 40, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
+            {/* Portrait.
+                Shot looking up against a blown-out sky, which is why it is framed
+                in a circle rather than cut out: the white hoodie and the white sky
+                share an edge with almost no contrast, so keying it would tear.
+                Reading the bright disc as a deliberate high-key crop is both
+                truer to the photo and stronger against the black surround. */}
+            <motion.figure
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
+              className="relative mx-auto mb-8 w-[240px] h-[240px] md:w-[300px] md:h-[300px]"
+            >
+              {/* Concentric ring, echoing the bezel language used elsewhere. */}
+              <div className="absolute -inset-3 rounded-full border border-white/[0.07]" />
+              <div className="absolute inset-0 rounded-full overflow-hidden bg-white/[0.04] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)]">
+                <img
+                  // c_thumb + g_face with a pulled-back zoom: c_fill kept the full
+                  // frame width and pushed the face into a corner, since the
+                  // subject sits low-right in the original.
+                  src="https://res.cloudinary.com/dogeweg3r/image/upload/f_auto,q_auto,w_700,c_thumb,g_face,z_0.62,ar_1:1/v1786363578/IMG_5882_yodfqu.jpg"
+                  alt="Austin Munene"
+                  width={300}
+                  height={300}
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-full object-cover grayscale contrast-[1.08]"
+                />
+              </div>
+
+              {/* Floating card, overlapping the portrait as in the reference.
+                  Deliberately not a metric - there is no true number to put here,
+                  so it carries facts instead. */}
+              <figcaption className="absolute -bottom-3 -left-4 md:-left-8 rounded-xl border border-white/[0.1] bg-black/70 backdrop-blur-md px-4 py-2.5 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.9)]">
+                <span className="flex items-center gap-2 text-[11px] font-medium tracking-wide text-white">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70 animate-ping" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  </span>
+                  Available for projects
+                </span>
+                <span className="mt-0.5 block text-[10px] text-gray-400">
+                  Nairobi &middot; GMT+3
+                </span>
+              </figcaption>
+            </motion.figure>
+
             <div
               className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm p-6 md:p-8 overflow-hidden"
               onMouseEnter={() => setCarouselPaused(true)}
@@ -349,48 +394,19 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               </div>
             </div>
 
-            {/* Floating stat mini-cards stacked to the side (desktop only) */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="hidden xl:flex absolute -right-4 top-8 flex-col gap-3"
-            >
-              <div className="bg-white/[0.05] backdrop-blur border border-white/[0.08] rounded-xl px-4 py-3 text-center">
-                <div className="text-xl font-bold text-white">6+</div>
-                <div className="text-[10px] text-gray-500 uppercase tracking-wider">Years</div>
-              </div>
-              <div className="bg-white/[0.05] backdrop-blur border border-white/[0.08] rounded-xl px-4 py-3 text-center">
-                <div className="text-xl font-bold text-accent-400">QA</div>
-                <div className="text-[10px] text-gray-500 uppercase tracking-wider">Lead</div>
-              </div>
-            </motion.div>
+            {/* The "6+ Years / QA Lead" floating mini-cards lived here. Removed:
+                they collided with the portrait, and CV-style tenure counts are
+                exactly the framing this redesign is moving away from. The
+                portrait's own caption now carries the one true, useful fact. */}
           </motion.div>
         </div>
 
-        {/* Stat badges row */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
-          className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4"
-        >
-          {stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ y: -4, borderColor: 'rgba(232, 135, 42,0.3)' }}
-              className="flex items-center gap-4 p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] transition-colors"
-            >
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent-500/10 flex items-center justify-center">
-                <stat.icon className="w-5 h-5 text-accent-400" />
-              </div>
-              <div>
-                <div className="text-xl font-bold text-white">{stat.value}</div>
-                <div className="text-xs text-gray-500">{stat.label}</div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* The four stat cards - Years Experience / Projects Shipped / Companies
+            / Tech Skills - lived here. Removed: those are CV fields, and two of
+            them worked against him ("5 Companies" reads as job-hopping, "6
+            Projects Shipped" undersells). A business site states an offer and
+            shows proof; it does not tally tenure. Replaced by nothing for now -
+            the services section will occupy this space. */}
       </div>
     </section>
   );

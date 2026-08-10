@@ -44,7 +44,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: 'radial-gradient(circle, #e8872a 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, #d4d4d8 1px, transparent 1px)',
           backgroundSize: '32px 32px',
         }}
       />
@@ -63,7 +63,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
               Experience
             </span>
             <h2 className="text-4xl md:text-5xl font-display mb-4" style={{
-              background: 'linear-gradient(135deg, #ffffff 0%, #fdc071 60%, #e8872a 100%)',
+              background: 'linear-gradient(135deg, #ffffff 0%, #f4f4f5 60%, #d4d4d8 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',

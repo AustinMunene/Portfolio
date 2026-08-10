@@ -4,9 +4,9 @@ import { OrbitControls } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
 
-const ACCENT = '#e8872a';
-const ACCENT_LIGHT = '#fdc071';
-const ACCENT_PALE = '#fedba8';
+const ACCENT = '#d4d4d8';
+const ACCENT_LIGHT = '#f4f4f5';
+const ACCENT_PALE = '#fafafa';
 
 const NODE_COUNT = 34;
 const LINK_RADIUS = 2.6;

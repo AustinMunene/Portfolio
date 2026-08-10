@@ -11,20 +11,22 @@ export default {
         display: ['Playfair Display', 'Georgia', 'serif'],
       },
       colors: {
-        // Warm amber. Redefining the existing `accent` scale rather than adding
-        // a new one migrates every accent-* usage in the app at once.
+        // Monochrome. The reference is a black-and-white design: its palette is
+        // greyscale and its primary CTA is a plain black pill, so there is no
+        // chromatic accent to reproduce. Keeping the scale named `accent` means
+        // every existing accent-* utility becomes a neutral in one edit.
         accent: {
-          DEFAULT: '#e8872a',
-          50: '#fff8ed',
-          100: '#ffefd4',
-          200: '#fedba8',
-          300: '#fdc071',
-          400: '#fb9d3c',
-          500: '#e8872a',
-          600: '#d1741f',
-          700: '#ad5a1b',
-          800: '#8a471c',
-          900: '#713b19',
+          DEFAULT: '#d4d4d8',
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#8f8f98',
+          600: '#71717a',
+          700: '#52525b',
+          800: '#3f3f46',
+          900: '#27272a',
         },
         // Tone-aware tokens. These resolve through CSS custom properties that
         // <Section tone="light|dark"> flips, so one component works in both.
