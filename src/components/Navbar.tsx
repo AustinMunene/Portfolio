@@ -1,11 +1,44 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Github, Mail, Linkedin } from 'lucide-react';
+import { Github, Mail, Linkedin, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../hooks/useTheme';
+
+/**
+ * Theme toggle. The two icons cross-fade and counter-rotate through the same
+ * slot rather than swapping, so the control reads as one object changing state.
+ * Shows the theme you would switch *to*, which is the convention users expect.
+ */
+const ThemeToggle = ({ theme, onToggle }: { theme: 'light' | 'dark'; onToggle: () => void }) => (
+  <button
+    onClick={onToggle}
+    className="relative flex items-center justify-center w-8 h-8 rounded-full border border-line bg-surface-raised text-fg-muted hover:text-fg transition-colors duration-200 active:scale-90 overflow-hidden"
+    aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+    title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+  >
+    <AnimatePresence initial={false} mode="popLayout">
+      <motion.span
+        key={theme}
+        initial={{ opacity: 0, rotate: -70, scale: 0.6 }}
+        animate={{ opacity: 1, rotate: 0, scale: 1 }}
+        exit={{ opacity: 0, rotate: 70, scale: 0.6 }}
+        transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
+        className="absolute inset-0 flex items-center justify-center"
+      >
+        {theme === 'dark' ? (
+          <Sun className="w-4 h-4 stroke-[1.8px]" />
+        ) : (
+          <Moon className="w-4 h-4 stroke-[1.8px]" />
+        )}
+      </motion.span>
+    </AnimatePresence>
+  </button>
+);
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { theme, toggle } = useTheme();
 
   // Close menu on route change
   useEffect(() => {
@@ -34,7 +67,7 @@ const Navbar = () => {
         
         {/* Brand Trigger Logo */}
         <NavLink to="/" className="text-lg font-bold tracking-tight select-none active:scale-95 transition-transform duration-200">
-          <span className="bg-gradient-to-r from-accent-400 to-accent-300 bg-clip-text text-transparent font-display text-xl">
+          <span className="text-fg font-display text-xl">
             AM
           </span>
         </NavLink>
@@ -48,8 +81,8 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `relative py-1 text-sm tracking-wide font-medium transition-colors duration-200 select-none ${
                   isActive
-                    ? 'text-accent-300'
-                    : 'text-gray-400 hover:text-white'
+                    ? 'text-fg'
+                    : 'text-fg-muted hover:text-fg'
                 }`
               }
             >
@@ -69,7 +102,7 @@ const Navbar = () => {
           ))}
 
           {/* Vertical Divider */}
-          <div className="h-4 w-px bg-white/10" aria-hidden />
+          <div className="h-4 w-px bg-line" aria-hidden />
 
           {/* Social Profiles */}
           <div className="flex gap-4">
@@ -79,34 +112,36 @@ const Navbar = () => {
                 href={href}
                 target={href.startsWith('mailto') ? undefined : '_blank'}
                 rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                className="text-gray-400 hover:text-accent-300 transition-transform duration-200 active:scale-90 hover:scale-105"
+                className="text-fg-muted hover:text-fg transition-transform duration-200 active:scale-90 hover:scale-105"
                 aria-label={label}
               >
                 <Icon className="w-4.5 h-4.5 stroke-[1.8px]" />
               </a>
             ))}
           </div>
+
+          <ThemeToggle theme={theme} onToggle={toggle} />
         </div>
 
         {/* Animated Hamburger Trigger Button */}
         <button
           onClick={toggleMenu}
-          className="md:hidden flex flex-col justify-center items-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.03] transition-transform duration-150 active:scale-90"
+          className="md:hidden flex flex-col justify-center items-center w-8 h-8 rounded-full border border-line bg-surface-raised transition-transform duration-150 active:scale-90"
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
           <div className="relative w-4 h-3.5 flex flex-col justify-between">
             <span
-              className={`w-4 h-0.5 bg-gray-300 rounded transition-transform duration-300 origin-top-left ${
+              className={`w-4 h-0.5 bg-fg-muted rounded transition-transform duration-300 origin-top-left ${
                 isMenuOpen ? 'rotate-45 translate-x-1 -translate-y-0.5' : ''
               }`}
             />
             <span
-              className={`w-3.5 h-0.5 bg-gray-300 rounded transition-opacity duration-200 ${
+              className={`w-3.5 h-0.5 bg-fg-muted rounded transition-opacity duration-200 ${
                 isMenuOpen ? 'opacity-0' : 'opacity-100'
               }`}
             />
             <span
-              className={`w-4 h-0.5 bg-gray-300 rounded transition-transform duration-300 origin-bottom-left ${
+              className={`w-4 h-0.5 bg-fg-muted rounded transition-transform duration-300 origin-bottom-left ${
                 isMenuOpen ? '-rotate-45 translate-x-0.5 translate-y-0.5' : ''
               }`}
             />
@@ -121,7 +156,7 @@ const Navbar = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -8 }}
               transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-              className="absolute top-[calc(100%+12px)] left-0 right-0 p-5 rounded-[20px] bg-black/80 backdrop-blur-2xl border border-white/10 shadow-2xl flex flex-col space-y-4"
+              className="absolute top-[calc(100%+12px)] left-0 right-0 p-5 rounded-[20px] bg-surface/95 backdrop-blur-2xl border border-line shadow-2xl flex flex-col space-y-4"
             >
               <div className="flex flex-col space-y-2">
                 {navItems.map(({ to, label }) => (
@@ -131,8 +166,8 @@ const Navbar = () => {
                     className={({ isActive }) =>
                       `block py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-200 ${
                         isActive
-                          ? 'text-accent-300 bg-accent-500/10 border border-accent-500/15'
-                          : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'
+                          ? 'text-fg bg-surface-raised border border-line'
+                          : 'text-fg-muted hover:text-fg hover:bg-surface-raised border border-transparent'
                       }`
                     }
                   >
@@ -142,22 +177,24 @@ const Navbar = () => {
               </div>
 
               {/* Horizontal Divider */}
-              <div className="h-px bg-white/10 w-full" aria-hidden />
+              <div className="h-px bg-line w-full" aria-hidden />
 
-              {/* Mobile Socials */}
-              <div className="flex justify-around py-1">
+              {/* Mobile socials, plus the theme toggle - it lives in the desktop
+                  bar too, and mobile visitors need it just as much. */}
+              <div className="flex items-center justify-around py-1">
                 {socialLinks.map(({ href, icon: Icon, label }) => (
                   <a
                     key={label}
                     href={href}
                     target={href.startsWith('mailto') ? undefined : '_blank'}
                     rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                    className="flex items-center justify-center w-10 h-10 rounded-full border border-white/5 bg-white/[0.02] text-gray-400 hover:text-accent-300 active:scale-95 transition-transform"
+                    className="flex items-center justify-center w-10 h-10 rounded-full border border-line bg-surface-raised text-fg-muted hover:text-fg active:scale-95 transition-transform"
                     aria-label={label}
                   >
                     <Icon className="w-5 h-5 stroke-[1.8px]" />
                   </a>
                 ))}
+                <ThemeToggle theme={theme} onToggle={toggle} />
               </div>
             </motion.div>
           )}

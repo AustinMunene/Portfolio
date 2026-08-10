@@ -20,6 +20,25 @@
 
     <!-- Standard favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!--
+      Resolve the theme before first paint. React mounts too late: without this
+      the page would paint the default theme and then snap to the stored one, so
+      a light-mode visitor gets a black flash on every load. Deliberately
+      blocking and inline - it must run before the first paint, and it is three
+      lines, so the cost is nil.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          document.documentElement.dataset.theme = stored || system;
+        } catch (e) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
     <title>Austin Munene</title>
   </head>
   <body>

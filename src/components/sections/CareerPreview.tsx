@@ -24,9 +24,10 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
       className="relative py-24 md:py-32 overflow-hidden"
     >
       {/* Background: image + overlay so content stays readable (same pattern as Hero) */}
-      <div className="absolute inset-0 bg-black" aria-hidden />
+      <div className="absolute inset-0 bg-surface-alt" aria-hidden />
       <motion.img
         src="/cypress.jpeg"
+        data-photo-backdrop
         alt=""
         role="presentation"
         decoding="async"
@@ -35,6 +36,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
       />
       <div
         className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"
+        data-photo-backdrop
         aria-hidden
       />
       <div className="absolute inset-0">
@@ -59,7 +61,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
           className="flex flex-col gap-6 mb-12 md:mb-16"
         >
           <div>
-            <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
+            <span className="text-fg-muted text-sm font-medium tracking-wider uppercase mb-4 block">
               Experience
             </span>
             <h2 className="text-4xl md:text-5xl font-display mb-4" style={{
@@ -70,7 +72,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
             }}>
               Career Journey
             </h2>
-            <p className="text-gray-400 max-w-xl">
+            <p className="text-fg-muted max-w-xl">
               A timeline of professional growth and achievements in tech.
             </p>
           </div>
@@ -93,17 +95,17 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                 className={`relative flex items-start gap-8 md:gap-12 pl-8`}
               >
                 <div className="w-full">
-                  <SpotlightSurface className="bg-white/[0.03] rounded-xl border border-white/[0.06] p-5 md:p-6 hover:border-accent-500/30 transition-colors duration-300 ml-6">
+                  <SpotlightSurface className="bg-surface-raised rounded-xl border border-line p-5 md:p-6 hover:border-accent-500/30 transition-colors duration-300 ml-6">
                     <div className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-accent-500/10 flex items-center justify-center mt-0.5">
-                        <Briefcase className="w-4 h-4 text-accent-400" />
+                        <Briefcase className="w-4 h-4 text-fg-muted" />
                       </div>
                       <div className="min-w-0">
-                        <h3 className="text-base md:text-lg font-bold text-white mb-1">
+                        <h3 className="text-base md:text-lg font-bold text-fg mb-1">
                           {role.title}
                         </h3>
-                        <p className="text-accent-300/90 text-sm mb-1">{role.company}</p>
-                        <p className="text-gray-500 text-xs">{role.period}</p>
+                        <p className="text-fg-muted text-sm mb-1">{role.company}</p>
+                        <p className="text-fg-subtle text-xs">{role.period}</p>
                       </div>
                     </div>
                   </SpotlightSurface>
@@ -120,7 +122,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
           <Link
             to="/career"
             aria-label="View full career journey"
-            className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.06] text-gray-300 hover:border-accent-500/40 hover:text-accent-300 transition-all text-sm font-medium md:absolute md:bottom-8 md:right-8"
+            className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-line text-fg-muted hover:border-accent-500/40 hover:text-fg transition-all text-sm font-medium md:absolute md:bottom-8 md:right-8"
           >
             View full journey
             <ArrowRight className="w-4 h-4" />

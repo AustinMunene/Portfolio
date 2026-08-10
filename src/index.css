@@ -5,14 +5,6 @@
 @tailwind utilities;
 
 :root {
-  /* Opt out of Chrome's Auto Dark Mode for Web Contents. Without a declared
-     color-scheme, Chrome assumes the page is light and rewrites its colours for
-     users who have that flag on - it was turning the white primary CTA into
-     rgb(20,23,24) and flipping its black label to white, making the button
-     invisible. Declaring the scheme tells the UA the page handles its own
-     theming, and also gives us dark form controls and scrollbars for free. */
-  color-scheme: dark;
-
   /* Elite Spring and Animation Curves - Emil Design Eng & Vanguard Architecture */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -26,35 +18,78 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Tone system.
+   Theme system.
 
-   The site alternates light panels (business content: services, process,
-   contact) with dark panels (craft: work, lab, blog). Components must not care
-   which they are in, so surface/text/border resolve through these variables and
-   <Section tone="…"> flips them. Consume via the Tailwind tokens - bg-surface,
-   text-fg, text-fg-muted, border-line - never by hardcoding a grey again.
+   One axis: the visitor's chosen theme, set as data-theme on <html>. Sections
+   alternate between --surface and --surface-alt *within* the active theme, so
+   the page keeps its rhythm in both.
+
+   Components must never hardcode a grey again. Consume the Tailwind tokens:
+   bg-surface, bg-surface-alt, bg-surface-raised, text-fg, text-fg-muted,
+   text-fg-subtle, border-line, and .btn-primary for the primary action.
+
+   `color-scheme` is declared per theme, which both matches UA widgets
+   (scrollbars, form controls) to the theme and opts the page out of Chrome's
+   Auto Dark Mode - that was rewriting the white CTA to rgb(20,23,24) and
+   flipping its label, for any visitor with the flag enabled.
    --------------------------------------------------------------------------- */
 :root,
-[data-tone='dark'] {
-  --surface: #030303;
-  --surface-raised: rgba(255, 255, 255, 0.02);
-  --fg: #f1f1f4;
-  --fg-muted: #9b9ba4;
-  --fg-subtle: #6b6b73;
-  --border: rgba(255, 255, 255, 0.08);
-  --cta: #f4f4f5;
-  --cta-fg: #0c0b0a;
+[data-theme='dark'] {
+  color-scheme: dark;
+  --surface: #050505;
+  --surface-alt: #0b0b0d;
+  --surface-raised: rgba(255, 255, 255, 0.03);
+  --fg: #f4f4f5;
+  --fg-muted: #a1a1aa;
+  --fg-subtle: #71717a;
+  --border: rgba(255, 255, 255, 0.1);
+  --cta: #fafafa;
+  --cta-fg: #09090b;
+  /* Hero scrim: keeps the headline legible over the WebGL scene. */
+  --hero-scrim: rgba(5, 5, 5, 0.92);
+  --hero-scrim-mid: rgba(5, 5, 5, 0.45);
+  --hero-poster: #060606;
+  --hero-poster-glow: rgba(212, 212, 216, 0.2);
+  --bezel-shadow: 0 24px 80px -12px rgba(0, 0, 0, 0.8), 0 1px 0 0 rgba(255, 255, 255, 0.03) inset;
+  --bezel-inner-bg: rgba(9, 9, 11, 0.9);
+  --bezel-inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  --grid-line: rgba(212, 212, 216, 0.05);
+  --sheen: rgba(255, 255, 255, 0.1);
 }
 
-[data-tone='light'] {
-  --surface: #f6f5f3;
-  --surface-raised: rgba(0, 0, 0, 0.018);
-  --fg: #0c0b0a;
-  --fg-muted: #56534e;
-  --fg-subtle: #85817a;
-  --border: rgba(0, 0, 0, 0.1);
-  --cta: #0c0b0a;
+[data-theme='light'] {
+  /* `only light`, not `light`. Plain `light` advertises a light page, which
+     invites Chrome's Auto Dark Mode to rewrite it - #ffffff was being painted as
+     rgb(20,23,24) with the text inverted. `only` is the standard opt-out.
+     Caveat: the "all sites" variant of that Chrome flag ignores author opt-outs
+     entirely, so a visitor running it will still see a darkened light theme.
+     Nothing in CSS can override that; it is a browser-level user choice. */
+  color-scheme: only light;
+  --surface: #ffffff;
+  --surface-alt: #f4f4f3;
+  --surface-raised: rgba(0, 0, 0, 0.025);
+  --fg: #09090b;
+  --fg-muted: #52525b;
+  --fg-subtle: #7c7c85;
+  --border: rgba(0, 0, 0, 0.12);
+  --cta: #09090b;
   --cta-fg: #fafafa;
+  --hero-scrim: rgba(255, 255, 255, 0.92);
+  --hero-scrim-mid: rgba(255, 255, 255, 0.45);
+  --hero-poster: #ffffff;
+  --hero-poster-glow: rgba(9, 9, 11, 0.08);
+  --bezel-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.16), 0 1px 0 0 rgba(255, 255, 255, 0.9) inset;
+  --bezel-inner-bg: #ffffff;
+  --bezel-inner-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.04);
+  --grid-line: rgba(9, 9, 11, 0.05);
+  --sheen: rgba(9, 9, 11, 0.06);
+}
+
+/* Primary action. Inverts with the theme the way the reference's black pill
+   does. Placed outside @layer so it beats the utilities on source order. */
+.btn-primary {
+  background-color: var(--cta);
+  color: var(--cta-fg);
 }
 
 @layer base {
@@ -65,8 +100,9 @@
   }
 
   body {
-    background-color: var(--neutral-dark);
-    color: #f1f1f4;
+    background-color: var(--surface);
+    color: var(--fg);
+    transition: background-color 400ms var(--ease-out), color 400ms var(--ease-out);
     font-family: 'Josefin Sans', Helvetica, Arial, sans-serif !important;
     /* Josefin Sans has a notably small x-height, so it reads smaller than Geist
        did at the same size. Bumped from 0.95rem with a looser line-height to
@@ -138,8 +174,8 @@
   pointer-events: none;
   z-index: 0;
   background-image: 
-    linear-gradient(to right, rgba(212, 212, 216, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(212, 212, 216, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(circle at 50% 50%, black 50%, transparent 100%);
 }
@@ -149,8 +185,8 @@
   position: absolute;
   inset: 0;
   background-image: 
-    radial-gradient(1px 1px at 20px 20px, rgba(212, 212, 216, 0.15) 1px, transparent 0),
-    radial-gradient(1.5px 1.5px at 40px 40px, rgba(228, 228, 231, 0.1) 1px, transparent 0);
+    radial-gradient(1px 1px at 20px 20px, var(--grid-line) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 40px 40px, var(--grid-line) 1px, transparent 0);
   background-size: 80px 80px;
   opacity: 0.8;
 }
@@ -162,7 +198,7 @@
   height: 100%;
   opacity: 0.02;
   pointer-events: none;
-  background-image: radial-gradient(rgba(212, 212, 216, 0.15) 2px, transparent 0);
+  background-image: radial-gradient(var(--grid-line) 2px, transparent 0);
   background-size: 24px 24px;
 }
 
@@ -174,11 +210,9 @@
   --bezel-gap: 6px;
   border-radius: var(--bezel-radius);
   padding: var(--bezel-gap);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow:
-    0 24px 80px -12px rgba(0, 0, 0, 0.8),
-    0 1px 0 0 rgba(255, 255, 255, 0.03) inset;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  box-shadow: var(--bezel-shadow);
   transition: border-color 500ms var(--ease-out), transform 300ms var(--ease-out);
 }
 
@@ -188,9 +222,9 @@
 
 .double-bezel-inner {
   border-radius: calc(var(--bezel-radius) - var(--bezel-gap));
-  background: rgba(7, 7, 11, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  background: var(--bezel-inner-bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--bezel-inner-shadow);
 }
 
 /* Floating Glass Pill Navigation styles */
@@ -202,23 +236,26 @@
   z-index: 50;
   width: calc(100% - 32px);
   max-width: 600px;
-  background: rgba(3, 3, 5, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Glass, tinted by the active theme so the island reads as frosted in both. */
+  background: var(--nav-bg);
+  border: 1px solid var(--border);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
   border-radius: 999px;
-  box-shadow: 
-    0 20px 40px -15px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-  transition: all 400ms var(--ease-spring);
+  box-shadow: var(--nav-shadow);
+  transition: background-color 400ms var(--ease-out), border-color 400ms var(--ease-out),
+    box-shadow 400ms var(--ease-out);
 }
 
-.nav-island:hover {
-  border-color: rgba(212, 212, 216, 0.25);
-  box-shadow: 
-    0 25px 50px -12px rgba(212, 212, 216, 0.1),
-    0 20px 40px -15px rgba(0, 0, 0, 0.8),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+:root,
+[data-theme='dark'] {
+  --nav-bg: rgba(5, 5, 7, 0.5);
+  --nav-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='light'] {
+  --nav-bg: rgba(255, 255, 255, 0.62);
+  --nav-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.18), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
 }
 
 /* Viewport reveal animations */
@@ -281,14 +318,14 @@
 
 /* Visible, high-end focus indicator */
 :focus-visible {
-  outline: 2px solid rgba(228, 228, 231, 0.8);
+  outline: 2px solid var(--fg);
   outline-offset: 3px;
   border-radius: 6px;
 }
 
 ::selection {
-  background: rgba(212, 212, 216, 0.35);
-  color: #ffffff;
+  background: var(--fg);
+  color: var(--surface);
 }
 
 /* Pointer-tracked sheen (Spotlight effect) */
@@ -304,7 +341,7 @@
   border-radius: inherit;
   background: radial-gradient(
     320px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(228, 228, 231, 0.12),
+    var(--sheen),
     transparent 65%
   );
   opacity: 0;
@@ -322,13 +359,13 @@
 /* Depth: soft ambient shadow plus inner highlights */
 .surface-depth {
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
-    0 24px 60px -20px rgba(0, 0, 0, 0.9);
+    0 1px 0 0 var(--sheen) inset,
+    var(--bezel-shadow);
 }
 
 /* Custom developer scrollbars */
 html {
-  scrollbar-color: rgba(212, 212, 216, 0.3) transparent;
+  scrollbar-color: var(--fg-subtle) transparent;
 }
 
 ::-webkit-scrollbar {
@@ -341,14 +378,14 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(212, 212, 216, 0.25);
+  background: var(--fg-subtle);
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(228, 228, 231, 0.5);
+  background: var(--fg-muted);
   background-clip: content-box;
 }
 
@@ -366,3 +403,10 @@ html {
   }
 }
 
+
+/* Decorative photo backdrops. The source images are dark code screenshots, so in
+   light mode a light overlay leaves grey murk and a dark one fights the theme.
+   Hiding them lets the surface carry the section, which is also cleaner. */
+[data-theme='light'] [data-photo-backdrop] {
+  display: none;
+}

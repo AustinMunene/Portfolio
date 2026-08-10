@@ -31,6 +31,7 @@ export default {
         // Tone-aware tokens. These resolve through CSS custom properties that
         // <Section tone="light|dark"> flips, so one component works in both.
         surface: 'var(--surface)',
+        'surface-alt': 'var(--surface-alt)',
         'surface-raised': 'var(--surface-raised)',
         fg: {
           DEFAULT: 'var(--fg)',

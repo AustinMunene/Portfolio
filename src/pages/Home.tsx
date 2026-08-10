@@ -202,7 +202,7 @@ const Home = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <span className="text-accent-600 text-sm font-medium tracking-wider uppercase mb-4 block">
+            <span className="text-fg-muted text-sm font-medium tracking-wider uppercase mb-4 block">
               Contact
             </span>
             <h2 className="text-4xl md:text-6xl font-display mb-6 text-fg">
@@ -228,7 +228,7 @@ const Home = () => {
           >
             <a
               href="mailto:saviusmunene@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-neutral-950 text-white rounded-full font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-neutral-950 text-fg rounded-full font-medium hover:opacity-90 transition-opacity"
             >
               saviusmunene@gmail.com
             </a>

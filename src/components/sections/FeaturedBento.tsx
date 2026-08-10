@@ -31,7 +31,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
   const getCategoryIcon = (category?: string) => {
     switch (category) {
       case 'Full-stack':
-        return <Cpu className="w-4 h-4 text-accent-400 stroke-[1.2px]" />;
+        return <Cpu className="w-4 h-4 text-fg-muted stroke-[1.2px]" />;
       case 'QA':
         return <Layers className="w-4 h-4 text-indigo-400 stroke-[1.2px]" />;
       default:
@@ -81,16 +81,16 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
           viewport={{ once: true }}
           className="mb-14 md:mb-20 max-w-3xl"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent-500/15 bg-accent-500/5 text-accent-300 text-xs uppercase tracking-[0.15em] font-semibold mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent-500/15 bg-accent-500/5 text-fg text-xs uppercase tracking-[0.15em] font-semibold mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-accent-500" />
             Engineering Casebook
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display tracking-tight mb-5 text-white">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display tracking-tight mb-5 text-fg">
             Selected Creations
           </h2>
           
-          <p className="text-base md:text-lg text-gray-400 font-normal leading-relaxed max-w-2xl">
+          <p className="text-base md:text-lg text-fg-muted font-normal leading-relaxed max-w-2xl">
             A production-ready catalog showcasing modern, robust frontends, bulletproof automation systems, and high-fidelity consumer platforms.
           </p>
 
@@ -104,8 +104,8 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                   onClick={() => setFilter(f)}
                   className={`relative px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider select-none transition-all duration-200 outline-none ${
                     isActive
-                      ? 'text-accent-300 border border-accent-500/30 bg-accent-500/10'
-                      : 'text-gray-400 border border-white/[0.06] bg-white/[0.015] hover:border-white/15 hover:text-gray-300 hover:bg-white/[0.03]'
+                      ? 'text-fg border border-accent-500/30 bg-accent-500/10'
+                      : 'text-fg-muted border border-line bg-surface-raised hover:border-line hover:text-fg-muted hover:bg-surface-raised'
                   }`}
                   style={{
                     boxShadow: isActive ? '0 0 20px rgba(212, 212, 216, 0.1)' : undefined
@@ -140,7 +140,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
           >
             {filtered.length === 0 ? (
-              <p className="text-gray-500 col-span-full font-mono text-sm py-12 text-center border border-dashed border-white/10 rounded-2xl">
+              <p className="text-fg-subtle col-span-full font-mono text-sm py-12 text-center border border-dashed border-line rounded-2xl">
                 [SYSTEM_WARN]: No creations found in this category.
               </p>
             ) : (
@@ -161,20 +161,20 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                     className={`group ${isWide ? 'md:col-span-2' : 'col-span-1'}`}
                   >
                     {/* Double-Bezel (Doppelrand) Enclosure Pattern */}
-                    <div className="rounded-[28px] p-1.5 bg-white/[0.02] border border-white/[0.06] shadow-[0_24px_80px_rgba(0,0,0,0.8)] hover:border-accent-500/25 transition-colors duration-500 h-full">
+                    <div className="rounded-[28px] p-1.5 bg-surface-raised border border-line shadow-[0_24px_80px_rgba(0,0,0,0.8)] hover:border-accent-500/25 transition-colors duration-500 h-full">
                       
                       {/* Inner Glass Plate Enclosure */}
-                      <SpotlightSurface className="rounded-[calc(28px-6px)] bg-[#07070b]/85 border border-white/[0.03] p-6 md:p-8 hover:border-white/[0.08] transition-colors duration-500 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] h-full flex flex-col">
+                      <SpotlightSurface className="rounded-[calc(28px-6px)] bg-[#07070b]/85 border border-line p-6 md:p-8 hover:border-line transition-colors duration-500 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] h-full flex flex-col">
                         
                         <div className="flex flex-col h-full">
                           {/* Card Header */}
                           <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
                             <div className="flex items-center gap-3">
-                              <span className="flex items-center justify-center w-8 h-8 rounded-full border border-white/5 bg-white/[0.02] group-hover:bg-accent-500/10 group-hover:border-accent-500/15 transition-all duration-300">
+                              <span className="flex items-center justify-center w-8 h-8 rounded-full border border-line bg-surface-raised group-hover:bg-accent-500/10 group-hover:border-accent-500/15 transition-all duration-300">
                                 {getCategoryIcon(project.category)}
                               </span>
                               
-                              <h3 className="text-xl md:text-2xl font-display text-white group-hover:text-accent-300 transition-colors duration-300">
+                              <h3 className="text-xl md:text-2xl font-display text-fg group-hover:text-fg transition-colors duration-300">
                                 {project.title}
                               </h3>
                             </div>
@@ -186,7 +186,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                                   href={project.github}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1.5 text-gray-500 hover:text-accent-400 text-sm font-semibold tracking-wide transition-colors duration-200 select-none"
+                                  className="inline-flex items-center gap-1.5 text-fg-subtle hover:text-fg-muted text-sm font-semibold tracking-wide transition-colors duration-200 select-none"
                                   onClick={(e) => e.stopPropagation()}
                                 >
                                   <Github className="w-4 h-4 stroke-[1.5px]" />
@@ -199,10 +199,10 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                                 href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/5 bg-white/[0.01] hover:border-accent-500/20 hover:bg-accent-500/5 text-gray-400 hover:text-accent-300 text-sm font-semibold tracking-wide select-none transition-all duration-200"
+                                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-line bg-surface-raised hover:border-accent-500/20 hover:bg-accent-500/5 text-fg-muted hover:text-fg text-sm font-semibold tracking-wide select-none transition-all duration-200"
                               >
                                 <span>Visit</span>
-                                <span className="flex items-center justify-center w-4 h-4 rounded-full bg-white/5 group-hover:bg-accent-500/10 group-hover:text-accent-300 transition-all duration-300">
+                                <span className="flex items-center justify-center w-4 h-4 rounded-full bg-white/5 group-hover:bg-accent-500/10 group-hover:text-fg transition-all duration-300">
                                   <ExternalLink className="w-2.5 h-2.5 stroke-[1.8px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
                                 </span>
                               </a>
@@ -210,7 +210,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                           </div>
                           
                           {/* Card Content Description */}
-                          <p className="text-gray-400 text-sm md:text-base leading-relaxed flex-1 mb-6 font-normal">
+                          <p className="text-fg-muted text-sm md:text-base leading-relaxed flex-1 mb-6 font-normal">
                             {project.description}
                           </p>
                           
@@ -220,7 +220,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                               {project.roles.map((r, i) => (
                                 <span
                                   key={i}
-                                  className="px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider font-bold text-accent-300/85 border border-accent-500/10 bg-accent-500/5 shadow-sm"
+                                  className="px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider font-bold text-fg/85 border border-accent-500/10 bg-accent-500/5 shadow-sm"
                                 >
                                   {r}
                                 </span>
@@ -229,11 +229,11 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                           )}
                           
                           {/* Tech Stack Pills with Custom Micro-Sheen */}
-                          <div className="flex flex-wrap gap-2 pt-4 border-t border-white/[0.05]">
+                          <div className="flex flex-wrap gap-2 pt-4 border-t border-line">
                             {project.stack.slice(0, isFeatured ? 6 : 4).map((tech, i) => (
                               <span
                                 key={i}
-                                className="px-3 py-1 bg-white/[0.02] border border-white/[0.04] rounded-md text-[11px] font-mono text-gray-400 select-none transition-colors duration-200 hover:text-white hover:border-white/10"
+                                className="px-3 py-1 bg-surface-raised border border-line rounded-md text-[11px] font-mono text-fg-muted select-none transition-colors duration-200 hover:text-fg hover:border-line"
                               >
                                 {tech}
                               </span>

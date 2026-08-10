@@ -18,7 +18,15 @@ const isCoarsePointer = () =>
  * Volumetric point cloud. Positions are generated once and rendered as a single
  * draw call, so particle count costs almost nothing at runtime.
  */
-const ParticleField = ({ count }: { count: number }) => {
+const ParticleField = ({
+  count,
+  color,
+  light,
+}: {
+  count: number;
+  color: string;
+  light: boolean;
+}) => {
   const ref = useRef<THREE.Points>(null);
 
   const positions = useMemo(() => {
@@ -46,12 +54,12 @@ const ParticleField = ({ count }: { count: number }) => {
     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color={ACCENT_LIGHT}
+        color={color}
         size={0.045}
         sizeAttenuation
         depthWrite={false}
-        opacity={0.7}
-        blending={THREE.AdditiveBlending}
+        opacity={light ? 0.45 : 0.7}
+        blending={light ? THREE.NormalBlending : THREE.AdditiveBlending}
       />
     </Points>
   );
@@ -68,7 +76,17 @@ type DistortMaterial = ElementRef<typeof MeshDistortMaterial>;
  * parallax alone (see CameraRig) reads as observing the object; reacting to
  * speed is what makes it feel like the object has mass.
  */
-const Core = ({ interactive }: { interactive: boolean }) => {
+const Core = ({
+  interactive,
+  core,
+  filament,
+  light,
+}: {
+  interactive: boolean;
+  core: string;
+  filament: string;
+  light: boolean;
+}) => {
   const inner = useRef<THREE.Mesh>(null);
   const shell = useRef<THREE.Mesh>(null);
   const material = useRef<DistortMaterial>(null);
@@ -117,23 +135,30 @@ const Core = ({ interactive }: { interactive: boolean }) => {
       <Icosahedron ref={inner} args={[2.7, 16]}>
         <MeshDistortMaterial
           ref={material}
-          color={ACCENT}
+          color={core}
           distort={BASE_DISTORT}
           speed={1.2}
-          roughness={0.18}
-          metalness={0.95}
-          emissive={ACCENT}
-          emissiveIntensity={0.55}
+          roughness={light ? 0.75 : 0.18}
+          // Metalness with no environment map renders almost black, which is why
+          // a near-white core still came out as a dark blob on light. Metals need
+          // something to reflect; on light we go fully diffuse instead.
+          metalness={light ? 0 : 0.95}
+          emissive={core}
+          // No self-illumination on light: an emissive object on white just
+          // flattens into a pale blob with no readable form.
+          emissiveIntensity={light ? 0 : 0.55}
         />
       </Icosahedron>
 
       <Icosahedron ref={shell} args={[4.25, 2]}>
         <meshBasicMaterial
-          color={ACCENT_LIGHT}
+          color={filament}
           wireframe
           transparent
-          opacity={0.26}
-          blending={THREE.AdditiveBlending}
+          opacity={light ? 0.16 : 0.26}
+          // Additive blending brightens whatever is behind it, which is invisible
+          // on a white page - normal blending keeps the wireframe readable.
+          blending={light ? THREE.NormalBlending : THREE.AdditiveBlending}
           depthWrite={false}
         />
       </Icosahedron>
@@ -171,11 +196,22 @@ const CameraRig = ({ enabled }: { enabled: boolean }) => {
 type HeroSceneProps = {
   /** When true the scene renders a single static frame and never animates. */
   reducedMotion?: boolean;
+  /** Drives geometry colour and whether bloom applies. */
+  theme?: 'light' | 'dark';
 };
 
-const HeroScene = ({ reducedMotion = false }: HeroSceneProps) => {
+const HeroScene = ({ reducedMotion = false, theme = 'dark' }: HeroSceneProps) => {
   const coarse = useMemo(isCoarsePointer, []);
   const animate = !reducedMotion;
+  const isLight = theme === 'light';
+
+  // On light the geometry sits only slightly off the page colour. A mid-grey core
+  // read as a heavy black amoeba covering the copy - the portrait is the focal
+  // point in light mode, so the scene drops to a faint embossed presence.
+  // Bloom is skipped entirely: it brightens already-bright pixels, so against
+  // white it adds a wash over the copy and no glow.
+  const core = isLight ? '#e7e7ea' : ACCENT;
+  const filament = isLight ? '#b4b4bb' : ACCENT_LIGHT;
 
   return (
     <Canvas
@@ -191,33 +227,37 @@ const HeroScene = ({ reducedMotion = false }: HeroSceneProps) => {
       style={{ position: 'absolute', inset: 0 }}
     >
       {/* Far enough back that it only softens the outer particle shell. Starting
-          it at 9 washed the core out before its shape was readable. */}
-      <fog attach="fog" args={['#050505', 17, 46]} />
+          it at 9 washed the core out before its shape was readable. Fog has to
+          match the page or it silhouettes the scene against a grey box. */}
+      <fog attach="fog" args={[isLight ? '#ffffff' : '#050505', 17, 46]} />
 
-      <ambientLight intensity={0.5} />
-      <pointLight position={[7, 5, 9]} intensity={3.4} color={ACCENT_LIGHT} />
-      <pointLight position={[-9, -5, 4]} intensity={2} color={ACCENT} />
+      <ambientLight intensity={isLight ? 0.85 : 0.5} />
+      <pointLight position={[7, 5, 9]} intensity={3.4} color={filament} />
+      <pointLight position={[-9, -5, 4]} intensity={2} color={core} />
       {/* Rim light: separates the core silhouette from the background. */}
-      <pointLight position={[-3, 3, -8]} intensity={2.6} color="#fafafa" />
+      <pointLight position={[-3, 3, -8]} intensity={2.6} color={isLight ? '#71717a' : '#fafafa'} />
 
-      <Core interactive={animate} />
-      <ParticleField count={coarse ? 1600 : 3500} />
+      <Core interactive={animate} core={core} filament={filament} light={isLight} />
+      <ParticleField count={coarse ? 1600 : 3500} color={filament} light={isLight} />
 
       <CameraRig enabled={animate} />
 
-      {/* Real bloom on the emissive core, replacing the stack of blurred CSS
-          orbs that used to sit on top of this canvas and mush it. */}
-      <EffectComposer>
-        <Bloom
-          // Pulled back from 0.85: a near-white emissive blooms far harder than
-          // the amber one did and blew out the core's silhouette.
-          intensity={coarse ? 0.42 : 0.72}
-          luminanceThreshold={0.22}
-          luminanceSmoothing={0.85}
-          mipmapBlur
-        />
-        <Vignette offset={0.32} darkness={0.55} />
-      </EffectComposer>
+      {/* Bloom replaces the stack of blurred CSS orbs that used to sit on top of
+          this canvas and mush it. Skipped on light: bloom only brightens already
+          bright pixels, so against white it adds a wash over the copy and no glow. */}
+      {!isLight && (
+        <EffectComposer>
+          <Bloom
+            // Pulled back from 0.85: a near-white emissive blooms far harder than
+            // the amber one did and blew out the core's silhouette.
+            intensity={coarse ? 0.42 : 0.72}
+            luminanceThreshold={0.22}
+            luminanceSmoothing={0.85}
+            mipmapBlur
+          />
+          <Vignette offset={0.32} darkness={0.55} />
+        </EffectComposer>
+      )}
     </Canvas>
   );
 };

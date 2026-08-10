@@ -1,6 +1,7 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Mail, Phone, ChevronDown } from 'lucide-react';
+import { useTheme } from '../../hooks/useTheme';
 
 // three/fiber/drei is ~600KB. Split it out so it never blocks first paint;
 // the hero renders its gradient ground immediately and the scene fades in.
@@ -52,6 +53,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
   const [getInTouchOpen, setGetInTouchOpen] = useState(false);
   const [carouselPaused, setCarouselPaused] = useState(false);
   const reduceMotion = useReducedMotion();
+  const { theme } = useTheme();
 
   // Auto-rotation is motion, so prefers-reduced-motion has to stop it too -
   // previously only the 3D scene honoured the setting while this kept cycling.
@@ -75,9 +77,9 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
         aria-hidden
         style={{
           background:
-            'radial-gradient(58% 68% at 68% 46%, rgba(212, 212, 216, 0.20), transparent 70%),' +
-            'radial-gradient(45% 55% at 18% 18%, rgba(212, 212, 216, 0.06), transparent 72%),' +
-            '#060402',
+            'radial-gradient(58% 68% at 68% 46%, var(--hero-poster-glow), transparent 70%),' +
+            'radial-gradient(45% 55% at 18% 18%, var(--hero-poster-glow), transparent 72%),' +
+            'var(--hero-poster)',
         }}
       />
       <motion.div
@@ -88,18 +90,23 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
         transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
       >
         <Suspense fallback={null}>
-          <HeroScene reducedMotion={Boolean(reduceMotion)} />
+          <HeroScene reducedMotion={Boolean(reduceMotion)} theme={theme} />
         </Suspense>
       </motion.div>
       {/* One scrim, not two. Heavy on the left where the headline sits, clearing
-          to nothing on the right so the geometry reads.
+          to nothing on the right so the geometry reads. Theme-driven, so it
+          darkens the copy area in dark mode and lightens it in light mode.
           The three blurred orbs and the dot grid that used to sit here are gone:
           they were CSS-faking a glow in front of a scene that now produces real
           bloom, and animating a 600px blur layer was the most expensive thing on
           the page. */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent"
+        className="absolute inset-0"
         aria-hidden
+        style={{
+          background:
+            'linear-gradient(to right, var(--hero-scrim) 0%, var(--hero-scrim-mid) 45%, transparent 75%)',
+        }}
       />
 
       {/* Vertical padding is needed at every breakpoint now that the right column
@@ -118,7 +125,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent-500/20 bg-accent-500/5 text-accent-300 text-sm mb-8"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent-500/20 bg-accent-500/5 text-fg text-sm mb-8"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75" />
@@ -150,12 +157,14 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                       className="inline-block"
                       whileHover={{
                         y: -8,
-                        color: '#e4e4e7',
                         transition: { duration: 0.2, ease: 'easeOut' },
                       }}
+                      // Gradient-clipped text has to follow the theme, or the
+                      // name is white-on-white in light mode. Runs from the
+                      // foreground colour into the muted one.
                       style={{
                         background:
-                          'linear-gradient(135deg, #ffffff 0%, #f4f4f5 60%, #d4d4d8 100%)',
+                          'linear-gradient(135deg, var(--fg) 0%, var(--fg) 55%, var(--fg-muted) 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
@@ -172,7 +181,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg md:text-xl text-gray-400 mb-8 max-w-lg leading-relaxed"
+              className="text-lg md:text-xl text-fg-muted mb-8 max-w-lg leading-relaxed"
             >
               Frontend + QA Engineer delivering reliable, production-ready user
               experiences
@@ -196,7 +205,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                   type="button"
                   onClick={() => setGetInTouchOpen((o) => !o)}
                   onBlur={() => setTimeout(() => setGetInTouchOpen(false), 150)}
-                  className="px-8 py-3 border border-white/10 text-gray-300 rounded-full font-medium hover:border-accent-500/50 hover:text-white hover:bg-accent-500/5 transition-all flex items-center gap-2"
+                  className="px-8 py-3 border border-line text-fg-muted rounded-full font-medium hover:border-accent-500/50 hover:text-fg hover:bg-accent-500/5 transition-all flex items-center gap-2"
                 >
                   Get in Touch
                   <ChevronDown className={`w-4 h-4 transition-transform ${getInTouchOpen ? 'rotate-180' : ''}`} />
@@ -208,23 +217,23 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute left-0 top-full mt-2 min-w-[220px] rounded-xl border border-white/[0.08] bg-black/95 backdrop-blur-md shadow-xl py-2 z-50"
+                      className="absolute left-0 top-full mt-2 min-w-[220px] rounded-xl border border-line bg-surface/95 backdrop-blur-md shadow-xl py-2 z-50"
                     >
                       <a
                         href="mailto:saviusmunene@gmail.com"
-                        className="flex items-center gap-3 px-4 py-3 text-left text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 text-left text-fg-muted hover:bg-white/5 hover:text-fg transition-colors"
                       >
-                        <Mail className="w-4 h-4 text-accent-400 shrink-0" />
+                        <Mail className="w-4 h-4 text-fg-muted shrink-0" />
                         <span className="text-sm">Email</span>
-                        <span className="text-xs text-gray-500 truncate ml-auto">saviusmunene@gmail.com</span>
+                        <span className="text-xs text-fg-subtle truncate ml-auto">saviusmunene@gmail.com</span>
                       </a>
                       <a
                         href="tel:+254743988415"
-                        className="flex items-center gap-3 px-4 py-3 text-left text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 text-left text-fg-muted hover:bg-white/5 hover:text-fg transition-colors"
                       >
-                        <Phone className="w-4 h-4 text-accent-400 shrink-0" />
+                        <Phone className="w-4 h-4 text-fg-muted shrink-0" />
                         <span className="text-sm">Call</span>
-                        <span className="text-xs text-gray-500 ml-auto">+254 743 988 415</span>
+                        <span className="text-xs text-fg-subtle ml-auto">+254 743 988 415</span>
                       </a>
                     </motion.div>
                   )}
@@ -237,14 +246,14 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-xs md:text-sm text-gray-500/80"
+              className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-xs md:text-sm text-fg-subtle"
             >
               <span>Production QA</span>
-              <span className="text-accent-500/40">|</span>
+              <span className="text-fg-subtle">|</span>
               <span>React + TypeScript</span>
-              <span className="text-accent-500/40">|</span>
+              <span className="text-fg-subtle">|</span>
               <span>Automation Mindset</span>
-              <span className="text-accent-500/40">|</span>
+              <span className="text-fg-subtle">|</span>
               <span>System Reliability</span>
             </motion.div>
           </motion.div>
@@ -269,8 +278,8 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               className="relative mx-auto mb-8 w-[240px] h-[240px] md:w-[300px] md:h-[300px]"
             >
               {/* Concentric ring, echoing the bezel language used elsewhere. */}
-              <div className="absolute -inset-3 rounded-full border border-white/[0.07]" />
-              <div className="absolute inset-0 rounded-full overflow-hidden bg-white/[0.04] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)]">
+              <div className="absolute -inset-3 rounded-full border border-line" />
+              <div className="absolute inset-0 rounded-full overflow-hidden bg-surface-raised shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)]">
                 <img
                   // c_thumb + g_face with a pulled-back zoom: c_fill kept the full
                   // frame width and pushed the face into a corner, since the
@@ -288,22 +297,22 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               {/* Floating card, overlapping the portrait as in the reference.
                   Deliberately not a metric - there is no true number to put here,
                   so it carries facts instead. */}
-              <figcaption className="absolute -bottom-3 -left-4 md:-left-8 rounded-xl border border-white/[0.1] bg-black/70 backdrop-blur-md px-4 py-2.5 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.9)]">
-                <span className="flex items-center gap-2 text-[11px] font-medium tracking-wide text-white">
+              <figcaption className="absolute -bottom-3 -left-4 md:-left-8 rounded-xl border border-line bg-surface/85 backdrop-blur-md px-4 py-2.5 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.9)]">
+                <span className="flex items-center gap-2 text-[11px] font-medium tracking-wide text-fg">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70 animate-ping" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
                   </span>
                   Available for projects
                 </span>
-                <span className="mt-0.5 block text-[10px] text-gray-400">
+                <span className="mt-0.5 block text-[10px] text-fg-muted">
                   Nairobi &middot; GMT+3
                 </span>
               </figcaption>
             </motion.figure>
 
             <div
-              className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm p-6 md:p-8 overflow-hidden"
+              className="relative rounded-2xl border border-line bg-surface-raised backdrop-blur-sm p-6 md:p-8 overflow-hidden"
               onMouseEnter={() => setCarouselPaused(true)}
               onMouseLeave={() => setCarouselPaused(false)}
               onFocusCapture={() => setCarouselPaused(true)}
@@ -340,23 +349,23 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
               >
-                <span className="text-xs font-medium text-accent-400 uppercase tracking-wider">
+                <span className="text-xs font-medium text-fg-muted uppercase tracking-wider">
                   {highlights[activeHighlight].label}
                 </span>
-                <h3 className="text-2xl md:text-3xl font-display text-white mt-2 mb-1">
+                <h3 className="text-2xl md:text-3xl font-display text-fg mt-2 mb-1">
                   {highlights[activeHighlight].title}
                 </h3>
-                <p className="text-accent-300/80 text-sm mb-3">
+                <p className="text-fg-muted text-sm mb-3">
                   {highlights[activeHighlight].subtitle}
                 </p>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-fg-muted text-sm leading-relaxed">
                   {highlights[activeHighlight].detail}
                 </p>
               </motion.div>
 
               {/* Progress bar: doubles as the countdown to the next rotation, so
                   it must not keep filling once rotation is paused or disabled. */}
-              <div className="mt-6 h-1 rounded-full bg-white/[0.04] overflow-hidden">
+              <div className="mt-6 h-1 rounded-full bg-surface-raised overflow-hidden">
                 {reduceMotion || carouselPaused ? (
                   <div
                     className={`h-full w-full rounded-full bg-gradient-to-r ${highlights[activeHighlight].accent} opacity-40`}
@@ -373,12 +382,12 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               </div>
 
               {/* Credibility indicators + CTA (always visible) */}
-              <div className="mt-6 pt-6 border-t border-white/[0.06]">
+              <div className="mt-6 pt-6 border-t border-line">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {credibilityChips.map((chip) => (
                     <span
                       key={chip}
-                      className="px-2.5 py-1 rounded-md text-[11px] font-medium text-gray-400 bg-white/[0.04] border border-white/[0.06]"
+                      className="px-2.5 py-1 rounded-md text-[11px] font-medium text-fg-muted bg-surface-raised border border-line"
                     >
                       {chip}
                     </span>
@@ -386,7 +395,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                 </div>
                 <a
                   href="#projects"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] border border-white/[0.08] text-sm text-white hover:bg-white/[0.1] hover:border-accent-500/30 transition-all"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-raised border border-line text-sm text-fg hover:bg-white/[0.1] hover:border-accent-500/30 transition-all"
                 >
                   View Projects
                   <ArrowRight className="w-3.5 h-3.5" />
