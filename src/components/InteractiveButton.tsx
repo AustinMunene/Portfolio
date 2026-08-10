@@ -15,7 +15,7 @@ const Button3D: React.FC<ButtonProps> = ({ text, onClick, position = [0, 0, 0], 
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  useFrame((state) => {
+  useFrame(() => {
     if (meshRef.current) {
       // Hover animation
       meshRef.current.scale.x = THREE.MathUtils.lerp(

@@ -16,8 +16,12 @@ const InteractiveDemo = lazy(() => import('./pages/InteractiveDemo'));
 
 function App() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    <div className="min-h-screen bg-[#030303] text-[#f1f1f4] overflow-hidden relative">
+      {/* High-fidelity Coder Grid & Particle Sheen Overlay */}
+      <div className="coder-grid" aria-hidden="true" />
+      
       <Navbar />
+      
       <Suspense fallback={<div className="min-h-screen" role="status" aria-label="Loading" />}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,23 +31,22 @@ function App() {
           <Route path="/interactive" element={<InteractiveDemo />} />
         </Routes>
       </Suspense>
-      <>
-        <ScrollToTop />
-        {/* Your Routes Here */}
-      </>
+      
+      <ScrollToTop />
+      
       {/* Footer */}
-        <footer className="relative container mx-auto px-4 py-8 mt-20">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/20 to-transparent" />
-          <div className="flex justify-between items-center">
-            <p className="text-gray-600 text-sm">© 2026 Austin Munene</p>
-            <a
-              href="#top"
-              className="text-gray-500 hover:text-accent-400 transition-colors text-sm"
-            >
-              Back to Top
-            </a>
-          </div>
-        </footer>
+      <footer className="relative container mx-auto px-6 py-10 mt-28 z-10">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/15 to-transparent" />
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-sm font-space-grotesk">© 2026 Austin Munene</p>
+          <a
+            href="#top"
+            className="text-gray-400 hover:text-accent-300 transition-colors duration-200 text-sm font-space-grotesk select-none active:scale-95"
+          >
+            Back to Top
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }

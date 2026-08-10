@@ -6,8 +6,10 @@ const styles = {
   danger: 'bg-red-600 text-white hover:bg-red-700',
 };
 
+type StyleKey = keyof typeof styles;
+
 const TailwindDemo: React.FC = () => {
-  const [selected, setSelected] = useState("primary");
+  const [selected, setSelected] = useState<StyleKey>('primary');
 
   return (
     <div className="bg-gray-900 text-white p-6 rounded shadow-md">
@@ -19,9 +21,9 @@ const TailwindDemo: React.FC = () => {
         <select
           className="bg-gray-700 text-white px-3 py-2 rounded"
           value={selected}
-          onChange={(e) => setSelected(e.target.value)}
+          onChange={(e) => setSelected(e.target.value as StyleKey)}
         >
-          {Object.keys(styles).map((key) => (
+          {(Object.keys(styles) as StyleKey[]).map((key) => (
             <option key={key} value={key}>
               {key.charAt(0).toUpperCase() + key.slice(1)}
             </option>
