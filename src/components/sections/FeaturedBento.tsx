@@ -42,7 +42,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
   return (
     <section id="projects" className="relative py-28 md:py-36 overflow-hidden">
       {/* Absolute background layers for "Coder Schematic Vibe" */}
-      <div className="absolute inset-0 bg-[#030303]" />
+      <div className="absolute inset-0 bg-surface" aria-hidden />
       
       {/* Custom Schematic Lines and Blueprint Dots */}
       <div className="absolute inset-0 opacity-[0.035] pointer-events-none select-none" aria-hidden="true">
@@ -164,7 +164,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                     <div className="rounded-[28px] p-1.5 bg-surface-raised border border-line shadow-[0_24px_80px_rgba(0,0,0,0.8)] hover:border-accent-500/25 transition-colors duration-500 h-full">
                       
                       {/* Inner Glass Plate Enclosure */}
-                      <SpotlightSurface className="rounded-[calc(28px-6px)] bg-[#07070b]/85 border border-line p-6 md:p-8 hover:border-line transition-colors duration-500 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] h-full flex flex-col">
+                      <SpotlightSurface className="rounded-[calc(28px-6px)] bg-surface-raised border border-line p-6 md:p-8 hover:border-line transition-colors duration-500 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] h-full flex flex-col">
                         
                         <div className="flex flex-col h-full">
                           {/* Card Header */}

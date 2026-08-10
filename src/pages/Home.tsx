@@ -8,6 +8,7 @@ import type { BentoProject } from '../components/sections/FeaturedBento';
 import CareerPreview from '../components/sections/CareerPreview';
 import BlogPreview from '../components/sections/BlogPreview';
 import Section from '../components/Section';
+import Services from '../components/sections/Services';
 
 const rawProjects: Array<{
   title: string;
@@ -164,25 +165,24 @@ const Home = () => {
     >
       <HeroSplit featuredProject={featuredProject} />
 
+      <Services />
+
       <FeaturedBento projects={projects} />
 
       <CareerPreview items={careerPreviewItems} />
 
       <BlogPreview posts={blogPosts} />
 
-      {/* Contact - the first section converted to the light tone, as the
-          proof-of-concept for the business/craft tonal split. Note there is not a
-          single hardcoded grey or white/x border below: everything reads through
-          the tone tokens, so this same markup would work in a dark section by
-          flipping one prop. */}
-      <Section tone="light" id="contact" className="py-24 md:py-32 overflow-hidden">
-        {/* Warm ground, sitting on the light surface rather than fighting it. */}
+      {/* Contact. No hardcoded greys or white/x borders below - everything reads
+          through the theme tokens, so the same markup works in either theme. */}
+      <Section id="contact" className="py-24 md:py-32 overflow-hidden">
+        {/* Soft ground, picking up the theme rather than fighting it. */}
         <div
           className="absolute inset-0"
           aria-hidden
           style={{
             background:
-              'radial-gradient(50% 60% at 50% 0%, rgba(212, 212, 216, 0.10), transparent 70%)',
+              'radial-gradient(50% 60% at 50% 0%, var(--hero-poster-glow), transparent 70%)',
           }}
         />
         <div

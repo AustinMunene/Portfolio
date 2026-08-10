@@ -3,30 +3,29 @@ import type { ReactNode } from 'react';
 type SectionProps = {
   children: ReactNode;
   /**
-   * Which half of the site this section belongs to.
-   * `light` = business-facing (services, process, why-me, contact).
-   * `dark`  = craft-facing (work, lab, blog).
-   * The tonal switch is the signal to the visitor about which mode they are in,
-   * so pick it by meaning rather than by visual rhythm.
+   * Which of the two surfaces this section sits on. Sections alternate so the
+   * page has rhythm, and because the theme is the visitor's choice this is
+   * relative to it rather than absolute - `alt` is a slightly raised panel in
+   * dark mode and a slightly recessed one in light.
    */
-  tone?: 'light' | 'dark';
+  variant?: 'base' | 'alt';
   id?: string;
   className?: string;
 };
 
 /**
- * Tone-scoped section wrapper.
+ * Themed section wrapper.
  *
- * Sets `data-tone`, which rebinds --surface/--fg/--border for everything inside
- * (see index.css). Children styled with the token utilities - bg-surface,
- * text-fg, text-fg-muted, border-line - then work in either tone with no
- * conditional classes and no duplicated markup.
+ * Surface and text come from the tokens that [data-theme] on <html> rebinds
+ * (see index.css), so children styled with bg-surface / text-fg / text-fg-muted
+ * / border-line work in either theme with no conditional classes.
  */
-const Section = ({ children, tone = 'dark', id, className = '' }: SectionProps) => (
+const Section = ({ children, variant = 'base', id, className = '' }: SectionProps) => (
   <section
     id={id}
-    data-tone={tone}
-    className={`relative bg-surface text-fg transition-colors duration-500 ${className}`}
+    className={`relative text-fg transition-colors duration-500 ${
+      variant === 'alt' ? 'bg-surface-alt' : 'bg-surface'
+    } ${className}`}
   >
     {children}
   </section>
