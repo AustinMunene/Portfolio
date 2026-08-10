@@ -23,7 +23,7 @@ const BlogPost2: React.FC = () => {
         <div className="absolute inset-0 bg-black" />
         <div className="container mx-auto px-4 py-24 relative z-10">
           <div className="text-center">
-            <h1 className="text-3xl font-bold mb-4 gradient-text">Post Not Found</h1>
+            <h1 className="text-3xl font-display mb-4 gradient-text">Post Not Found</h1>
             <button
               onClick={() => navigate('/blog')}
               className="text-accent-400 hover:text-accent-300 transition-colors"
@@ -77,7 +77,7 @@ const BlogPost2: React.FC = () => {
             <span>{post.readTime}</span>
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-bold mb-8 gradient-text">{post.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-display mb-8 gradient-text">{post.title}</h1>
 
           <div
             className="prose prose-invert prose-headings:text-white prose-a:text-accent-400 prose-a:no-underline hover:prose-a:text-accent-300 prose-code:text-accent-300 prose-strong:text-white max-w-none"

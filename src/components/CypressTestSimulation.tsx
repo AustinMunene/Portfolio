@@ -131,7 +131,7 @@ const CypressTestSimulation: React.FC = () => {
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-6 border-b border-white/[0.05]">
             <div>
-              <h3 className="text-xl font-bold font-space-grotesk text-white">QA Automation Sandbox</h3>
+              <h3 className="text-2xl font-display text-white">QA Automation Sandbox</h3>
               <p className="text-sm text-gray-400 mt-1">
                 Interact with this real-time simulated E2E test suite to run asserting assertions.
               </p>
@@ -142,7 +142,7 @@ const CypressTestSimulation: React.FC = () => {
               <button
                 onClick={runTests}
                 disabled={running}
-                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider font-space-grotesk select-none transition-all duration-200 outline-none ${
+                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider select-none transition-all duration-200 outline-none ${
                   running
                     ? 'bg-accent-500/10 border border-accent-500/20 text-accent-300'
                     : 'bg-emerald-600 hover:bg-emerald-500 border border-emerald-500/20 text-white shadow-[0_4px_16px_rgba(16,185,129,0.15)] active:scale-95'
@@ -202,7 +202,7 @@ const CypressTestSimulation: React.FC = () => {
                       </span>
 
                       <div className="min-w-0">
-                        <span className={`text-xs font-semibold uppercase font-space-grotesk tracking-wider ${
+                        <span className={`text-xs font-semibold uppercase tracking-wider ${
                           isPass ? 'text-emerald-400' : isFail ? 'text-red-400' : isRunning ? 'text-accent-300' : 'text-gray-500'
                         }`}>
                           TEST_SUITE_#{test.id} · {test.status}

@@ -207,7 +207,7 @@ const Home = () => {
             <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
               Contact
             </span>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text reveal">
+            <h2 className="text-4xl md:text-6xl font-display mb-6 gradient-text reveal">
               Let's Connect
             </h2>
           </motion.div>

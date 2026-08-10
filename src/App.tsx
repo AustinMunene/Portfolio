@@ -38,10 +38,10 @@ function App() {
       <footer className="relative container mx-auto px-6 py-10 mt-28 z-10">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/15 to-transparent" />
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm font-space-grotesk">© 2026 Austin Munene</p>
+          <p className="text-gray-500 text-sm">© 2026 Austin Munene</p>
           <a
             href="#top"
-            className="text-gray-400 hover:text-accent-300 transition-colors duration-200 text-sm font-space-grotesk select-none active:scale-95"
+            className="text-gray-400 hover:text-accent-300 transition-colors duration-200 text-sm select-none active:scale-95"
           >
             Back to Top
           </a>

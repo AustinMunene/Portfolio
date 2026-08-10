@@ -4,9 +4,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['DM Sans', '-apple-system', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-        'space-grotesk': ['Space Grotesk', 'sans-serif'],
+        sans: ['Geist', '-apple-system', 'system-ui', 'sans-serif'],
+        mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        // Display only. Instrument Serif has a single 400 weight, so pair it
+        // with font-normal and size - never font-bold, which synthesises.
+        display: ['Instrument Serif', 'Georgia', 'serif'],
       },
       colors: {
         accent: {

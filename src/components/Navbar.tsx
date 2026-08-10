@@ -34,7 +34,7 @@ const Navbar = () => {
         
         {/* Brand Trigger Logo */}
         <NavLink to="/" className="text-lg font-bold tracking-tight select-none active:scale-95 transition-transform duration-200">
-          <span className="bg-gradient-to-r from-accent-400 to-accent-300 bg-clip-text text-transparent font-space-grotesk font-semibold">
+          <span className="bg-gradient-to-r from-accent-400 to-accent-300 bg-clip-text text-transparent font-display text-xl">
             AM
           </span>
         </NavLink>
@@ -46,7 +46,7 @@ const Navbar = () => {
               key={to}
               to={to}
               className={({ isActive }) =>
-                `relative py-1 text-sm tracking-wide font-medium font-space-grotesk transition-colors duration-200 select-none ${
+                `relative py-1 text-sm tracking-wide font-medium transition-colors duration-200 select-none ${
                   isActive
                     ? 'text-accent-300'
                     : 'text-gray-400 hover:text-white'
@@ -120,7 +120,7 @@ const Navbar = () => {
               initial={{ opacity: 0, scale: 0.96, y: -8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -8 }}
-              transition={{ duration: 250, ease: 'easeOut' }}
+              transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
               className="absolute top-[calc(100%+12px)] left-0 right-0 p-5 rounded-[20px] bg-black/80 backdrop-blur-2xl border border-white/10 shadow-2xl flex flex-col space-y-4"
             >
               <div className="flex flex-col space-y-2">
@@ -129,7 +129,7 @@ const Navbar = () => {
                     key={to}
                     to={to}
                     className={({ isActive }) =>
-                      `block py-2.5 px-4 rounded-xl text-sm font-medium font-space-grotesk transition-all duration-200 ${
+                      `block py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-200 ${
                         isActive
                           ? 'text-accent-300 bg-accent-500/10 border border-accent-500/15'
                           : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'

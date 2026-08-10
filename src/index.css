@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
+/* Fonts are loaded via a single <link> in index.html. Keeping an @import here
+   too would serialise the request chain and duplicate a family. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,7 +27,7 @@
   body {
     background-color: var(--neutral-dark);
     color: #f1f1f4;
-    font-family: 'DM Sans', -apple-system, system-ui, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Geist', -apple-system, system-ui, BlinkMacSystemFont, sans-serif !important;
     font-size: 0.95rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -37,7 +37,21 @@
   }
 
   code, pre {
-    font-family: 'JetBrains Mono', monospace !important;
+    font-family: 'Geist Mono', ui-monospace, monospace !important;
+  }
+
+  /* Instrument Serif is a single-weight face. Force 400 wherever it is applied
+     so a stray font-bold cannot trigger synthetic bolding, which smears it. */
+  .font-display {
+    font-weight: 400 !important;
+    letter-spacing: -0.01em;
+  }
+
+  /* Editorial serif headings inside long-form blog content. */
+  .prose :is(h1, h2, h3) {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
 
   @media (max-width: 768px) {

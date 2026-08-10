@@ -1,16 +1,21 @@
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, type ElementRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Icosahedron, MeshDistortMaterial, Points, PointMaterial } from '@react-three/drei';
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
 const ACCENT = '#6366f1';
 const ACCENT_LIGHT = '#a5b4fc';
 
+/** Coarse pointers (phones/tablets) get a lighter scene: fewer particles, no AA. */
+const isCoarsePointer = () =>
+  typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
 /**
  * Volumetric point cloud. Positions are generated once and rendered as a single
  * draw call, so particle count costs almost nothing at runtime.
  */
-const ParticleField = ({ count = 3500 }: { count?: number }) => {
+const ParticleField = ({ count }: { count: number }) => {
   const ref = useRef<THREE.Points>(null);
 
   const positions = useMemo(() => {
@@ -49,13 +54,31 @@ const ParticleField = ({ count = 3500 }: { count?: number }) => {
   );
 };
 
-/** Slowly morphing core with a wireframe shell around it. */
-const Core = () => {
+/** drei's MeshDistortMaterial instance, which exposes a writable `distort`. */
+type DistortMaterial = ElementRef<typeof MeshDistortMaterial>;
+
+/**
+ * Slowly morphing core with a wireframe shell around it.
+ *
+ * The core also reacts to pointer *velocity*: moving the cursor quickly across
+ * the hero agitates the surface, and it settles back when you stop. Position
+ * parallax alone (see CameraRig) reads as observing the object; reacting to
+ * speed is what makes it feel like the object has mass.
+ */
+const Core = ({ interactive }: { interactive: boolean }) => {
   const inner = useRef<THREE.Mesh>(null);
   const shell = useRef<THREE.Mesh>(null);
+  const material = useRef<DistortMaterial>(null);
+
+  const lastPointer = useRef(new THREE.Vector2());
+  const agitation = useRef(0);
+
+  const BASE_DISTORT = 0.34;
+  const MAX_ADDED_DISTORT = 0.3;
 
   useFrame((state, delta) => {
     const t = state.clock.elapsedTime;
+
     if (inner.current) {
       inner.current.rotation.y += delta * 0.12;
       inner.current.rotation.z += delta * 0.05;
@@ -66,6 +89,22 @@ const Core = () => {
       const pulse = 1 + Math.sin(t * 0.6) * 0.03;
       shell.current.scale.setScalar(pulse);
     }
+
+    if (!interactive || !material.current) return;
+
+    // Pointer travel this frame, normalised to speed rather than raw distance
+    // so the response is frame-rate independent.
+    const { pointer } = state;
+    const travel = lastPointer.current.distanceTo(pointer);
+    lastPointer.current.copy(pointer);
+    const speed = delta > 0 ? travel / delta : 0;
+
+    // Rise quickly toward the incoming speed, decay slowly back to rest.
+    const target = Math.min(speed * 0.35, 1);
+    const rate = target > agitation.current ? 8 : 2.2;
+    agitation.current += (target - agitation.current) * Math.min(rate * delta, 1);
+
+    material.current.distort = BASE_DISTORT + agitation.current * MAX_ADDED_DISTORT;
   });
 
   return (
@@ -74,8 +113,9 @@ const Core = () => {
     <group position={[1.6, -0.2, -1]}>
       <Icosahedron ref={inner} args={[2.7, 16]}>
         <MeshDistortMaterial
+          ref={material}
           color={ACCENT}
-          distort={0.34}
+          distort={BASE_DISTORT}
           speed={1.2}
           roughness={0.18}
           metalness={0.95}
@@ -99,9 +139,10 @@ const Core = () => {
 };
 
 /**
- * Pointer-driven parallax. The camera eases toward the target rather than
- * tracking it directly, which is what makes the movement feel weighted instead
- * of mechanical.
+ * Pointer-driven parallax plus scroll-linked depth. The camera eases toward the
+ * target rather than tracking it directly, which is what makes the movement feel
+ * weighted instead of mechanical. Scrolling pulls the camera back so the core
+ * recedes as the next section arrives.
  */
 const CameraRig = ({ enabled }: { enabled: boolean }) => {
   const { camera, pointer } = useThree();
@@ -109,7 +150,12 @@ const CameraRig = ({ enabled }: { enabled: boolean }) => {
 
   useFrame((_, delta) => {
     if (!enabled) return;
-    target.current.set(pointer.x * 1.6, pointer.y * 1.0, 12);
+
+    // 0 at the top of the page, 1 once a full viewport has scrolled past.
+    const progress = Math.min(window.scrollY / Math.max(window.innerHeight, 1), 1);
+    const depth = 12 + progress * 7;
+
+    target.current.set(pointer.x * 1.6, pointer.y * 1.0, depth);
     // Frame-rate independent easing.
     const alpha = 1 - Math.pow(0.0015, delta);
     camera.position.lerp(target.current, alpha);
@@ -124,32 +170,51 @@ type HeroSceneProps = {
   reducedMotion?: boolean;
 };
 
-const HeroScene = ({ reducedMotion = false }: HeroSceneProps) => (
-  <Canvas
-    // `demand` renders one frame and stops, which is the correct reduced-motion
-    // behaviour and avoids burning a rAF loop for a still image.
-    frameloop={reducedMotion ? 'demand' : 'always'}
-    camera={{ position: [0, 0, 12], fov: 50 }}
-    dpr={[1, 1.75]}
-    gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-    performance={{ min: 0.5 }}
-    style={{ position: 'absolute', inset: 0 }}
-  >
-    {/* Far enough back that it only softens the outer particle shell. Starting
-        it at 9 washed the core out before its shape was readable. */}
-    <fog attach="fog" args={['#05050a', 17, 46]} />
+const HeroScene = ({ reducedMotion = false }: HeroSceneProps) => {
+  const coarse = useMemo(isCoarsePointer, []);
+  const animate = !reducedMotion;
 
-    <ambientLight intensity={0.5} />
-    <pointLight position={[7, 5, 9]} intensity={3.4} color={ACCENT_LIGHT} />
-    <pointLight position={[-9, -5, 4]} intensity={2} color={ACCENT} />
-    {/* Rim light: separates the core silhouette from the background. */}
-    <pointLight position={[-3, 3, -8]} intensity={2.6} color="#c7d2fe" />
+  return (
+    <Canvas
+      // `demand` renders one frame and stops, which is the correct reduced-motion
+      // behaviour and avoids burning a rAF loop for a still image.
+      frameloop={reducedMotion ? 'demand' : 'always'}
+      camera={{ position: [0, 0, 12], fov: 50 }}
+      // Touch devices pay the most for high DPR and MSAA, and benefit least -
+      // bloom already softens the particle edges that AA would clean up.
+      dpr={coarse ? [1, 1.25] : [1, 1.75]}
+      gl={{ antialias: !coarse, alpha: true, powerPreference: 'high-performance' }}
+      performance={{ min: 0.5 }}
+      style={{ position: 'absolute', inset: 0 }}
+    >
+      {/* Far enough back that it only softens the outer particle shell. Starting
+          it at 9 washed the core out before its shape was readable. */}
+      <fog attach="fog" args={['#05050a', 17, 46]} />
 
-    <Core />
-    <ParticleField />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[7, 5, 9]} intensity={3.4} color={ACCENT_LIGHT} />
+      <pointLight position={[-9, -5, 4]} intensity={2} color={ACCENT} />
+      {/* Rim light: separates the core silhouette from the background. */}
+      <pointLight position={[-3, 3, -8]} intensity={2.6} color="#c7d2fe" />
 
-    <CameraRig enabled={!reducedMotion} />
-  </Canvas>
-);
+      <Core interactive={animate} />
+      <ParticleField count={coarse ? 1600 : 3500} />
+
+      <CameraRig enabled={animate} />
+
+      {/* Real bloom on the emissive core, replacing the stack of blurred CSS
+          orbs that used to sit on top of this canvas and mush it. */}
+      <EffectComposer>
+        <Bloom
+          intensity={coarse ? 0.5 : 0.85}
+          luminanceThreshold={0.2}
+          luminanceSmoothing={0.85}
+          mipmapBlur
+        />
+        <Vignette offset={0.32} darkness={0.55} />
+      </EffectComposer>
+    </Canvas>
+  );
+};
 
 export default HeroScene;

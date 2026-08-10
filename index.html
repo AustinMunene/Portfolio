@@ -6,19 +6,19 @@
     <meta name="description" content="Austin Munene - Frontend Developer and QA Engineer Portfolio" />
     <meta name="theme-color" content="#0a0a0f" />
     
-    <!-- Preload critical assets -->
+    <!-- Fonts: one request for all three families. Previously split between a
+         <link> here and an @import in index.css, which serialised HTML -> CSS ->
+         CSS -> fonts and loaded JetBrains Mono twice.
+         Instrument Serif is display-only and ships a single 400 weight. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    
+
     <!-- Standard favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="index.css" />
-
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <title>Austin Munene</title>
   </head>
   <body>

@@ -98,7 +98,7 @@ const InteractiveCodeEditor: React.FC<InteractiveCodeEditorProps> = ({
             <button
               onClick={handleRunCode}
               disabled={executing}
-              className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold font-space-grotesk tracking-wide transition-all duration-200 select-none ${
+              className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 select-none ${
                 executing
                   ? 'bg-accent-500/10 border border-accent-500/20 text-accent-300'
                   : 'bg-accent-500 hover:bg-accent-400 border border-accent-400/20 text-white shadow-[0_4px_16px_rgba(99,102,241,0.25)] active:scale-95'
@@ -114,7 +114,7 @@ const InteractiveCodeEditor: React.FC<InteractiveCodeEditorProps> = ({
         {(title || description) && (
           <div className="px-6 py-4 border-b border-white/[0.05] bg-white/[0.01]">
             {title && (
-              <h3 className="text-sm font-semibold text-white font-space-grotesk tracking-tight">
+              <h3 className="text-sm font-semibold text-white tracking-tight">
                 {title}
               </h3>
             )}

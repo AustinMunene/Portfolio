@@ -25,7 +25,7 @@ const InteractiveDemo: React.FC = () => {
             <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
               Playground
             </span>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">Interactive Demo</h1>
+            <h1 className="text-4xl md:text-5xl font-display mb-4 gradient-text">Interactive Demo</h1>
             <p className="text-gray-400 max-w-lg mx-auto">
               Explore these interactive components showcasing my technical skills and expertise.
             </p>

@@ -81,12 +81,12 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
           viewport={{ once: true }}
           className="mb-14 md:mb-20 max-w-3xl"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent-500/15 bg-accent-500/5 text-accent-300 text-xs uppercase tracking-[0.15em] font-space-grotesk font-semibold mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent-500/15 bg-accent-500/5 text-accent-300 text-xs uppercase tracking-[0.15em] font-semibold mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-accent-500" />
             Engineering Casebook
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-space-grotesk tracking-tight mb-5 text-white">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display tracking-tight mb-5 text-white">
             Selected Creations
           </h2>
           
@@ -102,7 +102,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`relative px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider font-space-grotesk select-none transition-all duration-200 outline-none ${
+                  className={`relative px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider select-none transition-all duration-200 outline-none ${
                     isActive
                       ? 'text-accent-300 border border-accent-500/30 bg-accent-500/10'
                       : 'text-gray-400 border border-white/[0.06] bg-white/[0.015] hover:border-white/15 hover:text-gray-300 hover:bg-white/[0.03]'
@@ -174,7 +174,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                                 {getCategoryIcon(project.category)}
                               </span>
                               
-                              <h3 className="text-xl md:text-2xl font-bold font-space-grotesk text-white group-hover:text-accent-300 transition-colors duration-300">
+                              <h3 className="text-xl md:text-2xl font-display text-white group-hover:text-accent-300 transition-colors duration-300">
                                 {project.title}
                               </h3>
                             </div>
@@ -186,7 +186,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                                   href={project.github}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1.5 text-gray-500 hover:text-accent-400 text-sm font-space-grotesk font-semibold tracking-wide transition-colors duration-200 select-none"
+                                  className="inline-flex items-center gap-1.5 text-gray-500 hover:text-accent-400 text-sm font-semibold tracking-wide transition-colors duration-200 select-none"
                                   onClick={(e) => e.stopPropagation()}
                                 >
                                   <Github className="w-4 h-4 stroke-[1.5px]" />
@@ -199,7 +199,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                                 href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/5 bg-white/[0.01] hover:border-accent-500/20 hover:bg-accent-500/5 text-gray-400 hover:text-accent-300 text-sm font-space-grotesk font-semibold tracking-wide select-none transition-all duration-200"
+                                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/5 bg-white/[0.01] hover:border-accent-500/20 hover:bg-accent-500/5 text-gray-400 hover:text-accent-300 text-sm font-semibold tracking-wide select-none transition-all duration-200"
                               >
                                 <span>Visit</span>
                                 <span className="flex items-center justify-center w-4 h-4 rounded-full bg-white/5 group-hover:bg-accent-500/10 group-hover:text-accent-300 transition-all duration-300">
@@ -220,7 +220,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                               {project.roles.map((r, i) => (
                                 <span
                                   key={i}
-                                  className="px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider font-space-grotesk font-bold text-accent-300/85 border border-accent-500/10 bg-accent-500/5 shadow-sm"
+                                  className="px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider font-bold text-accent-300/85 border border-accent-500/10 bg-accent-500/5 shadow-sm"
                                 >
                                   {r}
                                 </span>

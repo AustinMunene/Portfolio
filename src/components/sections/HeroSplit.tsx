@@ -57,14 +57,19 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
 
   const [activeHighlight, setActiveHighlight] = useState(0);
   const [getInTouchOpen, setGetInTouchOpen] = useState(false);
+  const [carouselPaused, setCarouselPaused] = useState(false);
   const reduceMotion = useReducedMotion();
 
+  // Auto-rotation is motion, so prefers-reduced-motion has to stop it too -
+  // previously only the 3D scene honoured the setting while this kept cycling.
+  // It also pauses on hover/focus so the panel cannot swap out mid-read.
   useEffect(() => {
+    if (reduceMotion || carouselPaused) return;
     const interval = setInterval(() => {
       setActiveHighlight((prev) => (prev + 1) % highlights.length);
     }, 4500);
     return () => clearInterval(interval);
-  }, [highlights.length]);
+  }, [highlights.length, reduceMotion, carouselPaused]);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -81,27 +86,15 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
           <HeroScene reducedMotion={Boolean(reduceMotion)} />
         </Suspense>
       </motion.div>
-      {/* Scrim: only as dark as the copy needs. Heavy on the left where the
-          headline sits, clearing through the middle so the geometry reads. */}
+      {/* One scrim, not two. Heavy on the left where the headline sits, clearing
+          to nothing on the right so the geometry reads.
+          The three blurred orbs and the dot grid that used to sit here are gone:
+          they were CSS-faking a glow in front of a scene that now produces real
+          bloom, and animating a 600px blur layer was the most expensive thing on
+          the page. */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/25 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent"
         aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70"
-        aria-hidden
-      />
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-accent-600/20 rounded-full blur-[128px] animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent-800/15 rounded-full blur-[128px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent-500/10 rounded-full blur-[100px]" />
-      </div>
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, #6366f1 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
-        }}
       />
 
       <div className="container mx-auto px-4 relative z-10 py-24 md:py-0">
@@ -130,7 +123,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight cursor-default"
+              className="text-6xl md:text-8xl lg:text-9xl font-display mb-6 tracking-tight cursor-default"
             >
               {/* Split per word, not per character, so "Munene" can never break
                   across lines the way it did at wide viewports. */}
@@ -252,16 +245,24 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+            <div
+              className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm p-6 md:p-8 overflow-hidden"
+              onMouseEnter={() => setCarouselPaused(true)}
+              onMouseLeave={() => setCarouselPaused(false)}
+              onFocusCapture={() => setCarouselPaused(true)}
+              onBlurCapture={() => setCarouselPaused(false)}
+            >
               {/* Decorative corner glow */}
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-accent-500/20 rounded-full blur-[60px]" />
 
               {/* Indicator dots */}
               <div className="flex items-center gap-2 mb-6">
-                {highlights.map((_, i) => (
+                {highlights.map((highlight, i) => (
                   <button
                     key={i}
                     onClick={() => setActiveHighlight(i)}
+                    aria-label={`Show ${highlight.label}`}
+                    aria-current={i === activeHighlight}
                     className={`h-1.5 rounded-full transition-all duration-300 ${i === activeHighlight
                         ? 'w-8 bg-accent-500'
                         : 'w-1.5 bg-white/20 hover:bg-white/40'
@@ -281,7 +282,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                   <span className="text-xs font-medium text-accent-400 uppercase tracking-wider">
                     {highlights[activeHighlight].label}
                   </span>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mt-2 mb-1">
+                  <h3 className="text-2xl md:text-3xl font-display text-white mt-2 mb-1">
                     {highlights[activeHighlight].title}
                   </h3>
                   <p className="text-accent-300/80 text-sm mb-3">
@@ -293,15 +294,22 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Bottom decorative bar */}
+              {/* Progress bar: doubles as the countdown to the next rotation, so
+                  it must not keep filling once rotation is paused or disabled. */}
               <div className="mt-6 h-1 rounded-full bg-white/[0.04] overflow-hidden">
-                <motion.div
-                  key={activeHighlight}
-                  className={`h-full rounded-full bg-gradient-to-r ${highlights[activeHighlight].accent}`}
-                  initial={{ width: '0%' }}
-                  animate={{ width: '100%' }}
-                  transition={{ duration: 4, ease: 'linear' }}
-                />
+                {reduceMotion || carouselPaused ? (
+                  <div
+                    className={`h-full w-full rounded-full bg-gradient-to-r ${highlights[activeHighlight].accent} opacity-40`}
+                  />
+                ) : (
+                  <motion.div
+                    key={activeHighlight}
+                    className={`h-full rounded-full bg-gradient-to-r ${highlights[activeHighlight].accent}`}
+                    initial={{ width: '0%' }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 4.5, ease: 'linear' }}
+                  />
+                )}
               </div>
 
               {/* Credibility indicators + CTA (always visible) */}

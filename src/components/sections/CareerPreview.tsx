@@ -62,7 +62,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
             <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
               Experience
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{
+            <h2 className="text-4xl md:text-5xl font-display mb-4" style={{
               background: 'linear-gradient(135deg, #ffffff 0%, #a5b4fc 60%, #6366f1 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
