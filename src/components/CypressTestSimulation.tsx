@@ -108,31 +108,31 @@ const CypressTestSimulation: React.FC = () => {
     <Bezel>
       <>
         {/* Mock E2E Runner Window Chrome */}
-        <div className="bg-[#030305] px-5 py-3.5 border-b border-white/[0.05] flex items-center justify-between select-none">
+        <div className="bg-surface-alt px-5 py-3.5 border-b border-line flex items-center justify-between select-none">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-red-500/80" />
             <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
             <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-            <span className="h-4 w-px bg-white/10 mx-2" />
-            <span className="flex items-center gap-1.5 text-xs font-mono text-gray-500">
+            <span className="h-4 w-px bg-surface-raised mx-2" />
+            <span className="flex items-center gap-1.5 text-xs font-mono text-fg-subtle">
               <Terminal className="w-3.5 h-3.5" />
               CYPRESS_RUNNER_V10.8
             </span>
           </div>
           
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-white/[0.02] border border-white/[0.04]">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-surface-raised border border-line">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[10px] font-mono text-gray-400">HOST: localhost:3000/tests</span>
+            <span className="text-[10px] font-mono text-fg-muted">HOST: localhost:3000/tests</span>
           </div>
         </div>
 
         {/* Console Content Dashboard */}
         <div className="p-6 md:p-8">
           
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-6 border-b border-white/[0.05]">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-6 border-b border-line">
             <div>
-              <h3 className="text-2xl font-display text-white">QA Automation Sandbox</h3>
-              <p className="text-sm text-gray-400 mt-1">
+              <h3 className="text-2xl font-display text-fg">QA Automation Sandbox</h3>
+              <p className="text-sm text-fg-muted mt-1">
                 Interact with this real-time simulated E2E test suite to run asserting assertions.
               </p>
             </div>
@@ -144,8 +144,8 @@ const CypressTestSimulation: React.FC = () => {
                 disabled={running}
                 className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider select-none transition-all duration-200 outline-none ${
                   running
-                    ? 'bg-accent-500/10 border border-accent-500/20 text-accent-300'
-                    : 'bg-emerald-600 hover:bg-emerald-500 border border-emerald-500/20 text-white shadow-[0_4px_16px_rgba(16,185,129,0.15)] active:scale-95'
+                    ? 'bg-brand-soft border border-brand/30 text-fg'
+                    : 'bg-emerald-600 hover:bg-emerald-500 border border-emerald-500/20 text-fg shadow-[0_4px_16px_rgba(16,185,129,0.15)] active:scale-95'
                 }`}
               >
                 <Play className={`w-3.5 h-3.5 ${running ? 'animate-spin' : ''}`} />
@@ -154,7 +154,7 @@ const CypressTestSimulation: React.FC = () => {
 
               <button
                 onClick={resetSimulation}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-white/[0.06] bg-white/[0.015] text-gray-400 hover:text-white hover:border-white/15 transition-all duration-200 active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:text-gray-400 disabled:hover:border-white/[0.06]"
+                className="flex items-center justify-center w-10 h-10 rounded-full border border-line bg-surface-raised text-fg-muted hover:text-fg hover:border-line transition-all duration-200 active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:text-fg-muted disabled:hover:border-line"
                 title={running ? 'Suite is running' : 'Reset Suite'}
                 disabled={running}
               >
@@ -179,12 +179,12 @@ const CypressTestSimulation: React.FC = () => {
                     onClick={() => test.status !== 'idle' && setActiveLogIndex(index)}
                     className={`p-4 rounded-xl border transition-all duration-300 select-none cursor-pointer flex items-center justify-between gap-4 ${
                       isRunning
-                        ? 'bg-accent-500/5 border-accent-500/30'
+                        ? 'bg-brand-soft border-brand/30'
                         : isPass
                         ? 'bg-emerald-500/5 border-emerald-500/10 hover:border-emerald-500/30'
                         : isFail
                         ? 'bg-red-500/5 border-red-500/15 hover:border-red-500/35'
-                        : 'bg-white/[0.01] border-white/[0.04] hover:border-white/10'
+                        : 'bg-surface-raised border-line hover:border-line'
                     }`}
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
@@ -198,26 +198,26 @@ const CypressTestSimulation: React.FC = () => {
                         )}
                         {isPass && <CheckCircle2 className="w-5 h-5 text-emerald-400" />}
                         {isFail && <XCircle className="w-5 h-5 text-red-400" />}
-                        {test.status === 'idle' && <HelpCircle className="w-5 h-5 text-gray-600" />}
+                        {test.status === 'idle' && <HelpCircle className="w-5 h-5 text-fg-subtle" />}
                       </span>
 
                       <div className="min-w-0">
                         <span className={`text-xs font-semibold uppercase tracking-wider ${
-                          isPass ? 'text-emerald-400' : isFail ? 'text-red-400' : isRunning ? 'text-accent-300' : 'text-gray-500'
+                          isPass ? 'text-emerald-400' : isFail ? 'text-red-400' : isRunning ? 'text-fg' : 'text-fg-subtle'
                         }`}>
                           TEST_SUITE_#{test.id} · {test.status}
                         </span>
-                        <h4 className="text-sm font-medium text-white mt-0.5 truncate">{test.title}</h4>
+                        <h4 className="text-sm font-medium text-fg mt-0.5 truncate">{test.title}</h4>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-3 flex-shrink-0">
-                      <span className="text-[11px] font-mono text-gray-500">
+                      <span className="text-[11px] font-mono text-fg-subtle">
                         {test.status !== 'idle' ? `${test.duration}ms` : '--'}
                       </span>
                       {test.status !== 'idle' && (
                         <Eye className={`w-4 h-4 transition-colors duration-200 ${
-                          activeLogIndex === index ? 'text-accent-400' : 'text-gray-600 group-hover:text-gray-400'
+                          activeLogIndex === index ? 'text-fg-muted' : 'text-fg-subtle group-hover:text-fg-muted'
                         }`} />
                       )}
                     </div>
@@ -228,10 +228,10 @@ const CypressTestSimulation: React.FC = () => {
 
             {/* Terminal Diagnostic Panel (5 Cols) */}
             <div className="lg:col-span-5 h-full">
-              <div className="rounded-2xl bg-black/90 border border-white/[0.05] p-5 h-64 flex flex-col justify-between font-mono text-xs overflow-hidden shadow-2xl">
-                <div className="flex items-center justify-between pb-3 border-b border-white/[0.05] text-gray-500 select-none">
+              <div className="rounded-2xl bg-surface/90 border border-line p-5 h-64 flex flex-col justify-between font-mono text-xs overflow-hidden shadow-2xl">
+                <div className="flex items-center justify-between pb-3 border-b border-line text-fg-subtle select-none">
                   <span>DIAGNOSTIC_SHELL_LOG</span>
-                  <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded">UTF-8</span>
+                  <span className="text-[10px] bg-surface-raised px-2 py-0.5 rounded">UTF-8</span>
                 </div>
                 
                 <div className="flex-1 overflow-y-auto py-3 space-y-2 scrollbar-thin">
@@ -245,7 +245,7 @@ const CypressTestSimulation: React.FC = () => {
                         transition={{ duration: 0.2 }}
                         className="space-y-1.5"
                       >
-                        <span className="text-accent-400 block text-[11px] mb-2 font-semibold">
+                        <span className="text-fg-muted block text-[11px] mb-2 font-semibold">
                           // Terminal output for test #{tests[activeLogIndex].id}
                         </span>
                         {tests[activeLogIndex].log?.map((logLine, idx) => (
@@ -255,7 +255,7 @@ const CypressTestSimulation: React.FC = () => {
                               logLine.startsWith('❌') 
                                 ? 'text-red-400 bg-red-950/20 px-2 py-1 rounded border border-red-500/10 mt-1' 
                                 : logLine.startsWith('↳') 
-                                ? 'text-gray-400 pl-3' 
+                                ? 'text-fg-muted pl-3' 
                                 : 'text-emerald-300'
                             }`}
                           >
@@ -264,8 +264,8 @@ const CypressTestSimulation: React.FC = () => {
                         ))}
                       </motion.div>
                     ) : (
-                      <div className="h-full flex flex-col items-center justify-center text-center text-gray-600 py-10 select-none">
-                        <Terminal className="w-8 h-8 text-white/[0.03] mb-3" />
+                      <div className="h-full flex flex-col items-center justify-center text-center text-fg-subtle py-10 select-none">
+                        <Terminal className="w-8 h-8 text-fg/[0.03] mb-3" />
                         <p className="text-[11px]">Select a passed or failed test</p>
                         <p className="text-[10px] mt-0.5">to extract logs & E2E assertions.</p>
                       </div>
@@ -273,7 +273,7 @@ const CypressTestSimulation: React.FC = () => {
                   </AnimatePresence>
                 </div>
 
-                <div className="pt-2.5 border-t border-white/[0.05] text-[10px] text-gray-500 flex justify-between select-none">
+                <div className="pt-2.5 border-t border-line text-[10px] text-fg-subtle flex justify-between select-none">
                   <span>ASSERTIONS: {tests.filter(t => t.status === 'pass').length} passed / {tests.filter(t => t.status === 'fail').length} failed</span>
                 </div>
               </div>

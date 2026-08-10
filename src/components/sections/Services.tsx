@@ -54,7 +54,7 @@ const Services = () => (
           viewport={{ once: true }}
           className="lg:col-span-4"
         >
-          <span className="text-xs font-medium uppercase tracking-[0.18em] text-fg-subtle">
+          <span className="text-xs font-medium uppercase tracking-[0.18em] text-brand">
             Services
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-display tracking-tight">

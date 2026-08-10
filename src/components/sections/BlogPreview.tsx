@@ -90,7 +90,8 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
               Writing
             </span>
             <h2 className="text-4xl md:text-5xl font-display mb-4" style={{
-              background: 'linear-gradient(135deg, #ffffff 0%, #f4f4f5 60%, #d4d4d8 100%)',
+              background:
+                'linear-gradient(135deg, var(--fg) 0%, var(--fg) 55%, var(--fg-muted) 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -118,7 +119,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
               onClick={() => setTopic(t)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 topic === t
-                  ? 'bg-accent-500/20 text-fg border border-accent-500/40'
+                  ? 'bg-brand-soft text-brand border border-brand/30'
                   : 'bg-surface-raised text-fg-muted border border-line hover:border-line'
               }`}
             >

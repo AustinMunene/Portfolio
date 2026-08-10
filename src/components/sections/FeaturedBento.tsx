@@ -82,7 +82,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
           className="mb-14 md:mb-20 max-w-3xl"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent-500/15 bg-accent-500/5 text-fg text-xs uppercase tracking-[0.15em] font-semibold mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-brand" />
             Engineering Casebook
           </div>
           
@@ -104,7 +104,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                   onClick={() => setFilter(f)}
                   className={`relative px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider select-none transition-all duration-200 outline-none ${
                     isActive
-                      ? 'text-fg border border-accent-500/30 bg-accent-500/10'
+                      ? 'text-brand border border-brand/30 bg-brand-soft'
                       : 'text-fg-muted border border-line bg-surface-raised hover:border-line hover:text-fg-muted hover:bg-surface-raised'
                   }`}
                   style={{
@@ -115,7 +115,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                   {isActive && (
                     <motion.span
                       layoutId="chip-indicator"
-                      className="absolute inset-0 rounded-full border border-accent-400/20 pointer-events-none"
+                      className="absolute inset-0 rounded-full border border-brand/25 pointer-events-none"
                       transition={{ type: 'spring', stiffness: 350, damping: 25 }}
                     />
                   )}

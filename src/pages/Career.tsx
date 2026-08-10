@@ -155,40 +155,38 @@ const Career = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       className="relative min-h-screen overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-black" />
+      <div className="absolute inset-0 bg-surface" />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-600/10 rounded-full blur-[128px]" />
       <div className="absolute bottom-1/3 left-0 w-[400px] h-[400px] bg-accent-800/10 rounded-full blur-[128px]" />
 
       <div className="container mx-auto px-4 pt-20 md:pt-24 pb-16 md:pb-20 relative z-10">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: -20 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-12 md:mb-16"
           >
-            <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
+            <span className="text-fg-muted text-sm font-medium tracking-wider uppercase mb-4 block">
               Experience
             </span>
             <motion.h1
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
               transition={{ duration: 0.5 }}
               className="text-3xl md:text-5xl font-bold mb-6 gradient-text reveal"
             >
               Career Journey
             </motion.h1>
             <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+              initial={{ y: 20 }}
+              animate={{ y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg md:text-xl text-gray-400 reveal"
+              className="text-lg md:text-xl text-fg-muted reveal"
             >
               A timeline of my professional growth and achievements in the Tech Industry
             </motion.p>
@@ -202,49 +200,49 @@ const Career = () => {
               {careerHistory.map((role, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ y: 50 }}
+                  whileInView={{ y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.08 }}
                   viewport={{ once: true }}
                   className="reveal relative pl-8 md:pl-20"
                 >
                   {/* Timeline dot */}
                   <div className="absolute left-0 md:left-8 top-8 -translate-x-1/2">
-                    <div className={`w-3 h-3 rounded-full ${index === 0 ? 'bg-accent-500 shadow-lg shadow-accent-500/50' : 'bg-gray-600 border border-gray-500'}`} />
+                    <div className={`w-3 h-3 rounded-full ${index === 0 ? 'bg-brand shadow-lg shadow-brand/40' : 'bg-surface-raised border border-line'}`} />
                   </div>
 
-                  <div className="bg-white/[0.03] rounded-2xl p-6 md:p-8 border border-white/[0.06] hover:border-accent-500/20 transition-all duration-300 group hover:bg-accent-500/[0.02]">
+                  <div className="bg-surface-raised rounded-2xl p-6 md:p-8 border border-line hover:border-accent-500/20 transition-all duration-300 group hover:bg-accent-500/[0.02]">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6 gap-3">
                       <div>
                         <div className="flex items-center gap-3 mb-2">
-                          <Briefcase className="w-5 h-5 text-accent-400" />
-                          <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-accent-300 transition-colors">
+                          <Briefcase className="w-5 h-5 text-fg-muted" />
+                          <h3 className="text-xl md:text-2xl font-bold text-fg group-hover:text-fg transition-colors">
                             {role.title}
                           </h3>
                         </div>
-                        <div className="flex items-center gap-3 text-base md:text-lg text-gray-400 mb-1">
-                          <Award className="w-4 h-4 text-accent-400/60" />
+                        <div className="flex items-center gap-3 text-base md:text-lg text-fg-muted mb-1">
+                          <Award className="w-4 h-4 text-fg-muted/60" />
                           <span>{role.company}</span>
                         </div>
-                        <div className="flex items-center gap-3 text-sm text-gray-500">
+                        <div className="flex items-center gap-3 text-sm text-fg-subtle">
                           <Clock className="w-3.5 h-3.5" />
                           <span>{role.period}</span>
                         </div>
                       </div>
                       {index === 0 && (
-                        <span className="inline-flex px-3 py-1 bg-accent-500/10 rounded-full text-accent-300 text-xs border border-accent-500/20 self-start">
+                        <span className="inline-flex px-3 py-1 bg-accent-500/10 rounded-full text-fg text-xs border border-accent-500/20 self-start">
                           Current Role
                         </span>
                       )}
                     </div>
 
-                    <p className="text-gray-400 mb-6 leading-relaxed">
+                    <p className="text-fg-muted mb-6 leading-relaxed">
                       {role.description}
                     </p>
 
                     <div className="mb-6">
-                      <h4 className="text-sm font-semibold mb-3 flex items-center text-gray-300">
-                        <TestTube2 className="w-4 h-4 mr-2 text-accent-400/70" />
+                      <h4 className="text-sm font-semibold mb-3 flex items-center text-fg-muted">
+                        <TestTube2 className="w-4 h-4 mr-2 text-fg-muted/70" />
                         Key Responsibilities
                       </h4>
                       <ul className="space-y-2">
@@ -253,23 +251,23 @@ const Career = () => {
                             key={idx}
                             className="flex items-start text-sm"
                           >
-                            <Bug className="w-3.5 h-3.5 mr-3 mt-0.5 flex-shrink-0 text-accent-500/50" />
-                            <span className="text-gray-400">{resp}</span>
+                            <Bug className="w-3.5 h-3.5 mr-3 mt-0.5 flex-shrink-0 text-brand/50" />
+                            <span className="text-fg-muted">{resp}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
                     <div>
-                      <h4 className="text-sm font-semibold mb-3 flex items-center text-gray-300">
-                        <Code2 className="w-4 h-4 mr-2 text-accent-400/70" />
+                      <h4 className="text-sm font-semibold mb-3 flex items-center text-fg-muted">
+                        <Code2 className="w-4 h-4 mr-2 text-fg-muted/70" />
                         Skills & Tools
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {role.skills.map((skill, idx) => (
                           <span
                             key={idx}
-                            className="px-3 py-1 bg-white/[0.04] rounded-full text-xs text-gray-400 hover:text-accent-300 hover:bg-accent-500/10 transition-colors"
+                            className="px-3 py-1 bg-surface-raised rounded-full text-xs text-fg-muted hover:text-fg hover:bg-accent-500/10 transition-colors"
                           >
                             {skill}
                           </span>

@@ -81,7 +81,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `relative py-1 text-sm tracking-wide font-medium transition-colors duration-200 select-none ${
                   isActive
-                    ? 'text-fg'
+                    ? 'text-brand'
                     : 'text-fg-muted hover:text-fg'
                 }`
               }
@@ -92,7 +92,7 @@ const Navbar = () => {
                   {isActive && (
                     <motion.div
                       layoutId="nav-indicator"
-                      className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-gradient-to-r from-accent-500 to-indigo-400 rounded-full"
+                      className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-brand rounded-full"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -166,7 +166,7 @@ const Navbar = () => {
                     className={({ isActive }) =>
                       `block py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-200 ${
                         isActive
-                          ? 'text-fg bg-surface-raised border border-line'
+                          ? 'text-brand bg-brand-soft border border-brand/25'
                           : 'text-fg-muted hover:text-fg hover:bg-surface-raised border border-transparent'
                       }`
                     }

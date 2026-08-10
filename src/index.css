@@ -48,6 +48,12 @@
   /* Hero scrim: keeps the headline legible over the WebGL scene. */
   --hero-scrim: rgba(5, 5, 5, 0.92);
   --hero-scrim-mid: rgba(5, 5, 5, 0.45);
+  /* The one chromatic accent. Reserved for interactive and active states, so it
+     stays roughly 2% of the page. Brighter on dark, deeper on light, so it holds
+     contrast against both surfaces. To retheme the site, change these two. */
+  --accent: #8a8af0;
+  --accent-soft: rgba(138, 138, 240, 0.14);
+  --accent-fg: #09090b;
   --hero-poster: #060606;
   --hero-poster-glow: rgba(212, 212, 216, 0.2);
   --bezel-shadow: 0 24px 80px -12px rgba(0, 0, 0, 0.8), 0 1px 0 0 rgba(255, 255, 255, 0.03) inset;
@@ -76,6 +82,9 @@
   --cta-fg: #fafafa;
   --hero-scrim: rgba(255, 255, 255, 0.92);
   --hero-scrim-mid: rgba(255, 255, 255, 0.45);
+  --accent: #5b5bd6;
+  --accent-soft: rgba(91, 91, 214, 0.1);
+  --accent-fg: #ffffff;
   --hero-poster: #ffffff;
   --hero-poster-glow: rgba(9, 9, 11, 0.08);
   --bezel-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.16), 0 1px 0 0 rgba(255, 255, 255, 0.9) inset;
@@ -258,19 +267,18 @@
   --nav-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.18), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
 }
 
-/* Viewport reveal animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px) scale(0.98);
-  filter: blur(4px);
-  transition: opacity 800ms var(--ease-spring), transform 800ms var(--ease-spring), filter 800ms var(--ease-spring);
-  will-change: transform, opacity, filter;
-}
+/* `.reveal` used to set opacity 0 and blur, then wait for an IntersectionObserver
+   to add `.active`. That made three separate sections render invisible over the
+   course of this redesign whenever the observer did not fire, and the failure is
+   silent - the content occupies layout and paints nothing.
 
+   It is now inert. Elements keep the class (removing it would touch a dozen
+   files) but are always visible. Entrance animation is framer-motion's job via
+   whileInView, which animates *from* a visible baseline and so cannot strand
+   content. Never reintroduce a CSS rule that hides content pending JS. */
+.reveal,
 .reveal.active {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
 }
 
 /* Floating animation */
@@ -318,14 +326,14 @@
 
 /* Visible, high-end focus indicator */
 :focus-visible {
-  outline: 2px solid var(--fg);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 6px;
 }
 
 ::selection {
-  background: var(--fg);
-  color: var(--surface);
+  background: var(--accent);
+  color: var(--accent-fg);
 }
 
 /* Pointer-tracked sheen (Spotlight effect) */
@@ -409,4 +417,36 @@ html {
    Hiding them lets the surface carry the section, which is also cleaner. */
 [data-theme='light'] [data-photo-backdrop] {
   display: none;
+}
+
+/* Long-form blog content. Tailwind Typography is themed through its own custom
+   properties, so pointing those at our tokens makes `prose` correct in both
+   themes and removes the need for a conditional prose-invert class. */
+.prose {
+  --tw-prose-body: var(--fg-muted);
+  --tw-prose-headings: var(--fg);
+  --tw-prose-lead: var(--fg-muted);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--fg);
+  --tw-prose-counters: var(--fg-subtle);
+  --tw-prose-bullets: var(--border);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--fg);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-captions: var(--fg-subtle);
+  --tw-prose-code: var(--fg);
+  --tw-prose-pre-code: var(--fg-muted);
+  --tw-prose-pre-bg: var(--surface-alt);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+}
+
+/* Referenced by several page headings but never defined until now, so it was a
+   silent no-op. Theme-driven, running from the foreground into the muted tone. */
+.gradient-text {
+  background: linear-gradient(135deg, var(--fg) 0%, var(--fg) 55%, var(--fg-muted) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }

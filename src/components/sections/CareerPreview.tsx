@@ -65,7 +65,8 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
               Experience
             </span>
             <h2 className="text-4xl md:text-5xl font-display mb-4" style={{
-              background: 'linear-gradient(135deg, #ffffff 0%, #f4f4f5 60%, #d4d4d8 100%)',
+              background:
+                'linear-gradient(135deg, var(--fg) 0%, var(--fg) 55%, var(--fg-muted) 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',

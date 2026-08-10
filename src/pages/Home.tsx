@@ -202,7 +202,7 @@ const Home = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <span className="text-fg-muted text-sm font-medium tracking-wider uppercase mb-4 block">
+            <span className="text-brand text-sm font-medium tracking-wider uppercase mb-4 block">
               Contact
             </span>
             <h2 className="text-4xl md:text-6xl font-display mb-6 text-fg">

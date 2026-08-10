@@ -41,7 +41,10 @@ const pieData = [
   { name: 'DevOps', value: 10 },
 ];
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
+// Was a five-hue rainbow, which fought the black-and-white system and implied
+// categories that do not exist. One accent plus a neutral ramp instead: the
+// series stay distinguishable, and the accent marks the largest slice.
+const COLORS = ['var(--accent)', 'var(--fg-muted)', 'var(--fg-subtle)', 'var(--border)'];
 
 type ChartType = 'line' | 'bar' | 'pie';
 
@@ -55,18 +58,18 @@ const InteractiveDataViz: React.FC = () => {
         return (
           <ResponsiveContainer width="100%" height={isExpanded ? 400 : 300}>
             <LineChart data={lineData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-              <XAxis dataKey="name" stroke="#888" />
-              <YAxis stroke="#888" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="name" stroke="var(--fg-subtle)" />
+              <YAxis stroke="var(--fg-subtle)" />
               <Tooltip
-                contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
-                labelStyle={{ color: '#fff' }}
+                contentStyle={{ backgroundColor: 'var(--surface-alt)', border: '1px solid var(--border)', borderRadius: 8 }}
+                labelStyle={{ color: 'var(--fg)' }}
               />
               <Legend />
               <Line
                 type="monotone"
                 dataKey="value"
-                stroke="#8884d8"
+                stroke="var(--accent)"
                 activeDot={{ r: 8 }}
                 strokeWidth={2}
               />
@@ -77,15 +80,15 @@ const InteractiveDataViz: React.FC = () => {
         return (
           <ResponsiveContainer width="100%" height={isExpanded ? 400 : 300}>
             <BarChart data={barData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-              <XAxis dataKey="name" stroke="#888" />
-              <YAxis stroke="#888" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="name" stroke="var(--fg-subtle)" />
+              <YAxis stroke="var(--fg-subtle)" />
               <Tooltip
-                contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
-                labelStyle={{ color: '#fff' }}
+                contentStyle={{ backgroundColor: 'var(--surface-alt)', border: '1px solid var(--border)', borderRadius: 8 }}
+                labelStyle={{ color: 'var(--fg)' }}
               />
               <Legend />
-              <Bar dataKey="value" fill="#8884d8" />
+              <Bar dataKey="value" fill="var(--accent)" />
             </BarChart>
           </ResponsiveContainer>
         );
@@ -99,7 +102,7 @@ const InteractiveDataViz: React.FC = () => {
                 cy="50%"
                 labelLine={false}
                 outerRadius={isExpanded ? 150 : 100}
-                fill="#8884d8"
+                fill="var(--accent)"
                 dataKey="value"
                 label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
               >
@@ -108,8 +111,8 @@ const InteractiveDataViz: React.FC = () => {
                 ))}
               </Pie>
               <Tooltip
-                contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
-                labelStyle={{ color: '#fff' }}
+                contentStyle={{ backgroundColor: 'var(--surface-alt)', border: '1px solid var(--border)', borderRadius: 8 }}
+                labelStyle={{ color: 'var(--fg)' }}
               />
               <Legend />
             </PieChart>
@@ -125,11 +128,11 @@ const InteractiveDataViz: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-900 rounded-lg overflow-hidden border border-gray-800"
+      className="bg-surface-raised rounded-2xl overflow-hidden border border-line"
     >
-      <div className="p-4 border-b border-gray-800">
+      <div className="p-4 border-b border-line">
         <h3 className="text-lg font-semibold">Interactive Data Visualization</h3>
-        <p className="text-sm text-gray-400 mt-1">
+        <p className="text-sm text-fg-muted mt-1">
           Explore different types of data visualizations built with Recharts.
         </p>
       </div>
@@ -140,8 +143,8 @@ const InteractiveDataViz: React.FC = () => {
             onClick={() => setChartType('line')}
             className={`px-3 py-1 rounded-md text-sm transition-colors ${
               chartType === 'line'
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                ? 'bg-brand text-brand-fg'
+                : 'bg-surface-raised text-fg-muted hover:text-fg border border-line'
             }`}
           >
             Line Chart
@@ -150,8 +153,8 @@ const InteractiveDataViz: React.FC = () => {
             onClick={() => setChartType('bar')}
             className={`px-3 py-1 rounded-md text-sm transition-colors ${
               chartType === 'bar'
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                ? 'bg-brand text-brand-fg'
+                : 'bg-surface-raised text-fg-muted hover:text-fg border border-line'
             }`}
           >
             Bar Chart
@@ -160,22 +163,22 @@ const InteractiveDataViz: React.FC = () => {
             onClick={() => setChartType('pie')}
             className={`px-3 py-1 rounded-md text-sm transition-colors ${
               chartType === 'pie'
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                ? 'bg-brand text-brand-fg'
+                : 'bg-surface-raised text-fg-muted hover:text-fg border border-line'
             }`}
           >
             Pie Chart
           </button>
         </div>
         
-        <div className="bg-gray-950 p-4 rounded-lg">
+        <div className="bg-surface-alt p-4 rounded-xl">
           {renderChart()}
         </div>
         
         <div className="flex justify-end mt-4">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="px-3 py-1 bg-gray-800 text-white rounded-md text-sm hover:bg-gray-700 transition-colors"
+            className="px-3 py-1 bg-surface-raised border border-line text-fg-muted hover:text-fg rounded-md text-sm transition-colors"
           >
             {isExpanded ? 'Collapse' : 'Expand'}
           </button>

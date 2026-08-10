@@ -1057,7 +1057,7 @@ module.exports = {
 <p>Add <code>darkMode: 'class'</code>, then prefix utilities with <code>dark:</code>. No separate stylesheet required.</p>
 
 <pre><code class="language-html">
-&lt;div class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white"&gt;
+&lt;div class="bg-white text-gray-900 dark:bg-gray-900 dark:text-fg"&gt;
   Reads perfectly in both modes.
 &lt;/div&gt;
 </code></pre>
@@ -1067,7 +1067,7 @@ module.exports = {
 
 <pre><code class="language-css">
 .btn-primary {
-  @apply px-4 py-2 rounded-lg bg-accent-500 text-white font-medium
+  @apply px-4 py-2 rounded-lg bg-accent-500 text-fg font-medium
          hover:bg-accent-400 transition-colors duration-200;
 }
 </code></pre>
@@ -1246,7 +1246,7 @@ customElements.define('my-card', MyCard);
 ];
 
 const categoryColors: Record<string, string> = {
-  Development: 'bg-accent-500/10 text-accent-300 border-accent-500/20',
+  Development: 'bg-accent-500/10 text-fg border-accent-500/20',
   AI: 'bg-purple-500/10 text-purple-300 border-purple-500/20',
   Design: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20',
   Career: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
@@ -1258,22 +1258,22 @@ const Blog: React.FC = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 bg-black" />
+      <div className="absolute inset-0 bg-surface" />
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-accent-600/10 rounded-full blur-[128px]" />
 
       <div className="container mx-auto px-4 py-24 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
           className="max-w-5xl mx-auto"
         >
           <div className="text-center mb-16">
-            <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
+            <span className="text-fg-muted text-sm font-medium tracking-wider uppercase mb-4 block">
               Writing
             </span>
             <h1 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">Blog</h1>
-            <p className="text-gray-400 max-w-lg mx-auto">
+            <p className="text-fg-muted max-w-lg mx-auto">
               Thoughts, ideas, and insights about technology, development, and design.
             </p>
           </div>
@@ -1282,11 +1282,11 @@ const Blog: React.FC = () => {
             {blogPosts.map((post, index) => (
               <motion.article
                 key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ y: 20 }}
+                animate={{ y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.06 }}
                 onClick={() => navigate(`/blog/${post.id}`)}
-                className="group cursor-pointer bg-white/[0.03] rounded-2xl overflow-hidden border border-white/[0.06] hover:border-accent-500/20 transition-all duration-300 hover:bg-accent-500/[0.02]"
+                className="group cursor-pointer bg-surface-raised rounded-2xl overflow-hidden border border-line hover:border-accent-500/20 transition-all duration-300 hover:bg-accent-500/[0.02]"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -1296,22 +1296,22 @@ const Blog: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-xs border ${categoryColors[post.category] || 'bg-white/10 text-white border-white/10'}`}>
+                    <span className={`px-3 py-1 rounded-full text-xs border ${categoryColors[post.category] || 'bg-surface-raised text-fg border-line'}`}>
                       {post.category}
                     </span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center text-xs text-gray-500 mb-3">
+                  <div className="flex items-center text-xs text-fg-subtle mb-3">
                     <span>{post.date}</span>
-                    <span className="mx-2 text-accent-500/30">|</span>
+                    <span className="mx-2 text-brand/30">|</span>
                     <span>{post.readTime}</span>
                   </div>
-                  <h2 className="text-lg font-semibold mb-2 text-white group-hover:text-accent-300 transition-colors">
+                  <h2 className="text-lg font-semibold mb-2 text-fg group-hover:text-fg transition-colors">
                     {post.title}
                   </h2>
-                  <p className="text-sm text-gray-400 leading-relaxed line-clamp-2">{post.excerpt}</p>
-                  <span className="inline-block mt-4 text-sm text-accent-400 group-hover:translate-x-1 transition-transform">
+                  <p className="text-sm text-fg-muted leading-relaxed line-clamp-2">{post.excerpt}</p>
+                  <span className="inline-block mt-4 text-sm text-fg-muted group-hover:translate-x-1 transition-transform">
                     Read more →
                   </span>
                 </div>

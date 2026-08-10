@@ -30,6 +30,11 @@ export default {
         },
         // Tone-aware tokens. These resolve through CSS custom properties that
         // <Section tone="light|dark"> flips, so one component works in both.
+        brand: {
+          DEFAULT: 'var(--accent)',
+          soft: 'var(--accent-soft)',
+          fg: 'var(--accent-fg)',
+        },
         surface: 'var(--surface)',
         'surface-alt': 'var(--surface-alt)',
         'surface-raised': 'var(--surface-raised)',
