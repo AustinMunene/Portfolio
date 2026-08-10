@@ -1,11 +1,6 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Mail, Phone, ChevronDown } from 'lucide-react';
-import { useTheme } from '../../hooks/useTheme';
-
-// three/fiber/drei is ~600KB. Split it out so it never blocks first paint;
-// the hero renders its gradient ground immediately and the scene fades in.
-const HeroScene = lazy(() => import('../three/HeroScene'));
 
 const name = 'Austin Munene';
 
@@ -53,7 +48,6 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
   const [getInTouchOpen, setGetInTouchOpen] = useState(false);
   const [carouselPaused, setCarouselPaused] = useState(false);
   const reduceMotion = useReducedMotion();
-  const { theme } = useTheme();
 
   // Auto-rotation is motion, so prefers-reduced-motion has to stop it too -
   // previously only the 3D scene honoured the setting while this kept cycling.
@@ -68,44 +62,20 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Poster ground. The WebGL chunk is lazy and can take several seconds, and
-          a plain black fill meant the hero was an empty rectangle until it landed.
-          This approximates the scene's composition - a pale mass right of centre -
-          so first paint is already the right image and the canvas fades in over it. */}
+      {/* Static ground. The animated WebGL scene that used to live here is gone:
+          it collided with the copy and the highlight panel, cost a ~70KB lazy
+          chunk that left the hero blank for seconds while it loaded, and it was
+          the most expensive thing on the page. Two soft radials over the surface
+          give the depth without any of that. (HeroScene.tsx is in git history if
+          it is ever wanted back.) */}
       <div
         className="absolute inset-0"
         aria-hidden
         style={{
           background:
-            'radial-gradient(58% 68% at 68% 46%, var(--hero-poster-glow), transparent 70%),' +
-            'radial-gradient(45% 55% at 18% 18%, var(--hero-poster-glow), transparent 72%),' +
+            'radial-gradient(62% 70% at 72% 40%, var(--hero-poster-glow), transparent 72%),' +
+            'radial-gradient(48% 58% at 12% 14%, var(--hero-poster-glow), transparent 74%),' +
             'var(--hero-poster)',
-        }}
-      />
-      <motion.div
-        className="absolute inset-0"
-        aria-hidden
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
-      >
-        <Suspense fallback={null}>
-          <HeroScene reducedMotion={Boolean(reduceMotion)} theme={theme} />
-        </Suspense>
-      </motion.div>
-      {/* One scrim, not two. Heavy on the left where the headline sits, clearing
-          to nothing on the right so the geometry reads. Theme-driven, so it
-          darkens the copy area in dark mode and lightens it in light mode.
-          The three blurred orbs and the dot grid that used to sit here are gone:
-          they were CSS-faking a glow in front of a scene that now produces real
-          bloom, and animating a 600px blur layer was the most expensive thing on
-          the page. */}
-      <div
-        className="absolute inset-0"
-        aria-hidden
-        style={{
-          background:
-            'linear-gradient(to right, var(--hero-scrim) 0%, var(--hero-scrim-mid) 45%, transparent 75%)',
         }}
       />
 

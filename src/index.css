@@ -36,30 +36,32 @@
 :root,
 [data-theme='dark'] {
   color-scheme: dark;
-  --surface: #050505;
-  --surface-alt: #0b0b0d;
-  --surface-raised: rgba(255, 255, 255, 0.03);
-  --fg: #f4f4f5;
-  --fg-muted: #a1a1aa;
-  --fg-subtle: #71717a;
-  --border: rgba(255, 255, 255, 0.1);
-  --cta: #fafafa;
-  --cta-fg: #09090b;
+  /* Both themes carry a cool blue cast rather than pure neutral - flat white
+     read as harsh, and the tint gives the violet accent something to sit in. */
+  --surface: #06070b;
+  --surface-alt: #0b0d14;
+  --surface-raised: rgba(190, 205, 255, 0.04);
+  --fg: #f2f4f9;
+  --fg-muted: #a0a6b8;
+  --fg-subtle: #6f7488;
+  --border: rgba(190, 205, 255, 0.11);
+  --cta: #f6f8fd;
+  --cta-fg: #070911;
   /* Hero scrim: keeps the headline legible over the WebGL scene. */
-  --hero-scrim: rgba(5, 5, 5, 0.92);
-  --hero-scrim-mid: rgba(5, 5, 5, 0.45);
+  --hero-scrim: rgba(6, 7, 11, 0.92);
+  --hero-scrim-mid: rgba(6, 7, 11, 0.5);
   /* The one chromatic accent. Reserved for interactive and active states, so it
      stays roughly 2% of the page. Brighter on dark, deeper on light, so it holds
      contrast against both surfaces. To retheme the site, change these two. */
   --accent: #8a8af0;
   --accent-soft: rgba(138, 138, 240, 0.14);
   --accent-fg: #09090b;
-  --hero-poster: #060606;
-  --hero-poster-glow: rgba(212, 212, 216, 0.2);
+  --hero-poster: #06070b;
+  --hero-poster-glow: rgba(150, 170, 255, 0.13);
   --bezel-shadow: 0 24px 80px -12px rgba(0, 0, 0, 0.8), 0 1px 0 0 rgba(255, 255, 255, 0.03) inset;
-  --bezel-inner-bg: rgba(9, 9, 11, 0.9);
+  --bezel-inner-bg: rgba(8, 10, 17, 0.9);
   --bezel-inner-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
-  --grid-line: rgba(212, 212, 216, 0.05);
+  --grid-line: rgba(170, 190, 255, 0.055);
   --sheen: rgba(255, 255, 255, 0.1);
 }
 
@@ -71,26 +73,28 @@
      entirely, so a visitor running it will still see a darkened light theme.
      Nothing in CSS can override that; it is a browser-level user choice. */
   color-scheme: only light;
-  --surface: #ffffff;
-  --surface-alt: #f4f4f3;
-  --surface-raised: rgba(0, 0, 0, 0.025);
-  --fg: #09090b;
-  --fg-muted: #52525b;
-  --fg-subtle: #7c7c85;
-  --border: rgba(0, 0, 0, 0.12);
-  --cta: #09090b;
-  --cta-fg: #fafafa;
-  --hero-scrim: rgba(255, 255, 255, 0.92);
-  --hero-scrim-mid: rgba(255, 255, 255, 0.45);
+  /* Cool off-whites, not #ffffff. Pure white was glaring, and a blue-grey base
+     reads calmer while still being unmistakably a light theme. */
+  --surface: #f7f9fd;
+  --surface-alt: #eceff7;
+  --surface-raised: rgba(23, 43, 92, 0.035);
+  --fg: #0c1020;
+  --fg-muted: #4c5570;
+  --fg-subtle: #7b839c;
+  --border: rgba(23, 43, 92, 0.13);
+  --cta: #0c1020;
+  --cta-fg: #f7f9fd;
+  --hero-scrim: rgba(247, 249, 253, 0.9);
+  --hero-scrim-mid: rgba(247, 249, 253, 0.5);
   --accent: #5b5bd6;
   --accent-soft: rgba(91, 91, 214, 0.1);
   --accent-fg: #ffffff;
-  --hero-poster: #ffffff;
-  --hero-poster-glow: rgba(9, 9, 11, 0.08);
+  --hero-poster: #f7f9fd;
+  --hero-poster-glow: rgba(23, 43, 92, 0.07);
   --bezel-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.16), 0 1px 0 0 rgba(255, 255, 255, 0.9) inset;
-  --bezel-inner-bg: #ffffff;
+  --bezel-inner-bg: #fbfcfe;
   --bezel-inner-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.04);
-  --grid-line: rgba(9, 9, 11, 0.05);
+  --grid-line: rgba(23, 43, 92, 0.05);
   --sheen: rgba(9, 9, 11, 0.06);
 }
 
@@ -258,27 +262,33 @@
 
 :root,
 [data-theme='dark'] {
-  --nav-bg: rgba(5, 5, 7, 0.5);
+  --nav-bg: rgba(6, 7, 11, 0.55);
   --nav-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
 }
 
 [data-theme='light'] {
-  --nav-bg: rgba(255, 255, 255, 0.62);
+  --nav-bg: rgba(247, 249, 253, 0.68);
   --nav-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.18), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
 }
 
-/* `.reveal` used to set opacity 0 and blur, then wait for an IntersectionObserver
-   to add `.active`. That made three separate sections render invisible over the
-   course of this redesign whenever the observer did not fire, and the failure is
-   silent - the content occupies layout and paints nothing.
+/* Viewport reveal.
+   The hidden state is gated on [data-reveal-ready], which App sets only once its
+   IntersectionObserver is attached, so a route whose observer never runs shows
+   its content rather than hiding it forever. Failing visible is the rule here -
+   never let CSS hide content pending JS without a gate like this. */
+[data-reveal-ready] .reveal {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  filter: blur(4px);
+  transition: opacity 800ms var(--ease-spring), transform 800ms var(--ease-spring),
+    filter 800ms var(--ease-spring);
+  will-change: transform, opacity, filter;
+}
 
-   It is now inert. Elements keep the class (removing it would touch a dozen
-   files) but are always visible. Entrance animation is framer-motion's job via
-   whileInView, which animates *from* a visible baseline and so cannot strand
-   content. Never reintroduce a CSS rule that hides content pending JS. */
-.reveal,
-.reveal.active {
+[data-reveal-ready] .reveal.active {
   opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
 /* Floating animation */
