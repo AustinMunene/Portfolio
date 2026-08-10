@@ -271,28 +271,31 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                 ))}
               </div>
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeHighlight}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span className="text-xs font-medium text-accent-400 uppercase tracking-wider">
-                    {highlights[activeHighlight].label}
-                  </span>
-                  <h3 className="text-2xl md:text-3xl font-display text-white mt-2 mb-1">
-                    {highlights[activeHighlight].title}
-                  </h3>
-                  <p className="text-accent-300/80 text-sm mb-3">
-                    {highlights[activeHighlight].subtitle}
-                  </p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {highlights[activeHighlight].detail}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
+              {/* Deliberately NOT wrapped in AnimatePresence. Under
+                  framer-motion 12 the `mode="wait"` + keyed-child pattern here
+                  deadlocked and left this panel stuck at opacity 0, so the whole
+                  rotating highlight was invisible on the live site. A keyed
+                  remount with an enter-only transition cannot deadlock: if the
+                  animation never runs the content is still painted. */}
+              <motion.div
+                key={activeHighlight}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+              >
+                <span className="text-xs font-medium text-accent-400 uppercase tracking-wider">
+                  {highlights[activeHighlight].label}
+                </span>
+                <h3 className="text-2xl md:text-3xl font-display text-white mt-2 mb-1">
+                  {highlights[activeHighlight].title}
+                </h3>
+                <p className="text-accent-300/80 text-sm mb-3">
+                  {highlights[activeHighlight].subtitle}
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {highlights[activeHighlight].detail}
+                </p>
+              </motion.div>
 
               {/* Progress bar: doubles as the countdown to the next rotation, so
                   it must not keep filling once rotation is paused or disabled. */}
