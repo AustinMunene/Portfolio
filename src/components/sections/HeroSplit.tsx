@@ -73,8 +73,20 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Live WebGL centrepiece, layered under the copy. */}
-      <div className="absolute inset-0 bg-black" aria-hidden />
+      {/* Poster ground. The WebGL chunk is lazy and can take several seconds, and
+          a plain black fill meant the hero was an empty rectangle until it landed.
+          This approximates the scene's composition - warm mass right of centre -
+          so first paint is already the right image and the canvas fades in over it. */}
+      <div
+        className="absolute inset-0"
+        aria-hidden
+        style={{
+          background:
+            'radial-gradient(58% 68% at 68% 46%, rgba(232, 135, 42, 0.20), transparent 70%),' +
+            'radial-gradient(45% 55% at 18% 18%, rgba(232, 135, 42, 0.06), transparent 72%),' +
+            '#060402',
+        }}
+      />
       <motion.div
         className="absolute inset-0"
         aria-hidden
@@ -139,12 +151,12 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                       className="inline-block"
                       whileHover={{
                         y: -8,
-                        color: '#818cf8',
+                        color: '#fb9d3c',
                         transition: { duration: 0.2, ease: 'easeOut' },
                       }}
                       style={{
                         background:
-                          'linear-gradient(135deg, #ffffff 0%, #a5b4fc 60%, #6366f1 100%)',
+                          'linear-gradient(135deg, #ffffff 0%, #fdc071 60%, #e8872a 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
@@ -366,7 +378,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
           {stats.map((stat, i) => (
             <motion.div
               key={i}
-              whileHover={{ y: -4, borderColor: 'rgba(99,102,241,0.3)' }}
+              whileHover={{ y: -4, borderColor: 'rgba(232, 135, 42,0.3)' }}
               className="flex items-center gap-4 p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] transition-colors"
             >
               <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent-500/10 flex items-center justify-center">

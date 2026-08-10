@@ -4,8 +4,8 @@ import { Icosahedron, MeshDistortMaterial, Points, PointMaterial } from '@react-
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
-const ACCENT = '#6366f1';
-const ACCENT_LIGHT = '#a5b4fc';
+const ACCENT = '#e8872a';
+const ACCENT_LIGHT = '#fdc071';
 
 /** Coarse pointers (phones/tablets) get a lighter scene: fewer particles, no AA. */
 const isCoarsePointer = () =>
@@ -195,7 +195,7 @@ const HeroScene = ({ reducedMotion = false }: HeroSceneProps) => {
       <pointLight position={[7, 5, 9]} intensity={3.4} color={ACCENT_LIGHT} />
       <pointLight position={[-9, -5, 4]} intensity={2} color={ACCENT} />
       {/* Rim light: separates the core silhouette from the background. */}
-      <pointLight position={[-3, 3, -8]} intensity={2.6} color="#c7d2fe" />
+      <pointLight position={[-3, 3, -8]} intensity={2.6} color="#fedba8" />
 
       <Core interactive={animate} />
       <ParticleField count={coarse ? 1600 : 3500} />

@@ -101,7 +101,7 @@ const InteractiveCodeEditor: React.FC<InteractiveCodeEditorProps> = ({
               className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 select-none ${
                 executing
                   ? 'bg-accent-500/10 border border-accent-500/20 text-accent-300'
-                  : 'bg-accent-500 hover:bg-accent-400 border border-accent-400/20 text-white shadow-[0_4px_16px_rgba(99,102,241,0.25)] active:scale-95'
+                  : 'bg-accent-500 hover:bg-accent-400 border border-accent-400/20 text-white shadow-[0_4px_16px_rgba(232, 135, 42,0.25)] active:scale-95'
               }`}
             >
               <Play className={`w-3.5 h-3.5 ${executing ? 'animate-pulse' : ''}`} />

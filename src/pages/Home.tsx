@@ -7,6 +7,7 @@ import FeaturedBento from '../components/sections/FeaturedBento';
 import type { BentoProject } from '../components/sections/FeaturedBento';
 import CareerPreview from '../components/sections/CareerPreview';
 import BlogPreview from '../components/sections/BlogPreview';
+import Section from '../components/Section';
 
 const rawProjects: Array<{
   title: string;
@@ -169,33 +170,30 @@ const Home = () => {
 
       <BlogPreview posts={blogPosts} />
 
-      {/* Contact Section - Let's Connect */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
-        {/* Background: image + overlay (same pattern as Hero & Career Preview) */}
-        <div className="absolute inset-0 bg-black" aria-hidden />
-        <img
-          src="/VibeCoding.jpeg"
-          alt=""
-          role="presentation"
-          decoding="async"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
+      {/* Contact - the first section converted to the light tone, as the
+          proof-of-concept for the business/craft tonal split. Note there is not a
+          single hardcoded grey or white/x border below: everything reads through
+          the tone tokens, so this same markup would work in a dark section by
+          flipping one prop. */}
+      <Section tone="light" id="contact" className="py-24 md:py-32 overflow-hidden">
+        {/* Warm ground, sitting on the light surface rather than fighting it. */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"
+          className="absolute inset-0"
           aria-hidden
-        />
-        <div className="absolute inset-0">
-          <div className="absolute bottom-1/2 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-accent-600/15 rounded-full blur-[128px]" />
-          <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] bg-accent-800/10 rounded-full blur-[100px]" />
-        </div>
-        <div
-          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: 'radial-gradient(circle, #6366f1 1px, transparent 1px)',
+            background:
+              'radial-gradient(50% 60% at 50% 0%, rgba(232, 135, 42, 0.10), transparent 70%)',
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          aria-hidden
+          style={{
+            backgroundImage: 'radial-gradient(circle, #e8872a 1px, transparent 1px)',
             backgroundSize: '32px 32px',
           }}
         />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/30 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/40 to-transparent" />
 
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
@@ -204,11 +202,11 @@ const Home = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <span className="text-accent-400 text-sm font-medium tracking-wider uppercase mb-4 block">
+            <span className="text-accent-600 text-sm font-medium tracking-wider uppercase mb-4 block">
               Contact
             </span>
-            <h2 className="text-4xl md:text-6xl font-display mb-6 gradient-text reveal">
-              Let's Connect
+            <h2 className="text-4xl md:text-6xl font-display mb-6 text-fg">
+              Got a project?
             </h2>
           </motion.div>
           <motion.p
@@ -216,32 +214,33 @@ const Home = () => {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-lg text-gray-400 mb-10 max-w-lg mx-auto reveal"
+            className="text-lg text-fg-muted mb-10 max-w-lg mx-auto"
           >
-            Have a project in mind? Let's discuss how we can work together.
+            Tell me what you are building and where it is breaking. I will tell you
+            how I would approach it.
           </motion.p>
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             viewport={{ once: true }}
-            className="flex flex-wrap items-center justify-center gap-4 reveal"
+            className="flex flex-wrap items-center justify-center gap-4"
           >
             <a
               href="mailto:saviusmunene@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-accent-500/25 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-accent-500 hover:bg-accent-600 text-white rounded-full font-medium shadow-[0_8px_24px_-8px_rgba(232,135,42,0.5)] transition-colors"
             >
               saviusmunene@gmail.com
             </a>
             <a
               href="tel:+254743988415"
-              className="inline-flex items-center gap-2 px-8 py-3 border border-white/10 text-gray-300 rounded-full font-medium hover:border-accent-500/50 hover:text-white hover:bg-accent-500/5 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3 border border-line text-fg-muted rounded-full font-medium hover:border-accent-500/60 hover:text-fg hover:bg-accent-500/5 transition-colors"
             >
               +254 743 988 415
             </a>
           </motion.div>
         </div>
-      </section>
+      </Section>
     </motion.div>
   );
 };

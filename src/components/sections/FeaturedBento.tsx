@@ -49,17 +49,17 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6366f1" strokeWidth="1" />
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e8872a" strokeWidth="1" />
             </pattern>
             <pattern id="dotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="10" cy="10" r="1" fill="#818cf8" />
+              <circle cx="10" cy="10" r="1" fill="#fb9d3c" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#dotGrid)" />
           {/* Subtle diagonal circuit/wiring schematic line vectors */}
-          <path d="M-100 200 L 300 600 M1200 100 L 1500 400 M600 800 L 900 1100" stroke="#6366f1" strokeWidth="1.5" strokeDasharray="5 5" />
-          <path d="M200 100 L 250 150 L 500 150" stroke="#818cf8" strokeWidth="1" fill="none" />
-          <path d="M1000 700 L 1050 750 L 1300 750" stroke="#818cf8" strokeWidth="1" fill="none" />
+          <path d="M-100 200 L 300 600 M1200 100 L 1500 400 M600 800 L 900 1100" stroke="#e8872a" strokeWidth="1.5" strokeDasharray="5 5" />
+          <path d="M200 100 L 250 150 L 500 150" stroke="#fb9d3c" strokeWidth="1" fill="none" />
+          <path d="M1000 700 L 1050 750 L 1300 750" stroke="#fb9d3c" strokeWidth="1" fill="none" />
         </svg>
       </div>
 
@@ -108,7 +108,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                       : 'text-gray-400 border border-white/[0.06] bg-white/[0.015] hover:border-white/15 hover:text-gray-300 hover:bg-white/[0.03]'
                   }`}
                   style={{
-                    boxShadow: isActive ? '0 0 20px rgba(99, 102, 241, 0.1)' : undefined
+                    boxShadow: isActive ? '0 0 20px rgba(232, 135, 42, 0.1)' : undefined
                   }}
                 >
                   {/* Micro Pulse Active Indicator inside chip */}

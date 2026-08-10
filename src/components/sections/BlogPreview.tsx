@@ -69,7 +69,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: 'radial-gradient(circle, #6366f1 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, #e8872a 1px, transparent 1px)',
           backgroundSize: '32px 32px',
         }}
       />
@@ -88,7 +88,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
               Writing
             </span>
             <h2 className="text-4xl md:text-5xl font-display mb-4" style={{
-              background: 'linear-gradient(135deg, #ffffff 0%, #a5b4fc 60%, #6366f1 100%)',
+              background: 'linear-gradient(135deg, #ffffff 0%, #fdc071 60%, #e8872a 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
