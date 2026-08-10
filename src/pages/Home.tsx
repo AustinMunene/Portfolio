@@ -228,7 +228,7 @@ const Home = () => {
             className="flex flex-wrap items-center justify-center gap-4 reveal"
           >
             <a
-              href="mailto:muneneaustin56@gmail.com"
+              href="mailto:saviusmunene@gmail.com"
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-accent-500/25 transition-all"
             >
               saviusmunene@gmail.com

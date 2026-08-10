@@ -27,8 +27,12 @@
   body {
     background-color: var(--neutral-dark);
     color: #f1f1f4;
-    font-family: 'Geist', -apple-system, system-ui, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.95rem;
+    font-family: 'Josefin Sans', Helvetica, Arial, sans-serif !important;
+    /* Josefin Sans has a notably small x-height, so it reads smaller than Geist
+       did at the same size. Bumped from 0.95rem with a looser line-height to
+       keep long-form blog copy legible. */
+    font-size: 1.02rem;
+    line-height: 1.7;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -40,18 +44,19 @@
     font-family: 'Geist Mono', ui-monospace, monospace !important;
   }
 
-  /* Instrument Serif is a single-weight face. Force 400 wherever it is applied
-     so a stray font-bold cannot trigger synthetic bolding, which smears it. */
+  /* Playfair Display at 400, matching --font-heading-weight on the reference
+     site. Declared in the base layer (no !important) so a font-semibold utility
+     can still win where a heading needs more weight - Playfair has real ones. */
   .font-display {
-    font-weight: 400 !important;
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    letter-spacing: -0.005em;
   }
 
   /* Editorial serif headings inside long-form blog content. */
   .prose :is(h1, h2, h3) {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, serif;
     font-weight: 400;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.005em;
   }
 
   @media (max-width: 768px) {

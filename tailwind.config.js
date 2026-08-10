@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Geist', '-apple-system', 'system-ui', 'sans-serif'],
+        sans: ['Josefin Sans', 'Helvetica', 'Arial', 'sans-serif'],
         mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
-        // Display only. Instrument Serif has a single 400 weight, so pair it
-        // with font-normal and size - never font-bold, which synthesises.
-        display: ['Instrument Serif', 'Georgia', 'serif'],
+        // Display only. Playfair Display ships real 400-900 weights, so unlike
+        // Instrument Serif a font-semibold override here is safe.
+        display: ['Playfair Display', 'Georgia', 'serif'],
       },
       colors: {
         accent: {

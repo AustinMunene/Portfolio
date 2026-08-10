@@ -25,7 +25,7 @@ const Navbar = () => {
   const socialLinks = [
     { href: 'https://github.com/AustinMunene', icon: Github, label: 'GitHub Profile' },
     { href: 'https://www.linkedin.com/in/austin-munene/', icon: Linkedin, label: 'LinkedIn Profile' },
-    { href: 'mailto:austinmunene56@icloud.com', icon: Mail, label: 'Email Contact' },
+    { href: 'mailto:saviusmunene@gmail.com', icon: Mail, label: 'Email Contact' },
   ];
 
   return (
