@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ScrollToTop from './components/ScrollToTop';
+import Footer from './components/Footer';
 
 /*
   Home ships in the initial bundle; the rest are split. This matters most for
@@ -72,19 +73,7 @@ function App() {
 
       <ScrollToTop />
 
-      {/* Footer */}
-      <footer className="relative container mx-auto px-6 py-10 mt-28 z-10">
-        <div className="absolute top-0 left-0 right-0 h-px bg-line" />
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-fg-subtle text-sm">© 2026 Austin Munene</p>
-          <a
-            href="#top"
-            className="text-fg-muted hover:text-fg transition-colors duration-200 text-sm select-none active:scale-95"
-          >
-            Back to Top
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

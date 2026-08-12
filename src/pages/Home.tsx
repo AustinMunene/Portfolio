@@ -9,6 +9,7 @@ import CareerPreview from '../components/sections/CareerPreview';
 import BlogPreview from '../components/sections/BlogPreview';
 import Section from '../components/Section';
 import Services from '../components/sections/Services';
+import ContactForm from '../components/ContactForm';
 
 const rawProjects: Array<{
   title: string;
@@ -206,25 +207,40 @@ const Home = () => {
             Tell me what you are building and where it is breaking. I will tell you
             how I would approach it.
           </motion.p>
+          {/* The card settles into place as the section arrives rather than
+              floating over the page. The site already pins two things to the
+              viewport - the nav island and ScrollToTop - and a third would crowd
+              the content on a phone without adding a way to reach anyone. */}
+          <motion.div
+            initial={{ y: 28, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.55, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="max-w-2xl mx-auto"
+          >
+            <ContactForm />
+          </motion.div>
+
+          {/* The form is the primary path, but the address stays readable: plenty
+              of people want to paste it somewhere or forward it on rather than
+              type into a page. */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
             viewport={{ once: true }}
-            className="flex flex-wrap items-center justify-center gap-4"
+            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mt-10 text-sm"
           >
-            {/* Was `bg-neutral-950 text-fg`: a near-black pill with foreground
-                text, which in light mode meant near-black text on near-black.
-                btn-primary is the token pair that inverts with the theme. */}
+            <span className="text-fg-subtle">Or reach me directly</span>
             <a
               href="mailto:saviusmunene@gmail.com"
-              className="btn-primary inline-flex items-center gap-2 px-8 py-3 rounded-full font-medium hover:opacity-90 transition-opacity"
+              className="text-fg-muted hover:text-fg transition-colors underline underline-offset-4 decoration-brand-line"
             >
               saviusmunene@gmail.com
             </a>
             <a
               href="tel:+254743988415"
-              className="glass-pill inline-flex items-center gap-2 px-8 py-3 text-fg-muted rounded-full font-medium hover:border-brand-line hover:text-fg"
+              className="text-fg-muted hover:text-fg transition-colors underline underline-offset-4 decoration-brand-line"
             >
               +254 743 988 415
             </a>

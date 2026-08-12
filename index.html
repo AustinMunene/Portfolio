@@ -42,6 +42,24 @@
     <title>Austin Munene</title>
   </head>
   <body>
+    <!--
+      Netlify Forms registration.
+
+      Netlify discovers forms by parsing the static HTML it receives at deploy
+      time. The real form is rendered by React (src/components/ContactForm.tsx),
+      so it does not exist in any file Netlify can parse - without this copy the
+      endpoint is never created and every submission 404s.
+
+      Hidden from people and assistive tech; it exists purely to be crawled. Field
+      names must match ContactForm exactly, or those values arrive empty.
+    -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
