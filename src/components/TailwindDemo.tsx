@@ -25,9 +25,11 @@ const TailwindDemo: React.FC = () => {
           <label htmlFor="tw-style" className="text-sm font-semibold text-fg-muted">
             Select Style:
           </label>
+          {/* min-h-11 clears the 44px touch target, and 16px text keeps iOS from
+              zooming the page when the picker opens. */}
           <select
             id="tw-style"
-            className="bg-surface-alt text-fg border border-line px-3 py-2 rounded-lg text-sm"
+            className="bg-surface-alt text-fg border border-line px-3 py-2 min-h-11 rounded-lg text-base"
             value={selected}
             onChange={(e) => setSelected(e.target.value as StyleKey)}
           >

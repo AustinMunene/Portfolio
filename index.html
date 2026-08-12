@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- No maximum-scale / user-scalable=no: those block pinch-zoom, which is a
+         WCAG 1.4.4 failure and the single most common way a mobile site becomes
+         unusable for anyone who needs to magnify it. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Austin Munene - Frontend Developer and QA Engineer Portfolio" />
     <meta name="theme-color" content="#0a0a0f" />
     

@@ -58,8 +58,11 @@ const ContactForm: React.FC = () => {
     }
   };
 
+  // text-base, not text-sm: iOS Safari zooms the whole page in when a focused
+  // field measures under 16px, which on a phone throws the layout sideways the
+  // moment someone taps Name. The desktop size is a fair trade for that.
   const inputClass =
-    'w-full rounded-xl bg-surface-raised border border-line px-4 py-3 text-sm text-fg ' +
+    'w-full rounded-xl bg-surface-raised border border-line px-4 py-3 text-base text-fg ' +
     'placeholder:text-fg-subtle transition-colors duration-200 hover:border-brand-line ' +
     'focus:border-brand-line disabled:opacity-60';
 

@@ -137,10 +137,12 @@ const InteractiveCodeEditor: React.FC<InteractiveCodeEditorProps> = ({
             </div>
             
             <div className="flex-1 relative">
+              {/* 16px on phones so tapping in does not zoom the page (iOS does
+                  that below 16px); the tighter code size returns from md up. */}
               <textarea
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                className="w-full h-56 bg-transparent text-fg p-1 font-mono text-xs md:text-sm leading-relaxed focus:outline-none resize-none scrollbar-thin"
+                className="w-full h-56 bg-transparent text-fg p-1 font-mono text-base md:text-sm leading-relaxed focus:outline-none resize-none scrollbar-thin"
                 spellCheck="false"
               />
             </div>
