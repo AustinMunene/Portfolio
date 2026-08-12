@@ -33,6 +33,10 @@ export default {
         brand: {
           DEFAULT: 'var(--accent)',
           soft: 'var(--accent-soft)',
+          // Pre-diluted, because Tailwind 3 cannot apply an /opacity modifier to
+          // a raw var() colour - `border-brand/30` compiles to nothing at all.
+          // Use brand-line (border-, text-, bg-) wherever a faint accent is wanted.
+          line: 'var(--accent-line)',
           fg: 'var(--accent-fg)',
         },
         surface: 'var(--surface)',

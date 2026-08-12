@@ -95,7 +95,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent-500/20 bg-accent-500/5 text-fg text-sm mb-8"
+              className="glass-pill inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-fg text-sm mb-8"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75" />
@@ -163,9 +163,11 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex flex-col sm:flex-row items-start gap-4"
             >
+              {/* btn-primary, not `bg-white text-black` - the latter was a white
+                  pill sitting on a near-white surface in light mode. */}
               <a
                 href="#projects"
-                className="px-8 py-3 bg-white text-black rounded-full font-medium hover:opacity-90 transition-opacity flex items-center gap-2 group"
+                className="btn-primary px-8 py-3 rounded-full font-medium hover:opacity-90 transition-opacity flex items-center gap-2 group"
               >
                 View Projects
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -175,7 +177,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                   type="button"
                   onClick={() => setGetInTouchOpen((o) => !o)}
                   onBlur={() => setTimeout(() => setGetInTouchOpen(false), 150)}
-                  className="px-8 py-3 border border-line text-fg-muted rounded-full font-medium hover:border-accent-500/50 hover:text-fg hover:bg-accent-500/5 transition-all flex items-center gap-2"
+                  className="glass-pill px-8 py-3 text-fg-muted rounded-full font-medium hover:border-brand-line hover:text-fg flex items-center gap-2"
                 >
                   Get in Touch
                   <ChevronDown className={`w-4 h-4 transition-transform ${getInTouchOpen ? 'rotate-180' : ''}`} />
@@ -187,11 +189,11 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute left-0 top-full mt-2 min-w-[220px] rounded-xl border border-line bg-surface/95 backdrop-blur-md shadow-xl py-2 z-50"
+                      className="glass glass-strong absolute left-0 top-full mt-2 min-w-[220px] rounded-xl py-2 z-50"
                     >
                       <a
                         href="mailto:saviusmunene@gmail.com"
-                        className="flex items-center gap-3 px-4 py-3 text-left text-fg-muted hover:bg-white/5 hover:text-fg transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 text-left text-fg-muted hover:bg-brand-soft hover:text-fg transition-colors"
                       >
                         <Mail className="w-4 h-4 text-fg-muted shrink-0" />
                         <span className="text-sm">Email</span>
@@ -199,7 +201,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                       </a>
                       <a
                         href="tel:+254743988415"
-                        className="flex items-center gap-3 px-4 py-3 text-left text-fg-muted hover:bg-white/5 hover:text-fg transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 text-left text-fg-muted hover:bg-brand-soft hover:text-fg transition-colors"
                       >
                         <Phone className="w-4 h-4 text-fg-muted shrink-0" />
                         <span className="text-sm">Call</span>
@@ -249,7 +251,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
             >
               {/* Concentric ring, echoing the bezel language used elsewhere. */}
               <div className="absolute -inset-3 rounded-full border border-line" />
-              <div className="absolute inset-0 rounded-full overflow-hidden bg-surface-raised shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)]">
+              <div className="absolute inset-0 rounded-full overflow-hidden bg-surface-raised shadow-[var(--bezel-shadow)]">
                 <img
                   // c_thumb + g_face with a pulled-back zoom: c_fill kept the full
                   // frame width and pushed the face into a corner, since the
@@ -267,7 +269,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               {/* Floating card, overlapping the portrait as in the reference.
                   Deliberately not a metric - there is no true number to put here,
                   so it carries facts instead. */}
-              <figcaption className="absolute -bottom-3 -left-4 md:-left-8 rounded-xl border border-line bg-surface/85 backdrop-blur-md px-4 py-2.5 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.9)]">
+              <figcaption className="glass glass-strong absolute -bottom-3 -left-4 md:-left-8 rounded-xl px-4 py-2.5">
                 <span className="flex items-center gap-2 text-[11px] font-medium tracking-wide text-fg">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70 animate-ping" />
@@ -282,14 +284,15 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
             </motion.figure>
 
             <div
-              className="relative rounded-2xl border border-line bg-surface-raised backdrop-blur-sm p-6 md:p-8 overflow-hidden"
+              className="glass relative rounded-2xl p-6 md:p-8 overflow-hidden"
               onMouseEnter={() => setCarouselPaused(true)}
               onMouseLeave={() => setCarouselPaused(false)}
               onFocusCapture={() => setCarouselPaused(true)}
               onBlurCapture={() => setCarouselPaused(false)}
             >
-              {/* Decorative corner glow */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-accent-500/20 rounded-full blur-[60px]" />
+              {/* Decorative corner glow, sitting under the glass so the blur has
+                  something to pick up. */}
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-brand-soft rounded-full blur-[60px]" />
 
               {/* Indicator dots */}
               <div className="flex items-center gap-2 mb-6">
@@ -300,8 +303,8 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                     aria-label={`Show ${highlight.label}`}
                     aria-current={i === activeHighlight}
                     className={`h-1.5 rounded-full transition-all duration-300 ${i === activeHighlight
-                        ? 'w-8 bg-accent-500'
-                        : 'w-1.5 bg-white/20 hover:bg-white/40'
+                        ? 'w-8 bg-brand'
+                        : 'w-1.5 bg-line hover:bg-fg-subtle'
                       }`}
                   />
                 ))}
@@ -357,7 +360,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                   {credibilityChips.map((chip) => (
                     <span
                       key={chip}
-                      className="px-2.5 py-1 rounded-md text-[11px] font-medium text-fg-muted bg-surface-raised border border-line"
+                      className="glass-pill px-2.5 py-1 rounded-md text-[11px] font-medium text-fg-muted"
                     >
                       {chip}
                     </span>
@@ -365,7 +368,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                 </div>
                 <a
                   href="#projects"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-raised border border-line text-sm text-fg hover:bg-white/[0.1] hover:border-accent-500/30 transition-all"
+                  className="glass-pill inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm text-fg hover:border-brand-line"
                 >
                   View Projects
                   <ArrowRight className="w-3.5 h-3.5" />

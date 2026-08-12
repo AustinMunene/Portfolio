@@ -2,15 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
-import { blogPosts } from './Blog';
-
-const categoryColors: Record<string, string> = {
-  Development: 'bg-accent-500/10 text-fg border-accent-500/20',
-  AI: 'bg-purple-500/10 text-purple-300 border-purple-500/20',
-  Design: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20',
-  Career: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
-  'QA & Testing': 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20',
-};
+import { blogPosts, CATEGORY_CHIP } from './Blog';
 
 const BlogPost2: React.FC = () => {
   const { id } = useParams();
@@ -19,8 +11,7 @@ const BlogPost2: React.FC = () => {
 
   if (!post) {
     return (
-      <section className="relative min-h-screen overflow-hidden">
-        <div className="absolute inset-0 bg-surface" />
+      <section className="section-glow relative min-h-screen bg-surface overflow-hidden">
         <div className="container mx-auto px-4 py-24 relative z-10">
           <div className="text-center">
             <h1 className="text-3xl font-display mb-4 gradient-text">Post Not Found</h1>
@@ -37,10 +28,7 @@ const BlogPost2: React.FC = () => {
   }
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 bg-surface" />
-      <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-accent-600/8 rounded-full blur-[128px]" />
-
+    <section className="section-glow relative min-h-screen bg-surface overflow-hidden">
       <div className="container mx-auto px-4 py-24 relative z-10">
         <motion.article
           initial={{ y: 20 }}
@@ -50,7 +38,7 @@ const BlogPost2: React.FC = () => {
         >
           <button
             onClick={() => navigate('/blog')}
-            className="flex items-center text-fg-muted hover:text-fg-muted transition-colors mb-8 text-sm"
+            className="glass-pill inline-flex items-center px-4 py-2 rounded-full text-fg-muted hover:text-fg hover:border-brand-line mb-8 text-sm"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Blog
@@ -60,12 +48,7 @@ const BlogPost2: React.FC = () => {
             <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute top-4 left-4">
-              <span
-                className={
-                  'px-3 py-1 rounded-full text-xs border ' +
-                  (categoryColors[post.category] || 'bg-surface-raised text-fg border-line')
-                }
-              >
+              <span className={`px-3 py-1 rounded-full text-xs ${CATEGORY_CHIP}`}>
                 {post.category}
               </span>
             </div>
@@ -73,7 +56,7 @@ const BlogPost2: React.FC = () => {
 
           <div className="flex items-center text-xs text-fg-subtle mb-4">
             <span>{post.date}</span>
-            <span className="mx-2 text-brand/30">|</span>
+            <span className="mx-2 text-brand-line">|</span>
             <span>{post.readTime}</span>
           </div>
 

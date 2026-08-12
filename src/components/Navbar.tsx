@@ -156,7 +156,7 @@ const Navbar = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -8 }}
               transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-              className="absolute top-[calc(100%+12px)] left-0 right-0 p-5 rounded-[20px] bg-surface/95 backdrop-blur-2xl border border-line shadow-2xl flex flex-col space-y-4"
+              className="absolute top-[calc(100%+12px)] left-0 right-0 p-5 rounded-[20px] bg-surface backdrop-blur-2xl border border-line shadow-2xl flex flex-col space-y-4"
             >
               <div className="flex flex-col space-y-2">
                 {navItems.map(({ to, label }) => (
@@ -166,7 +166,7 @@ const Navbar = () => {
                     className={({ isActive }) =>
                       `block py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-200 ${
                         isActive
-                          ? 'text-brand bg-brand-soft border border-brand/25'
+                          ? 'text-brand bg-brand-soft border border-brand-line'
                           : 'text-fg-muted hover:text-fg hover:bg-surface-raised border border-transparent'
                       }`
                     }

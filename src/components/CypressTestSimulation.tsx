@@ -144,7 +144,7 @@ const CypressTestSimulation: React.FC = () => {
                 disabled={running}
                 className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider select-none transition-all duration-200 outline-none ${
                   running
-                    ? 'bg-brand-soft border border-brand/30 text-fg'
+                    ? 'bg-brand-soft border border-brand-line text-fg'
                     : 'bg-emerald-600 hover:bg-emerald-500 border border-emerald-500/20 text-fg shadow-[0_4px_16px_rgba(16,185,129,0.15)] active:scale-95'
                 }`}
               >
@@ -179,7 +179,7 @@ const CypressTestSimulation: React.FC = () => {
                     onClick={() => test.status !== 'idle' && setActiveLogIndex(index)}
                     className={`p-4 rounded-xl border transition-all duration-300 select-none cursor-pointer flex items-center justify-between gap-4 ${
                       isRunning
-                        ? 'bg-brand-soft border-brand/30'
+                        ? 'bg-brand-soft border-brand-line'
                         : isPass
                         ? 'bg-emerald-500/5 border-emerald-500/10 hover:border-emerald-500/30'
                         : isFail
@@ -228,7 +228,7 @@ const CypressTestSimulation: React.FC = () => {
 
             {/* Terminal Diagnostic Panel (5 Cols) */}
             <div className="lg:col-span-5 h-full">
-              <div className="rounded-2xl bg-surface/90 border border-line p-5 h-64 flex flex-col justify-between font-mono text-xs overflow-hidden shadow-2xl">
+              <div className="rounded-2xl bg-surface border border-line p-5 h-64 flex flex-col justify-between font-mono text-xs overflow-hidden shadow-2xl">
                 <div className="flex items-center justify-between pb-3 border-b border-line text-fg-subtle select-none">
                   <span>DIAGNOSTIC_SHELL_LOG</span>
                   <span className="text-[10px] bg-surface-raised px-2 py-0.5 rounded">UTF-8</span>

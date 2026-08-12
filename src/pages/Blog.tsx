@@ -1245,21 +1245,24 @@ customElements.define('my-card', MyCard);
   },
 ];
 
-const categoryColors: Record<string, string> = {
-  Development: 'bg-accent-500/10 text-fg border-accent-500/20',
-  AI: 'bg-purple-500/10 text-purple-300 border-purple-500/20',
-  Design: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20',
-  Career: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
-  'QA & Testing': 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20',
-};
+/**
+ * One chip style for every category, shared by the blog index, a post header and
+ * the homepage preview.
+ *
+ * It used to be a per-category colour map - purple for AI, amber for Career, and
+ * so on - written at the 300 weight, which only ever had contrast against a dark
+ * surface. In light mode those chips were pastel-on-white and close to
+ * illegible, and five hues fought the one-accent rule the palette is built on.
+ * Frosted neutral reads the same in both themes, and the category is still named
+ * in the label, which is where the information actually lives.
+ */
+export const CATEGORY_CHIP = 'glass-pill text-fg-muted';
 
 const Blog: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 bg-surface" />
-      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-accent-600/10 rounded-full blur-[128px]" />
+    <section className="section-glow relative min-h-screen bg-surface overflow-hidden">
 
       <div className="container mx-auto px-4 py-24 relative z-10">
         <motion.div
@@ -1286,7 +1289,7 @@ const Blog: React.FC = () => {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.06 }}
                 onClick={() => navigate(`/blog/${post.id}`)}
-                className="group cursor-pointer bg-surface-raised rounded-2xl overflow-hidden border border-line hover:border-accent-500/20 transition-all duration-300 hover:bg-accent-500/[0.02]"
+                className="glass group cursor-pointer rounded-2xl overflow-hidden hover:border-brand-line"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -1296,7 +1299,7 @@ const Blog: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-xs border ${categoryColors[post.category] || 'bg-surface-raised text-fg border-line'}`}>
+                    <span className={`px-3 py-1 rounded-full text-xs ${CATEGORY_CHIP}`}>
                       {post.category}
                     </span>
                   </div>
@@ -1304,7 +1307,7 @@ const Blog: React.FC = () => {
                 <div className="p-6">
                   <div className="flex items-center text-xs text-fg-subtle mb-3">
                     <span>{post.date}</span>
-                    <span className="mx-2 text-brand/30">|</span>
+                    <span className="mx-2 text-brand-line">|</span>
                     <span>{post.readTime}</span>
                   </div>
                   <h2 className="text-lg font-semibold mb-2 text-fg group-hover:text-fg transition-colors">

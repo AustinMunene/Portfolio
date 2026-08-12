@@ -100,8 +100,8 @@ const InteractiveCodeEditor: React.FC<InteractiveCodeEditorProps> = ({
               disabled={executing}
               className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 select-none ${
                 executing
-                  ? 'bg-brand-soft border border-brand/30 text-fg'
-                  : 'bg-white text-black hover:opacity-90 border border-line active:scale-95'
+                  ? 'bg-brand-soft border border-brand-line text-fg'
+                  : 'btn-primary hover:opacity-90 border border-line active:scale-95'
               }`}
             >
               <Play className={`w-3.5 h-3.5 ${executing ? 'animate-pulse' : ''}`} />

@@ -9,11 +9,7 @@ import TailwindDemo from '../components/TailwindDemo';
 
 const InteractiveDemo: React.FC = () => {
   return (
-    <section className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 bg-surface" />
-      <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-accent-600/10 rounded-full blur-[128px]" />
-      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-accent-800/8 rounded-full blur-[128px]" />
-
+    <section className="section-glow relative min-h-screen bg-surface overflow-hidden">
       <div className="container mx-auto px-4 py-24 relative z-10">
         <motion.div
           initial={{ y: 20 }}
@@ -34,7 +30,7 @@ const InteractiveDemo: React.FC = () => {
           <div className="space-y-16">
             <section>
               <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-accent-500 rounded-full" />
+                <span className="h-1 w-6 bg-brand rounded-full" />
                 Interactive Code Editor
               </h2>
               <InteractiveCodeEditor
@@ -47,7 +43,7 @@ const InteractiveDemo: React.FC = () => {
 
             <section>
               <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-accent-500 rounded-full" />
+                <span className="h-1 w-6 bg-brand rounded-full" />
                 Cypress Test Playground
               </h2>
               <CypressTestSimulation />
@@ -55,7 +51,7 @@ const InteractiveDemo: React.FC = () => {
 
             <section>
               <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-accent-500 rounded-full" />
+                <span className="h-1 w-6 bg-brand rounded-full" />
                 k6 Performance Test Simulator
               </h2>
               <PerformanceChart />
@@ -63,7 +59,7 @@ const InteractiveDemo: React.FC = () => {
 
             <section>
               <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-accent-500 rounded-full" />
+                <span className="h-1 w-6 bg-brand rounded-full" />
                 Tailwind UI Builder
               </h2>
               <TailwindDemo />
@@ -71,7 +67,7 @@ const InteractiveDemo: React.FC = () => {
 
             <section>
               <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-accent-500 rounded-full" />
+                <span className="h-1 w-6 bg-brand rounded-full" />
                 Interactive 3D Scene
               </h2>
               <Interactive3DScene />
@@ -79,7 +75,7 @@ const InteractiveDemo: React.FC = () => {
 
             <section>
               <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-accent-500 rounded-full" />
+                <span className="h-1 w-6 bg-brand rounded-full" />
                 Interactive Data Visualization
               </h2>
               <InteractiveDataViz />

@@ -133,16 +133,21 @@ const Interactive3DScene: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="spotlight surface-depth bg-white/[0.02] rounded-2xl overflow-hidden border border-white/[0.06]"
+      className="spotlight surface-depth bg-surface-raised rounded-2xl overflow-hidden border border-line"
     >
-      <div className="p-4 border-b border-white/[0.06]">
-        <h3 className="text-lg font-semibold">Module Graph</h3>
-        <p className="text-sm text-gray-400 mt-1">
+      <div className="p-4 border-b border-line">
+        <h3 className="text-lg font-semibold text-fg">Module Graph</h3>
+        <p className="text-sm text-fg-muted mt-1">
           An instanced force-graph rendered with Three.js and React Three Fiber. Drag to orbit.
         </p>
       </div>
 
-      <div className={`relative ${isExpanded ? 'h-[600px]' : 'h-[400px]'}`}>
+      {/* The canvas keeps a fixed dark stage in both themes. The edges draw with
+          AdditiveBlending, which needs a dark ground to be visible at all - over a
+          light surface they would add to white and disappear. A render viewport
+          reading darker than the page around it is the same convention a video
+          player follows, so this is deliberate rather than an unmigrated leftover. */}
+      <div className={`relative bg-[#05050a] ${isExpanded ? 'h-[600px]' : 'h-[400px]'}`}>
         <Canvas
           camera={{ position: [0, 0, 11], fov: 50 }}
           gl={{ antialias: true, alpha: true }}
@@ -175,9 +180,9 @@ const Interactive3DScene: React.FC = () => {
         </button>
       </div>
 
-      <div className="p-4 border-t border-white/[0.06]">
-        <h4 className="text-sm font-semibold mb-2">Controls</h4>
-        <ul className="text-sm text-gray-400 space-y-1">
+      <div className="p-4 border-t border-line">
+        <h4 className="text-sm font-semibold mb-2 text-fg">Controls</h4>
+        <ul className="text-sm text-fg-muted space-y-1">
           <li>• Drag: orbit the graph</li>
           <li>• Scroll: zoom in and out</li>
           <li>• Release: inertial damping settles the rotation</li>

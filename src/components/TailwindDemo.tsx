@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+/* Literal Tailwind classes on purpose: this demo's whole subject is the class
+   string it prints below the button, so these must not become theme tokens. */
 const styles = {
   primary: 'bg-blue-600 text-white hover:bg-blue-700',
   secondary: 'bg-gray-600 text-white hover:bg-gray-700',
@@ -12,31 +14,38 @@ const TailwindDemo: React.FC = () => {
   const [selected, setSelected] = useState<StyleKey>('primary');
 
   return (
-    <div className="bg-gray-900 text-white p-6 rounded shadow-md">
-      <h3 className="text-xl font-bold mb-4">Tailwind UI Builder</h3>
-      <p className="mb-4 text-sm text-gray-300">Preview dynamic Tailwind buttons</p>
-
-      <div className="mb-4">
-        <label className="mr-4 font-semibold">Select Style:</label>
-        <select
-          className="bg-gray-700 text-white px-3 py-2 rounded"
-          value={selected}
-          onChange={(e) => setSelected(e.target.value as StyleKey)}
-        >
-          {(Object.keys(styles) as StyleKey[]).map((key) => (
-            <option key={key} value={key}>
-              {key.charAt(0).toUpperCase() + key.slice(1)}
-            </option>
-          ))}
-        </select>
+    <div className="bg-surface-raised rounded-2xl overflow-hidden border border-line">
+      <div className="p-4 border-b border-line">
+        <h3 className="text-lg font-semibold text-fg">Tailwind UI Builder</h3>
+        <p className="text-sm text-fg-muted mt-1">Preview dynamic Tailwind buttons</p>
       </div>
 
-      <button className={`px-4 py-2 rounded transition ${styles[selected]}`}>
-        Tailwind Button
-      </button>
+      <div className="p-4">
+        <div className="flex items-center gap-3 mb-4">
+          <label htmlFor="tw-style" className="text-sm font-semibold text-fg-muted">
+            Select Style:
+          </label>
+          <select
+            id="tw-style"
+            className="bg-surface-alt text-fg border border-line px-3 py-2 rounded-lg text-sm"
+            value={selected}
+            onChange={(e) => setSelected(e.target.value as StyleKey)}
+          >
+            {(Object.keys(styles) as StyleKey[]).map((key) => (
+              <option key={key} value={key}>
+                {key.charAt(0).toUpperCase() + key.slice(1)}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="mt-4 text-sm text-gray-400">
-        <code>{`class="${styles[selected]}"`}</code>
+        <button className={`px-4 py-2 rounded-lg transition-colors ${styles[selected]}`}>
+          Tailwind Button
+        </button>
+
+        <div className="mt-4 text-sm font-mono text-fg-subtle">
+          <code>{`class="${styles[selected]}"`}</code>
+        </div>
       </div>
     </div>
   );

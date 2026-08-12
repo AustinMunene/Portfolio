@@ -175,25 +175,12 @@ const Home = () => {
 
       {/* Contact. No hardcoded greys or white/x borders below - everything reads
           through the theme tokens, so the same markup works in either theme. */}
-      <Section id="contact" className="py-24 md:py-32 overflow-hidden">
-        {/* Soft ground, picking up the theme rather than fighting it. */}
-        <div
-          className="absolute inset-0"
-          aria-hidden
-          style={{
-            background:
-              'radial-gradient(50% 60% at 50% 0%, var(--hero-poster-glow), transparent 70%)',
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.05]"
-          aria-hidden
-          style={{
-            backgroundImage: 'radial-gradient(circle, #d4d4d8 1px, transparent 1px)',
-            backgroundSize: '32px 32px',
-          }}
-        />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/40 to-transparent" />
+      <Section
+        id="contact"
+        variant="alt"
+        className="section-glow py-24 md:py-32 overflow-hidden"
+      >
+        <div className="absolute inset-x-0 top-0 h-px bg-line" aria-hidden />
 
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
@@ -226,15 +213,18 @@ const Home = () => {
             viewport={{ once: true }}
             className="flex flex-wrap items-center justify-center gap-4"
           >
+            {/* Was `bg-neutral-950 text-fg`: a near-black pill with foreground
+                text, which in light mode meant near-black text on near-black.
+                btn-primary is the token pair that inverts with the theme. */}
             <a
               href="mailto:saviusmunene@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-neutral-950 text-fg rounded-full font-medium hover:opacity-90 transition-opacity"
+              className="btn-primary inline-flex items-center gap-2 px-8 py-3 rounded-full font-medium hover:opacity-90 transition-opacity"
             >
               saviusmunene@gmail.com
             </a>
             <a
               href="tel:+254743988415"
-              className="inline-flex items-center gap-2 px-8 py-3 border border-line text-fg-muted rounded-full font-medium hover:border-accent-500/60 hover:text-fg hover:bg-accent-500/5 transition-colors"
+              className="glass-pill inline-flex items-center gap-2 px-8 py-3 text-fg-muted rounded-full font-medium hover:border-brand-line hover:text-fg"
             >
               +254 743 988 415
             </a>

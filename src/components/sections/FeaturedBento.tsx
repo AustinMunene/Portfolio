@@ -40,36 +40,16 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
   };
 
   return (
-    <section id="projects" className="relative py-28 md:py-36 overflow-hidden">
-      {/* Absolute background layers for "Coder Schematic Vibe" */}
-      <div className="absolute inset-0 bg-surface" aria-hidden />
-      
-      {/* Custom Schematic Lines and Blueprint Dots */}
-      <div className="absolute inset-0 opacity-[0.035] pointer-events-none select-none" aria-hidden="true">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#d4d4d8" strokeWidth="1" />
-            </pattern>
-            <pattern id="dotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="10" cy="10" r="1" fill="#e4e4e7" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#dotGrid)" />
-          {/* Subtle diagonal circuit/wiring schematic line vectors */}
-          <path d="M-100 200 L 300 600 M1200 100 L 1500 400 M600 800 L 900 1100" stroke="#d4d4d8" strokeWidth="1.5" strokeDasharray="5 5" />
-          <path d="M200 100 L 250 150 L 500 150" stroke="#e4e4e7" strokeWidth="1" fill="none" />
-          <path d="M1000 700 L 1050 750 L 1300 750" stroke="#e4e4e7" strokeWidth="1" fill="none" />
-        </svg>
-      </div>
-
-      {/* Radiant Glow Orb backdrop to blend gradient shades */}
-      <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-accent-600/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Clean border separators */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/10 to-transparent" />
+    <section
+      id="projects"
+      className="section-glow relative bg-surface py-28 md:py-36 overflow-hidden"
+    >
+      {/* The blueprint SVG - dot grid plus hardcoded #d4d4d8 schematic lines -
+          used to sit here. It was a light-grey drawing on a light surface, so in
+          light mode it read as smudges, and it duplicated the app-level
+          `.coder-grid`. The section-glow ground is what the glass frosts now. */}
+      <div className="absolute inset-x-0 top-0 h-px bg-line" aria-hidden />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-line" aria-hidden />
 
       <div className="container mx-auto px-6 relative z-10">
         
@@ -81,7 +61,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
           viewport={{ once: true }}
           className="mb-14 md:mb-20 max-w-3xl"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent-500/15 bg-accent-500/5 text-fg text-xs uppercase tracking-[0.15em] font-semibold mb-5">
+          <div className="glass-pill inline-flex items-center gap-2 px-3 py-1 rounded-full text-fg text-xs uppercase tracking-[0.15em] font-semibold mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-brand" />
             Engineering Casebook
           </div>
@@ -102,20 +82,15 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`relative px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider select-none transition-all duration-200 outline-none ${
-                    isActive
-                      ? 'text-brand border border-brand/30 bg-brand-soft'
-                      : 'text-fg-muted border border-line bg-surface-raised hover:border-line hover:text-fg-muted hover:bg-surface-raised'
+                  className={`glass-pill relative px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider select-none outline-none ${
+                    isActive ? 'is-active' : 'text-fg-muted hover:text-fg'
                   }`}
-                  style={{
-                    boxShadow: isActive ? '0 0 20px rgba(212, 212, 216, 0.1)' : undefined
-                  }}
                 >
                   {/* Micro Pulse Active Indicator inside chip */}
                   {isActive && (
                     <motion.span
                       layoutId="chip-indicator"
-                      className="absolute inset-0 rounded-full border border-brand/25 pointer-events-none"
+                      className="absolute inset-0 rounded-full border border-brand-line pointer-events-none"
                       transition={{ type: 'spring', stiffness: 350, damping: 25 }}
                     />
                   )}
@@ -160,17 +135,19 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                     viewport={{ once: true, margin: "-50px" }}
                     className={`group ${isWide ? 'md:col-span-2' : 'col-span-1'}`}
                   >
-                    {/* Double-Bezel (Doppelrand) Enclosure Pattern */}
-                    <div className="rounded-[28px] p-1.5 bg-surface-raised border border-line shadow-[0_24px_80px_rgba(0,0,0,0.8)] hover:border-accent-500/25 transition-colors duration-500 h-full">
-                      
+                    {/* Double-bezel enclosure: a frosted tray holding a frosted
+                        plate. The shadows are tokens now - the old hardcoded
+                        rgba(0,0,0,0.8) drop was tuned for a black page and left
+                        a bruise under every card in light mode. */}
+                    <div className="glass-tray rounded-[28px] p-1.5 hover:border-brand-line h-full">
                       {/* Inner Glass Plate Enclosure */}
-                      <SpotlightSurface className="rounded-[calc(28px-6px)] bg-surface-raised border border-line p-6 md:p-8 hover:border-line transition-colors duration-500 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] h-full flex flex-col">
+                      <SpotlightSurface className="glass glass-strong rounded-[calc(28px-6px)] p-6 md:p-8 h-full flex flex-col">
                         
                         <div className="flex flex-col h-full">
                           {/* Card Header */}
                           <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
                             <div className="flex items-center gap-3">
-                              <span className="flex items-center justify-center w-8 h-8 rounded-full border border-line bg-surface-raised group-hover:bg-accent-500/10 group-hover:border-accent-500/15 transition-all duration-300">
+                              <span className="glass-pill flex items-center justify-center w-8 h-8 rounded-full group-hover:border-brand-line">
                                 {getCategoryIcon(project.category)}
                               </span>
                               
@@ -199,10 +176,10 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                                 href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-line bg-surface-raised hover:border-accent-500/20 hover:bg-accent-500/5 text-fg-muted hover:text-fg text-sm font-semibold tracking-wide select-none transition-all duration-200"
+                                className="glass-pill inline-flex items-center gap-1.5 px-3 py-1 rounded-full hover:border-brand-line text-fg-muted hover:text-fg text-sm font-semibold tracking-wide select-none"
                               >
                                 <span>Visit</span>
-                                <span className="flex items-center justify-center w-4 h-4 rounded-full bg-white/5 group-hover:bg-accent-500/10 group-hover:text-fg transition-all duration-300">
+                                <span className="flex items-center justify-center w-4 h-4 rounded-full bg-brand-soft group-hover:text-fg transition-all duration-300">
                                   <ExternalLink className="w-2.5 h-2.5 stroke-[1.8px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
                                 </span>
                               </a>
@@ -220,7 +197,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                               {project.roles.map((r, i) => (
                                 <span
                                   key={i}
-                                  className="px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider font-bold text-fg/85 border border-accent-500/10 bg-accent-500/5 shadow-sm"
+                                  className="glass-pill px-2.5 py-1 rounded-md text-[10px] uppercase tracking-wider font-bold text-fg-muted"
                                 >
                                   {r}
                                 </span>
@@ -233,7 +210,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                             {project.stack.slice(0, isFeatured ? 6 : 4).map((tech, i) => (
                               <span
                                 key={i}
-                                className="px-3 py-1 bg-surface-raised border border-line rounded-md text-[11px] font-mono text-fg-muted select-none transition-colors duration-200 hover:text-fg hover:border-line"
+                                className="glass-pill px-3 py-1 rounded-md text-[11px] font-mono text-fg-muted select-none hover:text-fg hover:border-brand-line"
                               >
                                 {tech}
                               </span>

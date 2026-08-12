@@ -38,7 +38,7 @@ const SERVICES: Service[] = [
 ];
 
 const Services = () => (
-  <Section id="services" variant="alt" className="py-24 md:py-32 overflow-hidden">
+  <Section id="services" variant="alt" className="section-glow py-24 md:py-32 overflow-hidden">
     {/* Hairlines mark the section edges without needing a heavy background. */}
     <div className="absolute top-0 left-0 right-0 h-px bg-line" aria-hidden />
     <div className="absolute bottom-0 left-0 right-0 h-px bg-line" aria-hidden />
@@ -100,7 +100,7 @@ const Services = () => (
                   {service.tools.map((tool) => (
                     <li
                       key={tool}
-                      className="px-2.5 py-1 rounded-md border border-line bg-surface-raised font-mono text-[10px] uppercase tracking-wider text-fg-subtle"
+                      className="glass-pill px-2.5 py-1 rounded-md font-mono text-[10px] uppercase tracking-wider text-fg-subtle"
                     >
                       {tool}
                     </li>

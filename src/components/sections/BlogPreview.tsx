@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SpotlightSurface from '../SpotlightSurface';
-import useParallax from '../../hooks/useParallax';
+import { CATEGORY_CHIP } from '../../pages/Blog';
 import { ArrowRight } from 'lucide-react';
 
 export type BlogPreviewPost = {
@@ -21,18 +21,9 @@ type BlogPreviewProps = {
   posts: BlogPreviewPost[];
 };
 
-const categoryStyles: Record<string, string> = {
-  Development: 'bg-accent-500/10 text-fg border-accent-500/20',
-  AI: 'bg-purple-500/10 text-purple-300 border-purple-500/20',
-  Design: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20',
-  Career: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
-  'QA & Testing': 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20',
-};
-
 const BlogPreview = ({ posts }: BlogPreviewProps) => {
   const navigate = useNavigate();
   const [topic, setTopic] = useState('All');
-  const { ref: sectionRef, y } = useParallax<HTMLElement>(90);
 
   const filtered = useMemo(() => {
     if (topic === 'All') return posts;
@@ -45,37 +36,9 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
   return (
     <section
       id="blog-preview"
-      ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="section-glow relative bg-surface py-24 md:py-32 overflow-hidden"
     >
-      {/* Background: image + overlay (same pattern as Hero, Career Preview, Let's Connect) */}
-      <div className="absolute inset-0 bg-surface-alt" aria-hidden />
-      <motion.img
-        src="/cypress.jpeg"
-        data-photo-backdrop
-        alt=""
-        role="presentation"
-        decoding="async"
-        style={y ? { y } : undefined}
-        className="absolute -inset-y-16 inset-x-0 w-full h-[calc(100%+8rem)] object-cover object-center"
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"
-        data-photo-backdrop
-        aria-hidden
-      />
-      <div className="absolute inset-0">
-        <div className="absolute bottom-1/3 left-0 w-[400px] h-[400px] bg-accent-600/15 rounded-full blur-[128px]" />
-        <div className="absolute top-1/4 right-1/3 w-[300px] h-[300px] bg-accent-800/10 rounded-full blur-[100px]" />
-      </div>
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, #d4d4d8 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
-        }}
-      />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/30 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-line" aria-hidden />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -104,7 +67,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
           </div>
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/[0.1] text-fg-muted hover:border-accent-500/40 hover:text-fg transition-all text-sm font-medium"
+            className="glass-pill inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-fg-muted hover:border-brand-line hover:text-fg text-sm font-medium"
           >
             View all
             <ArrowRight className="w-4 h-4" />
@@ -117,10 +80,8 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
             <button
               key={t}
               onClick={() => setTopic(t)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                topic === t
-                  ? 'bg-brand-soft text-brand border border-brand/30'
-                  : 'bg-surface-raised text-fg-muted border border-line hover:border-line'
+              className={`glass-pill px-3 py-1.5 rounded-full text-xs font-medium ${
+                topic === t ? 'is-active' : 'text-fg-muted hover:text-fg'
               }`}
             >
               {t}
@@ -142,19 +103,22 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
                 onClick={() => navigate(`/blog/${featured.id}`)}
                 className="lg:col-span-2 group cursor-pointer"
               >
-                <SpotlightSurface className="h-full rounded-2xl overflow-hidden border border-line bg-surface-raised hover:border-accent-500/20 transition-colors duration-300">
+                <SpotlightSurface className="glass h-full rounded-2xl overflow-hidden hover:border-brand-line">
                   <div className="relative h-56 md:h-64 overflow-hidden">
                     <img
                       src={featured.imageUrl}
                       alt={featured.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    {/* The scrim is absolute rather than theme-driven on purpose:
+                        it sits over a photograph, and the title below is white in
+                        both themes because of it. */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
-                      <span className={`inline-block px-3 py-1 rounded-full text-xs border mb-3 ${categoryStyles[featured.category] || 'bg-white/10 text-fg border-line'}`}>
+                      <span className="inline-block px-3 py-1 rounded-full text-xs mb-3 border border-white/20 bg-black/40 text-white backdrop-blur-md">
                         {featured.category}
                       </span>
-                      <h3 className="text-xl md:text-2xl font-bold text-fg group-hover:text-fg transition-colors">
+                      <h3 className="text-xl md:text-2xl font-bold text-white">
                         {featured.title}
                       </h3>
                     </div>
@@ -186,10 +150,10 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
                   transition={{ duration: 0.4, delay: index * 0.06 }}
                   viewport={{ once: true }}
                   onClick={() => navigate(`/blog/${post.id}`)}
-                  className="spotlight surface-depth group cursor-pointer rounded-xl border border-line bg-surface-raised p-4 hover:border-accent-500/20 transition-colors duration-300"
+                  className="spotlight glass group cursor-pointer rounded-xl p-4 hover:border-brand-line"
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <span className={`px-2 py-0.5 rounded text-[10px] font-medium border ${categoryStyles[post.category] || 'bg-white/10 text-fg-muted border-line'}`}>
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${CATEGORY_CHIP}`}>
                       {post.category}
                     </span>
                     <span className="text-[11px] text-fg-subtle">{post.readTime}</span>

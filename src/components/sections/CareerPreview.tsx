@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SpotlightSurface from '../SpotlightSurface';
-import useParallax from '../../hooks/useParallax';
 import { ArrowRight, Briefcase } from 'lucide-react';
 
 export type CareerPreviewItem = {
@@ -15,42 +14,14 @@ type CareerPreviewProps = {
 };
 
 const CareerPreview = ({ items }: CareerPreviewProps) => {
-  const { ref: sectionRef, y } = useParallax<HTMLElement>(90);
-
   return (
     <section
       id="career-preview"
-      ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="section-glow relative bg-surface-alt py-24 md:py-32 overflow-hidden"
     >
-      {/* Background: image + overlay so content stays readable (same pattern as Hero) */}
-      <div className="absolute inset-0 bg-surface-alt" aria-hidden />
-      <motion.img
-        src="/cypress.jpeg"
-        data-photo-backdrop
-        alt=""
-        role="presentation"
-        decoding="async"
-        style={y ? { y } : undefined}
-        className="absolute -inset-y-16 inset-x-0 w-full h-[calc(100%+8rem)] object-cover object-center"
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"
-        data-photo-backdrop
-        aria-hidden
-      />
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-accent-600/15 rounded-full blur-[128px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-accent-800/10 rounded-full blur-[100px]" />
-      </div>
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, #d4d4d8 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
-        }}
-      />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/30 to-transparent" />
+      {/* Hairlines, not a gradient. A fading accent line reads as decoration on
+          a light surface; a flat token hairline reads as an edge. */}
+      <div className="absolute inset-x-0 top-0 h-px bg-line" aria-hidden />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -82,7 +53,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
 
         {/* Alternating timeline */}
         <div className="max-w-4xl mx-0 relative">
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-accent-500/30 via-accent-500/10 to-transparent -translate-x-px" />
+          <div className="absolute left-6 top-0 bottom-0 w-px bg-line -translate-x-px" />
 
           <div className="space-y-8 md:space-y-12">
             {items.map((role, index) => (
@@ -96,9 +67,9 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                 className={`relative flex items-start gap-8 md:gap-12 pl-8`}
               >
                 <div className="w-full">
-                  <SpotlightSurface className="bg-surface-raised rounded-xl border border-line p-5 md:p-6 hover:border-accent-500/30 transition-colors duration-300 ml-6">
+                  <SpotlightSurface className="glass rounded-xl p-5 md:p-6 hover:border-brand-line ml-6">
                     <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-accent-500/10 flex items-center justify-center mt-0.5">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-lg glass-pill flex items-center justify-center mt-0.5">
                         <Briefcase className="w-4 h-4 text-fg-muted" />
                       </div>
                       <div className="min-w-0">
@@ -113,7 +84,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                 </div>
 
                 {/* Timeline dot */}
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent-500/80 border-2 border-black" />
+                <div className="absolute left-6 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-brand ring-4 ring-surface-alt" />
               </motion.div>
             ))}
           </div>
@@ -123,7 +94,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
           <Link
             to="/career"
             aria-label="View full career journey"
-            className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-line text-fg-muted hover:border-accent-500/40 hover:text-fg transition-all text-sm font-medium md:absolute md:bottom-8 md:right-8"
+            className="glass-pill mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full text-fg-muted hover:border-brand-line hover:text-fg text-sm font-medium md:absolute md:bottom-8 md:right-8"
           >
             View full journey
             <ArrowRight className="w-4 h-4" />

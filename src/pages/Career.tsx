@@ -156,12 +156,8 @@ const Career = () => {
   return (
     <motion.div
       transition={{ duration: 0.5 }}
-      className="relative min-h-screen overflow-hidden"
+      className="section-glow relative min-h-screen bg-surface overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-surface" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-600/10 rounded-full blur-[128px]" />
-      <div className="absolute bottom-1/3 left-0 w-[400px] h-[400px] bg-accent-800/10 rounded-full blur-[128px]" />
 
       <div className="container mx-auto px-4 pt-20 md:pt-24 pb-16 md:pb-20 relative z-10">
         <div className="max-w-4xl mx-auto">
@@ -194,7 +190,7 @@ const Career = () => {
 
           {/* Timeline line */}
           <div className="relative">
-            <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent-500/40 via-accent-500/20 to-transparent" />
+            <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-line" />
 
             <div className="space-y-12 md:space-y-16">
               {careerHistory.map((role, index) => (
@@ -208,10 +204,10 @@ const Career = () => {
                 >
                   {/* Timeline dot */}
                   <div className="absolute left-0 md:left-8 top-8 -translate-x-1/2">
-                    <div className={`w-3 h-3 rounded-full ${index === 0 ? 'bg-brand shadow-lg shadow-brand/40' : 'bg-surface-raised border border-line'}`} />
+                    <div className={`w-3 h-3 rounded-full ring-4 ring-surface ${index === 0 ? 'bg-brand' : 'bg-fg-subtle'}`} />
                   </div>
 
-                  <div className="bg-surface-raised rounded-2xl p-6 md:p-8 border border-line hover:border-accent-500/20 transition-all duration-300 group hover:bg-accent-500/[0.02]">
+                  <div className="glass rounded-2xl p-6 md:p-8 hover:border-brand-line group">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6 gap-3">
                       <div>
                         <div className="flex items-center gap-3 mb-2">
@@ -221,7 +217,7 @@ const Career = () => {
                           </h3>
                         </div>
                         <div className="flex items-center gap-3 text-base md:text-lg text-fg-muted mb-1">
-                          <Award className="w-4 h-4 text-fg-muted/60" />
+                          <Award className="w-4 h-4 text-fg-subtle" />
                           <span>{role.company}</span>
                         </div>
                         <div className="flex items-center gap-3 text-sm text-fg-subtle">
@@ -230,7 +226,7 @@ const Career = () => {
                         </div>
                       </div>
                       {index === 0 && (
-                        <span className="inline-flex px-3 py-1 bg-accent-500/10 rounded-full text-fg text-xs border border-accent-500/20 self-start">
+                        <span className="glass-pill is-active inline-flex px-3 py-1 rounded-full text-xs self-start">
                           Current Role
                         </span>
                       )}
@@ -242,7 +238,7 @@ const Career = () => {
 
                     <div className="mb-6">
                       <h4 className="text-sm font-semibold mb-3 flex items-center text-fg-muted">
-                        <TestTube2 className="w-4 h-4 mr-2 text-fg-muted/70" />
+                        <TestTube2 className="w-4 h-4 mr-2 text-fg-subtle" />
                         Key Responsibilities
                       </h4>
                       <ul className="space-y-2">
@@ -251,7 +247,7 @@ const Career = () => {
                             key={idx}
                             className="flex items-start text-sm"
                           >
-                            <Bug className="w-3.5 h-3.5 mr-3 mt-0.5 flex-shrink-0 text-brand/50" />
+                            <Bug className="w-3.5 h-3.5 mr-3 mt-0.5 flex-shrink-0 text-brand-line" />
                             <span className="text-fg-muted">{resp}</span>
                           </li>
                         ))}
@@ -260,14 +256,14 @@ const Career = () => {
 
                     <div>
                       <h4 className="text-sm font-semibold mb-3 flex items-center text-fg-muted">
-                        <Code2 className="w-4 h-4 mr-2 text-fg-muted/70" />
+                        <Code2 className="w-4 h-4 mr-2 text-fg-subtle" />
                         Skills & Tools
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {role.skills.map((skill, idx) => (
                           <span
                             key={idx}
-                            className="px-3 py-1 bg-surface-raised rounded-full text-xs text-fg-muted hover:text-fg hover:bg-accent-500/10 transition-colors"
+                            className="glass-pill px-3 py-1 rounded-full text-xs text-fg-muted hover:text-fg hover:border-brand-line"
                           >
                             {skill}
                           </span>
