@@ -25,3 +25,12 @@ dist-ssr
 .qodo
 .bolt
 .orchids
+
+# Local env. VITE_* values are compiled into the client bundle, so nothing
+# secret belongs here - but it should not be committed either.
+.env
+.env.local
+.env.*.local
+
+# Local Netlify folder
+.netlify

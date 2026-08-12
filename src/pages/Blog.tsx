@@ -411,7 +411,7 @@ jobs:
           wait-on: 'http://localhost:3000'
           spec: 'cypress/e2e/smoke/**/*.cy.js'
         env:
-          CYPRESS_BASE_URL: \$\{{ secrets.STAGING_URL }}
+          CYPRESS_BASE_URL: \${{ secrets.STAGING_URL }}
 
       - name: Upload screenshots on failure
         uses: actions/upload-artifact@v4
