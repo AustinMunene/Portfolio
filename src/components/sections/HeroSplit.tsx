@@ -46,8 +46,13 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
 
   const [activeHighlight, setActiveHighlight] = useState(0);
   const [getInTouchOpen, setGetInTouchOpen] = useState(false);
-  const [carouselPaused, setCarouselPaused] = useState(false);
+  // Hover and focus are held separately. With one shared flag a mouseleave
+  // cleared a pause that a keyboard focus was still holding, and vice versa.
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [focusPaused, setFocusPaused] = useState(false);
   const reduceMotion = useReducedMotion();
+
+  const carouselPaused = hoverPaused || focusPaused;
 
   // Auto-rotation is motion, so prefers-reduced-motion has to stop it too -
   // previously only the 3D scene honoured the setting while this kept cycling.
@@ -285,10 +290,26 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
 
             <div
               className="glass relative rounded-2xl p-6 md:p-8 overflow-hidden"
-              onMouseEnter={() => setCarouselPaused(true)}
-              onMouseLeave={() => setCarouselPaused(false)}
-              onFocusCapture={() => setCarouselPaused(true)}
-              onBlurCapture={() => setCarouselPaused(false)}
+              // Pointer events, and only for an actual mouse. A tap on a touch
+              // screen synthesizes mouseover/mouseenter, but leaves no pointer
+              // hovering afterwards, so the matching leave never arrives - that
+              // latched this to paused for the rest of the visit, which is why
+              // the panel sat frozen on phones.
+              onPointerEnter={(e) => {
+                if (e.pointerType === 'mouse') setHoverPaused(true);
+              }}
+              onPointerLeave={(e) => {
+                if (e.pointerType === 'mouse') setHoverPaused(false);
+              }}
+              // Same trap by way of focus: tapping an indicator dot focuses it
+              // and touch delivers no blur. :focus-visible matches keyboard
+              // focus only, which is the case this pause actually exists for.
+              onFocusCapture={(e) => {
+                if ((e.target as HTMLElement).matches?.(':focus-visible')) {
+                  setFocusPaused(true);
+                }
+              }}
+              onBlurCapture={() => setFocusPaused(false)}
             >
               {/* Decorative corner glow, sitting under the glass so the blur has
                   something to pick up. */}
@@ -310,31 +331,67 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                 ))}
               </div>
 
-              {/* Deliberately NOT wrapped in AnimatePresence. Under
-                  framer-motion 12 the `mode="wait"` + keyed-child pattern here
-                  deadlocked and left this panel stuck at opacity 0, so the whole
-                  rotating highlight was invisible on the live site. A keyed
-                  remount with an enter-only transition cannot deadlock: if the
-                  animation never runs the content is still painted. */}
-              <motion.div
-                key={activeHighlight}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-              >
-                <span className="text-xs font-medium text-fg-muted uppercase tracking-wider">
-                  {highlights[activeHighlight].label}
-                </span>
-                <h3 className="text-2xl md:text-3xl font-display text-fg mt-2 mb-1">
-                  {highlights[activeHighlight].title}
-                </h3>
-                <p className="text-fg-muted text-sm mb-3">
-                  {highlights[activeHighlight].subtitle}
-                </p>
-                <p className="text-fg-muted text-sm leading-relaxed">
-                  {highlights[activeHighlight].detail}
-                </p>
-              </motion.div>
+              {/* Every highlight stays mounted, stacked into a single grid cell,
+                  with only the active one opaque. The cell therefore sizes to
+                  the TALLEST highlight and holds that height for the whole
+                  rotation. Previously only the active one was mounted, so the
+                  panel resized on every swap - and since the hero grid is
+                  items-center, that re-centred both columns and shunted the
+                  page below, which read as the hero flickering between sizes.
+                  This has to come from layout rather than a min-height guess:
+                  the featured project's description arrives as a prop, so no
+                  fixed number stays correct.
+
+                  Still deliberately NOT AnimatePresence. Under framer-motion 12
+                  the `mode="wait"` + keyed-child pattern deadlocked here and
+                  left the panel stuck at opacity 0, so the highlight was
+                  invisible on the live site. Animating permanently-mounted
+                  children cannot deadlock: if the animation never runs, the
+                  active copy is still painted. */}
+              <div className="grid">
+                {highlights.map((highlight, i) => {
+                  const isActive = i === activeHighlight;
+                  return (
+                    <motion.div
+                      key={highlight.label}
+                      // Same cell for all three: transforms below shift them
+                      // visually without ever affecting the measured height.
+                      className="col-start-1 row-start-1"
+                      // Inactive copies are real text sitting at opacity 0, so
+                      // they have to be hidden from assistive tech explicitly.
+                      aria-hidden={!isActive}
+                      // No enter animation on first paint - otherwise all three
+                      // fade in at once before the effect settles.
+                      initial={false}
+                      animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 12 }}
+                      transition={
+                        reduceMotion
+                          ? { duration: 0 }
+                          : { duration: 0.3, ease: [0.23, 1, 0.32, 1] }
+                      }
+                      style={{ pointerEvents: isActive ? 'auto' : 'none' }}
+                    >
+                      <span className="text-xs font-medium text-fg-muted uppercase tracking-wider">
+                        {highlight.label}
+                      </span>
+                      <h3 className="text-2xl md:text-3xl font-display text-fg mt-2 mb-1">
+                        {highlight.title}
+                      </h3>
+                      {/* Only the featured project carries a subtitle; the other
+                          two were rendering an empty <p> whose mb-3 still took
+                          space, adding a third inconsistent height. */}
+                      {highlight.subtitle && (
+                        <p className="text-fg-muted text-sm mb-3">
+                          {highlight.subtitle}
+                        </p>
+                      )}
+                      <p className="text-fg-muted text-sm leading-relaxed">
+                        {highlight.detail}
+                      </p>
+                    </motion.div>
+                  );
+                })}
+              </div>
 
               {/* Progress bar: doubles as the countdown to the next rotation, so
                   it must not keep filling once rotation is paused or disabled. */}
