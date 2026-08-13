@@ -1,0 +1,29 @@
+{
+  /* Netlify functions run on the server, not in the browser, so they cannot
+     share tsconfig.app.json: that one is scoped to `src` and carries DOM libs
+     but no Node types. Without this project the functions directory was checked
+     by nothing at all - a typo in form-autoreply.mts would have built, deployed
+     and then failed silently at runtime. */
+  "compilerOptions": {
+    "target": "ES2022",
+    /* No "DOM": @types/node supplies fetch/Request/Response/Headers itself, and
+       pulling DOM in as well gives two conflicting declarations of each. */
+    "lib": ["ES2023"],
+    "types": ["node"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode - Netlify bundles these before running them. */
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["netlify/**/*.ts", "netlify/**/*.mts"]
+}

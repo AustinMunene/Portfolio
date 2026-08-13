@@ -24,5 +24,18 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
     },
+  },
+  {
+    /* Netlify functions. Separate from the block above because the glob there
+       is .ts/.tsx, which silently skips .mts - so these were reported as
+       "File ignored because no matching configuration was supplied" and never
+       linted. They also run on Node rather than in the browser, and none of the
+       React plugins apply to them. */
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ['netlify/**/*.{ts,mts}'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      globals: globals.node,
+    },
   }
 );
