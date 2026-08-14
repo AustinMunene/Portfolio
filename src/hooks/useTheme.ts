@@ -23,6 +23,17 @@ export const useTheme = () => {
   // per theme, so setting the attribute is enough to move UA widgets too.
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
+
+    // Keep the mobile browser chrome in step, or it stays dark under a light
+    // page. Read back from --surface rather than repeating the hex here, so
+    // this cannot drift from the theme it is meant to match - the attribute
+    // above is already set, so the custom property resolves to the new theme.
+    const surface = getComputedStyle(document.documentElement)
+      .getPropertyValue('--surface')
+      .trim();
+    if (surface) {
+      document.getElementById('theme-color')?.setAttribute('content', surface);
+    }
   }, [theme]);
 
   useEffect(() => {

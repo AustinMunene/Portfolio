@@ -196,6 +196,23 @@
   }
 }
 
+/* First paint only, set and cleared by the inline script in index.html.
+
+   body and every glass surface carry 400ms colour transitions, which is right
+   when someone flips the toggle and wrong on load: a theme applied after the
+   first frame would fade in over 400ms rather than simply being there, turning
+   a one-frame correction into a slow, very visible wash.
+
+   Outside @layer on purpose. `.glass` and friends are unlayered too, and an
+   unlayered !important beats an unlayered normal declaration - inside @layer
+   base this would be competing on layer order instead. */
+.theme-booting,
+.theme-booting *,
+.theme-booting *::before,
+.theme-booting *::after {
+  transition: none !important;
+}
+
 /* Keyframes */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
@@ -344,6 +361,11 @@
   }
 }
 
+/* .nav-island and .reveal are *not* handled here even though they belong to the
+   same idea - both are declared further down the file, and a media query adds
+   no specificity, so an override placed above the rule it is overriding simply
+   loses the cascade. They live in the mobile block near the end instead. */
+
 /* Ambient light behind a section. Two soft pools of the theme's glow colour,
    which is what the glass panels above have to frost.
 
@@ -391,12 +413,20 @@
 :root,
 [data-theme='dark'] {
   --nav-bg: rgba(6, 7, 11, 0.55);
+  /* Near-opaque fallback for phones, where the blur behind the island is off.
+     At 0.55 the content scrolling underneath reads straight through it. */
+  --nav-bg-solid: rgba(6, 7, 11, 0.94);
   --nav-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  --nav-shadow-mobile: 0 8px 20px -12px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
 }
 
 [data-theme='light'] {
   --nav-bg: rgba(247, 249, 253, 0.68);
+  --nav-bg-solid: rgba(247, 249, 253, 0.96);
   --nav-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.18), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+  --nav-shadow-mobile: 0 8px 20px -14px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
 }
 
 /* Viewport reveal.
@@ -545,8 +575,35 @@ html {
     top: 16px;
     width: calc(100% - 24px);
     border-radius: 20px;
+
+    /* The glass block above strips backdrop-filter from .glass and .glass-pill
+       on phones, but .nav-island was never in that list - and it is the one
+       that mattered most. It is position:fixed, so its backdrop is the entire
+       page scrolling underneath it: the blur is recomputed every frame of
+       every scroll rather than once when the element moves. That is what made
+       the site flicker while scrolling on mobile, and worse in dark mode,
+       where --nav-shadow is 0.7 alpha against light's 0.18 on the same
+       permanently-composited layer.
+
+       Without the blur the 55%-opaque tint would let content read straight
+       through, so the mobile island goes near-opaque, and the drop shadow
+       shrinks with it. */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--nav-bg-solid);
+    box-shadow: var(--nav-shadow-mobile);
   }
-  
+
+  /* Animating filter: blur() is about the most expensive thing a phone GPU can
+     be asked to do here, and every revealed element was holding a compositor
+     layer for it. Opacity and transform read the same at this size and are
+     both compositor-only. */
+  [data-reveal-ready] .reveal {
+    filter: none;
+    transition: opacity 800ms var(--ease-spring), transform 800ms var(--ease-spring);
+    will-change: transform, opacity;
+  }
+
   img {
     content-visibility: auto;
     contain: content;
