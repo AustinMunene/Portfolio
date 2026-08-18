@@ -15,9 +15,1115 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 14,
+    title: "Build Your Own AI Superpowers: The Skills Every Engineer Should Have",
+    excerpt: "Stop asking one AI to be good at everything. How to install, call and write your own specialised AI skills for frontend, QA and backend work, and for the parts of the job you keep re-explaining.",
+    date: "August 18, 2026",
+    readTime: "15 min read",
+    category: "AI",
+    imageUrl: "/ai-skills-toolbox.jpg",
+    content: `
+<p>Okay.</p>
+
+<p>We've talked about AI becoming your junior team.</p>
+
+<p>We've talked about using AI to become a better QA engineer and full-stack developer.</p>
+
+<p>So now I think it's time we get into the really fun stuff.</p>
+
+<p><strong>AI skills.</strong></p>
+
+<p>Not the "I know how to use ChatGPT" kind of skills.</p>
+
+<p>I'm talking about actually giving your AI specialised abilities that make it better at the work you're already doing.</p>
+
+<p>Because there is a massive difference between:</p>
+
+<blockquote><p>"AI, make this website look good."</p></blockquote>
+
+<p>and:</p>
+
+<blockquote><p>"Use my frontend design skill, apply modern UI/UX principles, check accessibility, review the responsive behaviour, and then critique your own implementation."</p></blockquote>
+
+<p>That second one is where things start getting interesting.</p>
+
+<p>And this is something I've been experimenting with a lot lately, especially when building frontend projects.</p>
+
+<p>When I was working on projects like:</p>
+
+<ul>
+  <li>Girlie Conversations</li>
+  <li>HerCart Essentials</li>
+  <li>my own portfolio at <a href="https://austin.is-a.dev">austin.is-a.dev</a></li>
+</ul>
+
+<p>I wasn't just asking AI to write code.</p>
+
+<p>I was using specialised skills for different parts of the process.</p>
+
+<p>Frontend design.</p>
+
+<p>UI/UX.</p>
+
+<p>Visual reviews.</p>
+
+<p>Browser testing.</p>
+
+<p>Documentation.</p>
+
+<p>Brainstorming.</p>
+
+<p>Criticism.</p>
+
+<p>And eventually I realised:</p>
+
+<blockquote><p><strong>Why am I asking one AI to be good at everything when I can give it specialised skills?</strong></p></blockquote>
+
+<p>That's the whole idea behind this article.</p>
+
+<p>Welcome to my AI toolbox. 😂</p>
+
+<h2>First things first: What is an AI skill?</h2>
+
+<p>Let's simplify this.</p>
+
+<p>An AI skill is basically a reusable set of instructions, knowledge, rules and workflows that teaches an AI <strong>how to perform a particular type of task well.</strong></p>
+
+<p>Instead of repeatedly saying:</p>
+
+<blockquote><p>"Please behave like a senior frontend engineer."</p></blockquote>
+
+<blockquote><p>"Please review this UI."</p></blockquote>
+
+<blockquote><p>"Please follow these accessibility rules."</p></blockquote>
+
+<blockquote><p>"Please think about UX."</p></blockquote>
+
+<p>You package that knowledge into something reusable.</p>
+
+<p>Then whenever you need it:</p>
+
+<p><strong>You call the skill.</strong></p>
+
+<p>Here's the way I explain it to people who don't write code.</p>
+
+<p>Imagine you hire someone brilliant. Genuinely brilliant. They've read everything.</p>
+
+<p>But on their first day they don't know that your team always double-checks the mobile layout, or that you have been burned three times by that one flaky payment flow, or that you hate it when someone ships a button with no loading state.</p>
+
+<p>So every single morning you explain it all over again.</p>
+
+<p>Every. Single. Morning. 😂</p>
+
+<p>A skill is just writing it down once so you never have to do that again.</p>
+
+<p>Think about it like having specialists on your team.</p>
+
+<p>You wouldn't expect one developer to be the best:</p>
+
+<ul>
+  <li>UI designer</li>
+  <li>backend engineer</li>
+  <li>QA engineer</li>
+  <li>security engineer</li>
+  <li>DevOps engineer</li>
+  <li>UX researcher</li>
+</ul>
+
+<p>at the exact same time.</p>
+
+<p>So why do we expect one generic AI prompt to be amazing at all of these things?</p>
+
+<p>Exactly.</p>
+
+<h2>And here's the part I really like</h2>
+
+<p>You can actually install some of these skills directly from your terminal.</p>
+
+<p>This means you don't have to keep opening a browser, finding some prompt you wrote three months ago, copying it, pasting it into your AI chat and hoping you remembered the latest version.</p>
+
+<p>You know the one. <code>final_prompt_v3_ACTUAL_final.txt</code>. 😂</p>
+
+<p>Your IDE becomes the command centre.</p>
+
+<p>That's how I prefer working with AI now.</p>
+
+<p>I'm already in the project.</p>
+
+<p>I'm already in the terminal.</p>
+
+<p>I'm already writing code.</p>
+
+<p>So why leave?</p>
+
+<h2>Installing your first frontend skill</h2>
+
+<p>Let's start with one I've been using for frontend work:</p>
+
+<h3>Impeccable</h3>
+
+<p>If you're doing frontend development, this is one worth checking out.</p>
+
+<p>The idea is to give your AI a structured set of frontend design and improvement capabilities instead of just asking it:</p>
+
+<blockquote><p>"Make this prettier."</p></blockquote>
+
+<p>😂</p>
+
+<p>And that's important because <strong>pretty does not automatically mean good.</strong></p>
+
+<p>A UI can look beautiful and still have:</p>
+
+<ul>
+  <li>terrible hierarchy</li>
+  <li>inconsistent spacing</li>
+  <li>poor typography</li>
+  <li>bad responsive behaviour</li>
+  <li>accessibility issues</li>
+  <li>confusing interactions</li>
+  <li>unnecessary visual noise</li>
+</ul>
+
+<p>It's the website equivalent of a very handsome person who cannot hold a conversation.</p>
+
+<p>Impeccable gives your AI a much more structured way of thinking about these problems.</p>
+
+<h4>Install it</h4>
+
+<p>From your project terminal:</p>
+
+<pre><code class="language-bash">npx impeccable install
+</code></pre>
+
+<p>It requires <strong>Node.js 22.12+</strong>.</p>
+
+<p>The cool part is that the installer can tailor the build to the AI harness and model you're using.</p>
+
+<p>Once installed, start your agent and initialise it:</p>
+
+<pre><code class="language-text">/impeccable init
+</code></pre>
+
+<p>And when you need to update it later:</p>
+
+<pre><code class="language-bash">npx impeccable update
+</code></pre>
+
+<p>That's it.</p>
+
+<p>Now instead of having a giant prompt sitting somewhere in your notes, you have a reusable frontend capability available directly in your AI development workflow.</p>
+
+<p>That's the difference between <strong>using a prompt</strong> and <strong>building a workflow.</strong></p>
+
+<h2>So how do I actually use the skill?</h2>
+
+<p>This is where I think people get confused.</p>
+
+<p>Installing a skill doesn't mean the AI is going to magically run it every time you type something.</p>
+
+<p>You need to understand the idea of <strong>invoking or calling a skill.</strong></p>
+
+<p>Depending on the skill and your AI coding harness, that might mean:</p>
+
+<pre><code class="language-text">/skill-name
+</code></pre>
+
+<p>or a specific command exposed by the skill.</p>
+
+<p>Or, in some setups, the AI can automatically decide when a skill is relevant based on the skill's instructions.</p>
+
+<p>The exact syntax depends on the skill and the harness you're using.</p>
+
+<p>But conceptually, think:</p>
+
+<pre><code class="language-text">Install skill
+      ↓
+Initialise/configure skill
+      ↓
+Open your project
+      ↓
+Call skill when needed
+      ↓
+Give it the task
+</code></pre>
+
+<p>For example:</p>
+
+<blockquote><p>"Use the Impeccable skill to review this landing page. Focus on visual hierarchy, typography, spacing, responsiveness and accessibility. Don't rewrite the entire page. First identify the biggest problems and explain why they matter."</p></blockquote>
+
+<p>That's much more useful than:</p>
+
+<blockquote><p>"Make my landing page better."</p></blockquote>
+
+<p>One of those gets you a report you can act on.</p>
+
+<p>The other gets you a purple gradient. 😂</p>
+
+<h2>My favourite frontend workflow</h2>
+
+<p>This is where things start getting fun.</p>
+
+<p>Imagine I'm building a new landing page.</p>
+
+<p>I might start with the basic implementation.</p>
+
+<p>Then:</p>
+
+<h3>Step 1</h3>
+
+<p>Ask my frontend skill to review the implementation.</p>
+
+<h3>Step 2</h3>
+
+<p>Ask my UI/UX skill to critique the experience.</p>
+
+<h3>Step 3</h3>
+
+<p>Ask a browser capable AI tool to actually inspect the running website.</p>
+
+<h3>Step 4</h3>
+
+<p>Ask it to test mobile and desktop layouts.</p>
+
+<h3>Step 5</h3>
+
+<p>Fix the issues.</p>
+
+<h3>Step 6</h3>
+
+<p>Run the review again.</p>
+
+<p>So the workflow becomes:</p>
+
+<pre><code class="language-text">Build
+  ↓
+AI Design Review
+  ↓
+UX Review
+  ↓
+Browser Review
+  ↓
+Fix
+  ↓
+Review Again
+</code></pre>
+
+<p>That is a completely different development experience.</p>
+
+<p>You're effectively creating a little design team around yourself.</p>
+
+<p>And you're still the person making the decisions.</p>
+
+<h2>UI/UX skills</h2>
+
+<p>Another category I think frontend developers should have is a dedicated UI/UX skill.</p>
+
+<p>A good one should help AI think about:</p>
+
+<ul>
+  <li>visual hierarchy</li>
+  <li>typography</li>
+  <li>spacing</li>
+  <li>colour</li>
+  <li>component consistency</li>
+  <li>responsive design</li>
+  <li>accessibility</li>
+  <li>user flows</li>
+  <li>interaction patterns</li>
+  <li>empty states</li>
+  <li>loading states</li>
+  <li>error states</li>
+</ul>
+
+<p>This is where something like a UI/UX Pro Max style skill becomes useful.</p>
+
+<p>The important part is that we're giving AI <strong>a framework for evaluating design.</strong></p>
+
+<p>Otherwise you get:</p>
+
+<blockquote><p>"This looks modern."</p></blockquote>
+
+<p>Okay.</p>
+
+<p>According to who? 😂</p>
+
+<p>A proper skill should be able to explain:</p>
+
+<blockquote><p>"The CTA doesn't have enough visual prominence."</p></blockquote>
+
+<blockquote><p>"The hierarchy between the heading and supporting text is weak."</p></blockquote>
+
+<blockquote><p>"This interaction is unclear on mobile."</p></blockquote>
+
+<blockquote><p>"The colour contrast doesn't meet accessibility expectations."</p></blockquote>
+
+<p>Now we're talking.</p>
+
+<h2>Frontend skills should not just build</h2>
+
+<p>This is one of the biggest lessons I've learned.</p>
+
+<p>Don't only use AI to generate the frontend.</p>
+
+<p>Use AI to <strong>criticise the frontend.</strong></p>
+
+<p>There's a massive difference.</p>
+
+<p>If AI creates the page and you immediately accept it, you've essentially asked the same person to build the house and approve their own inspection.</p>
+
+<p>😂</p>
+
+<p>Instead:</p>
+
+<blockquote><p>Build it.</p></blockquote>
+
+<p>Then:</p>
+
+<blockquote><p><strong>Review it.</strong></p></blockquote>
+
+<p>Then:</p>
+
+<blockquote><p><strong>Try to break it.</strong></p></blockquote>
+
+<p>Then:</p>
+
+<blockquote><p><strong>Try to improve it.</strong></p></blockquote>
+
+<p>That's the workflow.</p>
+
+<h2>Browser skills are a cheat code</h2>
+
+<p>This is another one I've been using.</p>
+
+<p>A browser capable AI tool can actually interact with your running application.</p>
+
+<p>Instead of sending a screenshot and asking:</p>
+
+<blockquote><p>"Does this look okay?"</p></blockquote>
+
+<p>you can have AI inspect the actual website.</p>
+
+<p>Navigate.</p>
+
+<p>Click.</p>
+
+<p>Scroll.</p>
+
+<p>Resize.</p>
+
+<p>Check interactions.</p>
+
+<p>Look at states.</p>
+
+<p>Find broken experiences.</p>
+
+<p>I've used workflows like Claude in Chrome for this kind of review.</p>
+
+<p>And it changes the feedback loop completely.</p>
+
+<pre><code class="language-text">Write code
+     ↓
+Run application
+     ↓
+Open browser
+     ↓
+AI explores application
+     ↓
+Find problems
+     ↓
+Fix
+     ↓
+Repeat
+</code></pre>
+
+<p>At that point you're getting pretty close to:</p>
+
+<p><strong>AI-assisted exploratory testing.</strong></p>
+
+<p>And as a QA engineer, this is where I start getting excited. 😂</p>
+
+<h2>Grill-me: The skill that tells you your idea might suck</h2>
+
+<p>This is another concept I absolutely love.</p>
+
+<p>Sometimes you don't need AI to build something.</p>
+
+<p>You need AI to tell you whether you should build it at all.</p>
+
+<p>That's where a "grill-me" style skill comes in.</p>
+
+<p>You give it your idea.</p>
+
+<p>Then tell it:</p>
+
+<blockquote><p><strong>Don't encourage me. Challenge me.</strong></p></blockquote>
+
+<p>Ask it:</p>
+
+<ul>
+  <li>What am I assuming?</li>
+  <li>What could go wrong?</li>
+  <li>Who actually needs this?</li>
+  <li>What problem am I solving?</li>
+  <li>What alternatives exist?</li>
+  <li>What am I overengineering?</li>
+  <li>What would make this fail?</li>
+  <li>What would users hate?</li>
+  <li>What am I completely overlooking?</li>
+</ul>
+
+<p>This is useful for software.</p>
+
+<p>It's also useful for life.</p>
+
+<p>Because sometimes AI saying:</p>
+
+<blockquote><p>"That's a great idea!"</p></blockquote>
+
+<p>is exactly what you don't need.</p>
+
+<p>You need:</p>
+
+<blockquote><p>"Bro... no." 😂</p></blockquote>
+
+<p>Honestly, this one has saved me more weekends than any amount of generated code.</p>
+
+<h2>And then there's documentation</h2>
+
+<p>Another skill category that I think developers should seriously explore is documentation and research.</p>
+
+<p>Imagine you're implementing something using a library you've never used.</p>
+
+<p>Instead of asking AI from whatever it happens to remember:</p>
+
+<blockquote><p>"How does this library work?"</p></blockquote>
+
+<p>Give it the documentation.</p>
+
+<p>Then ask:</p>
+
+<blockquote><p>"I'm implementing X. Read the documentation and identify the recommended approach. Highlight anything that could cause problems with my implementation."</p></blockquote>
+
+<p>Now AI is working from the <strong>source of truth</strong> instead of guessing.</p>
+
+<p>That's a much better workflow.</p>
+
+<p>And if you're working with rapidly changing technologies, this becomes even more important.</p>
+
+<h2>Now let's bring this into QA</h2>
+
+<p>This is where things get REALLY interesting.</p>
+
+<p>Because QA is full of repeatable reasoning patterns.</p>
+
+<p>We already have:</p>
+
+<ul>
+  <li>testing methodologies</li>
+  <li>heuristics</li>
+  <li>checklists</li>
+  <li>risk analysis</li>
+  <li>boundary analysis</li>
+  <li>exploratory testing</li>
+  <li>regression strategies</li>
+  <li>API testing patterns</li>
+</ul>
+
+<p>Why not teach those to AI?</p>
+
+<p>Imagine creating a skill called:</p>
+
+<pre><code class="language-text">senior-qa-review
+</code></pre>
+
+<p>And inside it:</p>
+
+<pre><code class="language-text">Always consider:
+
+Functional behaviour
+Negative scenarios
+Boundary conditions
+Authorization
+Authentication
+Data integrity
+API behaviour
+State transitions
+Concurrency
+Error handling
+Regression impact
+Security
+Performance
+Accessibility
+Browser behaviour
+</code></pre>
+
+<p>Now every time you ask AI to review a feature, it already knows your testing philosophy.</p>
+
+<p>You don't have to paste that context every single time.</p>
+
+<h2>Build a Playwright skill</h2>
+
+<p>This one is particularly useful if you're doing automation.</p>
+
+<p>Let's say your project has specific Playwright conventions.</p>
+
+<p>Maybe you use:</p>
+
+<ul>
+  <li>Page Objects</li>
+  <li>fixtures</li>
+  <li>reusable test data</li>
+  <li>specific selectors</li>
+  <li>specific naming conventions</li>
+  <li>specific assertions</li>
+  <li>screenshots on failure</li>
+  <li>traces</li>
+  <li>tags</li>
+  <li>a particular folder structure</li>
+</ul>
+
+<p>Don't explain all of this every time.</p>
+
+<p>Create a skill.</p>
+
+<p>Then:</p>
+
+<blockquote><p>"Create Playwright tests for this feature."</p></blockquote>
+
+<p>actually means:</p>
+
+<blockquote><p>"Create Playwright tests <strong>the way we build Playwright tests here.</strong>"</p></blockquote>
+
+<p>That is a massive upgrade.</p>
+
+<p>The skill can encode:</p>
+
+<pre><code class="language-text">Test structure
+Naming conventions
+Selector strategy
+Fixture usage
+Assertions
+Test data
+Retries
+Tracing
+Screenshots
+Reporting
+</code></pre>
+
+<p>Now AI isn't just generating tests.</p>
+
+<p>It's generating tests that fit <strong>your ecosystem.</strong></p>
+
+<h2>Backend skills</h2>
+
+<p>The same idea applies to backend development.</p>
+
+<p>Imagine having:</p>
+
+<pre><code class="language-text">backend-review
+api-design
+database-review
+security-review
+performance-review
+</code></pre>
+
+<p>Each skill has a specific job.</p>
+
+<p>Your backend skill understands:</p>
+
+<ul>
+  <li>API conventions</li>
+  <li>validation</li>
+  <li>error handling</li>
+  <li>authentication</li>
+  <li>authorization</li>
+  <li>logging</li>
+  <li>architecture</li>
+</ul>
+
+<p>Your database skill understands:</p>
+
+<ul>
+  <li>query performance</li>
+  <li>indexes</li>
+  <li>relationships</li>
+  <li>transactions</li>
+  <li>data integrity</li>
+  <li>migrations</li>
+</ul>
+
+<p>Your security skill attacks the implementation.</p>
+
+<p>Now your AI can review the same feature from multiple perspectives.</p>
+
+<p>That's way more powerful than:</p>
+
+<blockquote><p>"Review my backend."</p></blockquote>
+
+<h2>And here's where it gets even better</h2>
+
+<p>You can combine skills.</p>
+
+<p>Imagine you're building a new feature.</p>
+
+<p>You might have:</p>
+
+<pre><code class="language-text">                 NEW FEATURE
+                      │
+      ┌─────────┬─────┴─────┬─────────┐
+      ↓         ↓           ↓         ↓
+   Frontend  Backend     Security  Testing
+      │         │           │         │
+      └─────────┴─────┬─────┴─────────┘
+                      ↓
+                 Final Review
+</code></pre>
+
+<p>Each capability has a different responsibility.</p>
+
+<p>That's basically a virtual engineering team.</p>
+
+<p>And you're orchestrating it from your IDE.</p>
+
+<h2>But how do you create your own skills?</h2>
+
+<p>This is probably the most important part of this entire article.</p>
+
+<p>Because eventually you're going to find yourself thinking:</p>
+
+<blockquote><p>"Why doesn't AI already know how I do this?"</p></blockquote>
+
+<p>Good question.</p>
+
+<p><strong>Teach it.</strong></p>
+
+<p>Start with something repetitive.</p>
+
+<p>Maybe every time you receive a Jira ticket, you do the same analysis.</p>
+
+<p>You:</p>
+
+<ol>
+  <li>Read the requirement.</li>
+  <li>Identify the affected areas.</li>
+  <li>Look for ambiguity.</li>
+  <li>Think about edge cases.</li>
+  <li>Identify API changes.</li>
+  <li>Think about regression impact.</li>
+  <li>Create test scenarios.</li>
+</ol>
+
+<p>Write that process down.</p>
+
+<p>Congratulations.</p>
+
+<p>You have the beginning of a QA skill.</p>
+
+<h2>My process for creating a skill</h2>
+
+<h3>1. Ask yourself</h3>
+
+<blockquote><p>What do I keep explaining to AI?</p></blockquote>
+
+<p>That's probably a skill.</p>
+
+<h3>2. Write down your process</h3>
+
+<p>Don't try to make it perfect.</p>
+
+<p>Write:</p>
+
+<blockquote><p>"When I review this type of work, I normally check X, Y and Z."</p></blockquote>
+
+<h3>3. Define what good looks like</h3>
+
+<p>This is extremely important.</p>
+
+<p>Tell the AI:</p>
+
+<blockquote><p>A good result should...</p></blockquote>
+
+<p>and:</p>
+
+<blockquote><p>A bad result usually...</p></blockquote>
+
+<p>Now it has something to aim for.</p>
+
+<h3>4. Add your rules</h3>
+
+<p>What should always happen?</p>
+
+<p>What should never happen?</p>
+
+<p>What assumptions should it avoid?</p>
+
+<p>What standards should it follow?</p>
+
+<h3>5. Give it examples</h3>
+
+<p>This is huge.</p>
+
+<p>Give it examples of:</p>
+
+<p><strong>Good</strong></p>
+
+<p>and</p>
+
+<p><strong>Bad.</strong></p>
+
+<p>Examples can communicate things that 50 lines of instructions sometimes can't.</p>
+
+<h3>6. Test it against real work</h3>
+
+<p>Don't test it with:</p>
+
+<blockquote><p>"Give me an example."</p></blockquote>
+
+<p>Give it an actual task.</p>
+
+<p>Something you were going to do anyway.</p>
+
+<p>See what happens.</p>
+
+<h3>7. Keep improving it</h3>
+
+<p>The first version will probably suck.</p>
+
+<p>That's fine.</p>
+
+<p>You use it.</p>
+
+<p>It misses something.</p>
+
+<p>You update it.</p>
+
+<p>It misses something else.</p>
+
+<p>You update it again.</p>
+
+<p>Eventually you have something that actually reflects how you work.</p>
+
+<h2>Your skills can become your engineering muscle memory</h2>
+
+<p>This is the part I find really interesting.</p>
+
+<p>Think about experienced engineers.</p>
+
+<p>A senior QA engineer sees a requirement and immediately thinks:</p>
+
+<blockquote><p>"What happens if this value is null?"</p></blockquote>
+
+<p>A senior frontend engineer sees a design and immediately notices:</p>
+
+<blockquote><p>"This is going to be terrible on mobile."</p></blockquote>
+
+<p>A senior backend engineer sees an endpoint and immediately thinks:</p>
+
+<blockquote><p>"What happens when this gets hammered with concurrent requests?"</p></blockquote>
+
+<p>That's experience.</p>
+
+<p>Nobody taught them that in a course. They got there by shipping something at 2am and watching it fall over. 😂</p>
+
+<p>Skills allow you to encode some of that experience into AI.</p>
+
+<p>So instead of starting from zero every time...</p>
+
+<p>Your AI starts with <strong>your accumulated knowledge and standards.</strong></p>
+
+<p>That's powerful.</p>
+
+<h2>Don't build one giant "everything" skill</h2>
+
+<p>Please don't do this.</p>
+
+<p>😂</p>
+
+<p>Don't create:</p>
+
+<pre><code class="language-text">ultimate-software-engineer-ai-skill-final-v7-really-final
+</code></pre>
+
+<p>with 15,000 lines telling AI how to build software, design interfaces, test APIs, deploy Kubernetes, make coffee and solve world peace.</p>
+
+<p>Keep skills focused.</p>
+
+<p>Good:</p>
+
+<pre><code class="language-text">frontend-review
+ui-ux-review
+playwright
+api-testing
+security-review
+requirements-analysis
+grill-me
+</code></pre>
+
+<p>Bad:</p>
+
+<pre><code class="language-text">do-everything-engineering
+</code></pre>
+
+<p>The whole point is <strong>specialisation.</strong></p>
+
+<h2>And now we get to the really fun part</h2>
+
+<p>Imagine your AI toolbox eventually looking something like this:</p>
+
+<pre><code class="language-text">MY AI TOOLBOX
+
+Frontend
+├── frontend-review
+├── ui-ux-review
+├── accessibility
+├── browser-review
+└── design-system
+
+Backend
+├── api-design
+├── database-review
+├── security-review
+└── performance
+
+QA
+├── test-strategy
+├── exploratory-testing
+├── playwright
+├── api-testing
+└── defect-analysis
+
+Thinking
+├── grill-me
+├── requirements-analysis
+├── architecture-review
+└── research
+
+General
+├── documentation
+├── code-review
+└── planning
+</code></pre>
+
+<p>Now notice what happens to the question you start asking.</p>
+
+<p>It stops being:</p>
+
+<blockquote><p>"What's the best AI?"</p></blockquote>
+
+<p>And becomes:</p>
+
+<blockquote><p><strong>"What capability do I need right now?"</strong></p></blockquote>
+
+<p>That's a much better question.</p>
+
+<h2>Your IDE is becoming the command centre</h2>
+
+<p>This is probably my favourite shift.</p>
+
+<p>I'm already in my IDE.</p>
+
+<p>I'm already in the terminal.</p>
+
+<p>I'm already looking at the code.</p>
+
+<p>So instead of constantly jumping between:</p>
+
+<p>Chrome → ChatGPT → Copy → Paste → IDE → Test → Chrome → ChatGPT...</p>
+
+<p>I can start bringing these capabilities <strong>into the development environment.</strong></p>
+
+<p>Install a skill.</p>
+
+<p>Configure it.</p>
+
+<p>Call it.</p>
+
+<p>Use it.</p>
+
+<p>Improve it.</p>
+
+<p>Repeat.</p>
+
+<p>The AI starts becoming part of the project rather than another website sitting beside the project.</p>
+
+<p>And that distinction matters.</p>
+
+<h2>But there's one more thing</h2>
+
+<p>Skills are great.</p>
+
+<p>But skills alone don't give AI access to your world.</p>
+
+<p>A frontend skill can tell AI <strong>how</strong> to review a website.</p>
+
+<p>A QA skill can tell it <strong>how</strong> to test something.</p>
+
+<p>A backend skill can tell it <strong>how</strong> to review an API.</p>
+
+<p>But what if you want AI to actually:</p>
+
+<ul>
+  <li>inspect GitHub</li>
+  <li>read Jira</li>
+  <li>query your database</li>
+  <li>run Playwright</li>
+  <li>access your documentation</li>
+  <li>inspect your browser</li>
+  <li>interact with APIs</li>
+  <li>check CI/CD</li>
+</ul>
+
+<p>Now we need something else.</p>
+
+<p>We need <strong>tools.</strong></p>
+
+<p>And this is where the line between:</p>
+
+<p><strong>skills</strong></p>
+
+<p>and</p>
+
+<p><strong>MCP</strong></p>
+
+<p>starts becoming very interesting.</p>
+
+<p>A skill gives AI the <strong>knowledge and instructions</strong> for how to approach a task.</p>
+
+<p>A tool gives AI the <strong>ability to actually do something.</strong></p>
+
+<p>One is knowing how to drive.</p>
+
+<p>The other is being handed the keys.</p>
+
+<p>Put them together?</p>
+
+<p>Now we're cooking. 🔥</p>
+
+<h2>The real cheat code</h2>
+
+<p>We've spent the last three articles going deeper into this.</p>
+
+<p>First:</p>
+
+<p><strong>AI can become part of your team.</strong></p>
+
+<p>Then:</p>
+
+<p><strong>AI can make you a better engineer.</strong></p>
+
+<p>Now:</p>
+
+<p><strong>You can teach AI how you work.</strong></p>
+
+<p>That's the progression.</p>
+
+<p>Don't just collect prompts.</p>
+
+<p>Build skills.</p>
+
+<p>Don't just ask AI questions.</p>
+
+<p>Give it standards.</p>
+
+<p>Don't just let it generate work.</p>
+
+<p>Give it a process.</p>
+
+<p>Don't just consume AI tooling.</p>
+
+<p><strong>Build your own.</strong></p>
+
+<p>Because eventually everyone is going to have access to the same models.</p>
+
+<p>The advantage won't simply be:</p>
+
+<blockquote><p>"I have Claude."</p></blockquote>
+
+<p>or:</p>
+
+<blockquote><p>"I have ChatGPT."</p></blockquote>
+
+<p>or:</p>
+
+<blockquote><p>"I have Gemini."</p></blockquote>
+
+<p>Everyone will.</p>
+
+<p>The advantage will be:</p>
+
+<blockquote><p><strong>"I've built a system around these models that makes me ridiculously effective."</strong></p></blockquote>
+
+<p>And honestly, that's the bit I'm most excited about.</p>
+
+<h2>One last challenge</h2>
+
+<p>Open your terminal.</p>
+
+<p>Go through the things you do every week.</p>
+
+<p>Look for the repetitive stuff.</p>
+
+<p>The things you keep explaining.</p>
+
+<p>The things you keep checking.</p>
+
+<p>The things you keep prompting.</p>
+
+<p>The things where you have a very specific way of doing things.</p>
+
+<p>Pick <strong>one.</strong></p>
+
+<p>Turn it into a skill.</p>
+
+<p>Use it.</p>
+
+<p>Break it.</p>
+
+<p>Improve it.</p>
+
+<p>Then create another one.</p>
+
+<p>Eventually you'll have something pretty cool.</p>
+
+<p>Not just an AI assistant.</p>
+
+<p>Not just a collection of prompts.</p>
+
+<p>But your own <strong>AI engineering toolbox.</strong></p>
+
+<p>And the funniest part?</p>
+
+<p>The more you teach AI how you work, the more you realise how you work yourself.</p>
+
+<p>You start asking:</p>
+
+<blockquote><p>Why do I always check this?</p></blockquote>
+
+<blockquote><p>Why don't I have a standard for that?</p></blockquote>
+
+<blockquote><p>Why am I doing this manually?</p></blockquote>
+
+<blockquote><p>Could this be automated?</p></blockquote>
+
+<blockquote><p>Could an agent handle this?</p></blockquote>
+
+<p>Half the time you don't even have a good answer. You just always did it that way. 😂</p>
+
+<p>And that's where the next level begins.</p>
+
+<p>Because once your AI has the skills...</p>
+
+<p>we just need to give it <strong>hands.</strong></p>
+
+<p>And that's where we're going next.</p>
+
+<p><em>Part 4: Give Your AI Hands: MCP, Tools and Connecting Your Agent to the Real World</em> 👀</p>
+  `
+  },
+  {
     id: 13,
     title: "AI Cheat Codes for Engineers: How to Become a Better QA + Full-Stack Dev",
-    excerpt: "Twelve ways to use AI that make you a sharper engineer instead of a faster copy-paster — debugging, breaking features, code review, test data and impact analysis.",
+    excerpt: "Twelve ways to use AI that make you a sharper engineer instead of a faster copy-paster. Debugging, breaking features, code review, test data and impact analysis.",
     date: "August 18, 2026",
     readTime: "12 min read",
     category: "AI",
@@ -430,13 +1536,13 @@ Users with conflicting permissions
 
 <p>Because I have a feeling that's going to become one of the most valuable skills we can have as engineers.</p>
 
-<p><em>Part 3: Stop Prompting. Start Context Engineering.</em> 👀</p>
+<p><em>Part 3: Build Your Own AI Superpowers. The Skills Every Engineer Should Have.</em> 👀</p>
   `
   },
   {
     id: 12,
     title: "AI Is Not Your Copilot Anymore. It's Your Junior Team",
-    excerpt: "Most of us still use AI like a smarter Google search. The bigger shift is delegation — agents with tools, context and guardrails, and what MCP means for engineers and QAs.",
+    excerpt: "Most of us still use AI like a smarter Google search. The bigger shift is delegation: agents with tools, context and guardrails, and what MCP means for engineers and QAs.",
     date: "August 18, 2026",
     readTime: "9 min read",
     category: "AI",
