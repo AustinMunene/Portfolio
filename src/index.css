@@ -385,9 +385,31 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  /* Centres sit inside the section, not on its top and bottom edges. Anchored at
+     0% / 100% the glow was brightest exactly at the seam and then hard-clipped by
+     `inset: 0`, so every boundary got the full-strength tint on one side and
+     nothing on the other - and because neighbours peak at different x (18% vs
+     88%), the step ran the whole width. Dark mode showed it most: --section-glow
+     is nearly twice the alpha there. */
   background:
-    radial-gradient(60% 55% at 18% 0%, var(--section-glow), transparent 70%),
-    radial-gradient(52% 50% at 88% 100%, var(--section-glow), transparent 72%);
+    radial-gradient(60% 55% at 18% 26%, var(--section-glow), transparent 70%),
+    radial-gradient(52% 50% at 88% 74%, var(--section-glow), transparent 72%);
+  /* Belt and braces: whatever the radials still carry near the edges is faded
+     out, so a section always meets its neighbour on the bare surface colour. */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
 }
 
 /* Floating Glass Pill Navigation styles */
@@ -636,6 +658,15 @@ html {
   --tw-prose-pre-bg: var(--surface-alt);
   --tw-prose-th-borders: var(--border);
   --tw-prose-td-borders: var(--border);
+}
+
+/* Typography's default blockquote quotes are curly marks injected as pseudo
+   elements. Blog posts write their own quotation marks inline, and several
+   blockquotes are multi-paragraph asides rather than quotes, so the injected
+   pair either doubles up or wraps the whole aside. Drop them. */
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none;
 }
 
 /* Referenced by several page headings but never defined until now, so it was a

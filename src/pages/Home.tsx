@@ -178,7 +178,6 @@ const Home = () => {
           through the theme tokens, so the same markup works in either theme. */}
       <Section
         id="contact"
-        variant="alt"
         className="section-glow py-24 md:py-32 overflow-hidden"
       >
         <div className="absolute inset-x-0 top-0 h-px bg-line" aria-hidden />

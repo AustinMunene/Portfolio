@@ -15,6 +15,824 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 13,
+    title: "AI Cheat Codes for Engineers: How to Become a Better QA + Full-Stack Dev",
+    excerpt: "Twelve ways to use AI that make you a sharper engineer instead of a faster copy-paster — debugging, breaking features, code review, test data and impact analysis.",
+    date: "August 18, 2026",
+    readTime: "12 min read",
+    category: "AI",
+    imageUrl: "/ai-cheat-codes.jpg",
+    content: `
+<p>So we just established that AI is no longer just our little coding buddy. It can actually become part of the team.</p>
+
+<p>Agents. Tools. MCP. Automation. AI employees that can go off and do things while you're busy pretending you understand why that production bug only happens on Tuesdays. 😂</p>
+
+<p>But before we start building our army of AI agents, I think there is something we need to talk about.</p>
+
+<p><strong>You.</strong></p>
+
+<p>Because having access to AI does not automatically make you a better engineer. Actually, if you use it badly, it can make you worse.</p>
+
+<p>You stop debugging because you can ask AI for the fix. You stop reading documentation because you can ask AI to summarize it. You stop thinking about edge cases because AI can generate 50 test cases in five seconds. You stop learning because there is always a machine sitting next to you ready to give you the answer.</p>
+
+<p>And before you know it, you've become really good at copying answers from AI.</p>
+
+<p>That's not the goal.</p>
+
+<p>The goal is to become the engineer who knows <strong>how to use AI to think better, learn faster and ship better software.</strong></p>
+
+<p>So here are some of the AI cheat codes I've been using and experimenting with.</p>
+
+<h2>Cheat Code #1: Stop asking AI to fix things. Ask it to help you debug.</h2>
+
+<p>This one changed the way I use AI.</p>
+
+<p>The easiest thing in the world is to paste an error into ChatGPT and say "fix this." And yes, sometimes it works. But you just skipped the most important part: <strong>understanding what actually went wrong.</strong></p>
+
+<p>Instead, give AI the situation. Tell it:</p>
+
+<pre><code class="language-text">Expected:
+The API should return a 200 response.
+
+Actual:
+I'm getting a 500.
+
+Context:
+This happens only when the user has no assigned department.
+
+What I've already checked:
+- Database connection is working
+- Endpoint works for users with departments
+- Logs show a null reference error
+</code></pre>
+
+<p>Then ask:</p>
+
+<blockquote><p>Give me the most likely causes, rank them by probability, and tell me what evidence I should look for to confirm each one.</p></blockquote>
+
+<p>Now you're not asking AI to replace your debugging. You're using it as a <strong>rubber duck that happens to have read half the internet.</strong> 😂</p>
+
+<p>And this is especially useful as a QA. Because good QA isn't just:</p>
+
+<blockquote><p>"The test failed."</p></blockquote>
+
+<p>It's:</p>
+
+<blockquote><p>"The test failed, here's what I think is happening, here's the evidence, and here's where I think we should investigate."</p></blockquote>
+
+<p>AI can help you get there faster.</p>
+
+<h2>Cheat Code #2: Don't ask AI to write test cases. Ask it to break the system.</h2>
+
+<p>This is probably one of my favourite QA use cases.</p>
+
+<p>A requirement says:</p>
+
+<blockquote><p>Users can reset their password using their email address.</p></blockquote>
+
+<p>The lazy AI prompt is "generate test cases for password reset." You'll get:</p>
+
+<ul>
+  <li>Valid email</li>
+  <li>Invalid email</li>
+  <li>Empty email</li>
+  <li>Successful reset</li>
+  <li>Unsuccessful reset</li>
+</ul>
+
+<p>Cool. But let's make AI uncomfortable. Tell it:</p>
+
+<blockquote><p>"You are a senior QA engineer trying to break this feature. Find scenarios that developers are likely to overlook. Think about security, state, concurrency, rate limiting, session handling, expired tokens, reused tokens, enumeration, browser behaviour, API manipulation and unexpected user behaviour."</p></blockquote>
+
+<p>Now we're getting somewhere. Suddenly AI starts asking questions like:</p>
+
+<ul>
+  <li>What happens if the reset token is used twice?</li>
+  <li>What happens if the token expires while the page is open?</li>
+  <li>Can someone determine whether an email exists in the system?</li>
+  <li>What happens if multiple reset requests are made?</li>
+  <li>Can the password reset endpoint be called directly without going through the UI?</li>
+  <li>What happens if the user changes their password while another reset token is still active?</li>
+</ul>
+
+<p>Those are much more interesting tests.</p>
+
+<p>The cheat code isn't <strong>"AI writes my test cases."</strong> It's <strong>"AI helps me think of things I might not have thought about."</strong></p>
+
+<p>That's a huge difference.</p>
+
+<h2>Cheat Code #3: Give AI your QA brain</h2>
+
+<p>This is where things get really interesting.</p>
+
+<p>AI doesn't automatically know what <em>you</em> consider important. So teach it. Give it your testing principles. Something like:</p>
+
+<pre><code class="language-text">When reviewing a feature, always consider:
+
+1.  Happy paths
+2.  Negative scenarios
+3.  Boundary conditions
+4.  Permissions and authorization
+5.  Data integrity
+6.  API behaviour
+7.  State transitions
+8.  Error handling
+9.  Concurrency
+10. Regression impact
+11. Security
+12. Browser and device behaviour
+</code></pre>
+
+<p>Now every time you give it a requirement, you're not getting generic AI testing. You're getting testing influenced by <strong>your methodology.</strong></p>
+
+<p>This is one of the things I think people underestimate. The better context you give AI, the better the engineer it can become alongside you.</p>
+
+<h2>Cheat Code #4: Use AI as your senior engineer</h2>
+
+<p>We've all been there. You have to implement something you've never worked with before.</p>
+
+<p>Maybe it's a new library. Maybe it's some weird Next.js behaviour. Maybe it's a database optimisation. Maybe you're looking at a codebase someone apparently designed during a very emotional weekend. 😂</p>
+
+<p>You could ask "explain this to me." But you can do much better. Tell AI:</p>
+
+<blockquote><p>"I'm a developer who understands React, TypeScript and REST APIs but haven't worked with this particular technology. Teach me what I need to know to implement this feature. Start with the mental model, then explain the relevant concepts, then show me a practical implementation. Don't skip the tradeoffs."</p></blockquote>
+
+<p>Now AI knows <strong>what you know</strong>, <strong>what you don't know</strong>, and <strong>what you're trying to accomplish.</strong></p>
+
+<p>That's a completely different interaction. And this is where AI becomes a genuinely good learning tool.</p>
+
+<h2>Cheat Code #5: Don't let AI write your code before you've designed it</h2>
+
+<p>This one is important.</p>
+
+<p>AI is ridiculously good at producing code. That's also the problem. You can say "build me an authentication system" and 30 seconds later you have 500 lines of code.</p>
+
+<p>Congratulations. You now have 500 lines of code you don't fully understand. 😂</p>
+
+<p>Instead, tell AI your approach first. For example:</p>
+
+<blockquote><p>"I'm thinking of handling authentication using X, storing Y, and using Z for authorization. Before I implement this, review my approach. What am I missing? What are the security concerns? What would you change?"</p></blockquote>
+
+<p>Now you're getting architectural feedback. Then you implement. Then ask AI to review the implementation against the original design.</p>
+
+<p>This keeps <strong>you in the driver's seat.</strong> AI becomes your reviewer instead of your replacement.</p>
+
+<h2>Cheat Code #6: Make AI review your code like it hates you</h2>
+
+<p>This is one of the easiest wins.</p>
+
+<p>Don't just ask "review my code." That's too friendly. 😂</p>
+
+<p>Ask:</p>
+
+<blockquote><p><strong>"Review this code like a senior engineer who is actively looking for reasons to reject this PR."</strong></p></blockquote>
+
+<p>Then run different reviews.</p>
+
+<h3>Security review</h3>
+<p>Look for authentication, authorization, injection, data exposure and insecure assumptions.</p>
+
+<h3>Performance review</h3>
+<p>Identify unnecessary database queries, expensive operations, rendering problems and scalability concerns.</p>
+
+<h3>QA review</h3>
+<p>Identify behaviours that could be difficult to test or likely to break.</p>
+
+<h3>Maintainability review</h3>
+<p>Assume someone else has to maintain this code for the next five years.</p>
+
+<h3>Evil user review</h3>
+<p>Assume the user is actively trying to abuse this feature. What can they do?</p>
+
+<p>Same code. Five different perspectives. You have basically created a mini code review panel.</p>
+
+<h2>Cheat Code #7: Turn AI into your documentation navigator</h2>
+
+<p>Documentation is great. Documentation is also sometimes a 47-page rabbit hole when all you wanted was "how do I configure this one thing?" 😂</p>
+
+<p>Instead of asking AI from memory, give it the official documentation and tell it what you're trying to accomplish. For example:</p>
+
+<blockquote><p>"I'm trying to implement X. Here is the official documentation. Extract only the sections relevant to this implementation. Explain the recommended approach and highlight anything I should be careful about."</p></blockquote>
+
+<p>This is important because <strong>context matters.</strong> You're not saying "AI, tell me how this framework works." You're saying "here is the source of truth, help me navigate it."</p>
+
+<p>That is a much safer way of using AI for technical work.</p>
+
+<h2>Cheat Code #8: Use AI to turn requirements into questions</h2>
+
+<p>This one is extremely useful for QA.</p>
+
+<p>You get a Jira ticket. The requirement looks simple. You read it. You think "yeah, that's probably fine."</p>
+
+<p>Don't do that. Give it to AI and ask:</p>
+
+<blockquote><p>"Review this requirement as a QA engineer. Identify ambiguity, missing acceptance criteria, assumptions, edge cases and questions that should be answered before development starts."</p></blockquote>
+
+<p>Now instead of waiting until testing to discover "wait... what happens if this user doesn't have a department?" you can catch it before the developer writes a single line of code.</p>
+
+<p>That's <strong>shift-left testing with AI.</strong></p>
+
+<p>And honestly, this is where I think AI can make QA significantly better. Not just helping us test faster. Helping us <strong>ask better questions earlier.</strong></p>
+
+<h2>Cheat Code #9: Generate test data that makes you uncomfortable</h2>
+
+<p>Test data is one of those things we underestimate. We create:</p>
+
+<pre><code class="language-text">John Doe
+john@gmail.com
+Age: 25
+Salary: 100,000
+</code></pre>
+
+<p>Everything works. Amazing.</p>
+
+<p>Now ask AI:</p>
+
+<blockquote><p>"Generate test data specifically designed to expose weaknesses in this system."</p></blockquote>
+
+<p>And suddenly:</p>
+
+<pre><code class="language-text">Names with unusual characters
+Very long strings
+Null values
+Duplicate records
+Negative numbers
+Maximum integer values
+Dates around midnight
+Leap years
+Different time zones
+Extremely large datasets
+Malformed API payloads
+Users with conflicting permissions
+</code></pre>
+
+<p>That's where testing becomes interesting.</p>
+
+<p>For systems like HRMS, payroll and enterprise applications, this gets even more useful. Because the edge cases aren't always obvious.</p>
+
+<h2>Cheat Code #10: Use AI to understand the codebase before touching it</h2>
+
+<p>This is one I've become increasingly interested in.</p>
+
+<p>You join a project. There are 500 files. Nobody knows where anything is. Someone says "it's actually pretty straightforward."</p>
+
+<p>It isn't. 😂</p>
+
+<p>Before you start changing things, let AI help you map the system. Ask it to identify:</p>
+
+<ul>
+  <li>application entry points</li>
+  <li>major modules</li>
+  <li>API layers</li>
+  <li>database interactions</li>
+  <li>authentication flow</li>
+  <li>state management</li>
+  <li>external integrations</li>
+  <li>test structure</li>
+  <li>deployment pipeline</li>
+</ul>
+
+<p>Then ask:</p>
+
+<blockquote><p>"If I change this module, what areas of the application are most likely to be affected?"</p></blockquote>
+
+<p>Now you're thinking about <strong>impact analysis</strong>. And that's extremely useful for both QA and development.</p>
+
+<h2>Cheat Code #11: Use AI to learn from your own mistakes</h2>
+
+<p>This is one I really like.</p>
+
+<p>Let's say you had a production bug. Don't just fix it. Feed AI:</p>
+
+<ul>
+  <li>the original requirement</li>
+  <li>the implementation</li>
+  <li>the bug</li>
+  <li>why testing didn't catch it</li>
+  <li>the eventual fix</li>
+</ul>
+
+<p>Then ask:</p>
+
+<blockquote><p>"What testing or development practice could have prevented this defect? Should we add a regression test? What similar areas of the system should we inspect?"</p></blockquote>
+
+<p>Now you're turning a bug into a <strong>learning opportunity.</strong></p>
+
+<p>Over time, you can start building your own library of failure patterns. And that's where things get really interesting. Because your AI isn't just learning about software in general. It's learning about <strong>the kinds of failures your systems actually have.</strong></p>
+
+<h2>Cheat Code #12: Find the repetitive stuff</h2>
+
+<p>This is probably the biggest cheat code of them all.</p>
+
+<p>Pay attention to what you do every week. If you're doing:</p>
+
+<blockquote><p>Prompt → Copy → Paste → Modify → Run → Repeat</p></blockquote>
+
+<p>over and over again... stop. That's a signal.</p>
+
+<p>Maybe it should become a script. Maybe it should become an automation. Maybe it should become a custom AI workflow. Maybe it should eventually become an agent.</p>
+
+<p>This is exactly how we get from <strong>AI assistant</strong> to <strong>AI employee.</strong></p>
+
+<p>And that's where we start entering the territory I talked about in Part 1.</p>
+
+<h2>But here's the trap</h2>
+
+<p>There's something we need to be careful about. AI makes it incredibly easy to <strong>look productive.</strong></p>
+
+<p>You can generate code faster. Generate tests faster. Write documentation faster. Generate Jira tickets faster. Generate emails faster. Everything is faster.</p>
+
+<p>But faster isn't automatically better. If you don't understand what's being generated, you're accumulating technical debt at machine speed. 😂</p>
+
+<p>And that's why I think the most important AI skill isn't prompting. It's <strong>judgement.</strong></p>
+
+<p>Knowing:</p>
+
+<blockquote>
+  <p>When should I trust this?</p>
+  <p>When should I verify it?</p>
+  <p>What am I missing?</p>
+  <p>What assumptions is AI making?</p>
+  <p>What context doesn't it have?</p>
+  <p>What could go wrong?</p>
+</blockquote>
+
+<p>Those are engineering questions.</p>
+
+<h2>The AI skill I actually want to develop</h2>
+
+<p>I'm not trying to become the guy who knows 500 secret ChatGPT prompts. I don't think that's where the long-term advantage is.</p>
+
+<p>I want to become really good at <strong>breaking down problems and knowing where AI can give me leverage.</strong></p>
+
+<ul>
+  <li>If I'm stuck debugging something, AI helps me investigate.</li>
+  <li>If I'm learning something, AI becomes my tutor.</li>
+  <li>If I'm designing something, AI challenges my thinking.</li>
+  <li>If I'm testing something, AI helps me find scenarios I might miss.</li>
+  <li>If I'm reviewing code, AI gives me another perspective.</li>
+  <li>If I'm doing something repetitive, AI helps me automate it.</li>
+</ul>
+
+<p>And if I discover a workflow that keeps repeating? That's when I start thinking:</p>
+
+<blockquote><p><strong>"Can I build an agent for this?"</strong></p></blockquote>
+
+<p>That's the progression.</p>
+
+<h2>AI won't replace your engineering brain</h2>
+
+<p>At least, I don't think it should. 😂</p>
+
+<p>The engineers who get the most out of AI aren't necessarily the ones who ask AI to do everything. They're the ones who know <strong>what to give AI and what to keep for themselves.</strong></p>
+
+<p>Let AI handle the repetitive work. Let it generate possibilities. Let it challenge your assumptions. Let it search through huge amounts of information. Let it write the boring first draft. Let it find the edge cases. Let it review your work.</p>
+
+<p>But keep the judgement. Keep the curiosity. Keep the ability to understand the system. Keep the ability to say:</p>
+
+<blockquote><p>"Hold up. That doesn't make sense."</p></blockquote>
+
+<p>Because that little voice is still one of the most valuable tools you have.</p>
+
+<h2>The real cheat code</h2>
+
+<p>If I had to reduce everything in this article to one thing, it would be this:</p>
+
+<blockquote><p><strong>Don't ask yourself "How can I use AI?"</strong></p></blockquote>
+
+<p>Ask:</p>
+
+<blockquote><p><strong>"How can AI make me better at this?"</strong></p></blockquote>
+
+<p>That's a completely different question.</p>
+
+<p>And once you start thinking that way, you'll notice something interesting. You're no longer just using AI. You're <strong>designing workflows around it.</strong></p>
+
+<p>And once you start designing workflows around it, you'll eventually ask "why am I doing these steps manually?"</p>
+
+<p>And that's when things get fun. Because now we're moving from <strong>AI helping me work</strong> to <strong>AI doing the work.</strong></p>
+
+<p>And that... is where we're going next. 👀</p>
+
+<h2>Final thought</h2>
+
+<p>We're probably still very early. A lot of us are experimenting.</p>
+
+<p>Some people are using AI to write emails. Some are using it to write code. Some are building agents that run entire workflows. Some are connecting AI to their tools using MCP. And some of us are still asking ChatGPT "what does this error mean?" 😂</p>
+
+<p>All of that is fine. The important thing is to start.</p>
+
+<p>Experiment. Break things. Build weird little workflows. Give AI access to boring tasks. Figure out what works. Figure out what doesn't.</p>
+
+<p>And most importantly...</p>
+
+<p><strong>Don't just use AI. Learn how to engineer with it.</strong></p>
+
+<p>Because I have a feeling that's going to become one of the most valuable skills we can have as engineers.</p>
+
+<p><em>Part 3: Stop Prompting. Start Context Engineering.</em> 👀</p>
+  `
+  },
+  {
+    id: 12,
+    title: "AI Is Not Your Copilot Anymore. It's Your Junior Team",
+    excerpt: "Most of us still use AI like a smarter Google search. The bigger shift is delegation — agents with tools, context and guardrails, and what MCP means for engineers and QAs.",
+    date: "August 18, 2026",
+    readTime: "9 min read",
+    category: "AI",
+    imageUrl: "/ai-junior-team.jpg",
+    content: `
+<p>Let's be honest. Most of us in tech are still using AI like it's a really smart Google search.</p>
+
+<p>We ask it to explain an error. We paste some code and say <em>"why isn't this working?"</em> We ask it to write a test. We ask it to refactor a function. Then we copy the answer, stare at it for 30 seconds, and move on with our lives.</p>
+
+<p>And don't get me wrong — that's already pretty insane. But I think we're leaving <strong>a ridiculous amount of value on the table.</strong></p>
+
+<p>Because AI has quietly moved from:</p>
+
+<blockquote><p>"Help me do this."</p></blockquote>
+
+<p>to:</p>
+
+<blockquote><p>"Go do this for me."</p></blockquote>
+
+<p>And that distinction is massive.</p>
+
+<h2>The biggest shift isn't AI. It's delegation.</h2>
+
+<p>I've been thinking about AI less as a chatbot and more as a junior engineer sitting somewhere inside my workflow. Not because AI is replacing engineers, but because there are a lot of things engineers do every single day that don't necessarily require <em>an engineer sitting there doing them manually.</em></p>
+
+<p>Think about your average day. You open Jira. You check your tickets. You read requirements. You inspect a PR. You run tests. You investigate failures. You check logs. You hit an API. You compare responses. You write test cases. You update documentation. You create bug reports. You check Slack.</p>
+
+<p>Then you repeat half of this tomorrow. And again on Thursday. And again next sprint.</p>
+
+<p>That's where things get interesting. Because instead of asking:</p>
+
+<blockquote><p>"How can AI help me do my job?"</p></blockquote>
+
+<p>I think the better question is:</p>
+
+<blockquote><p><strong>"Which parts of my job should I stop doing myself?"</strong></p></blockquote>
+
+<p>That's the mindset shift.</p>
+
+<h2>Your first AI employee</h2>
+
+<p>Imagine having an agent whose entire job is <strong>QA recon.</strong></p>
+
+<p>Every morning it checks:</p>
+
+<ul>
+  <li>New Jira tickets</li>
+  <li>Recently merged PRs</li>
+  <li>Changed APIs</li>
+  <li>Recent production bugs</li>
+  <li>Failed CI pipelines</li>
+  <li>Test reports</li>
+  <li>Requirements attached to tickets</li>
+</ul>
+
+<p>Then it comes back and says:</p>
+
+<blockquote>
+  <p><strong>Morning Austin.</strong></p>
+  <p>4 PRs were merged overnight. 2 touched payroll calculations. 1 modified the leave API.</p>
+  <p>The payroll PR changes a calculation method that currently has 17 automated tests. I recommend running the payroll regression suite before this reaches staging.</p>
+  <p>Also, the leave API response schema changed from <code>employeeId</code> to <code>employee_id</code>. Three existing tests may fail.</p>
+</blockquote>
+
+<p>Now we're talking. That's no longer autocomplete. That's an <strong>agent doing reconnaissance.</strong></p>
+
+<p>And you can still make the final decision.</p>
+
+<h2>But what's actually an AI agent?</h2>
+
+<p>The easiest way I've found to think about an agent is:</p>
+
+<p><strong>Model + Instructions + Tools + Context + Guardrails</strong></p>
+
+<ul>
+  <li>The <strong>model</strong> is the brain.</li>
+  <li>The <strong>instructions</strong> tell it how to behave.</li>
+  <li>The <strong>tools</strong> allow it to actually do things.</li>
+  <li>The <strong>context</strong> gives it the information it needs.</li>
+  <li>The <strong>guardrails</strong> stop it from going full Skynet.</li>
+</ul>
+
+<p>OpenAI's own guidance follows a very similar foundation: models, tools and instructions are the core pieces, with orchestration and guardrails becoming important as workflows get more complex.</p>
+
+<p>And here's the important bit.</p>
+
+<h3>A chatbot can tell you what to do. An agent can actually do it.</h3>
+
+<p>That's the game we're entering.</p>
+
+<h2>The cheat code: give AI tools</h2>
+
+<p>This is where things get interesting for us as developers and QAs. Imagine giving an AI access to:</p>
+
+<pre><code class="language-text">Jira
+GitHub
+Postman
+Playwright
+Your database
+CI/CD
+Slack
+Your documentation
+Browser automation
+Test reports
+</code></pre>
+
+<p>Suddenly the AI isn't sitting there guessing. It can <strong>inspect reality.</strong></p>
+
+<p>That's incredibly important, because one of the biggest problems with using AI for software engineering is context. You can give ChatGPT a 500-line file and ask "what's wrong?" — but you're still asking it to reason about a snapshot.</p>
+
+<p>Give an agent access to your repository, test results, API definitions, tickets and logs? Now it has a much better picture of the system. That's when AI starts becoming useful in a completely different way.</p>
+
+<h2>And this is where MCP enters the chat 👀</h2>
+
+<p>If you've been hearing people throw around <strong>MCP</strong> and wondering what everyone is suddenly talking about, you're not alone.</p>
+
+<p>MCP stands for <strong>Model Context Protocol</strong>. The easiest mental model?</p>
+
+<h3>MCP is a standard way of giving AI access to tools and data.</h3>
+
+<p>Instead of building some weird custom integration every time you want an AI system to talk to another application, MCP gives you a common protocol for exposing capabilities to AI applications.</p>
+
+<p>Think:</p>
+
+<pre><code class="language-text">                    AI AGENT
+                       │
+              ┌────────┴────────┐
+              │                 │
+             MCP               MCP
+              │                 │
+       ┌──────┴──────┐   ┌──────┴──────┐
+       │             │   │             │
+     GitHub        Jira  Playwright  Database
+</code></pre>
+
+<p>The agent doesn't need to know every implementation detail. It knows:</p>
+
+<blockquote>
+  <p>"I have a tool that can search Jira."</p>
+  <p>"I have a tool that can inspect GitHub."</p>
+  <p>"I have a tool that can execute browser automation."</p>
+</blockquote>
+
+<p>And the protocol has grown well past simply connecting local tools. The current specification includes things like Tasks, MCP Apps, improved authorization and a stateless protocol core designed to make MCP deployments easier to scale.</p>
+
+<h2>So what does this mean for a QA engineer?</h2>
+
+<p>This is where I think things get <strong>really interesting.</strong></p>
+
+<p>We spend a ridiculous amount of time doing investigation. And investigation is exactly the kind of work AI agents can be good at.</p>
+
+<p>Imagine this workflow:</p>
+
+<pre><code class="language-text">Jira Ticket
+     ↓
+Agent reads requirements
+     ↓
+Inspect changed PR
+     ↓
+Identify affected APIs
+     ↓
+Generate test scenarios
+     ↓
+Run Playwright tests
+     ↓
+Inspect failures
+     ↓
+Check API responses
+     ↓
+Compare expected vs actual
+     ↓
+Generate bug report
+</code></pre>
+
+<p>And your job becomes:</p>
+
+<p><strong>Review → Challenge → Approve → Decide</strong></p>
+
+<p>instead of:</p>
+
+<p><strong>Click → Copy → Paste → Repeat → Cry</strong> 😂</p>
+
+<h2>Don't automate everything</h2>
+
+<p>Here's where I think people get AI completely wrong. The goal isn't "let's make the agent do absolutely everything and step away." That's how you end up with an extremely confident machine doing extremely stupid things.</p>
+
+<p>The goal is:</p>
+
+<blockquote><p><strong>Automate the boring. Augment the thinking. Keep humans in control of the important decisions.</strong></p></blockquote>
+
+<p>For example, I'd happily let an agent:</p>
+
+<ul>
+  <li>generate test cases</li>
+  <li>inspect a PR</li>
+  <li>run regression tests</li>
+  <li>analyze logs</li>
+  <li>summarize failures</li>
+  <li>search documentation</li>
+  <li>identify impacted modules</li>
+  <li>prepare a bug report</li>
+  <li>suggest edge cases</li>
+  <li>monitor CI</li>
+</ul>
+
+<p>But I probably don't want it casually:</p>
+
+<ul>
+  <li>deploying production</li>
+  <li>deleting records</li>
+  <li>changing payroll</li>
+  <li>approving financial transactions</li>
+  <li>modifying security permissions</li>
+</ul>
+
+<p>without some kind of approval mechanism.</p>
+
+<p>That's where <strong>guardrails</strong> matter. And MCP's newer authorization work is moving in exactly this direction as these systems become more production-oriented.</p>
+
+<h2>The real skill isn't prompting anymore</h2>
+
+<p>This is probably the biggest thing I want to explore in this series.</p>
+
+<p>Everyone is learning how to write prompts. That's useful. But I think we're moving toward something bigger: <strong>agent design.</strong></p>
+
+<p>The valuable engineer isn't necessarily the person who knows the longest prompt. It's the person who can look at a workflow and say:</p>
+
+<blockquote><p>"This shouldn't require a human to do all of these steps."</p></blockquote>
+
+<p>Then design a system around it. You start thinking about:</p>
+
+<ul>
+  <li><strong>What should the agent know?</strong> Context.</li>
+  <li><strong>What should the agent be able to do?</strong> Tools.</li>
+  <li><strong>What decisions can it make?</strong> Reasoning.</li>
+  <li><strong>What decisions require approval?</strong> Guardrails.</li>
+  <li><strong>What happens when something goes wrong?</strong> Fallbacks.</li>
+  <li><strong>How do we know whether it actually worked?</strong> Evaluation.</li>
+</ul>
+
+<p>That's much closer to engineering than prompt engineering.</p>
+
+<h2>Build your own little AI team</h2>
+
+<p>This is the direction I'm personally most interested in. Instead of having <strong>one giant agent that does everything</strong>, you can start thinking in terms of specialized agents.</p>
+
+<p>For example:</p>
+
+<pre><code class="language-text">                  ┌──────────────┐
+                  │   AI LEAD    │
+                  └──────┬───────┘
+                         │
+          ┌──────────────┼──────────────┐
+          ↓              ↓              ↓
+      QA AGENT       DEV AGENT      RESEARCH AGENT
+          │              │              │
+       Testing        Coding         Research
+          │              │              │
+     Playwright        GitHub       Web/Search
+          │              │              │
+          └──────────────┼──────────────┘
+                         ↓
+                   HUMAN REVIEW
+</code></pre>
+
+<p>Your QA agent doesn't need to know everything. It just needs to be <strong>really good at QA.</strong></p>
+
+<p>Your research agent doesn't need access to your production database. It just needs to find and summarize information.</p>
+
+<p>Your coding agent doesn't need permission to deploy. It needs the tools required to modify code and run tests.</p>
+
+<p>This separation makes the whole system easier to reason about. And much easier to trust.</p>
+
+<h2>What a QA agent actually looks like</h2>
+
+<p>So let's make it concrete. Give it tools:</p>
+
+<ul>
+  <li>Jira</li>
+  <li>GitHub/Bitbucket</li>
+  <li>Playwright</li>
+  <li>API client</li>
+  <li>Test reports</li>
+  <li>Documentation</li>
+</ul>
+
+<p>Then give it instructions:</p>
+
+<blockquote>
+  <p>You are a senior QA engineer.</p>
+  <p>Your job is to identify risk, not simply confirm that requirements work.</p>
+  <p>Always consider happy paths, negative scenarios, boundary conditions, authorization, data integrity, API behaviour and regression impact.</p>
+  <p>Never assume a requirement is correct simply because it exists.</p>
+</blockquote>
+
+<p>Then give it a workflow.</p>
+
+<pre><code class="language-text">1.  Read ticket
+2.  Identify requirements
+3.  Identify ambiguities
+4.  Inspect implementation
+5.  Identify impacted areas
+6.  Generate test strategy
+7.  Generate test cases
+8.  Execute available automated tests
+9.  Analyze failures
+10. Report findings
+</code></pre>
+
+<p>Now you've built something useful. Not because the prompt is magical, but because you've given the AI <strong>context + tools + responsibility.</strong></p>
+
+<h2>And here's the bit nobody tells you</h2>
+
+<p>Your agent will suck initially. 😂</p>
+
+<p>It will misunderstand things. It will call the wrong tool. It will generate terrible tests. It will occasionally become very confident about something that is completely wrong.</p>
+
+<p>Welcome to software engineering.</p>
+
+<p>The answer isn't to abandon agents. The answer is to <strong>test the agent too.</strong></p>
+
+<p>Yes. QA the AI.</p>
+
+<p>If we're going to trust agents with engineering work, we need to think about:</p>
+
+<ul>
+  <li>accuracy</li>
+  <li>reliability</li>
+  <li>hallucinations</li>
+  <li>tool misuse</li>
+  <li>authorization</li>
+  <li>prompt injection</li>
+  <li>data leakage</li>
+  <li>regression</li>
+  <li>observability</li>
+  <li>evaluation</li>
+</ul>
+
+<p>Which, ironically, means QA engineers might be sitting in a pretty interesting position. Because we've spent years asking:</p>
+
+<blockquote><p><strong>"How do we know this system actually works?"</strong></p></blockquote>
+
+<p>Now we're going to have to ask the same question about systems that can reason and act.</p>
+
+<h2>My new rule for AI</h2>
+
+<p>Here's the rule I'm trying to follow:</p>
+
+<blockquote><p><strong>If I do something more than twice, I start wondering whether I should give it to an agent.</strong></p></blockquote>
+
+<p>Not necessarily automate it immediately. Just investigate it.</p>
+
+<p>Because sometimes the best use of AI isn't asking it to write the code. Sometimes it's asking:</p>
+
+<blockquote><p>"How can I redesign this workflow so I don't have to do this manually anymore?"</p></blockquote>
+
+<p>That's a completely different question. And I think that's where we're headed.</p>
+
+<h2>We're just getting started</h2>
+
+<p>This isn't going to be another blog series where I explain what ChatGPT is. We all know what ChatGPT is. 😂</p>
+
+<p>I want to actually build stuff. We're going to look at:</p>
+
+<ul>
+  <li>AI workflows for developers</li>
+  <li>AI workflows for QA engineers</li>
+  <li>Prompting techniques that actually matter</li>
+  <li>Building autonomous agents</li>
+  <li>MCP from a developer's perspective</li>
+  <li>Building our own MCP servers</li>
+  <li>Connecting agents to Jira, GitHub and other tools</li>
+  <li>Giving agents browser access</li>
+  <li>AI-powered Playwright testing</li>
+  <li>Agentic API testing</li>
+  <li>Multi-agent workflows</li>
+  <li>Agent memory</li>
+  <li>Guardrails</li>
+  <li>Evaluating agents</li>
+  <li>Prompt injection and security</li>
+  <li>Building a personal AI engineering team</li>
+  <li>And eventually, making these things useful enough that they actually save us time</li>
+</ul>
+
+<p>Because the future isn't necessarily <strong>AI replacing engineers.</strong> I think it's much more interesting than that. It's:</p>
+
+<blockquote><p><strong>Engineers who know how to build and manage AI systems replacing engineers who refuse to use them.</strong></p></blockquote>
+
+<p>And if you're in tech, that's probably worth paying attention to.</p>
+
+<p>Welcome to the agent era!</p>
+
+<p><em>P.S. If you're still using AI exclusively to explain error messages, you're leaving money on the table.</em></p>
+  `
+  },
+  {
     id: 8,
     title: "How to Bag That QA Automation Dream Job: Cypress Edition",
     excerpt: "Cypress interview prep: project structure, best practices, common questions, CI/CD setup, and how to explain your test architecture clearly.",
@@ -1258,6 +2076,13 @@ customElements.define('my-card', MyCard);
  */
 export const CATEGORY_CHIP = 'glass-pill text-fg-muted';
 
+/* The chip on a card sits on top of the cover photo, where `glass-pill` borrows
+   the page background and disappears over a light image. Anything laid over a
+   photo needs its own contrast, so it carries a dark scrim and white text in
+   both themes rather than following the theme tokens. */
+export const CATEGORY_CHIP_ON_IMAGE =
+  'border border-white/20 bg-black/40 text-white backdrop-blur-md';
+
 const Blog: React.FC = () => {
   const navigate = useNavigate();
 
@@ -1299,7 +2124,7 @@ const Blog: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-xs ${CATEGORY_CHIP}`}>
+                    <span className={`px-3 py-1 rounded-full text-xs ${CATEGORY_CHIP_ON_IMAGE}`}>
                       {post.category}
                     </span>
                   </div>

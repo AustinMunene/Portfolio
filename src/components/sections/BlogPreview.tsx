@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SpotlightSurface from '../SpotlightSurface';
-import { CATEGORY_CHIP } from '../../pages/Blog';
+import { CATEGORY_CHIP, CATEGORY_CHIP_ON_IMAGE } from '../../pages/Blog';
 import { ArrowRight } from 'lucide-react';
 
 export type BlogPreviewPost = {
@@ -115,7 +115,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
                         both themes because of it. */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
-                      <span className="inline-block px-3 py-1 rounded-full text-xs mb-3 border border-white/20 bg-black/40 text-white backdrop-blur-md">
+                      <span className={`inline-block px-3 py-1 rounded-full text-xs mb-3 ${CATEGORY_CHIP_ON_IMAGE}`}>
                         {featured.category}
                       </span>
                       <h3 className="text-xl md:text-2xl font-bold text-white">

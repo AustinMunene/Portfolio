@@ -38,7 +38,7 @@ const SERVICES: Service[] = [
 ];
 
 const Services = () => (
-  <Section id="services" variant="alt" className="section-glow py-24 md:py-32 overflow-hidden">
+  <Section id="services" className="section-glow py-24 md:py-32 overflow-hidden">
     {/* Hairlines mark the section edges without needing a heavy background. */}
     <div className="absolute top-0 left-0 right-0 h-px bg-line" aria-hidden />
     <div className="absolute bottom-0 left-0 right-0 h-px bg-line" aria-hidden />

@@ -17,7 +17,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
   return (
     <section
       id="career-preview"
-      className="section-glow relative bg-surface-alt py-24 md:py-32 overflow-hidden"
+      className="section-glow relative bg-surface py-24 md:py-32 overflow-hidden"
     >
       {/* Hairlines, not a gradient. A fading accent line reads as decoration on
           a light surface; a flat token hairline reads as an edge. */}
@@ -84,7 +84,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                 </div>
 
                 {/* Timeline dot */}
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-brand ring-4 ring-surface-alt" />
+                <div className="absolute left-6 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-brand ring-4 ring-surface" />
               </motion.div>
             ))}
           </div>

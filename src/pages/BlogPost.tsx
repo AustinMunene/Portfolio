@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
-import { blogPosts, CATEGORY_CHIP } from './Blog';
+import { blogPosts, CATEGORY_CHIP_ON_IMAGE } from './Blog';
 
 const BlogPost2: React.FC = () => {
   const { id } = useParams();
@@ -48,7 +48,7 @@ const BlogPost2: React.FC = () => {
             <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute top-4 left-4">
-              <span className={`px-3 py-1 rounded-full text-xs ${CATEGORY_CHIP}`}>
+              <span className={`px-3 py-1 rounded-full text-xs ${CATEGORY_CHIP_ON_IMAGE}`}>
                 {post.category}
               </span>
             </div>
