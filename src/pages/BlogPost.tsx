@@ -62,8 +62,12 @@ const BlogPost2: React.FC = () => {
 
           <h1 className="text-4xl md:text-5xl font-display mb-8 gradient-text">{post.title}</h1>
 
+          {/* Links carry the accent and an underline. They used to be styled as
+              muted body text with `prose-a:no-underline`, which was harmless
+              while posts linked to nothing, but the posts now link out to real
+              projects and a link nobody can see is a link nobody clicks. */}
           <div
-            className="prose  prose-headings:text-fg prose-a:text-fg-muted prose-a:no-underline hover:prose-a:text-fg prose-code:text-fg prose-strong:text-fg max-w-none"
+            className="prose prose-headings:text-fg prose-a:text-brand prose-a:underline prose-a:underline-offset-4 prose-a:decoration-brand-line hover:prose-a:decoration-brand prose-code:text-fg prose-strong:text-fg max-w-none"
             dangerouslySetInnerHTML={{ __html: post.content || '' }}
           />
         </motion.article>

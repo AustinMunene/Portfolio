@@ -52,8 +52,8 @@ export const blogPosts: BlogPost[] = [
 <p>When I was working on projects like:</p>
 
 <ul>
-  <li>Girlie Conversations</li>
-  <li>HerCart Essentials</li>
+  <li><a href="https://girlieconversations.com" target="_blank" rel="noopener noreferrer">Girlie Conversations</a></li>
+  <li><a href="https://hercartexpressessentials.com" target="_blank" rel="noopener noreferrer">HerCart Essentials</a></li>
   <li>my own portfolio at <a href="https://austin.is-a.dev">austin.is-a.dev</a></li>
 </ul>
 
@@ -1552,7 +1552,7 @@ Users with conflicting permissions
 
 <p>We ask it to explain an error. We paste some code and say <em>"why isn't this working?"</em> We ask it to write a test. We ask it to refactor a function. Then we copy the answer, stare at it for 30 seconds, and move on with our lives.</p>
 
-<p>And don't get me wrong — that's already pretty insane. But I think we're leaving <strong>a ridiculous amount of value on the table.</strong></p>
+<p>And don't get me wrong. That's already pretty insane. But I think we're leaving <strong>a ridiculous amount of value on the table.</strong></p>
 
 <p>Because AI has quietly moved from:</p>
 
@@ -1651,7 +1651,7 @@ Test reports
 
 <p>Suddenly the AI isn't sitting there guessing. It can <strong>inspect reality.</strong></p>
 
-<p>That's incredibly important, because one of the biggest problems with using AI for software engineering is context. You can give ChatGPT a 500-line file and ask "what's wrong?" — but you're still asking it to reason about a snapshot.</p>
+<p>That's incredibly important, because one of the biggest problems with using AI for software engineering is context. You can give ChatGPT a 500-line file and ask "what's wrong?" but you're still asking it to reason about a snapshot.</p>
 
 <p>Give an agent access to your repository, test results, API definitions, tickets and logs? Now it has a much better picture of the system. That's when AI starts becoming useful in a completely different way.</p>
 
@@ -1947,32 +1947,47 @@ Generate bug report
     category: "QA & Testing",
     imageUrl: "/automation.JPG",
     content: `
-<p>If Cypress is on the job description, expect questions about architecture, selectors, API mocking, and how you keep suites maintainable. This post covers the topics that come up most often in QA automation interviews, with examples you can adapt to your own projects.</p>
+<p>So Cypress is on the job description.</p>
+
+<p>Here's the thing nobody tells you about QA automation interviews. They are not really testing whether you've memorised the docs. 😂</p>
+
+<p>They're testing whether you've ever had a suite go red at 2am for a reason that wasn't a real bug.</p>
+
+<p>This is everything that actually comes up. Architecture, selectors, mocking, and how you keep a suite alive once it's bigger than twelve tests.</p>
 
 <h2>Why Cypress?</h2>
-<p>When someone asks why you chose Cypress, go beyond "it's popular." Tie your answer to how the tool fits your stack:</p>
+
+<p>When they ask why you picked it, "it's popular" is not an answer. 😂</p>
+
+<p>Tie it to the stack:</p>
+
 <ul>
-  <li><strong>Runs inside the browser.</strong> Unlike Selenium's out-of-process model, Cypress executes in the same run loop as your app, which often means faster feedback and fewer timing issues.</li>
-  <li><strong>Live debugging.</strong> The Test Runner lets you watch tests execute and inspect DOM state at each step.</li>
-  <li><strong>Automatic waiting.</strong> Cypress retries commands until assertions pass. Avoid fixed sleeps like <code>cy.wait(3000)</code> unless you're waiting on something external.</li>
-  <li><strong>Command log.</strong> Each step is recorded so you can see what the page looked like when a test failed.</li>
-  <li><strong>JavaScript-first.</strong> If the app is JS/TS, tests use the same language and tooling.</li>
-  <li><strong>Strong local DX.</strong> The interactive runner is one of the main reasons teams adopt it for web E2E work.</li>
+  <li><strong>It runs inside the browser.</strong> Unlike Selenium sitting outside the process, Cypress executes in the same run loop as your app. Faster feedback, fewer timing problems.</li>
+  <li><strong>Live debugging.</strong> The Test Runner lets you watch it happen and inspect the DOM at every step.</li>
+  <li><strong>It waits for you.</strong> Cypress retries commands until the assertion passes. Which is why <code>cy.wait(3000)</code> should make you uncomfortable.</li>
+  <li><strong>Command log.</strong> Every step recorded, so you can see what the page looked like the moment it died.</li>
+  <li><strong>JavaScript-first.</strong> If the app is JS or TS, your tests speak the same language as the thing they're testing.</li>
+  <li><strong>The local experience is lovely.</strong> Genuinely one of the main reasons teams adopt it.</li>
 </ul>
 
-<h2>Core Best Practices</h2>
-<p>Interviewers often probe whether you've run suites in production, not just followed a tutorial. These habits matter:</p>
+<h2>Best practices they're actually probing for</h2>
+
+<p>Interviewers want to know if you've run a suite in production or just finished a tutorial.</p>
+
+<p>These are the habits that give it away:</p>
+
 <ul>
-  <li><strong>Keep tests independent.</strong> Tests must not rely on state from other tests. Reset state between test cases using <code>beforeEach()</code>. A test that only passes when run after another test is a ticking time bomb.</li>
-  <li><strong>Use <code>data-cy</code> attributes for selectors.</strong> Never rely on CSS classes, IDs, or text content that designers and devs can change freely. <code>data-cy</code> attributes are test-only contracts.</li>
-  <li><strong>Never use arbitrary waits.</strong> <code>cy.wait(3000)</code> is not a solution. It's a symptom. Use assertions and let Cypress's retry-ability do its job.</li>
-  <li><strong>Abstract repeated actions into custom commands.</strong> Login, navigation, form filling - anything you do in more than two tests belongs in <code>commands.js</code>.</li>
-  <li><strong>Keep your test files focused.</strong> Group related tests into folders by feature, not by type. A test file that tests login should only test login.</li>
-  <li><strong>Test at the right layer.</strong> Don't E2E everything. Unit tests for logic, integration tests for components, E2E for critical user journeys only.</li>
+  <li><strong>Tests must be independent.</strong> No test should depend on state another test left behind. Reset in <code>beforeEach()</code>. A test that only passes when it runs second is a time bomb with a nice green tick on it.</li>
+  <li><strong>Use <code>data-cy</code> for selectors.</strong> Never CSS classes, never text a designer might reword. <code>data-cy</code> is a contract that exists only for tests.</li>
+  <li><strong>No arbitrary waits.</strong> <code>cy.wait(3000)</code> isn't a fix. It's a symptom. Assert, and let retry-ability do its job.</li>
+  <li><strong>Abstract the repeated stuff.</strong> Login, navigation, filling forms. Anything you do in more than two tests belongs in <code>commands.js</code>.</li>
+  <li><strong>Keep files focused.</strong> Group by feature, not by type. A file called login should test login. That's it.</li>
+  <li><strong>Test at the right layer.</strong> Don't put everything through end to end. Unit for logic, integration for components, end to end for the journeys that would cost you money.</li>
 </ul>
 
-<h2>Project Structure</h2>
-<p>A clear folder layout makes suites easier to onboard to and maintain. A structure that works well for many teams:</p>
+<h2>Project structure</h2>
+
+<p>A clear layout is half the battle when someone new joins:</p>
 
 <pre><code class="language-bash">
 project-root/
@@ -2008,10 +2023,11 @@ project-root/
 └── package.json
 </code></pre>
 
-<p>Call out three things: <strong>separate smoke tests</strong> from full regression, <strong>Page Objects</strong> in their own folder, and a <strong>central selectors file</strong> so you never have magic strings scattered across test files.</p>
+<p>Three things worth pointing at in an interview: <strong>smoke tests kept separate</strong> from full regression, <strong>page objects in their own folder</strong>, and a <strong>central selectors file</strong> so you don't have magic strings scattered across forty files.</p>
 
-<h2>cypress.config.js</h2>
-<p>Interviewers often ask what goes in the config. Here's a production-ready example:</p>
+<h2>The config</h2>
+
+<p>They will ask what goes in here:</p>
 
 <pre><code class="language-js">
 const { defineConfig } = require('cypress');
@@ -2043,10 +2059,15 @@ module.exports = defineConfig({
 });
 </code></pre>
 
-<p>The <code>retries</code> config is worth calling out specifically - it shows you think about CI stability without papering over real bugs.</p>
+<p>Call out <code>retries</code> specifically.</p>
 
-<h2>Page Object Model (POM)</h2>
-<p>POM separates <em>what you're testing</em> (the spec) from <em>how you interact with the UI</em> (the page object). When markup changes, you update selectors in one place instead of across every test file.</p>
+<p>It says you think about CI stability without using retries to hide real bugs. That distinction matters and interviewers notice it.</p>
+
+<h2>Page Object Model</h2>
+
+<p>POM separates <em>what</em> you're testing from <em>how</em> you talk to the UI.</p>
+
+<p>Markup changes? You fix one file instead of thirty.</p>
 
 <pre><code class="language-js">
 // cypress/pages/LoginPage.js
@@ -2091,18 +2112,26 @@ describe('Login', () => {
 });
 </code></pre>
 
-<p>Specs stay short; page objects hold the selector and interaction details.</p>
+<p>Specs stay short and readable. The page object holds the messy details.</p>
 
-<h2>Common Interview Questions</h2>
+<h2>The questions that actually come up</h2>
 
-<h3>1. "How do you handle dynamic elements or flaky tests?"</h3>
-<p>Don't say waits. Say <strong>assertions and retry-ability</strong>. Cypress retries automatically until the assertion passes or times out. You can also extend the timeout for specific elements:</p>
+<h3>1. "How do you handle flaky tests?"</h3>
+
+<p>Do not say waits. 😂</p>
+
+<p>Say <strong>assertions and retry-ability</strong>. Cypress keeps retrying until the assertion passes or it times out. Stretch the timeout for a specific element if you genuinely need to:</p>
+
 <pre><code class="language-js">
 cy.get('[data-cy=submit-btn]', { timeout: 10000 }).should('be.visible').click();
 </code></pre>
 
 <h3>2. "How do you select elements?"</h3>
-<p>Always use <code>data-cy</code> attributes. This makes your tests immune to CSS class changes. Never rely on auto-generated class names - that's how you end up debugging at 2am wondering why CI broke.</p>
+
+<p><code>data-cy</code>. Always.</p>
+
+<p>Auto-generated class names are how you end up debugging CI at 2am wondering what changed.</p>
+
 <pre><code class="language-js">
 // ❌ Fragile
 cy.get('.btn-primary-v2-final')
@@ -2111,9 +2140,12 @@ cy.get('.btn-primary-v2-final')
 cy.get('[data-cy=login-button]')
 </code></pre>
 
-<h3>3. "How do you avoid repeating login in every test?"</h3>
-<p>Two answers, both worth knowing:</p>
-<p><strong>Option A - Custom command (UI login):</strong></p>
+<h3>3. "How do you avoid logging in for every test?"</h3>
+
+<p>Three answers, and knowing all three is the flex.</p>
+
+<p><strong>Option A, custom command through the UI:</strong></p>
+
 <pre><code class="language-js">
 Cypress.Commands.add('login', (email, password) => {
   cy.visit('/login');
@@ -2122,7 +2154,9 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get('[data-cy=submit]').click();
 });
 </code></pre>
-<p><strong>Option B - API login (faster, preferred):</strong> Hit the auth API directly to set the token, skipping the UI entirely. Dramatically speeds up test suites.</p>
+
+<p><strong>Option B, hit the API directly.</strong> Faster, and your tests stop depending on the login screen:</p>
+
 <pre><code class="language-js">
 Cypress.Commands.add('loginViaApi', (email, password) => {
   cy.request({
@@ -2134,7 +2168,9 @@ Cypress.Commands.add('loginViaApi', (email, password) => {
   });
 });
 </code></pre>
-<p><strong>Option C - cy.session() (best for suites):</strong> Cypress caches and restores the browser session between tests so you only authenticate once per suite:</p>
+
+<p><strong>Option C, <code>cy.session()</code>.</strong> Cypress caches and restores the session, so you authenticate once for the whole suite:</p>
+
 <pre><code class="language-js">
 beforeEach(() => {
   cy.session('user-session', () => {
@@ -2143,8 +2179,10 @@ beforeEach(() => {
 });
 </code></pre>
 
-<h3>4. "How do you handle API calls in tests?"</h3>
-<p>Cypress can intercept and stub network requests using <code>cy.intercept()</code>. Know it deeply - it's one of Cypress's most powerful features:</p>
+<h3>4. "How do you handle API calls?"</h3>
+
+<p><code>cy.intercept()</code>. Know this one deeply, because it's the most powerful thing in the toolbox:</p>
+
 <pre><code class="language-js">
 // Stub a GET request with fixture data
 cy.intercept('GET', '/api/users', { fixture: 'users.json' }).as('getUsers');
@@ -2170,13 +2208,16 @@ cy.wait('@createOrder').its('request.body').should('include', { productId: 'p-1'
 cy.intercept('GET', '/api/data', { statusCode: 500, body: 'Server Error' }).as('failedRequest');
 </code></pre>
 
-<h3>5. "What's the difference between cy.get() and cy.find()?"</h3>
-<p><code>cy.get()</code> queries from the root of the document. <code>cy.find()</code> queries within a previously yielded subject. Use <code>find()</code> to scope searches inside a component:</p>
+<h3>5. "cy.get() vs cy.find()?"</h3>
+
+<p><code>cy.get()</code> searches from the top of the document. <code>cy.find()</code> searches inside whatever you already have.</p>
+
 <pre><code class="language-js">
 cy.get('[data-cy=user-card]').find('[data-cy=user-name]').should('contain', 'Austin');
 </code></pre>
 
-<h3>6. "What are aliases and why use them?"</h3>
+<h3>6. "What are aliases for?"</h3>
+
 <pre><code class="language-js">
 // Alias a DOM element to avoid re-querying
 cy.get('[data-cy=submit-btn]').as('submitBtn');
@@ -2189,15 +2230,20 @@ cy.wait('@users').its('response.statusCode').should('eq', 200);
 </code></pre>
 
 <h3>7. "How do you manage test data?"</h3>
-<p>Use <strong>fixtures</strong> for static data and <strong>API seeding</strong> for dynamic data. Avoid depending on live production data - your tests should be deterministic. If data can change under your tests, your tests will be flaky.</p>
 
-<h3>8. "How do you test file uploads?"</h3>
+<p>Fixtures for static data. API seeding for dynamic data.</p>
+
+<p>And never, ever point your tests at live production data. If the data can change underneath you, your tests will be flaky and it won't be your fault, which is somehow worse. 😂</p>
+
+<h3>8. "File uploads?"</h3>
+
 <pre><code class="language-js">
 // Using cypress-file-upload plugin
 cy.get('[data-cy=upload-input]').attachFile('test-document.pdf');
 </code></pre>
 
-<h3>9. "How do you test across multiple viewports?"</h3>
+<h3>9. "Multiple viewports?"</h3>
+
 <pre><code class="language-js">
 const viewports = [
   { device: 'mobile', width: 375, height: 812 },
@@ -2214,13 +2260,14 @@ viewports.forEach(({ device, width, height }) => {
 });
 </code></pre>
 
-<h2>Smoke Testing vs Regression Testing</h2>
-<p>This comes up constantly. Know the distinction cold:</p>
+<h2>Smoke vs regression vs sanity</h2>
+
+<p>This comes up constantly. Know it cold:</p>
 
 <ul>
-  <li><strong>Smoke Tests:</strong> A small, fast subset that verifies the application is fundamentally working - did the build deploy? Can users log in? Does the homepage load? Run after every deployment. Should complete in under 5 minutes. If smoke fails, skip the full suite.</li>
-  <li><strong>Regression Tests:</strong> The full suite - every test, every feature, every edge case. Run on a schedule (nightly or pre-release) to catch anything that's broken since last release. Can take 30–60+ minutes.</li>
-  <li><strong>Sanity Tests:</strong> A targeted subset run after a specific bug fix to verify that fix works without running everything.</li>
+  <li><strong>Smoke.</strong> A small fast subset that answers one question: is this thing fundamentally alive? Did it deploy, can people log in, does the homepage load. Runs after every deploy, finishes in under five minutes. If smoke fails, don't bother running the rest.</li>
+  <li><strong>Regression.</strong> Everything. Every feature, every edge case. Runs nightly or before a release. Takes 30 to 60 minutes, sometimes a lot more.</li>
+  <li><strong>Sanity.</strong> A targeted subset after a specific fix, to check that one thing works without running the world.</li>
 </ul>
 
 <pre><code class="language-js">
@@ -2242,10 +2289,11 @@ describe('[SMOKE] Core User Journeys', () => {
 });
 </code></pre>
 
-<h2>Headless Mode vs Interactive Mode</h2>
+<h2>Headless vs interactive</h2>
+
 <ul>
-  <li><strong>Interactive mode (<code>cypress open</code>):</strong> Opens the Cypress Test Runner UI. Watch tests run in real time, use the time-travel debugger, click on commands to inspect state. For local development and debugging.</li>
-  <li><strong>Headless mode (<code>cypress run</code>):</strong> Runs tests in a browser with no visible UI. Faster, less memory, results to the terminal. This is what CI/CD pipelines use.</li>
+  <li><strong><code>cypress open</code>.</strong> The Test Runner UI. Watch it run, time-travel through commands, inspect state. This is for you, locally.</li>
+  <li><strong><code>cypress run</code>.</strong> No visible browser. Faster, lighter, output to the terminal. This is for CI.</li>
 </ul>
 
 <pre><code class="language-bash">
@@ -2262,8 +2310,9 @@ npx cypress run --browser chrome
 npx cypress run --spec "cypress/e2e/smoke/**/*.cy.js"
 </code></pre>
 
-<h2>Environment Variables and Multi-Environment Testing</h2>
-<p>The same suite should run against dev, staging, or production by changing config, not by editing tests:</p>
+<h2>Running against different environments</h2>
+
+<p>The same suite should run against dev, staging or production by changing config. Never by editing tests.</p>
 
 <pre><code class="language-bash">
 # Override base URL for staging
@@ -2282,8 +2331,9 @@ cy.request({
 });
 </code></pre>
 
-<h2>Test Reporting</h2>
-<p>Raw terminal output isn't enough for teams. Add proper reporting so results are visible without digging through logs:</p>
+<h2>Reporting</h2>
+
+<p>Terminal output is fine for you and useless for everyone else.</p>
 
 <pre><code class="language-bash">
 npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator
@@ -2300,9 +2350,12 @@ reporterOptions: {
 },
 </code></pre>
 
-<p>In CI, merge reports and publish them as build artifacts. Every stakeholder can see results with a click.</p>
+<p>Merge the reports in CI and publish them as build artifacts. Now your manager can see results without asking you.</p>
 
-<h2>CI/CD Integration</h2>
+<p>Which, honestly, is a feature for both of you. 😂</p>
+
+<h2>CI/CD</h2>
+
 <pre><code class="language-yaml">
 # .github/workflows/cypress.yml
 name: Cypress E2E Tests
@@ -2352,49 +2405,71 @@ jobs:
           path: cypress/videos
 </code></pre>
 
-<h2>Topics Worth Mentioning</h2>
+<h2>Things worth dropping into the conversation</h2>
+
 <ul>
-  <li>Knowing <strong>cy.session()</strong> for caching authentication state across tests</li>
-  <li>Mentioning <strong>cypress-axe</strong> for accessibility testing as part of your automation strategy</li>
-  <li>Knowing the difference between <code>cy.intercept()</code> and the deprecated <code>cy.route()</code></li>
-  <li>Understanding Cypress's <strong>async nature</strong> - commands are queued, not executed immediately; Cypress builds a command chain and executes it</li>
-  <li>Having opinions on <strong>when NOT to use Cypress</strong> - it doesn't support multi-tab testing or multi-browser-context scenarios (Playwright handles those better)</li>
-  <li>Mentioning <strong>Cypress Component Testing</strong> - Cypress can test React/Vue/Angular components in isolation without a full browser stack</li>
-  <li>Understanding <strong>loginViaApi vs UI login</strong> - hitting the API directly for auth is faster and doesn't create test dependency on the login UI</li>
-  <li>Discussing a <strong>central selectors file</strong> - keeping all <code>data-cy</code> values in one place means one change when a selector needs to update</li>
+  <li><strong>cy.session()</strong> for caching auth across tests</li>
+  <li><strong>cypress-axe</strong> for accessibility as part of your automation, not a separate afterthought</li>
+  <li>The difference between <code>cy.intercept()</code> and the deprecated <code>cy.route()</code></li>
+  <li>Cypress's <strong>async nature</strong>. Commands are queued into a chain and then executed, not run line by line as you read them.</li>
+  <li><strong>When not to use Cypress.</strong> No multi-tab, no multiple browser contexts. Playwright handles those. Saying this out loud shows you pick tools instead of defending them.</li>
+  <li><strong>Component testing.</strong> Cypress can test React, Vue or Angular components in isolation.</li>
+  <li><strong>API login vs UI login</strong> and why the API route is faster and less fragile</li>
+  <li>A <strong>central selectors file</strong>, so one selector change is one edit</li>
 </ul>
 
-<h2>Before the Interview</h2>
-<p>Interviewers care less about memorizing the docs and more about how you reason about risk: what you'd test first, how you'd reduce flakiness, and how you'd structure a suite for a team. Asking clarifying questions about the product and calling out edge cases is as important as naming Cypress APIs.</p>
+<h2>The actual advice</h2>
 
-<h2>Conclusion</h2>
-<p>Be ready to walk through project layout, stable selectors, <code>cy.intercept()</code>, custom commands, and the difference between smoke and regression runs. If you can explain those in the context of a real app you've tested, you'll be in good shape.</p>
+<p>Here's what I wish someone had told me earlier.</p>
+
+<p>Interviewers care much less about whether you've memorised the API surface, and much more about how you reason about risk.</p>
+
+<p>What would you test first? How would you cut flakiness? How would you structure this for a team of five?</p>
+
+<p>Asking clarifying questions about the product counts for more than naming another Cypress method. 😂</p>
+
+<h2>Before you walk in</h2>
+
+<p>Be ready to talk through project layout, stable selectors, <code>cy.intercept()</code>, custom commands, and smoke versus regression.</p>
+
+<p>And tie every single one of them to a real app you've actually tested.</p>
+
+<p>That's the whole difference between someone who has read about automation and someone who has done it.</p>
     `
   },
   {
     id: 10,
     title: "Playwright: The Power Tool Every Modern QA Engineer Needs (+ How It Stacks Up Against Cypress)",
-    excerpt: "How Playwright works, how to structure a project, and when to choose it over Cypress — with code examples and a side-by-side comparison.",
+    excerpt: "How Playwright works, how to structure a project, and when to choose it over Cypress, with code examples and a side-by-side comparison.",
     date: "May 20, 2025",
     readTime: "12 min read",
     category: "QA & Testing",
     imageUrl: "/playwright.jpg",
     content: `
-<p>Playwright handles multi-tab flows, cross-browser runs, and parallel workers more naturally than Cypress in many setups. Microsoft maintains it, and it shows up regularly in QA job postings alongside Cypress.</p>
+<p>Cypress was my first real automation love. 😂</p>
 
-<p>Below: how to structure a Playwright project, patterns that come up in interviews, and a practical comparison so you can pick the right tool for the job.</p>
+<p>And then one day someone asked me to test a flow that opened a second tab.</p>
 
-<h2>What Makes Playwright Different?</h2>
-<p>Playwright was built from the ground up to support the modern web. Its architecture is fundamentally different from Cypress:</p>
+<p>That was the day I learned Cypress does not do second tabs.</p>
+
+<p>So let's talk about Playwright. What it actually does differently, how to structure a project, and when it genuinely beats Cypress.</p>
+
+<h2>What makes Playwright different</h2>
+
+<p>It wasn't bolted onto the modern web. It was built for it.</p>
+
 <ul>
-  <li><strong>Multi-browser natively:</strong> Chromium, Firefox, and WebKit (Safari) - all supported, all maintained by the Playwright team. Real cross-browser coverage, not an afterthought.</li>
-  <li><strong>Out-of-process architecture:</strong> Playwright controls the browser via the Chrome DevTools Protocol (CDP) from outside the browser process. This means it can handle multiple tabs, multiple browser contexts, and even multiple browsers in one test.</li>
-  <li><strong>Auto-waiting built in:</strong> Like Cypress, Playwright auto-waits - but with a more granular actionability model. Before clicking, it checks: is the element visible? Is it enabled? Is it stable (not animating)? Is it in the viewport?</li>
-  <li><strong>True parallelism:</strong> Tests run in parallel by default across multiple workers. No extra config required.</li>
-  <li><strong>Multi-language:</strong> JavaScript/TypeScript, Python, Java, C#. One framework, your team's preferred language.</li>
+  <li><strong>Multi-browser, properly.</strong> Chromium, Firefox and WebKit. All first-class, all maintained by the same team. Real Safari coverage, not an afterthought.</li>
+  <li><strong>It sits outside the browser.</strong> Playwright drives the browser from outside the process, which is exactly why it can handle multiple tabs, multiple contexts and even multiple browsers in a single test.</li>
+  <li><strong>Auto-waiting with a checklist.</strong> Before it clicks anything it asks: is this visible, is it enabled, has it stopped animating, is it actually in the viewport?</li>
+  <li><strong>Parallel by default.</strong> No config. No paid tier. It just runs your tests in parallel.</li>
+  <li><strong>Pick your language.</strong> JavaScript, TypeScript, Python, Java, C#.</li>
 </ul>
 
-<h2>Project Structure</h2>
+<p>That second point is the whole thing, honestly. Cypress runs inside your app's run loop, which is what makes its debugging so lovely and also what boxes it in.</p>
+
+<h2>Project structure</h2>
+
 <pre><code class="language-bash">
 project-root/
 ├── tests/
@@ -2422,7 +2497,8 @@ project-root/
 └── package.json
 </code></pre>
 
-<h2>playwright.config.ts</h2>
+<h2>The config file</h2>
+
 <pre><code class="language-ts">
 import { defineConfig, devices } from '@playwright/test';
 
@@ -2452,9 +2528,12 @@ export default defineConfig({
 });
 </code></pre>
 
-<p>The <code>projects</code> array lets you run the same tests across Chromium, Firefox, WebKit, and mobile profiles from one config. Cypress supports multiple browsers, but Playwright's cross-browser matrix is a core part of the design.</p>
+<p>That <code>projects</code> array is the part worth staring at.</p>
 
-<h2>Page Object Model in Playwright</h2>
+<p>One config, and the same tests run against Chromium, Firefox, WebKit and a mobile profile. Cypress can run multiple browsers too, but here the cross-browser matrix is the design, not a setting you go looking for.</p>
+
+<h2>Page objects</h2>
+
 <pre><code class="language-ts">
 // pages/LoginPage.ts
 import { Page, Locator } from '@playwright/test';
@@ -2516,9 +2595,12 @@ test.describe('Login', () => {
 });
 </code></pre>
 
-<h2>Playwright-Only Features</h2>
+<p>Specs stay readable. Selectors live in one place. Same discipline as Cypress, slightly different syntax.</p>
 
-<h3>1. Multi-Tab Testing</h3>
+<h2>The things only Playwright does</h2>
+
+<h3>1. Multiple tabs</h3>
+
 <pre><code class="language-ts">
 test('link opens in new tab', async ({ browser }) => {
   const context = await browser.newContext();
@@ -2536,7 +2618,10 @@ test('link opens in new tab', async ({ browser }) => {
 });
 </code></pre>
 
-<h3>2. Multiple Browser Contexts (Simulate Two Users)</h3>
+<p>This is the one that made me switch for certain projects.</p>
+
+<h3>2. Two users at once</h3>
+
 <pre><code class="language-ts">
 test('admin and user see different dashboards', async ({ browser }) => {
   const adminContext = await browser.newContext({ storageState: 'admin-auth.json' });
@@ -2553,7 +2638,12 @@ test('admin and user see different dashboards', async ({ browser }) => {
 });
 </code></pre>
 
-<h3>3. API Authentication (Store & Reuse State)</h3>
+<p>An admin and a normal user, in the same test, seeing different things.</p>
+
+<p>Try explaining to a product manager why you can't test that. 😂</p>
+
+<h3>3. Log in once, reuse it everywhere</h3>
+
 <pre><code class="language-ts">
 // global-setup.ts - runs once before all tests
 import { chromium } from '@playwright/test';
@@ -2581,7 +2671,10 @@ use: {
 }
 </code></pre>
 
-<h3>4. Network Interception</h3>
+<p>Every test now starts already authenticated. No logging in 200 times.</p>
+
+<h3>4. Network interception</h3>
+
 <pre><code class="language-ts">
 // Mock an API response
 await page.route('/api/users', route => {
@@ -2604,12 +2697,19 @@ await page.route('/api/config', async route => {
 });
 </code></pre>
 
+<p>Mock it, kill it, or let it through and rewrite the answer on the way back.</p>
+
 <h2>Trace Viewer</h2>
-<p>When a test fails in CI, Playwright can capture a trace — a recording of actions, network requests, console output, and DOM snapshots. Open it with:</p>
+
+<p>This is genuinely my favourite feature.</p>
+
+<p>When a test dies in CI, Playwright can capture a trace. Actions, network requests, console output, DOM snapshots, all of it.</p>
+
 <pre><code class="language-bash">
 npx playwright show-trace trace.zip
 </code></pre>
-<p>Useful for debugging failures you can't reproduce locally. Video recordings help too, but traces give you step-by-step context.</p>
+
+<p>Which means the classic "works on my machine, fails in CI" conversation gets a lot shorter. Video helps, but a trace lets you step through what actually happened.</p>
 
 <h2>Cypress vs Playwright</h2>
 
@@ -2635,17 +2735,26 @@ npx playwright show-trace trace.zip
   </tbody>
 </table>
 
-<h2>Which Should You Use?</h2>
-<p>Many teams use both, for different jobs:</p>
+<h2>So which one?</h2>
+
+<p>Honestly? A lot of teams run both.</p>
+
 <ul>
-  <li><strong>Cypress</strong> fits well when the team is JavaScript-first and wants a polished local debugging experience for core web flows.</li>
-  <li><strong>Playwright</strong> fits when you need Safari/WebKit coverage, multi-tab or multi-user scenarios, or parallel runs without extra infrastructure.</li>
-  <li>Starting fresh with a Safari requirement? Playwright is often the simpler path. Onboarding a team new to automation? Cypress's runner can be easier to learn.</li>
+  <li><strong>Cypress</strong> when the team is JavaScript-first and you want that polished local debugging experience for your core web flows.</li>
+  <li><strong>Playwright</strong> when you need Safari coverage, multi-tab or multi-user scenarios, or parallel runs without paying for infrastructure.</li>
+  <li>Starting fresh and Safari is a requirement? Playwright is the shorter road. Onboarding people who've never automated anything? Cypress's runner is kinder.</li>
 </ul>
 
-<h2>Conclusion</h2>
-<p>Playwright and Cypress solve overlapping but not identical problems. Knowing both — and being able to explain the tradeoffs for a given product — is more useful than treating either as a universal default.</p>
-  `
+<h2>The actual takeaway</h2>
+
+<p>These two tools solve overlapping problems, not identical ones.</p>
+
+<p>And in an interview, the useful thing isn't picking a side.</p>
+
+<p>It's being able to say <strong>why</strong> you'd choose one for a specific product, and what you'd give up by doing it.</p>
+
+<p>That answer is worth more than knowing every API in either. 😂</p>
+    `
   },
   {
     id: 11,
@@ -2656,14 +2765,19 @@ npx playwright show-trace trace.zip
     category: "AI",
     imageUrl: "/AIBasedTesting.jpeg",
     content: `
-<p>AI is already involved in how test cases get written, how failures get triaged, and how brittle selectors get maintained. The useful question is not whether it will change QA, but where it saves time today and where it still needs a human review.</p>
+<p>Let's skip the part where we ask whether AI is going to change QA.</p>
 
-<p>This post covers tools and workflows that are working now, not speculative predictions.</p>
+<p>It already did. Quietly. While everybody was arguing about it on LinkedIn. 😂</p>
 
-<h2>What AI Is Doing in Testing Today</h2>
+<p>So the more useful question is: where does it genuinely save time today, and where does it still need a human standing over it?</p>
 
-<h3>1. AI-Assisted Test Generation</h3>
-<p>The most immediate impact. Tools like GitHub Copilot, Cursor, and Claude can generate test cases, fixtures, and page objects from a description or from reading your existing code:</p>
+<p>Everything here is stuff that works now. No predictions.</p>
+
+<h2>What AI is already doing in testing</h2>
+
+<h3>1. Generating tests</h3>
+
+<p>The most immediate one. Copilot, Cursor and Claude will happily turn a description or an existing component into test cases, fixtures and page objects:</p>
 
 <pre><code class="language-ts">
 // Prompt: "Write Cypress tests for a login form with email, 
@@ -2694,17 +2808,27 @@ describe('Login Form', () => {
 });
 </code></pre>
 
-<p>AI is good at scaffolding — generating boilerplate specs, fixtures, or page objects from a prompt or existing code. You still decide what to test and whether the generated cases match real user risk.</p>
+<p>Useful. Genuinely.</p>
 
-<h3>2. Self-Healing Tests</h3>
-<p>One of the biggest time sinks in test automation is maintaining selectors. A developer renames a class or restructures the DOM, and suddenly 30 tests fail - not because the feature is broken, but because your selectors are stale.</p>
+<p>But notice what it did there. It generated the obvious cases. The ones you'd have thought of anyway.</p>
 
-<p>Tools like Testim, Mabl, and Healenium attempt to recover when selectors break by matching elements on context and attributes. That can cut maintenance time after UI refactors, though you should still review what changed.</p>
+<p>AI is good at <strong>scaffolding.</strong> You still decide what's worth testing and whether those cases map to actual user risk.</p>
 
-<h3>3. Visual Testing with AI</h3>
-<p>Traditional visual testing tools (screenshot diffing) are brittle - they fail on any pixel change, including intentional ones like font rendering or anti-aliasing differences across environments.</p>
+<h3>2. Self-healing tests</h3>
 
-<p>AI-powered visual testing (Applitools Eyes, Percy) uses neural networks to distinguish between meaningful visual regressions and irrelevant pixel noise. It understands layout, spacing, and content at a semantic level - not just a pixel level.</p>
+<p>Every automation engineer knows this pain.</p>
+
+<p>A developer renames a class. Thirty tests go red. Nothing is broken. Your selectors are just stale.</p>
+
+<p>Tools like Testim, Mabl and Healenium try to recover by matching on context and surrounding attributes instead of one brittle string.</p>
+
+<p>It cuts real maintenance time after a UI refactor. Just go and look at what it healed, because "the test passes now" and "the test still tests the right thing" are not the same sentence.</p>
+
+<h3>3. Visual testing that isn't useless</h3>
+
+<p>Old screenshot diffing fails on everything. Font rendering. Anti-aliasing. A one pixel shift because the CI machine felt different that day. 😂</p>
+
+<p>AI-powered visual testing like Applitools and Percy compares at a semantic level instead. Layout, spacing, content. It can tell the difference between a real regression and noise.</p>
 
 <pre><code class="language-js">
 // Applitools integration with Cypress
@@ -2720,17 +2844,24 @@ describe('Visual regression', () => {
 });
 </code></pre>
 
-<h3>4. AI-Powered Test Analysis and Failure Triage</h3>
-<p>When your CI pipeline fails with 47 test failures, figuring out the root cause manually is painful. AI tools are beginning to cluster failures, identify shared root causes, and distinguish between a flaky test and a real regression - automatically.</p>
+<h3>4. Failure triage</h3>
 
-<p>Tools like <strong>Sentry</strong>, <strong>Datadog</strong>, and <strong>BuildPulse</strong> use ML to detect flaky tests, group related failures, and surface the most likely root cause. Instead of reading 200 lines of stack traces, you get: "3 tests are failing due to a timeout on the /api/checkout endpoint."</p>
+<p>Your pipeline goes red with 47 failures.</p>
 
-<h3>5. AI Test Coverage Analysis</h3>
-<p>AI tools can analyse your codebase, map it against your existing test suite, and identify untested code paths, high-risk areas, and coverage gaps - much more intelligently than traditional coverage percentage metrics.</p>
+<p>You now have a choice: read 200 lines of stack trace, or get told "3 tests are failing because /api/checkout is timing out."</p>
 
-<h2>Practical AI Workflows for QA Engineers Right Now</h2>
+<p>Tools like Sentry, Datadog and BuildPulse cluster failures, spot flaky tests and surface the likely root cause. This is one of those things that sounds small and then saves you an afternoon every week.</p>
 
-<h3>Workflow 1: Use AI to Generate Test Cases from User Stories</h3>
+<h3>5. Coverage analysis</h3>
+
+<p>Not the coverage percentage. That number has been lying to us for years. 😂</p>
+
+<p>AI tools can map your codebase against your suite and point at untested paths and high-risk areas, which is a much more honest answer than "we're at 82%."</p>
+
+<h2>Workflows you can use this week</h2>
+
+<h3>Turn a user story into test cases</h3>
+
 <pre><code class="language-markdown">
 Prompt to Claude/ChatGPT:
 "Given this user story: 'As a user, I want to reset my password via email 
@@ -2759,13 +2890,20 @@ Scenario: Invalid email address format
   And the submit button should remain disabled
 </code></pre>
 
-<h3>Workflow 2: AI-Assisted Debugging</h3>
-<p>When a test fails with a cryptic error, paste the error and your test code into Claude and ask "why is this failing and how do I fix it?" The quality of debugging assistance from modern AI is genuinely impressive for test automation scenarios.</p>
+<h3>Debug a failing test</h3>
 
-<h3>Workflow 3: Generate Page Objects from HTML</h3>
-<p>Paste a component's HTML into an AI tool and ask it to generate a Page Object. A task that took 20 minutes now takes 2.</p>
+<p>Paste the error and the test code and ask why it's failing.</p>
 
-<h3>Workflow 4: Test Data Generation</h3>
+<p>I was sceptical about this one. I'm not anymore. For test automation specifically, modern AI is very good at spotting the thing you've been staring past for twenty minutes.</p>
+
+<h3>Generate page objects from HTML</h3>
+
+<p>Paste in a component's markup, ask for a page object.</p>
+
+<p>Twenty minutes becomes two.</p>
+
+<h3>Generate test data</h3>
+
 <pre><code class="language-js">
 // Prompt: "Generate realistic fixture data for 10 users with 
 // name, email, role (admin/user), and createdAt date"
@@ -2778,60 +2916,76 @@ Scenario: Invalid email address format
 ]
 </code></pre>
 
-<h2>What's on the Horizon</h2>
+<p>Nobody has ever enjoyed writing fixture data by hand. Nobody. 😂</p>
 
-<h3>Autonomous Test Generation from User Sessions</h3>
-<p>The next frontier: AI agents that watch real user sessions (with consent), identify untested user journeys, and automatically generate and validate test cases for them. No human writing a single line of test code.</p>
+<h2>What's coming</h2>
 
-<h3>AI Test Architects</h3>
-<p>AI that doesn't just generate individual tests but designs entire test strategies - recommending what to test at unit vs integration vs E2E level, based on code complexity, change frequency, and business risk.</p>
+<p><strong>Tests generated from real sessions.</strong> Agents that watch actual user journeys, with consent, spot the untested ones and write tests for them.</p>
 
-<h3>Conversational Test Creation</h3>
-<p>Tell an AI agent: "Make sure that when a user with a free plan tries to access premium features, they see an upgrade prompt." The agent writes the tests, runs them, and reports back - all through conversation.</p>
+<p><strong>AI test architects.</strong> Not just writing tests, but deciding what belongs at unit level versus integration versus end to end, based on complexity, change frequency and business risk.</p>
 
-<h3>Predictive Defect Detection</h3>
-<p>AI that analyses a pull request's changes and predicts which existing tests are most likely to fail - before you even run them. Prioritise your test runs intelligently rather than running everything every time.</p>
+<p><strong>Conversational test creation.</strong> "Make sure a free plan user hitting a premium feature sees the upgrade prompt." The agent writes it, runs it, reports back.</p>
 
-<h2>How to Stay Useful as Tools Improve</h2>
+<p><strong>Predictive failure detection.</strong> AI reads a pull request and predicts which tests will break before you run anything.</p>
 
-<h3>1. Write Better Prompts for Test Work</h3>
-<p>Clear prompts with acceptance criteria, edge cases, and framework context produce better output. Treat AI like a fast junior — review everything before it lands in your repo.</p>
+<h2>So how do you stay useful?</h2>
 
-<h3>2. Learn the AI Testing Tools</h3>
-<p>Get hands-on with at least one of these now:</p>
+<h3>1. Get better at asking</h3>
+
+<p>Clear prompts with acceptance criteria, edge cases and framework context produce dramatically better output.</p>
+
+<p>Treat AI like a fast junior. Brilliant, quick, and absolutely not merging anything without review.</p>
+
+<h3>2. Actually try the tools</h3>
+
+<p>Pick one and get hands-on:</p>
+
 <ul>
-  <li><strong>Applitools</strong> - AI visual testing (free tier available)</li>
-  <li><strong>Mabl</strong> - AI-powered E2E testing with self-healing</li>
-  <li><strong>Testim</strong> - ML-based test authoring and maintenance</li>
-  <li><strong>Healenium</strong> - open-source self-healing for Selenium/Playwright</li>
-  <li><strong>GitHub Copilot</strong> - for AI-assisted test writing in your IDE</li>
+  <li><strong>Applitools</strong> for AI visual testing, free tier available</li>
+  <li><strong>Mabl</strong> for end to end with self-healing</li>
+  <li><strong>Testim</strong> for ML-based authoring and maintenance</li>
+  <li><strong>Healenium</strong> if you're on Selenium or Playwright and want open source</li>
+  <li><strong>GitHub Copilot</strong> for writing tests in your editor</li>
 </ul>
 
-<h3>3. Double Down on What AI Can't Replace</h3>
+<h3>3. Double down on what it can't do</h3>
+
 <p>AI is excellent at execution. It's weak at:</p>
+
 <ul>
-  <li><strong>Test strategy</strong> - deciding what matters most to test and why</li>
-  <li><strong>Domain knowledge</strong> - understanding the business context behind a feature</li>
-  <li><strong>Exploratory testing</strong> - the creative, intuition-driven discovery of unexpected bugs</li>
-  <li><strong>Stakeholder communication</strong> - translating QA findings into business language</li>
-  <li><strong>Risk assessment</strong> - knowing which untested scenarios could actually hurt users</li>
+  <li><strong>Test strategy.</strong> Deciding what actually matters and why.</li>
+  <li><strong>Domain knowledge.</strong> Understanding the business behind the feature.</li>
+  <li><strong>Exploratory testing.</strong> The creative, slightly feral instinct that finds the bug nobody specified.</li>
+  <li><strong>Stakeholder communication.</strong> Turning findings into something a business person can act on.</li>
+  <li><strong>Risk assessment.</strong> Knowing which untested scenario would actually hurt a user.</li>
 </ul>
 
-<p>Invest deeply in these. They're your moat.</p>
+<p>That list is your moat. Invest in it.</p>
 
-<h3>4. Build an AI-Augmented Workflow, Not an AI-Dependent One</h3>
-<p>The risk of over-relying on AI is subtle but real. If you stop understanding <em>why</em> a test is written a certain way because you always just accept the AI output, you lose the ability to debug it, maintain it, or improve it when it inevitably breaks in a complex edge case.</p>
+<h3>4. Augmented, not dependent</h3>
 
-<p>Use AI to go faster. Maintain the understanding to go deeper.</p>
+<p>This risk is subtle.</p>
 
-<h3>5. Document What Works for Your Team</h3>
-<p>Shared prompt templates and review checklists help more than individual experiments. If your team adopts AI-assisted test writing, write down what you expect people to verify before merging.</p>
+<p>If you always accept the output, you slowly stop understanding <em>why</em> a test is written the way it is. And then it breaks in some horrible edge case and you can't debug your own suite.</p>
 
-<h2>Conclusion</h2>
-<p>AI can speed up repetitive QA work — generating cases, fixtures, and first-pass debugging — but strategy, domain knowledge, and exploratory testing still belong to humans. Use the tools to move faster; keep ownership of what "done" means for your product.</p>
+<blockquote><p>Use AI to go faster. Keep enough understanding to go deeper.</p></blockquote>
 
-<p>If you're experimenting already, note what saved time and what needed correction. That feedback loop matters more than adopting every new tool on launch day.</p>
-  `
+<h3>5. Write down what works</h3>
+
+<p>Shared prompt templates and review checklists beat everyone quietly experimenting alone.</p>
+
+<p>If your team is using AI to write tests, agree on what a human checks before it merges.</p>
+
+<h2>Where this leaves us</h2>
+
+<p>AI is quick at the repetitive parts. Cases, fixtures, first-pass debugging.</p>
+
+<p>Strategy, domain knowledge and exploratory testing are still ours.</p>
+
+<p>And if you're already experimenting, keep notes on what saved you time and what you had to fix.</p>
+
+<p>That feedback loop is worth more than adopting every tool the week it launches. 😂</p>
+    `
   },
   {
     id: 1,
@@ -2842,10 +2996,23 @@ Scenario: Invalid email address format
     category: "Development",
     imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-<p>Modern web apps are built from small, composable pieces rather than monolithic pages. The patterns below are ones I reach for on most projects — not because they're trendy, but because they keep codebases easier to change over time.</p>
+<p>Let's be honest.</p>
 
-<h2>The Component Mindset</h2>
-<p>React, Vue, and Svelte all encourage the same idea: isolate UI into components that own their markup, styling, and local state. A button becomes a component with variants, sizes, and loading states instead of one-off markup copied across pages.</p>
+<p>Most of us didn't learn to build web apps properly. We learned to build them <strong>eventually.</strong> 😂</p>
+
+<p>You start with one file. Then two. Then a folder called "components" that is really just where you put the things you'd rather not look at.</p>
+
+<p>Six months later you're scared to rename a button.</p>
+
+<p>So here are the patterns I actually reach for. Not because they're trendy, but because they keep a codebase easy to change later.</p>
+
+<h2>The component mindset</h2>
+
+<p>React, Vue and Svelte are all pushing the same idea.</p>
+
+<p>Isolate your UI into components that own their markup, their styling and their local state.</p>
+
+<p>A button stops being markup you copied across five pages. It becomes one thing, with variants, sizes and loading states.</p>
 
 <pre><code class="language-jsx">
 // ✅ Think like this
@@ -2856,34 +3023,65 @@ const Button = ({ variant = 'primary', size = 'md', children, ...props }) => (
 );
 </code></pre>
 
+<p>Write it once. Fix it once.</p>
+
 <h2>Performance</h2>
-<p>Slow loads hurt retention. A few levers that consistently matter:</p>
+
+<p>Slow apps lose people. That's the entire argument.</p>
+
+<p>A few levers that consistently matter:</p>
+
 <ul>
-  <li><strong>Code splitting:</strong> Only ship the JavaScript the current page actually needs. React's <code>lazy()</code> and <code>Suspense</code> make this straightforward.</li>
-  <li><strong>Image optimization:</strong> Use modern formats (WebP, AVIF), lazy load below-the-fold images, and always specify dimensions to prevent layout shift.</li>
-  <li><strong>Caching:</strong> Leverage browser caching with proper cache headers and service workers for offline capability.</li>
-  <li><strong>Bundle analysis:</strong> Run <code>npx vite-bundle-visualizer</code> or similar tools regularly. You'll be shocked what's hiding in your node_modules.</li>
+  <li><strong>Code splitting.</strong> Only ship the JavaScript the current page actually needs. React's <code>lazy()</code> and <code>Suspense</code> make this straightforward.</li>
+  <li><strong>Image optimization.</strong> Modern formats like WebP and AVIF, lazy load anything below the fold, and always specify dimensions so the layout doesn't jump.</li>
+  <li><strong>Caching.</strong> Proper cache headers, and service workers if you need offline.</li>
+  <li><strong>Bundle analysis.</strong> Run <code>npx vite-bundle-visualizer</code> now and then.</li>
 </ul>
 
-<h2>State Management</h2>
-<p>Not every app needs Redux. In fact, most don't. Start with React's built-in <code>useState</code> and <code>useContext</code>. Reach for Zustand or Jotai when things get complex. Only bring in Redux or TanStack Query when you genuinely need server state synchronization at scale.</p>
+<p>That last one is genuinely humbling. Run it on a project you're proud of and see what's actually in there. 😂</p>
 
-<p>The rule of thumb: if your state lives in one component, keep it there. If two siblings need it, lift it up. If your whole app needs it, use context or a store.</p>
+<h2>State management</h2>
+
+<p>Not every app needs Redux.</p>
+
+<p>Actually, most don't.</p>
+
+<p>Start with <code>useState</code> and <code>useContext</code>. Reach for Zustand or Jotai when things get complicated. Only bring in Redux or TanStack Query when you genuinely need server state synchronised at scale.</p>
+
+<p>The rule of thumb:</p>
+
+<blockquote><p>If your state lives in one component, keep it there. If two siblings need it, lift it up. If the whole app needs it, use context or a store.</p></blockquote>
+
+<p>That's it. That's the whole decision tree.</p>
 
 <h2>Tooling</h2>
-<p>A stack I default to on new frontend work:</p>
+
+<p>The stack I default to on new frontend work:</p>
+
 <ul>
-  <li><strong>Vite</strong> over Create React App - faster cold starts, instant HMR, better DX</li>
-  <li><strong>TypeScript</strong> from day one - your future self will thank you</li>
-  <li><strong>ESLint + Prettier</strong> - automate the style debates so you can focus on real problems</li>
-  <li><strong>Vitest</strong> for unit tests - it shares Vite's config and is significantly faster than Jest</li>
+  <li><strong>Vite</strong> over Create React App. Faster cold starts, instant HMR, better developer experience.</li>
+  <li><strong>TypeScript</strong> from day one. Your future self will thank you.</li>
+  <li><strong>ESLint and Prettier.</strong> Automate the style debates so you can argue about real things instead.</li>
+  <li><strong>Vitest</strong> for unit tests. It shares Vite's config and it's significantly faster than Jest.</li>
 </ul>
 
 <h2>Deployment</h2>
-<p>Vercel, Netlify, and Cloudflare Pages make shipping straightforward, but convenience shouldn't skip preview environments, basic error monitoring, and a rollback plan.</p>
 
-<h2>Conclusion</h2>
-<p>Reusable components, measured performance, and a lean stack until you need more — that covers most of what keeps a frontend codebase healthy. Start there before adding complexity.</p>
+<p>Vercel, Netlify and Cloudflare Pages have made shipping almost too easy.</p>
+
+<p>Almost. Convenience is not a reason to skip preview environments, basic error monitoring and a rollback plan.</p>
+
+<p>Because the day you need a rollback plan is not the day you want to start writing one. 😂</p>
+
+<h2>So what actually matters?</h2>
+
+<p>Reusable components.</p>
+
+<p>Performance you actually measured.</p>
+
+<p>A lean stack until the project genuinely asks for more.</p>
+
+<p>Start there. Add complexity when the work demands it, not when your timeline does. 😂</p>
     `
   },
   {
@@ -2895,32 +3093,74 @@ const Button = ({ variant = 'primary', size = 'md', children, ...props }) => (
     category: "AI",
     imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-<p>GitHub Copilot, Cursor, and chat-based assistants are part of many developers' daily workflow now. They're useful for specific tasks — and unreliable for others. It helps to be explicit about which is which.</p>
+<p>Copilot, Cursor and chat assistants are just part of the job now.</p>
 
-<h2>What AI Can and Can't Do Today</h2>
-<p>AI assistants handle boilerplate well: scaffolding components, writing tests for small functions, explaining unfamiliar code, and completing patterns they've seen many times. They struggle with novel architecture, nuanced business rules, and anything that depends on undocumented context in your codebase.</p>
+<p>Most of us have stopped thinking about it. You open the editor, something autocompletes, you hit tab, you move on.</p>
 
-<p>Think of them as a fast collaborator on well-defined tasks, not a substitute for understanding what you're shipping.</p>
+<p>Which is fine. Until it isn't.</p>
 
-<h2>Tools Worth Trying</h2>
+<p>Because these tools are genuinely brilliant at some things and quietly terrible at others, and knowing which is which is most of the skill.</p>
+
+<h2>What AI is actually good at right now</h2>
+
+<p>Boilerplate. Scaffolding components. Writing tests for small functions. Explaining code you've never seen before. Completing patterns it has seen ten thousand times.</p>
+
+<p>All of that, it does well.</p>
+
+<h2>And what it isn't</h2>
+
+<p>Novel architecture. Nuanced business rules. Anything that depends on context living in someone's head rather than in the repo.</p>
+
+<p>Ask it why your team made a weird decision in 2022 and it will confidently invent a reason. 😂</p>
+
+<p>So think of it as a fast collaborator on well-defined work. Not a substitute for understanding what you're shipping.</p>
+
+<h2>Tools worth trying</h2>
+
 <ul>
-  <li><strong>GitHub Copilot:</strong> The most mature option. Deep IDE integration, decent multi-file context, and it's getting better at understanding your codebase over time.</li>
-  <li><strong>Cursor:</strong> A Copilot competitor built as a full IDE fork of VS Code. Its "composer" feature for multi-file edits is genuinely impressive for refactoring tasks.</li>
-  <li><strong>Claude / ChatGPT:</strong> Better for architectural discussions, debugging sessions, writing documentation, and tasks that benefit from back-and-forth conversation.</li>
-  <li><strong>Codeium:</strong> Free alternative to Copilot that's worth a look if you're budget-conscious.</li>
+  <li><strong>GitHub Copilot.</strong> The most mature option. Deep editor integration and decent multi-file context.</li>
+  <li><strong>Cursor.</strong> A full IDE built on VS Code. The multi-file editing is genuinely impressive for refactoring.</li>
+  <li><strong>Claude and ChatGPT.</strong> Better for architecture discussions, debugging sessions and anything that benefits from back and forth.</li>
+  <li><strong>Codeium.</strong> Free, and worth a look if budget is the deciding factor.</li>
 </ul>
 
-<h2>AI in Testing (Developer View)</h2>
-<p>From a development side, AI can draft test cases from user stories or suggest coverage gaps. Tools like Testim and Mabl add self-healing selectors on the QA side. Generated tests still need review — passing tests that assert the wrong thing are worse than no tests.</p>
+<h2>What this does to testing</h2>
 
-<h2>Career Impact</h2>
-<p>Developers who use AI well tend to spend less time on syntax and boilerplate and more on design, review, and communication. Those skills become more important, not less, when generation gets cheaper.</p>
+<p>AI can draft test cases from user stories and point at coverage gaps. On the QA side, tools like Testim and Mabl add self-healing selectors.</p>
 
-<h2>Risks to Watch</h2>
-<p>Over-reliance shows up as subtle bugs in code that looks correct at a glance. Juniors who skip foundational debugging practice may also miss the mental models that make senior work possible. Use AI to move faster — not to skip understanding.</p>
+<p>But generated tests still need a human to read them.</p>
 
-<h2>Conclusion</h2>
-<p>AI in development is an amplification layer, not a replacement story. The practical move is to learn where it helps your workflow and keep reviewing everything it produces.</p>
+<p>Because here's the thing nobody says out loud:</p>
+
+<blockquote><p>A passing test that asserts the wrong thing is worse than no test at all.</p></blockquote>
+
+<p>No test tells you nothing. A wrong test tells you something false, and you believe it.</p>
+
+<h2>What it means for your career</h2>
+
+<p>Developers who use AI well spend less time on syntax and more on design, review and explaining things to other humans.</p>
+
+<p>Which means those skills get <strong>more</strong> valuable, not less.</p>
+
+<p>When generating code becomes cheap, knowing what's worth generating becomes the job.</p>
+
+<h2>The risk nobody likes talking about</h2>
+
+<p>Over-reliance shows up as subtle bugs in code that looks completely fine at a glance.</p>
+
+<p>And if you're early in your career, skipping the debugging practice costs you something you won't notice for years. The mental models that make senior work possible are built by struggling through problems, not by watching something else solve them.</p>
+
+<p>Use AI to move faster.</p>
+
+<p>Not to skip understanding.</p>
+
+<h2>Where this lands</h2>
+
+<p>AI in development is an amplification layer. It is not a replacement story, whatever LinkedIn is telling you this week. 😂</p>
+
+<p>Learn where it helps your workflow. Review everything it produces.</p>
+
+<p>That's the whole strategy.</p>
     `
   },
   {
@@ -2932,13 +3172,27 @@ const Button = ({ variant = 'primary', size = 'md', children, ...props }) => (
     category: "Design",
     imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-<p>Tailwind puts styling in the markup as small utility classes instead of pre-built components you fight against. The first reaction is often skepticism; after a project or two, the workflow usually clicks.</p>
+<p>Everyone hates Tailwind for about a week.</p>
 
-<h2>Utility-First Styling</h2>
-<p>Bootstrap gives you opinionated components. Tailwind gives you primitives — <code>flex</code>, <code>pt-4</code>, <code>text-gray-700</code> — that you compose into whatever layout you need. You trade separate CSS files for co-located styling decisions.</p>
+<p>You look at a div with fourteen classes on it and think, genuinely, "we spent twenty years separating content from presentation and this is what we did with it." 😂</p>
 
-<h2>Responsive Layouts</h2>
-<p>Tailwind's responsive system uses a mobile-first approach with intuitive breakpoint prefixes. You define the base style (mobile), then override at larger sizes:</p>
+<p>Then you build a project with it.</p>
+
+<p>Then you go back to a normal CSS file and realise you have no idea which of these 400 lines are still being used.</p>
+
+<h2>Utility-first styling</h2>
+
+<p>Bootstrap hands you opinionated components. You then spend your time fighting them.</p>
+
+<p>Tailwind hands you primitives instead. <code>flex</code>, <code>pt-4</code>, <code>text-gray-700</code>. You compose them into whatever you actually need.</p>
+
+<p>The trade is simple. You give up separate CSS files. You get styling decisions that live next to the thing they style.</p>
+
+<h2>Responsive layouts</h2>
+
+<p>This is where it clicked for me.</p>
+
+<p>Tailwind is mobile-first. You write the base style for small screens, then override at larger ones:</p>
 
 <pre><code class="language-html">
 &lt;div class="
@@ -2951,10 +3205,15 @@ const Button = ({ variant = 'primary', size = 'md', children, ...props }) => (
 &lt;/div&gt;
 </code></pre>
 
-<p>Base styles target mobile; breakpoint prefixes (<code>md:</code>, <code>lg:</code>) override at larger widths. Responsive rules sit next to the element they affect.</p>
+<p>Base styles hit mobile. Prefixes like <code>md:</code> and <code>lg:</code> take over at wider screens.</p>
 
-<h2>Design Tokens</h2>
-<p>Tailwind's spacing scale and config file keep teams aligned. Define colors and fonts once in <code>tailwind.config.js</code> and reuse them everywhere.</p>
+<p>The responsive rules sit right next to the element they affect. No jumping to another file to find out why something collapses at 768px.</p>
+
+<h2>Design tokens</h2>
+
+<p>The config file is what keeps a team honest.</p>
+
+<p>Define your colours and fonts once and reuse them everywhere:</p>
 
 <pre><code class="language-js">
 // tailwind.config.js - your design tokens live here
@@ -2977,8 +3236,11 @@ module.exports = {
 }
 </code></pre>
 
-<h2>Dark Mode</h2>
-<p>Add <code>darkMode: 'class'</code>, then prefix utilities with <code>dark:</code>. No separate stylesheet required.</p>
+<p>Now nobody is inventing a seventh shade of blue at 4pm on a Friday. 😂</p>
+
+<h2>Dark mode</h2>
+
+<p>Add <code>darkMode: 'class'</code>, then prefix with <code>dark:</code>.</p>
 
 <pre><code class="language-html">
 &lt;div class="bg-white text-gray-900 dark:bg-gray-900 dark:text-fg"&gt;
@@ -2986,8 +3248,11 @@ module.exports = {
 &lt;/div&gt;
 </code></pre>
 
-<h2>Extracting Patterns with @apply</h2>
-<p>When the same utility combination repeats, extract it — but sparingly. Tailwind works best when most styling stays inline.</p>
+<p>No separate stylesheet. No duplicate theme file. That's it.</p>
+
+<h2>Extracting patterns with @apply</h2>
+
+<p>When the same combination keeps repeating, you can pull it out:</p>
 
 <pre><code class="language-css">
 .btn-primary {
@@ -2996,10 +3261,19 @@ module.exports = {
 }
 </code></pre>
 
-<p>Use this sparingly - the whole point of Tailwind is keeping styles local - but it's perfect for high-frequency patterns.</p>
+<p>But go easy on this.</p>
 
-<h2>Conclusion</h2>
-<p>Tailwind is a different way to think about CSS: utilities in markup, tokens in config, responsive rules at the point of use. Give it a few projects before deciding whether it fits your team.</p>
+<p>The whole point of Tailwind is that styles stay local. If you <code>@apply</code> everything, you've just rebuilt a CSS file with extra steps and a build tool. 😂</p>
+
+<p>Save it for the handful of patterns you genuinely use everywhere.</p>
+
+<h2>Is it worth it?</h2>
+
+<p>Tailwind asks you to think about CSS differently. Utilities in the markup, tokens in the config, responsive rules where you can see them.</p>
+
+<p>Give it two projects before you decide.</p>
+
+<p>One is not enough. You'll still be annoyed. 😂</p>
     `
   },
   {
@@ -3011,10 +3285,21 @@ module.exports = {
     category: "Development",
     imageUrl: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-<p>Most JavaScript developers hit a familiar bug: <code>Cannot read properties of undefined (reading 'map')</code> in production, traced back to a string passed where an array was expected. TypeScript would have flagged that at edit time.</p>
+<p>Every JavaScript developer has met this error:</p>
 
-<h2>Types as Documentation</h2>
-<p>The best documentation is the kind that stays up to date automatically. When you type a function in TypeScript, the signature <em>is</em> the documentation:</p>
+<blockquote><p><code>Cannot read properties of undefined (reading 'map')</code></p></blockquote>
+
+<p>In production. On a Friday. 😂</p>
+
+<p>And when you finally trace it, it's the same story every time. Somebody passed a string where an array was expected, and nothing anywhere told them not to.</p>
+
+<p>TypeScript would have caught that while you were still typing it.</p>
+
+<h2>Types are documentation that can't lie</h2>
+
+<p>The best documentation is the kind that stays true without anyone maintaining it.</p>
+
+<p>When you type a function, the signature <em>is</em> the documentation:</p>
 
 <pre><code class="language-ts">
 // Anyone calling this knows exactly what goes in and what comes out
@@ -3023,13 +3308,21 @@ async function fetchUserById(id: string): Promise&lt;User | null&gt; {
 }
 </code></pre>
 
-<p>Compare that to a JSDoc comment that someone wrote 18 months ago and may or may not reflect what the function actually does today. Types enforce the contract. Comments suggest it.</p>
+<p>Now compare that to a JSDoc comment someone wrote 18 months ago, which may or may not describe what the function does today.</p>
 
-<h2>Editor Support</h2>
-<p>TypeScript gives you autocomplete on object properties, inline errors for wrong arguments, safe renames across files, and jump-to-definition that actually works across modules.</p>
+<p>Types enforce the contract.</p>
 
-<h2>Interfaces and Generics</h2>
-<p>Once you move past basic types, TypeScript's interfaces and generics let you model your domain precisely:</p>
+<p>Comments just suggest it. 😂</p>
+
+<h2>Your editor gets significantly smarter</h2>
+
+<p>Autocomplete on object properties. Errors on wrong arguments before you run anything. Renames that work across the whole project. Jump-to-definition that actually lands where it should.</p>
+
+<p>This is the part people underestimate. It's not just safety. It's that the editor finally knows what you're talking about.</p>
+
+<h2>Interfaces and generics</h2>
+
+<p>Once you're past the basics, you can model your actual domain:</p>
 
 <pre><code class="language-ts">
 interface ApiResponse&lt;T&gt; {
@@ -3044,16 +3337,31 @@ const userResponse: ApiResponse&lt;User&gt; = await api.getUser(id);
 const postsResponse: ApiResponse&lt;Post[]&gt; = await api.getPosts();
 </code></pre>
 
-<p>You write the shape once. TypeScript enforces it everywhere. Change the interface and every usage site flags immediately if it breaks the contract.</p>
+<p>You write the shape once. TypeScript enforces it everywhere.</p>
 
-<h2>The Learning Curve</h2>
-<p>The first week with TypeScript can feel slower. By the time you're a few weeks in, untyped JavaScript often feels like working without guardrails. You don't need <code>strict</code> mode on day one — adopt it incrementally as the team gets comfortable.</p>
+<p>Change the interface and every place that breaks lights up immediately, instead of six weeks later in someone's browser.</p>
 
-<h2>Adoption in the Ecosystem</h2>
-<p>Most major JavaScript libraries ship TypeScript types now, and many greenfield projects start with TS by default. On job boards it's often listed alongside JavaScript itself.</p>
+<h2>The first week is annoying</h2>
 
-<h2>Conclusion</h2>
-<p>TypeScript trades a bit of upfront typing for fewer runtime surprises and better tooling. For most teams building anything beyond a small script, that trade is worth it.</p>
+<p>I won't pretend otherwise.</p>
+
+<p>Week one feels slower. You're arguing with the compiler about things you already know are fine.</p>
+
+<p>Then a few weeks pass, you open an untyped JavaScript file, and it feels like driving without a seatbelt.</p>
+
+<p>You don't need <code>strict</code> mode on day one either. Turn it on gradually as the team gets comfortable.</p>
+
+<h2>The ecosystem already decided</h2>
+
+<p>Most major libraries ship types now. Most new projects start with TypeScript by default. Job listings put it right next to JavaScript itself.</p>
+
+<p>The debate is largely over. 😂</p>
+
+<h2>So is it worth it?</h2>
+
+<p>You trade a bit of upfront typing for fewer runtime surprises and much better tooling.</p>
+
+<p>For anything bigger than a small script, that's a good trade.</p>
     `
   },
   {
@@ -3065,41 +3373,83 @@ const postsResponse: ApiResponse&lt;Post[]&gt; = await api.getPosts();
     category: "Career",
     imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-<p>Many developer portfolios read like resumes with CSS: skills list, project grid, contact form. Hiring managers often spend under a minute on a first pass. Yours should answer what you build and why someone should care, quickly.</p>
+<p>Most developer portfolios are just a CV wearing CSS. 😂</p>
 
-<h2>Lead With What You Do</h2>
-<p>Generic hero copy — "passionate full-stack developer who loves building things" — doesn't differentiate you. State the problems you solve and the kind of work you want:</p>
+<p>Skills list. Project grid. Contact form nobody fills in.</p>
+
+<p>And here's the uncomfortable part. A hiring manager gives yours somewhere under a minute on the first pass.</p>
+
+<p>So the question isn't "does my portfolio look nice."</p>
+
+<p>It's <strong>can someone tell what I do and why it matters, fast.</strong></p>
+
+<h2>Lead with what you actually do</h2>
+
+<p>Generic hero copy tells them nothing:</p>
 
 <pre><code class="language-markdown">
 ❌ "Passionate developer who loves building things"
 ✅ "I build fast, accessible React applications with a focus on QA and test coverage"
 </code></pre>
 
-<h2>Fewer, Stronger Projects</h2>
-<p>Three excellent projects beat ten mediocre ones every time. Hiring managers don't have time to review a portfolio gallery - they'll look at one or two things, and those things need to be impressive. Choose projects that:</p>
+<p>One of those describes literally every developer alive. The other tells someone whether to keep reading.</p>
+
+<h2>Fewer projects. Better ones.</h2>
+
+<p>Three excellent projects beat ten average ones. Every single time.</p>
+
+<p>Nobody is browsing your gallery. They'll look at one or two things, and those things have to land.</p>
+
+<p>So pick projects that:</p>
+
 <ul>
-  <li>Solve a real problem you actually care about</li>
-  <li>Demonstrate technical depth, not just technical breadth</li>
-  <li>Have live demos (this is non-negotiable - dead links kill interest instantly)</li>
-  <li>Show your decision-making, not just the end result</li>
+  <li>Solve a real problem you actually cared about</li>
+  <li>Show depth rather than breadth</li>
+  <li>Have a live demo, because a dead link ends the conversation instantly</li>
+  <li>Show your decisions, not just the finished thing</li>
 </ul>
 
-<p>That last point matters more than most developers realize. Write a short case study for each project. What was the challenge? What did you consider? What tradeoffs did you make? This is what distinguishes a portfolio from a GitHub link dump.</p>
+<p>That last one matters more than most people realise.</p>
 
-<h2>Write About Your Decisions</h2>
-<p>A short blog or case study per project shows how you think, not just what you shipped. Even a handful of technical posts helps — you don't need a weekly publishing schedule.</p>
+<p>Write a short case study for each. What was the problem? What did you consider? What did you trade away, and why?</p>
 
-<h2>Performance Counts</h2>
-<p>If you're claiming frontend skills, a slow portfolio undercuts the message. Run Lighthouse, fix the obvious issues, and treat load time as part of the work sample.</p>
+<p>That's the difference between a portfolio and a list of GitHub links.</p>
 
-<h2>Design Without Overdoing It</h2>
-<p>You don't need custom illustration work. Pick one accent color, use a consistent type scale, leave whitespace, and borrow layout patterns from sites you like. Dark themes work well for dev portfolios because code and UI both read clearly.</p>
+<h2>Write about how you think</h2>
 
-<h2>Make Contact Easy</h2>
-<p>Email, LinkedIn, and GitHub should be visible without hunting through a form. Remove friction between interest and reply.</p>
+<p>A short blog or a case study per project shows your reasoning, not just your output.</p>
 
-<h2>Conclusion</h2>
-<p>A good portfolio tells a clear story: what you build, how you think, and how to reach you. Ship something live — an imperfect site beats a perfect one that never leaves localhost.</p>
+<p>And you don't need a weekly publishing schedule. Nobody is checking. A handful of honest technical posts does the job.</p>
+
+<h2>Your portfolio is itself a work sample</h2>
+
+<p>This one catches people out.</p>
+
+<p>If you're claiming frontend skills on a site that takes six seconds to load, you've made the argument against yourself before anyone read a word. 😂</p>
+
+<p>Run Lighthouse. Fix the obvious things. Treat load time as part of the submission.</p>
+
+<h2>Design, without going overboard</h2>
+
+<p>You don't need custom illustrations.</p>
+
+<p>Pick one accent colour. Use a consistent type scale. Leave whitespace. Borrow layout ideas from sites you already like.</p>
+
+<p>Dark themes tend to work well for developer portfolios because code and UI both read cleanly on them.</p>
+
+<h2>Make it easy to contact you</h2>
+
+<p>Email, LinkedIn and GitHub, visible without hunting.</p>
+
+<p>Every extra click between "interested" and "message sent" costs you people.</p>
+
+<h2>The short version</h2>
+
+<p>A good portfolio answers three things. What you build. How you think. How to reach you.</p>
+
+<p>And then ship it.</p>
+
+<p>An imperfect site that's live beats a perfect one that never leaves localhost. 😂</p>
     `
   },
   {
@@ -3111,15 +3461,23 @@ const postsResponse: ApiResponse&lt;Post[]&gt; = await api.getPosts();
     category: "Development",
     imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-<p>Frameworks come and go, but browsers now ship APIs for building reusable custom elements without picking a library. Web Components aren't a replacement for React — they're a different layer of the stack.</p>
+<p>Frameworks come and go.</p>
 
-<h2>What Are Web Components?</h2>
-<p>Web Components is an umbrella term for three browser APIs that work together to let you create custom, reusable HTML elements:</p>
+<p>Meanwhile the browser quietly shipped its own way to build reusable components, and a lot of us never looked at it.</p>
+
+<p>To be clear, Web Components are not here to replace React. They sit at a different layer of the stack entirely, and that's the part worth understanding.</p>
+
+<h2>So what are they?</h2>
+
+<p>It's an umbrella term for three browser APIs that work together:</p>
+
 <ul>
-  <li><strong>Custom Elements:</strong> Define your own HTML tags with their own behavior. <code>&lt;my-button&gt;</code> becomes a real element the browser understands.</li>
-  <li><strong>Shadow DOM:</strong> Encapsulate your component's internals. Styles inside don't leak out. Styles outside don't bleed in. True encapsulation - no CSS specificity battles.</li>
-  <li><strong>HTML Templates:</strong> Define inert markup with <code>&lt;template&gt;</code> that gets cloned and stamped into the DOM on demand.</li>
+  <li><strong>Custom Elements.</strong> Define your own HTML tags. <code>&lt;my-button&gt;</code> becomes a real element the browser understands.</li>
+  <li><strong>Shadow DOM.</strong> Real encapsulation. Styles inside don't leak out, styles outside don't bleed in. No specificity wars.</li>
+  <li><strong>HTML Templates.</strong> Inert markup in a <code>&lt;template&gt;</code> that gets cloned into the DOM when you need it.</li>
 </ul>
+
+<p>That Shadow DOM point deserves a moment. Actual style encapsulation, from the platform, with no build step and no naming convention you have to remember. 😂</p>
 
 <pre><code class="language-js">
 class MyButton extends HTMLElement {
@@ -3137,14 +3495,27 @@ customElements.define('my-button', MyButton);
 // Now usable as &lt;my-button&gt;Click me&lt;/my-button&gt; anywhere
 </code></pre>
 
-<h2>Framework Independence</h2>
-<p>A custom element works in React, Vue, Angular, or plain HTML. Large orgs (Google/Lit, Microsoft/Fluent, Adobe/Spectrum) use them as portable design-system primitives across teams on different stacks.</p>
+<h2>They work everywhere</h2>
 
-<h2>Web Components vs Framework Components</h2>
-<p>Web Components work well for leaf UI — buttons, inputs, badges. They're verbose for complex app logic and lack the ecosystem of a full framework. The practical split: Web Components for shared design tokens and primitives; React/Vue/etc. for application state and routing.</p>
+<p>A custom element runs in React, Vue, Angular or a plain HTML file.</p>
 
-<h2>Lit</h2>
-<p>Lit adds reactive properties and declarative templates on top of the raw APIs while still outputting standard custom elements:</p>
+<p>Which is exactly why the big organisations use them. Google has Lit, Microsoft has Fluent, Adobe has Spectrum. When you have thirty teams on six different stacks, a design system that only works in one framework isn't a design system.</p>
+
+<h2>So should you drop React?</h2>
+
+<p>No. 😂</p>
+
+<p>Web Components are great for leaf UI. Buttons, inputs, badges, the small things everybody shares.</p>
+
+<p>They get verbose fast for complex application logic, and the ecosystem around them is nowhere near a full framework's.</p>
+
+<p>The practical split most teams land on:</p>
+
+<blockquote><p>Web Components for shared primitives and design tokens. React or Vue for application state and routing.</p></blockquote>
+
+<h2>Lit makes them bearable</h2>
+
+<p>The raw APIs are a lot of ceremony. Lit adds reactive properties and declarative templates on top, and still outputs standard custom elements:</p>
 
 <pre><code class="language-js">
 import { LitElement, html, css } from 'lit';
@@ -3160,11 +3531,19 @@ class MyCard extends LitElement {
 customElements.define('my-card', MyCard);
 </code></pre>
 
-<h2>Browser Support</h2>
-<p>All major browsers have supported Web Components since around 2020. The remaining friction is usually tooling and team familiarity, not platform gaps.</p>
+<p>Same output. Much less typing.</p>
 
-<h2>Conclusion</h2>
-<p>Web Components fill a specific niche: portable, encapsulated UI that belongs to the platform. Worth knowing even if your day-to-day work stays inside a framework.</p>
+<h2>Browser support</h2>
+
+<p>Every major browser has supported this since around 2020.</p>
+
+<p>So the thing holding it back isn't the platform. It's tooling and team familiarity, which is a much more boring problem. 😂</p>
+
+<h2>Worth knowing?</h2>
+
+<p>Yes, even if you spend all day inside a framework.</p>
+
+<p>Web Components fill a specific niche: portable, encapsulated UI that belongs to the platform rather than to whatever we're all using this year.</p>
     `
   },
 ];
