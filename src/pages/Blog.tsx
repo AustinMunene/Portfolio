@@ -3587,7 +3587,8 @@ const Blog: React.FC = () => {
             </span>
             <h1 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">Blog</h1>
             <p className="text-fg-muted max-w-lg mx-auto">
-              Thoughts, ideas, and insights about technology, development, and design.
+              Mostly what happens when I get bored and start poking at things.
+              Testing, frontend, AI, and the occasional strong opinion. 😂
             </p>
           </div>
 
