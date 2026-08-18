@@ -54,16 +54,20 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
 
   const carouselPaused = hoverPaused || focusPaused;
 
-  // Auto-rotation is motion, so prefers-reduced-motion has to stop it too -
-  // previously only the 3D scene honoured the setting while this kept cycling.
-  // It also pauses on hover/focus so the panel cannot swap out mid-read.
+  // The panel advances on every device. Reduced motion is honoured by dropping
+  // the *animation*, not the rotation: the crossfade below goes to duration 0
+  // and the progress bar stops filling, so the content still changes while
+  // nothing actually moves. Stopping rotation outright meant any phone with
+  // Reduce Motion switched on sat on slide one for the whole visit, with
+  // nothing to suggest the dashes could be tapped.
+  // Still pauses on hover/focus so the panel cannot swap out mid-read.
   useEffect(() => {
-    if (reduceMotion || carouselPaused) return;
+    if (carouselPaused) return;
     const interval = setInterval(() => {
       setActiveHighlight((prev) => (prev + 1) % highlights.length);
     }, 4500);
     return () => clearInterval(interval);
-  }, [highlights.length, reduceMotion, carouselPaused]);
+  }, [highlights.length, carouselPaused]);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -194,7 +198,7 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.2 }}
-                      className="glass glass-strong absolute left-0 top-full mt-2 min-w-[220px] rounded-xl py-2 z-50"
+                      className="glass glass-overlay absolute left-0 top-full mt-2 min-w-[220px] rounded-xl py-2 z-50"
                     >
                       <a
                         href="mailto:saviusmunene@gmail.com"
@@ -315,7 +319,15 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                   something to pick up. */}
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-brand-soft rounded-full blur-[60px]" />
 
-              {/* Indicator dots */}
+              {/* Indicator dashes.
+
+                  The dash is an inner span rather than the button itself. The
+                  global mobile rule in index.css gives every button a 44px
+                  minimum box for touch, which was inflating a 6px dash into a
+                  44px circle on phones - the button *was* the dash, so sizing
+                  the target resized the design. Splitting them lets the button
+                  grow into a proper tap target while the dash stays a dash in
+                  both layouts. */}
               <div className="flex items-center gap-2 mb-6">
                 {highlights.map((highlight, i) => (
                   <button
@@ -323,11 +335,15 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
                     onClick={() => setActiveHighlight(i)}
                     aria-label={`Show ${highlight.label}`}
                     aria-current={i === activeHighlight}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${i === activeHighlight
-                        ? 'w-8 bg-brand'
-                        : 'w-1.5 bg-line hover:bg-fg-subtle'
-                      }`}
-                  />
+                    className="group flex items-center justify-center"
+                  >
+                    <span
+                      className={`h-1.5 rounded-full transition-all duration-300 ${i === activeHighlight
+                          ? 'w-8 bg-brand'
+                          : 'w-1.5 bg-line group-hover:bg-fg-subtle'
+                        }`}
+                    />
+                  </button>
                 ))}
               </div>
 
