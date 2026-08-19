@@ -240,6 +240,17 @@
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(circle at 50% 50%, black 50%, transparent 100%);
+  /* This is a position:fixed, full-viewport, masked layer that never changes.
+     Without its own compositor layer the browser has to re-rasterize the grid,
+     the dot pattern and the radial mask against fresh content on every scroll
+     frame - the same class of per-frame work that made the nav island flicker
+     before it stopped blurring its backdrop. Promoting it means the texture is
+     painted once and scrolling only re-composites it.
+
+     Note this transform does not disturb the element's own fixed positioning;
+     only a transform on an *ancestor* would do that, and nothing above it here
+     is transformed. */
+  transform: translateZ(0);
 }
 
 .coder-grid::after {
@@ -647,10 +658,16 @@ html {
     will-change: transform, opacity;
   }
 
-  img {
-    content-visibility: auto;
-    contain: content;
-  }
+  /* `img { content-visibility: auto; contain: content }` used to live here. It
+     tells the browser to skip rendering an image until it is near the viewport,
+     which on a phone shows up as an empty box that fills in a beat late while
+     you scroll - read as flickering, which is exactly what it was.
+
+     It was also buying very little. Every image here sits in a parent with an
+     explicit height (h-48 on the blog cards, a fixed square on the hero avatar),
+     so skipping them saved no layout work, and there is no contain-intrinsic-size
+     to size them while skipped. Paint stability is worth more than deferring a
+     handful of images. */
 }
 
 

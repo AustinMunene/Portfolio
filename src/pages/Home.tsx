@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { careerHistory } from './Career';
 import { blogPosts } from './Blog';
@@ -135,28 +134,13 @@ const careerPreviewItems = careerHistory.slice(0, 4).map(({ title, company, peri
   period,
 }));
 
+// The reveal observer lives in App (useRevealObserver) and covers every route.
+// This page used to attach a second one to the same `.reveal` nodes, which
+// double-observed every element and, because it ran on mount rather than behind
+// App's deferred [data-reveal-ready] gate, could mark elements active before the
+// gate engaged - so content painted, then whatever had not been marked snapped
+// back to hidden and animated in again.
 const Home = () => {
-
-  useEffect(() => {
-    const observerCallback: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1,
-    });
-
-    document.querySelectorAll('.reveal').forEach((element) => {
-      observer.observe(element);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <motion.div
       initial={{ opacity: 0 }}

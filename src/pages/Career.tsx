@@ -132,23 +132,32 @@ export const careerHistory = [
     },
   ];
 
+/*
+  This page keeps its own reveal observer, and it is load-bearing rather than a
+  duplicate of App's.
+
+  Career is lazy-loaded. On navigation App's useRevealObserver re-runs and does
+  its querySelectorAll a tick later, while the Suspense fallback is still up and
+  this component's DOM does not exist yet - so it observes nothing here, then
+  sets [data-reveal-ready]. The three `.reveal` elements below mount after that,
+  already hidden by the gate and with nothing watching them. Without this, they
+  would never become visible.
+
+  Home, by contrast, has no `.reveal` elements at all and ships in the initial
+  bundle, so the copy of this that used to live there was observing nothing.
+*/
 const Career = () => {
   useEffect(() => {
-    const observerCallback: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+      },
+      { threshold: 0.1 },
+    );
 
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1,
-    });
-
-    document.querySelectorAll('.reveal').forEach((element) => {
-      observer.observe(element);
-    });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
