@@ -1,5 +1,8 @@
 # Only the functions directory is declared here. Build command and publish
 # directory stay in the Netlify UI, where they already are - repeating them in
 # this file would silently override those settings from the repo.
+[build]
+  node_version = "22"
+
 [functions]
   directory = "netlify/functions"
