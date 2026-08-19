@@ -1,5 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  /*
+    Compile `hover:` and `group-hover:` inside `@media (hover: hover)` instead of
+    as a bare `:hover`.
+
+    Touch browsers latch :hover on the element you last tapped and hold it until
+    you tap something else. Every card here hangs animation off hover -
+    group-hover:scale-105 on the cover image, hover:border-brand-line on the
+    card, group-hover:translate-x-1 on the arrow - so tapping or scrolling
+    through a list of cards was firing and unfiring 300-500ms transitions on
+    whichever card was last touched. That is the flicker.
+  */
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {

@@ -13,6 +13,14 @@ export function useSpotlight<T extends HTMLElement = HTMLDivElement>() {
   const ref = useRef<T>(null);
 
   const onPointerMove = useCallback((event: React.PointerEvent<T>) => {
+    // Mouse only. The sheen this feeds is already behind
+    // `@media (hover: hover) and (pointer: fine)`, so on a phone none of this
+    // work could ever be seen - but it still ran. Dragging a finger down a card
+    // fires a stream of pointermove events, and each one called
+    // getBoundingClientRect(), forcing a synchronous layout mid-scroll on the
+    // very elements being scrolled.
+    if (event.pointerType !== 'mouse') return;
+
     const node = ref.current;
     if (!node) return;
     const rect = node.getBoundingClientRect();
