@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import SpotlightSurface from '../SpotlightSurface';
 import { CATEGORY_CHIP, CATEGORY_CHIP_ON_IMAGE } from '../../pages/Blog';
 import { ArrowRight } from 'lucide-react';
+import { useDuration } from '../../hooks/useMobileReducedDuration';
 
 export type BlogPreviewPost = {
   id: number;
@@ -24,6 +25,7 @@ type BlogPreviewProps = {
 const BlogPreview = ({ posts }: BlogPreviewProps) => {
   const navigate = useNavigate();
   const [topic, setTopic] = useState('All');
+  const dur = useDuration(1);
 
   const filtered = useMemo(() => {
     if (topic === 'All') return posts;
@@ -44,7 +46,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: dur * 0.5 }}
           viewport={{ once: true }}
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8 md:mb-12"
         >
@@ -98,7 +100,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
               <motion.article
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: dur * 0.5 }}
                 viewport={{ once: true }}
                 onClick={() => navigate(`/blog/${featured.id}`)}
                 className="lg:col-span-2 group cursor-pointer"
@@ -147,7 +149,7 @@ const BlogPreview = ({ posts }: BlogPreviewProps) => {
                   key={post.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.06 }}
+                  transition={{ duration: dur * 0.4, delay: index * 0.06 }}
                   viewport={{ once: true }}
                   onClick={() => navigate(`/blog/${post.id}`)}
                   className="spotlight glass group cursor-pointer rounded-xl p-4 hover:border-brand-line"

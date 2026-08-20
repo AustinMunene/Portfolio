@@ -9,6 +9,7 @@ import BlogPreview from '../components/sections/BlogPreview';
 import Section from '../components/Section';
 import Services from '../components/sections/Services';
 import ContactForm from '../components/ContactForm';
+import { useDuration } from '../hooks/useMobileReducedDuration';
 
 const rawProjects: Array<{
   title: string;
@@ -141,6 +142,8 @@ const careerPreviewItems = careerHistory.slice(0, 4).map(({ title, company, peri
 // gate engaged - so content painted, then whatever had not been marked snapped
 // back to hidden and animated in again.
 const Home = () => {
+  const dur = useDuration(1);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -170,7 +173,7 @@ const Home = () => {
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: dur * 0.5 }}
             viewport={{ once: true }}
           >
             <span className="text-brand text-sm font-medium tracking-wider uppercase mb-4 block">
@@ -183,7 +186,7 @@ const Home = () => {
           <motion.p
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: dur * 0.5, delay: 0.2 }}
             viewport={{ once: true }}
             className="text-lg text-fg-muted mb-10 max-w-lg mx-auto"
           >
@@ -197,7 +200,7 @@ const Home = () => {
           <motion.div
             initial={{ y: 28, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.55, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: dur * 0.55, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
             viewport={{ once: true, amount: 0.2 }}
             className="max-w-2xl mx-auto"
           >
@@ -210,7 +213,7 @@ const Home = () => {
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.45 }}
+            transition={{ duration: dur * 0.5, delay: 0.45 }}
             viewport={{ once: true }}
             className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mt-10 text-sm"
           >

@@ -509,6 +509,13 @@
   will-change: transform; 
 }
 
+/* Progress bar fill for the hero carousel, driven by CSS rather than framer-motion
+   so the browser can restart it off the main thread without a DOM remount. */
+@keyframes progressFill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
 /* Hover underline with elegant accent */
 .hover-underline {
   position: relative;
@@ -625,6 +632,17 @@ html {
 
 /* Mobile viewport adjustments */
 @media (max-width: 768px) {
+  /* Continuous animations are cheap on desktop but consume GPU compositing
+     resources on every frame on phones. Ping and float are decorative - kill
+     them on touch devices to free the compositor for scroll and entrance work. */
+  .animate-ping {
+    animation: none;
+  }
+
+  .floating {
+    animation: none;
+  }
+
   .nav-island {
     top: 16px;
     width: calc(100% - 24px);

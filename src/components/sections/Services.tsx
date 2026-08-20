@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import Section from '../Section';
+import { useDuration } from '../../hooks/useMobileReducedDuration';
 
 type Service = {
   title: string;
@@ -37,7 +38,10 @@ const SERVICES: Service[] = [
   },
 ];
 
-const Services = () => (
+const Services = () => {
+  const dur = useDuration(1);
+
+  return (
   <Section id="services" className="section-glow py-24 md:py-32 overflow-hidden">
     {/* Hairlines mark the section edges without needing a heavy background. */}
     <div className="absolute top-0 left-0 right-0 h-px bg-line" aria-hidden />
@@ -50,7 +54,7 @@ const Services = () => (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+          transition={{ duration: dur * 0.6, ease: [0.23, 1, 0.32, 1] }}
           viewport={{ once: true }}
           className="lg:col-span-4"
         >
@@ -73,7 +77,7 @@ const Services = () => (
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.6,
+                duration: dur * 0.6,
                 delay: Math.min(i * 0.08, 0.24),
                 ease: [0.23, 1, 0.32, 1],
               }}
@@ -113,6 +117,7 @@ const Services = () => (
       </div>
     </div>
   </Section>
-);
+  );
+};
 
 export default Services;

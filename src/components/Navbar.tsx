@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Github, Mail, Linkedin, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
+import { useDuration } from '../hooks/useMobileReducedDuration';
 
 /**
  * Theme toggle. The two icons cross-fade and counter-rotate through the same
@@ -39,6 +40,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const { theme, toggle } = useTheme();
+  const indicatorRef = useRef<HTMLDivElement>(null);
+  const navLinksRef = useRef<HTMLDivElement>(null);
+  const dur = useDuration(1);
 
   // Close menu on route change
   useEffect(() => {
@@ -48,6 +52,29 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Slide the underline to the active link.  Uses getBoundingClientRect for
+  // a precise position rather than layoutId / FLIP, which causes layout
+  // recalculation flicker on mobile.
+  const updateIndicator = useCallback(() => {
+    const container = navLinksRef.current;
+    const indicator = indicatorRef.current;
+    if (!container || !indicator) return;
+    const activeLink = container.querySelector('[aria-current="page"]') as HTMLElement | null;
+    if (!activeLink) {
+      indicator.style.opacity = '0';
+      return;
+    }
+    const containerRect = container.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    indicator.style.opacity = '1';
+    indicator.style.width = `${linkRect.width}px`;
+    indicator.style.transform = `translateX(${linkRect.left - containerRect.left}px)`;
+  }, []);
+
+  useEffect(() => {
+    updateIndicator();
+  }, [location.pathname, updateIndicator]);
 
   const navItems = [
     { to: '/career', label: 'Career' },
@@ -73,7 +100,15 @@ const Navbar = () => {
         </NavLink>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-7">
+        <div className="hidden md:flex items-center space-x-7" ref={navLinksRef}>
+          {/* Sliding underline — positioned absolutely and moved via transform
+              rather than layoutId / FLIP.  CSS transition handles the slide;
+              no framer-motion layout measurements means no mobile flicker. */}
+          <div
+            ref={indicatorRef}
+            className="absolute -bottom-1.5 left-0 h-[2.5px] bg-brand rounded-full transition-[width,transform] ease-[var(--ease-out)]"
+            style={{ transitionDuration: `${dur * 200}ms`, opacity: 0 }}
+          />
           {navItems.map(({ to, label }) => (
             <NavLink
               key={to}
@@ -86,18 +121,7 @@ const Navbar = () => {
                 }`
               }
             >
-              {({ isActive }) => (
-                <>
-                  {label}
-                  {isActive && (
-                    <motion.div
-                      layoutId="nav-indicator"
-                      className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-brand rounded-full"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </>
-              )}
+              {label}
             </NavLink>
           ))}
 

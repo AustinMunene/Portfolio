@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SpotlightSurface from '../SpotlightSurface';
 import { ArrowRight, Briefcase } from 'lucide-react';
+import { useDuration } from '../../hooks/useMobileReducedDuration';
 
 export type CareerPreviewItem = {
   title: string;
@@ -14,6 +15,8 @@ type CareerPreviewProps = {
 };
 
 const CareerPreview = ({ items }: CareerPreviewProps) => {
+  const dur = useDuration(1);
+
   return (
     <section
       id="career-preview"
@@ -27,7 +30,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: dur * 0.5 }}
           viewport={{ once: true }}
           className="flex flex-col gap-6 mb-12 md:mb-16"
         >
@@ -61,8 +64,7 @@ const CareerPreview = ({ items }: CareerPreviewProps) => {
                 key={role.company + role.period}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
+                transition={{ duration: dur * 0.5, delay: index * 0.08 }}
                 viewport={{ once: true }}
                 className={`relative flex items-start gap-8 md:gap-12 pl-8`}
               >

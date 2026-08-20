@@ -410,19 +410,25 @@ const HeroSplit = ({ featuredProject }: HeroSplitProps) => {
               </div>
 
               {/* Progress bar: doubles as the countdown to the next rotation, so
-                  it must not keep filling once rotation is paused or disabled. */}
+                  it must not keep filling once rotation is paused or disabled.
+
+                  Driven by a CSS @keyframes rather than framer-motion so the
+                  browser can restart it off the main thread.  The old pattern
+                  used key={activeHighlight} to force a full unmount/remount
+                  on every rotation - that DOM churn caused a brief layout
+                  repaint that read as flicker on phones.  A keyed CSS
+                  animation achieves the same restart without touching the DOM
+                  tree. */}
               <div className="mt-6 h-1 rounded-full bg-surface-raised overflow-hidden">
                 {reduceMotion || carouselPaused ? (
                   <div
                     className={`h-full w-full rounded-full bg-gradient-to-r ${highlights[activeHighlight].accent} opacity-40`}
                   />
                 ) : (
-                  <motion.div
+                  <div
                     key={activeHighlight}
                     className={`h-full rounded-full bg-gradient-to-r ${highlights[activeHighlight].accent}`}
-                    initial={{ width: '0%' }}
-                    animate={{ width: '100%' }}
-                    transition={{ duration: 4.5, ease: 'linear' }}
+                    style={{ animation: 'progressFill 4.5s linear forwards' }}
                   />
                 )}
               </div>

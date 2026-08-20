@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, Cpu, Terminal, Layers } from 'lucide-react';
 import SpotlightSurface from '../SpotlightSurface';
+import { useDuration } from '../../hooks/useMobileReducedDuration';
 
 export type BentoProject = {
   title: string;
@@ -21,11 +22,35 @@ type FeaturedBentoProps = {
 
 const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
   const [filter, setFilter] = useState<'All' | 'Frontend' | 'QA' | 'Full-stack'>('All');
+  const indicatorRef = useRef<HTMLSpanElement>(null);
+  const chipRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const dur = useDuration(0.4);
 
   const filtered = useMemo(() => {
     if (filter === 'All') return projects;
     return projects.filter((p) => p.category === filter);
   }, [projects, filter]);
+
+  const setChipRef = useCallback((key: string) => (el: HTMLButtonElement | null) => {
+    if (el) chipRefs.current.set(key, el);
+    else chipRefs.current.delete(key);
+  }, []);
+
+  const moveIndicator = useCallback((key: string) => {
+    const el = chipRefs.current.get(key);
+    const indicator = indicatorRef.current;
+    if (!el || !indicator) return;
+    const parent = el.parentElement;
+    if (!parent) return;
+    const parentRect = parent.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    indicator.style.width = `${elRect.width}px`;
+    indicator.style.transform = `translateX(${elRect.left - parentRect.left}px)`;
+  }, []);
+
+  useEffect(() => {
+    moveIndicator(filter);
+  }, [filter, moveIndicator]);
 
   // Map icons to project categories to reinforce the "prodev + mature QA" branding
   const getCategoryIcon = (category?: string) => {
@@ -74,26 +99,28 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
             A production-ready catalog showcasing modern, robust frontends, bulletproof automation systems, and high-fidelity consumer platforms.
           </p>
 
-          {/* Filter Chips - Upgraded with High-End Active Motion */}
-          <div className="flex flex-wrap gap-2.5 mt-8">
+          {/* Filter Chips — CSS-transition indicator instead of layoutId.
+              layoutId triggers FLIP measurements that cause layout
+              recalculation flicker on mobile; a positioned div with
+              transform + transition achieves the same visual without
+              touching the layout engine. */}
+          <div className="flex flex-wrap gap-2.5 mt-8 relative">
+            <span
+              ref={indicatorRef}
+              className="absolute top-0 left-0 h-full rounded-full border border-brand-line pointer-events-none transition-[width,transform] ease-[var(--ease-out)]"
+              style={{ transitionDuration: `${dur * 250}ms` }}
+            />
             {FILTERS.map((f) => {
               const isActive = filter === f;
               return (
                 <button
                   key={f}
+                  ref={setChipRef(f)}
                   onClick={() => setFilter(f)}
                   className={`glass-pill relative px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider select-none outline-none ${
                     isActive ? 'is-active' : 'text-fg-muted hover:text-fg'
                   }`}
                 >
-                  {/* Micro Pulse Active Indicator inside chip */}
-                  {isActive && (
-                    <motion.span
-                      layoutId="chip-indicator"
-                      className="absolute inset-0 rounded-full border border-brand-line pointer-events-none"
-                      transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-                    />
-                  )}
                   <span className="relative z-10 flex items-center gap-2">
                     {f === 'All' ? null : getCategoryIcon(f)}
                     {f}
@@ -104,34 +131,44 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
           </div>
         </motion.div>
 
-        {/* Asymmetric Bento Masonry Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={filter}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-          >
+        {/* Asymmetric Bento Masonry Grid.
+            AnimatePresence wraps individual cards instead of the whole grid.
+            The old mode="wait" pattern removed the entire grid (exit 0.4s),
+            waited, then re-mounted it (enter 0.4s) — a full 0.8s where the
+            project list was blank, which flashed on phones.  Individual-card
+            AnimatePresence lets exiting cards fade out while entering cards
+            fade in simultaneously, cutting the perceived transition in half
+            and eliminating the blank flash. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <AnimatePresence mode="popLayout">
             {filtered.length === 0 ? (
-              <p className="text-fg-subtle col-span-full font-mono text-sm py-12 text-center border border-dashed border-line rounded-2xl">
+              <motion.p
+                key="empty"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-fg-subtle col-span-full font-mono text-sm py-12 text-center border border-dashed border-line rounded-2xl"
+              >
                 [SYSTEM_WARN]: No creations found in this category.
-              </p>
+              </motion.p>
             ) : (
               filtered.map((project, index) => {
-                // Introduce structural rhythm:
-                // Primary/large card (index 0) gets a double-width col span.
-                // Every 4th card (e.g. index 3) gets col-span-2 on large screens to create asymmetrical masonry tension.
                 const isFeatured = index === 0;
                 const isWide = isFeatured || (index === 3 && filtered.length > 3);
-                
+
                 return (
                   <motion.div
-                    key={project.title + index}
-                    initial={{ y: 32, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: Math.min(index * 0.05, 0.25), ease: [0.23, 1, 0.32, 1] }}
+                    key={project.title}
+                    layout
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{
+                      duration: dur * 0.5,
+                      delay: Math.min(index * 0.04, 0.2),
+                      ease: [0.23, 1, 0.32, 1],
+                      layout: { duration: dur * 0.35 },
+                    }}
                     viewport={{ once: true, margin: "-50px" }}
                     className={`group ${isWide ? 'md:col-span-2' : 'col-span-1'}`}
                   >
@@ -224,8 +261,8 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
                 );
               })
             )}
-          </motion.div>
-        </AnimatePresence>
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
