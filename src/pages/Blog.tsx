@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     title: "Day 1 as a QA Lead: How I Approach a System I've Never Tested Before",
     excerpt: "Today I start as a QA Lead on a digital health system I've never seen. Not a \"here's the perfect QA process\" article — this is the reconnaissance plan I'm actually walking in with, written before I know whether it works.",
     date: "September 1, 2026",
-    readTime: "25 min read",
+    readTime: "29 min read",
     category: "QA & Testing",
     imageUrl: "/qa-lead-day-one.jpg",
     content: `
@@ -975,6 +975,172 @@ What's already automated, and does anyone actually trust it?
 <blockquote><p>"Well... technically it's supposed to..."</p></blockquote>
 
 <p>That pause is where the bugs live. 😂</p>
+
+<h2>I'm not just joining a system</h2>
+
+<p>Everything up to this point has been about the product.</p>
+
+<p>Reading it. Poking it. Mapping it. Following the data through it.</p>
+
+<p>And all of that I can do on my own, given enough time and coffee. 😂</p>
+
+<p>But I'm not being hired to be a very well-informed observer.</p>
+
+<p>I'm joining a <strong>team</strong>, and a <strong>process</strong> that already exists without me.</p>
+
+<p>And I nearly wrote this entire article without mentioning either of them.</p>
+
+<p>Which is actually the interesting part.</p>
+
+<p>Because that's the trap, isn't it?</p>
+
+<p>QA people love systems.</p>
+
+<p>And we forget that an organisation is also a system. 😂</p>
+
+<h3>The team I'm actually leading</h3>
+
+<p>I have direct reports. QA interns and juniors.</p>
+
+<p>And honestly, on Day 1 that's probably more urgent than the database schema.</p>
+
+<p>Because here's the thing about somebody who has been on a project for six months:</p>
+
+<blockquote><p><strong>They already know where the bodies are buried.</strong></p></blockquote>
+
+<p>They know which test always fails and just gets re-run.</p>
+
+<p>They know which feature everyone quietly dreads regression testing.</p>
+
+<p>They know the bug they've reported three times that keeps getting closed.</p>
+
+<p>And more often than not, nobody has actually asked them.</p>
+
+<p>I just spent a whole section on getting knowledge out of the lead dev's head.</p>
+
+<p>Same argument. Different people.</p>
+
+<pre><code class="language-text">What are you working on right now?
+
+What takes up most of your week?
+
+What do you keep doing manually that you hate?
+
+What have you been asked to do that never made sense to you?
+
+What would you fix if someone just let you?
+
+What do you want to get better at?
+</code></pre>
+
+<p>That last question isn't filler.</p>
+
+<p>I'm supposed to be mentoring these people.</p>
+
+<p>I can't do that if I don't know where they're trying to go.</p>
+
+<p>And realistically? A good chunk of what I want to automate this year is going to be built by them.</p>
+
+<h3>How work actually flows here</h3>
+
+<p>Earlier I said I want QA involved before the code is finished.</p>
+
+<p>I want requirements to be testable.</p>
+
+<p>I want defects to become learning opportunities.</p>
+
+<p>Great. Very inspiring. 😂</p>
+
+<p>But those are all things I want to <strong>change.</strong></p>
+
+<p>And you cannot change a process you haven't mapped.</p>
+
+<p>It's the same rule as the system, just pointed at the organisation:</p>
+
+<blockquote><p><strong>Don't fix what you don't understand.</strong></p></blockquote>
+
+<pre><code class="language-text">When does QA get involved in a piece of work?
+
+What does "done" mean here, and who decides?
+
+Is there a QA sign-off before release?
+
+Who actually has go/no-go authority?
+
+How are defects prioritised, and what severity levels exist?
+
+What happens when something is found late?
+
+How do requirements arrive, and from whom?
+
+Who talks to the client?
+</code></pre>
+
+<p>Some of those answers are going to be "we don't really have that."</p>
+
+<p>Which is fine.</p>
+
+<p><strong>"We don't have that" is a finding, not a failure.</strong></p>
+
+<p>But I want to know something is missing, rather than assume it is.</p>
+
+<h3>And then the question I think people skip most</h3>
+
+<p>You walk into a new role carrying your own idea of what a good QA lead does.</p>
+
+<p>Meanwhile, somebody hired you for a reason that lives in their head and may never get said out loud.</p>
+
+<p>So I want to ask directly:</p>
+
+<blockquote><p>"What does good look like at 30 days? At 90?"</p></blockquote>
+
+<blockquote><p>"What made you decide to hire a QA lead now?"</p></blockquote>
+
+<blockquote><p>"What's the thing you're hoping stops happening?"</p></blockquote>
+
+<p>That last one is my favourite.</p>
+
+<p>Because organisations don't usually hire a QA lead when everything is going beautifully.</p>
+
+<p>They hire one after something hurt.</p>
+
+<p>A bad release.</p>
+
+<p>A production incident.</p>
+
+<p>An angry client.</p>
+
+<p>A deadline that quietly went past.</p>
+
+<p>Knowing what that thing was tells me more about the real priorities than any job description ever will.</p>
+
+<p>And it gives me something I genuinely need:</p>
+
+<p>An actual answer to <strong>"so when are we automating?"</strong></p>
+
+<p>Because if I know what success looks like at 90 days, I can explain what happens in weeks one to four, and why.</p>
+
+<p>Instead of just vibes and enthusiasm. 😂</p>
+
+<h3>Why I almost skipped all of this</h3>
+
+<p>I'll be honest about it.</p>
+
+<p>Systems are easier than people.</p>
+
+<p>A database schema doesn't have opinions about you. 😂</p>
+
+<p>But in my experience, QA work rarely fails because somebody misunderstood the architecture.</p>
+
+<p>It fails because nobody agreed what quality meant.</p>
+
+<p>Or who decides when something is ready.</p>
+
+<p>Or whether raising a concern late is welcome or annoying.</p>
+
+<p>So this half of the job matters at least as much as the other half.</p>
+
+<p>Probably more.</p>
 
 <h2>Then comes the question everyone loves...</h2>
 
