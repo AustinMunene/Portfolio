@@ -15,6 +15,2092 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 16,
+    title: "Day 1 as a QA Lead: How I Approach a System I've Never Tested Before",
+    excerpt: "Today I start as a QA Lead on a digital health system I've never seen. Not a \"here's the perfect QA process\" article — this is the reconnaissance plan I'm actually walking in with, written before I know whether it works.",
+    date: "September 1, 2026",
+    readTime: "21 min read",
+    category: "QA & Testing",
+    imageUrl: "/qa-lead-day-one.jpg",
+    content: `
+<p>Today is Day 1.</p>
+
+<p>New company.</p>
+
+<p>New team.</p>
+
+<p>New product.</p>
+
+<p>New domain.</p>
+
+<p>New codebase.</p>
+
+<p>And somewhere in the middle of all of that, I am expected to do what QA engineers do best:</p>
+
+<p><strong>Figure out how to break things before users do.</strong> 😂</p>
+
+<p>Except there's one small problem.</p>
+
+<p>I don't know the system yet.</p>
+
+<p>And honestly?</p>
+
+<p>I think that's exactly where the real QA work begins.</p>
+
+<p>I'm joining a team working on digital health systems, and there is a good chance I'll also get involved with other internal systems along the way.</p>
+
+<p>So instead of walking in on Day 1 thinking:</p>
+
+<blockquote><p>"Where are the test cases?"</p></blockquote>
+
+<p>I'm going in thinking:</p>
+
+<blockquote><p><strong>"What the hell does this system actually do?"</strong></p></blockquote>
+
+<p>Because I've learned something over the years.</p>
+
+<p>You cannot test a system properly if you don't understand it.</p>
+
+<p>You can execute 500 test cases.</p>
+
+<p>You can automate 1,000 scenarios.</p>
+
+<p>You can have beautiful reports.</p>
+
+<p>And still completely miss the thing that actually matters.</p>
+
+<p>So this article is basically me documenting the approach I'm taking as I step into this role.</p>
+
+<p>Not a "here is the perfect QA process" article.</p>
+
+<p>Not a "I've mastered digital health" article.</p>
+
+<p>I haven't.</p>
+
+<p>😂</p>
+
+<p>This is more like:</p>
+
+<blockquote><p><strong>Here's how I'm going to figure it out.</strong></p></blockquote>
+
+<p>And I'm going to come back to this later and see what I got right, what I got wrong, and what I completely underestimated.</p>
+
+<h2>Rule #1: Don't test what you don't understand</h2>
+
+<p>This sounds obvious.</p>
+
+<p>But I think it's one of the easiest mistakes to make when joining a new project.</p>
+
+<p>You get a Jira ticket.</p>
+
+<p>You read the acceptance criteria.</p>
+
+<p>You write some test cases.</p>
+
+<p>You execute them.</p>
+
+<p>Everything passes.</p>
+
+<p>Great.</p>
+
+<p>Except...</p>
+
+<p><strong>Do you actually know whether the requirement makes sense?</strong></p>
+
+<p>Do you understand why the feature exists?</p>
+
+<p>Do you understand who uses it?</p>
+
+<p>Do you understand what happens before the feature?</p>
+
+<p>What happens after?</p>
+
+<p>What other systems depend on it?</p>
+
+<p>What happens when it fails?</p>
+
+<p>What data does it touch?</p>
+
+<p>What happens in the real world?</p>
+
+<p>That's the stuff I'm interested in.</p>
+
+<p>My first objective isn't going to be:</p>
+
+<p><strong>"How many test cases can I execute?"</strong></p>
+
+<p>It's:</p>
+
+<p><strong>"How much of this system can I understand?"</strong></p>
+
+<h2>My first week is reconnaissance</h2>
+
+<p>I'm thinking about the first week almost like a reconnaissance mission.</p>
+
+<p>Before I start changing anything, automating anything or creating some beautiful QA dashboard nobody asked for...</p>
+
+<p>I want to map the territory.</p>
+
+<p>The first things I want to understand are:</p>
+
+<pre><code class="language-text">Product
+  ↓
+Users
+  ↓
+Workflows
+  ↓
+Architecture
+  ↓
+Data
+  ↓
+Integrations
+  ↓
+Risks
+  ↓
+Testing strategy
+  ↓
+Automation
+</code></pre>
+
+<p>And importantly, I don't want to understand these things separately.</p>
+
+<p>I want to understand how they connect.</p>
+
+<h2>1. Start with the product, not the code</h2>
+
+<p>The codebase is tempting.</p>
+
+<p>Especially as someone who enjoys development.</p>
+
+<p>You open the repository.</p>
+
+<p>You see the stack.</p>
+
+<p>You see the folders.</p>
+
+<p>You see the APIs.</p>
+
+<p>You immediately start thinking:</p>
+
+<blockquote><p>"I can probably automate this."</p></blockquote>
+
+<p>Not yet.</p>
+
+<p>First, I want to understand the product.</p>
+
+<p>What problem is it solving?</p>
+
+<p>Who uses it?</p>
+
+<p>Why do they use it?</p>
+
+<p>What does a normal day look like for a user?</p>
+
+<p>What does a successful workflow look like?</p>
+
+<p>What does failure look like?</p>
+
+<p>What are the most important things the system does?</p>
+
+<p>What would happen if those things stopped working?</p>
+
+<p>That's where I'm starting.</p>
+
+<h2>2. Find the users</h2>
+
+<p>One of the first things I want to build is a simple map of the users and their responsibilities.</p>
+
+<p>For example, a digital health system might involve different actors such as:</p>
+
+<pre><code class="language-text">Patient
+   ↓
+Healthcare Worker
+   ↓
+Facility
+   ↓
+Supervisor
+   ↓
+Administrator
+   ↓
+External System
+</code></pre>
+
+<p>The exact roles obviously depend on the product.</p>
+
+<p>But the principle is the same.</p>
+
+<p>I want to know:</p>
+
+<p><strong>Who is allowed to do what?</strong></p>
+
+<p>Because permissions aren't just a security concern.</p>
+
+<p>They're a testing concern.</p>
+
+<p>If User A can see information that should only be available to User B, that's a defect.</p>
+
+<p>If a clinician can perform an administrative action they shouldn't have access to, that's a defect.</p>
+
+<p>If a user loses permissions but their existing session can still perform privileged actions, that's a defect.</p>
+
+<p>So understanding the roles early gives me an entire testing dimension.</p>
+
+<h2>3. Map the critical workflows</h2>
+
+<p>This is probably one of the first actual artefacts I want to create.</p>
+
+<p>Not 200 test cases.</p>
+
+<p>A <strong>workflow map.</strong></p>
+
+<p>Something like:</p>
+
+<pre><code class="language-text">User Login
+    ↓
+Patient Search
+    ↓
+Patient Selection
+    ↓
+Consultation
+    ↓
+Clinical Data Capture
+    ↓
+Save
+    ↓
+Submit
+    ↓
+Review
+    ↓
+Referral / Treatment / Follow-up
+</code></pre>
+
+<p>Obviously, the real system may look completely different.</p>
+
+<p>That's the point.</p>
+
+<p>I need to discover what the real workflow looks like.</p>
+
+<p>Then I can ask:</p>
+
+<blockquote><p>Which steps are critical?</p></blockquote>
+
+<blockquote><p>Which steps change data?</p></blockquote>
+
+<blockquote><p>Which steps communicate with another system?</p></blockquote>
+
+<blockquote><p>Which steps can fail silently?</p></blockquote>
+
+<blockquote><p>Which steps have regulatory or privacy implications?</p></blockquote>
+
+<blockquote><p>Which steps would cause serious problems if they were wrong?</p></blockquote>
+
+<p>That's where testing starts becoming <strong>risk-based</strong> rather than just requirement-based.</p>
+
+<h2>4. Follow the data</h2>
+
+<p>This is something I'm particularly interested in with digital health systems.</p>
+
+<p>Don't just follow the user.</p>
+
+<p><strong>Follow the data.</strong></p>
+
+<p>Imagine a patient record.</p>
+
+<p>Where does it originate?</p>
+
+<p>Where is it stored?</p>
+
+<p>Who can modify it?</p>
+
+<p>Who can read it?</p>
+
+<p>Does it get transformed?</p>
+
+<p>Does it get sent somewhere else?</p>
+
+<p>Does another system consume it?</p>
+
+<p>What happens when the data fails validation?</p>
+
+<p>What happens when the receiving system is unavailable?</p>
+
+<p>What happens if the same information is submitted twice?</p>
+
+<p>What happens if the connection drops halfway through?</p>
+
+<p>What happens if the request succeeds but the response is lost?</p>
+
+<p>That's where things get really interesting.</p>
+
+<p>Because in a health system, you're not simply testing:</p>
+
+<blockquote><p>"Does the button work?"</p></blockquote>
+
+<p>You're testing:</p>
+
+<blockquote><p><strong>"Did the right information reach the right place, in the right form, for the right user, without compromising its integrity?"</strong></p></blockquote>
+
+<p>That's a much bigger problem.</p>
+
+<h2>Digital health is not just another CRUD application</h2>
+
+<p>This is probably one of the biggest mindset shifts I'm expecting to make.</p>
+
+<p>At the surface, a digital health application might look familiar.</p>
+
+<p>Forms.</p>
+
+<p>Tables.</p>
+
+<p>Dashboards.</p>
+
+<p>APIs.</p>
+
+<p>Authentication.</p>
+
+<p>Reports.</p>
+
+<p>Notifications.</p>
+
+<p>Basically the same ingredients we've seen in countless enterprise systems.</p>
+
+<p>But the <strong>domain context changes the risk.</strong></p>
+
+<p>A wrong value in an ordinary internal dashboard might be annoying.</p>
+
+<p>A wrong clinical value, patient identity, referral, medication record or diagnostic result can have consequences far beyond the application itself.</p>
+
+<p>That's why <a href="https://www.who.int/health-topics/digital-health" target="_blank" rel="noopener noreferrer">WHO's digital health work</a> places a strong emphasis on interoperability, data sharing, evidence-based implementation and systems that support health outcomes, rather than treating digital health as simply another category of software.</p>
+
+<p>That changes how I think about QA.</p>
+
+<h2>So what does a QA engineer actually need to understand about digital health?</h2>
+
+<p>I'm still learning this myself.</p>
+
+<p>But these are some of the areas I'm going to be looking at.</p>
+
+<h3>Patient identity</h3>
+
+<p>How is a patient identified?</p>
+
+<p>What happens if two records look similar?</p>
+
+<p>Can duplicate patients exist?</p>
+
+<p>What happens when patient information changes?</p>
+
+<p>Can one patient accidentally be associated with another patient's data?</p>
+
+<p>That last one is obviously a <strong>massive</strong> concern.</p>
+
+<h3>Clinical data</h3>
+
+<p>What information is being captured?</p>
+
+<p>What are the valid values?</p>
+
+<p>What are the units?</p>
+
+<p>What are the allowed ranges?</p>
+
+<p>Which fields are mandatory?</p>
+
+<p>Which fields are conditional?</p>
+
+<p>What rules determine whether one field affects another?</p>
+
+<p>This is where domain knowledge becomes extremely important.</p>
+
+<p>The QA engineer needs to understand the business or clinical rules, not just whether the form accepts a value.</p>
+
+<h3>Workflow</h3>
+
+<p>Healthcare isn't always:</p>
+
+<pre><code class="language-text">Create → Read → Update → Delete
+</code></pre>
+
+<p>It can be:</p>
+
+<pre><code class="language-text">Register
+   ↓
+Assess
+   ↓
+Diagnose
+   ↓
+Treat
+   ↓
+Refer
+   ↓
+Follow up
+   ↓
+Close
+</code></pre>
+
+<p>And those states matter.</p>
+
+<p>A patient shouldn't necessarily be able to jump from one state to another arbitrarily.</p>
+
+<p>So state-transition testing becomes important.</p>
+
+<h2>Interoperability is going to be another big one</h2>
+
+<p>This is one area I definitely want to learn more about.</p>
+
+<p>Healthcare systems rarely exist completely by themselves.</p>
+
+<p>They may need to exchange information with:</p>
+
+<ul>
+  <li>EMRs</li>
+  <li>laboratory systems</li>
+  <li>pharmacy systems</li>
+  <li>imaging systems</li>
+  <li>national health platforms</li>
+  <li>insurance systems</li>
+  <li>reporting platforms</li>
+  <li>identity systems</li>
+  <li>notification services</li>
+</ul>
+
+<p>And that's where interoperability comes in.</p>
+
+<p>One standard worth understanding is <strong><a href="https://hl7.org/fhir/" target="_blank" rel="noopener noreferrer">HL7 FHIR</a></strong>, which defines a standard way to represent and exchange healthcare information. FHIR is organised around resources such as Patient, Practitioner, Observation, DiagnosticReport, Medication and many others.</p>
+
+<p>As a QA engineer, I don't necessarily need to become a clinical informatics expert overnight.</p>
+
+<p>But if the system uses FHIR, I absolutely want to understand:</p>
+
+<pre><code class="language-text">Resource
+Profile
+StructureDefinition
+ValueSet
+CodeSystem
+Reference
+Bundle
+API
+</code></pre>
+
+<p>And then test the actual implementation against its intended contract.</p>
+
+<p>Because interoperability bugs can be sneaky.</p>
+
+<p>The UI might say:</p>
+
+<blockquote><p>"Referral submitted successfully."</p></blockquote>
+
+<p>But what actually happened?</p>
+
+<p>Did the API send the correct resource?</p>
+
+<p>Was the identifier correct?</p>
+
+<p>Did the receiving system accept it?</p>
+
+<p>Was the response interpreted correctly?</p>
+
+<p>Was the data transformed correctly?</p>
+
+<p>That's QA territory.</p>
+
+<h2>And then there are APIs</h2>
+
+<p>I'm expecting to spend a lot of time here.</p>
+
+<p>For every important workflow, I want to know:</p>
+
+<pre><code class="language-text">UI
+ ↓
+Frontend
+ ↓
+API
+ ↓
+Service
+ ↓
+Database
+ ↓
+External system
+</code></pre>
+
+<p>And then I want to know what happens in the reverse direction.</p>
+
+<p>Because testing only from the UI can hide a lot.</p>
+
+<p>I want API tests for:</p>
+
+<ul>
+  <li>authentication</li>
+  <li>authorization</li>
+  <li>validation</li>
+  <li>expected responses</li>
+  <li>error responses</li>
+  <li>boundary conditions</li>
+  <li>duplicate requests</li>
+  <li>malformed payloads</li>
+  <li>data integrity</li>
+  <li>rate limiting where relevant</li>
+  <li>integration failures</li>
+</ul>
+
+<p><a href="https://owasp.org/API-Security/" target="_blank" rel="noopener noreferrer">OWASP's API Security Top 10</a> is a useful starting point here, especially around broken object-level authorization, broken authentication, excessive resource consumption, broken function-level authorization and unsafe API consumption.</p>
+
+<p>And for application security more broadly, <a href="https://owasp.org/www-project-application-security-verification-standard/" target="_blank" rel="noopener noreferrer">OWASP ASVS</a> provides a structured basis for testing technical security controls in web applications.</p>
+
+<p>I'm not saying:</p>
+
+<blockquote><p>"Follow OWASP and you're done."</p></blockquote>
+
+<p>Absolutely not.</p>
+
+<p>It's a starting point for asking better questions.</p>
+
+<h2>Then I want to understand the database</h2>
+
+<p>Not necessarily because QA needs to write SQL all day.</p>
+
+<p>But because understanding the data model can reveal things the UI won't.</p>
+
+<p>I want to know:</p>
+
+<ul>
+  <li>What are the core entities?</li>
+  <li>What are the relationships?</li>
+  <li>What fields are unique?</li>
+  <li>What fields are nullable?</li>
+  <li>What constraints exist?</li>
+  <li>What happens on deletion?</li>
+  <li>What happens on updates?</li>
+  <li>What gets audited?</li>
+  <li>What gets soft deleted?</li>
+  <li>What gets archived?</li>
+  <li>Which tables are sensitive?</li>
+  <li>What data is derived rather than directly entered?</li>
+</ul>
+
+<p>If I understand the database model, I can start designing better test data.</p>
+
+<p>And better test data means better testing.</p>
+
+<h2>Security and privacy are not optional side quests</h2>
+
+<p>This is especially important in digital health.</p>
+
+<p>Healthcare data is sensitive.</p>
+
+<p>In Kenya, the Data Protection Act specifically addresses personal data relating to health, and the Digital Health Act includes provisions around confidentiality, privacy, security, access controls, accuracy and integrity of sensitive health data.</p>
+
+<p>So as a QA engineer, I want to understand the actual controls implemented in the product.</p>
+
+<p>Things like:</p>
+
+<pre><code class="language-text">Who can access what?
+
+Can users access records they shouldn't?
+
+Can users manipulate IDs to access another patient's record?
+
+Are sensitive fields exposed in API responses?
+
+Are secrets exposed in logs?
+
+Are audit events generated?
+
+Can audit records be modified?
+
+Does logout actually invalidate access?
+
+What happens when a user's permissions change?
+
+Can a user access old data after their access is revoked?
+</code></pre>
+
+<p>And this is where API testing, browser testing, database validation and security testing start overlapping.</p>
+
+<h2>Audit trails are another thing I want to understand</h2>
+
+<p>If someone changes important information:</p>
+
+<p><strong>Who changed it?</strong></p>
+
+<p><strong>When?</strong></p>
+
+<p><strong>What changed?</strong></p>
+
+<p><strong>What was the previous value?</strong></p>
+
+<p><strong>What was the new value?</strong></p>
+
+<p><strong>Was the change authorised?</strong></p>
+
+<p>And can the audit record itself be tampered with?</p>
+
+<p>This is one of those areas that might not be visible from the UI at all.</p>
+
+<p>Which is exactly why QA needs to understand the architecture.</p>
+
+<h2>What about offline systems?</h2>
+
+<p>This is another thing I want to investigate if the product has offline capabilities.</p>
+
+<p>And this is a completely different testing problem.</p>
+
+<p>Imagine a healthcare worker captures information while offline.</p>
+
+<p>Then:</p>
+
+<pre><code class="language-text">Device
+   ↓
+Local storage
+   ↓
+Network unavailable
+   ↓
+User continues working
+   ↓
+Network returns
+   ↓
+Sync
+   ↓
+Server
+</code></pre>
+
+<p>Now we have a whole new collection of questions.</p>
+
+<p>What happens when the connection drops?</p>
+
+<p>What happens when it comes back?</p>
+
+<p>What if the same record was changed on both sides?</p>
+
+<p>What if sync happens twice?</p>
+
+<p>What if the device runs out of storage?</p>
+
+<p>What if the application is closed during sync?</p>
+
+<p>What if only half the data synchronises?</p>
+
+<p>What happens when two users modify the same record?</p>
+
+<p>That's a whole testing strategy by itself.</p>
+
+<h2>My first-week QA reconnaissance checklist</h2>
+
+<p>So if I had to turn all of this into an actual first-week plan, this is roughly how I'd approach it.</p>
+
+<h3>Day 1: Understand the product</h3>
+
+<p>I want:</p>
+
+<ul>
+  <li>Product overview</li>
+  <li>Product demo</li>
+  <li>User roles</li>
+  <li>Major workflows</li>
+  <li>Current QA process</li>
+  <li>Known pain points</li>
+  <li>Known production issues</li>
+  <li>Current environments</li>
+  <li>Release process</li>
+</ul>
+
+<p>And most importantly:</p>
+
+<p><strong>Someone explaining the system to me like I'm completely new to it.</strong></p>
+
+<p>Because I am.</p>
+
+<p>😂</p>
+
+<h3>Day 2: Understand the architecture</h3>
+
+<p>I want to know:</p>
+
+<pre><code class="language-text">Frontend
+Backend
+Database
+APIs
+Authentication
+External integrations
+Queues
+Notifications
+Storage
+CI/CD
+Environments
+Monitoring
+Logging
+</code></pre>
+
+<p>I want architecture diagrams if they exist.</p>
+
+<p>If they don't?</p>
+
+<p>I'll probably make one.</p>
+
+<p>Even if it's ugly.</p>
+
+<p>The purpose isn't to impress anyone.</p>
+
+<p>It's to understand the system.</p>
+
+<h3>Day 3: Become a user</h3>
+
+<p>This is important.</p>
+
+<p>I want to actually use the system.</p>
+
+<p>Not just read documentation.</p>
+
+<p>Give me the application.</p>
+
+<p>Let me create something.</p>
+
+<p>Let me modify something.</p>
+
+<p>Let me break something.</p>
+
+<p>Let me make mistakes.</p>
+
+<p>Let me experience the workflow.</p>
+
+<p>Because sometimes the best documentation is:</p>
+
+<p><strong>using the product like a confused user.</strong></p>
+
+<p>😂</p>
+
+<h3>Day 4: Start testing</h3>
+
+<p>Now I can start exploring.</p>
+
+<p>Not necessarily writing hundreds of formal test cases.</p>
+
+<p>I want to explore the critical workflows.</p>
+
+<p>Happy paths.</p>
+
+<p>Negative paths.</p>
+
+<p>Boundary cases.</p>
+
+<p>Permissions.</p>
+
+<p>Error handling.</p>
+
+<p>Data integrity.</p>
+
+<p>Integrations.</p>
+
+<p>Browser behaviour.</p>
+
+<p>And start building a risk picture.</p>
+
+<h3>Day 5: Build the QA baseline</h3>
+
+<p>By the end of the first week, I'd like to have a baseline understanding of:</p>
+
+<pre><code class="language-text">What the system does
+Who uses it
+What matters most
+Where the biggest risks are
+How the architecture works
+What is currently covered
+What isn't covered
+What is automated
+What isn't
+Where the major quality gaps are
+</code></pre>
+
+<p>I don't expect to know everything.</p>
+
+<p>That would be unrealistic.</p>
+
+<p>I want enough understanding to know <strong>what I don't know.</strong></p>
+
+<p>That's a much better starting point.</p>
+
+<h2>Then comes the question everyone loves...</h2>
+
+<h3>"So when are we automating?"</h3>
+
+<p>😂</p>
+
+<p>This is where I want to be disciplined.</p>
+
+<p>Because automation is exciting.</p>
+
+<p>Especially when you're a QA engineer who likes Playwright.</p>
+
+<p>You see a new system and immediately think:</p>
+
+<blockquote><p>"We need an automation framework."</p></blockquote>
+
+<p>Maybe.</p>
+
+<p>But not yet.</p>
+
+<h2>Don't automate chaos</h2>
+
+<p>If the product is changing every week...</p>
+
+<p>Don't automate everything.</p>
+
+<p>If you don't understand the workflows...</p>
+
+<p>Don't automate everything.</p>
+
+<p>If requirements are unclear...</p>
+
+<p>Don't automate everything.</p>
+
+<p>If the application has unstable selectors...</p>
+
+<p>Don't automate everything.</p>
+
+<p>If you don't know which scenarios are actually valuable...</p>
+
+<p>Definitely don't automate everything.</p>
+
+<p>Because then you don't have an automation strategy.</p>
+
+<p>You have a very expensive collection of flaky scripts.</p>
+
+<p>😂</p>
+
+<h2>My automation approach</h2>
+
+<p>I'd rather go:</p>
+
+<pre><code class="language-text">Understand
+   ↓
+Risk assess
+   ↓
+Identify stable critical flows
+   ↓
+Create manual baseline
+   ↓
+Automate high-value scenarios
+   ↓
+Run in CI
+   ↓
+Monitor failures
+   ↓
+Maintain
+   ↓
+Expand coverage
+</code></pre>
+
+<p>Automation should follow understanding.</p>
+
+<p>Not the other way around.</p>
+
+<h2>What would I automate first?</h2>
+
+<p>Probably the workflows that are:</p>
+
+<p><strong>High risk + high frequency + relatively stable.</strong></p>
+
+<p>For example:</p>
+
+<pre><code class="language-text">Login
+Authentication
+Core patient workflows
+Critical data capture
+Important API contracts
+Permission checks
+High-value regression scenarios
+Key integrations
+</code></pre>
+
+<p>But the actual list will depend on the system.</p>
+
+<p>That's the whole point of doing reconnaissance first.</p>
+
+<h2>What would I probably NOT automate first?</h2>
+
+<p>Things like:</p>
+
+<ul>
+  <li>constantly changing workflows</li>
+  <li>highly visual subjective checks</li>
+  <li>unstable features</li>
+  <li>scenarios that are faster to test manually</li>
+  <li>low-risk functionality</li>
+  <li>features that haven't settled yet</li>
+</ul>
+
+<p>And definitely not:</p>
+
+<blockquote><p>"Let's automate because management wants 80% coverage."</p></blockquote>
+
+<p>Coverage is useful.</p>
+
+<p>But <strong>meaningful coverage</strong> is what I care about.</p>
+
+<p>I'd rather have 200 reliable tests protecting critical workflows than 2,000 flaky tests that everyone ignores.</p>
+
+<h2>The automation pyramid still matters</h2>
+
+<p>My general mental model is still:</p>
+
+<pre><code class="language-text">             E2E
+            /   \\
+           /     \\
+        API       UI
+       /             \\
+      /               \\
+    Unit / Component
+</code></pre>
+
+<p>The lower levels should generally give us fast, focused feedback.</p>
+
+<p>API tests can validate a lot of business behaviour without requiring the browser.</p>
+
+<p>UI tests should focus on critical user journeys.</p>
+
+<p>And end-to-end tests should prove that the important pieces actually work together.</p>
+
+<p>Not every possible scenario needs to go through the UI.</p>
+
+<p>That's how you end up waiting 47 minutes for a pipeline to tell you that a button changed its text. 😂</p>
+
+<h2>But I also want contract testing</h2>
+
+<p>If the system integrates with other systems, this becomes interesting.</p>
+
+<p>If my application expects:</p>
+
+<pre><code class="language-json">{
+  "patientId": "123",
+  "status": "active"
+}
+</code></pre>
+
+<p>I don't just want to test that my UI displays something.</p>
+
+<p>I want confidence that the systems agree on the contract.</p>
+
+<p>That's where API schemas, contract tests and interoperability standards become valuable.</p>
+
+<p>And if the system uses FHIR, then conformance to the relevant profiles and implementation guides becomes another dimension to investigate rather than simply testing generic JSON responses. HL7's FHIR specification explicitly includes <a href="https://build.fhir.org/conformance-module.html" target="_blank" rel="noopener noreferrer">conformance concepts</a> such as CapabilityStatements, StructureDefinitions and implementation guides.</p>
+
+<h2>Test environments matter more than people think</h2>
+
+<p>Another thing I want to understand immediately:</p>
+
+<p><strong>Where does testing actually happen?</strong></p>
+
+<pre><code class="language-text">Development
+     ↓
+QA
+     ↓
+Staging
+     ↓
+Production
+</code></pre>
+
+<p>Or whatever the actual environment strategy is.</p>
+
+<p>Then:</p>
+
+<p>What data exists in each environment?</p>
+
+<p>Is it synthetic?</p>
+
+<p>Is production-like data used?</p>
+
+<p>How are secrets managed?</p>
+
+<p>How are deployments performed?</p>
+
+<p>How do we reset test data?</p>
+
+<p>How do external integrations behave?</p>
+
+<p>Can we reproduce production issues?</p>
+
+<p>Can we safely test failure scenarios?</p>
+
+<p>A brilliant test strategy running against a terrible test environment is still going to hurt.</p>
+
+<h2>Test data is going to be a project of its own</h2>
+
+<p>Especially for healthcare.</p>
+
+<p>We need realistic enough data to test meaningful scenarios.</p>
+
+<p>But we also need to be extremely careful with sensitive information.</p>
+
+<p>I want to understand:</p>
+
+<ul>
+  <li>how test data is created</li>
+  <li>whether synthetic data is available</li>
+  <li>how data is anonymised</li>
+  <li>who can access it</li>
+  <li>how long it is retained</li>
+  <li>how test data is reset</li>
+  <li>whether production data ever reaches lower environments</li>
+</ul>
+
+<p>This is one of those areas where QA, security and data governance overlap.</p>
+
+<h2>Then I want observability</h2>
+
+<p>When a test fails, I don't want:</p>
+
+<blockquote><p>"Expected 200, received 500."</p></blockquote>
+
+<p>Cool.</p>
+
+<p>Why?</p>
+
+<p>😂</p>
+
+<p>I want to know whether we have access to:</p>
+
+<ul>
+  <li>application logs</li>
+  <li>API logs</li>
+  <li>request IDs</li>
+  <li>traces</li>
+  <li>database errors</li>
+  <li>service health</li>
+  <li>CI logs</li>
+  <li>browser traces</li>
+  <li>monitoring dashboards</li>
+</ul>
+
+<p>Good observability makes QA dramatically more effective.</p>
+
+<p>Because a failed test should start an investigation, not a guessing game.</p>
+
+<h2>And this is where AI comes back</h2>
+
+<p>You didn't think I was going to let AI escape this article, did you? 😂</p>
+
+<p>We've spent Parts 1 to 4 talking about AI.</p>
+
+<p>I'm starting a new role where I'm going to have to understand a potentially large and unfamiliar system.</p>
+
+<p>I'm absolutely going to use AI.</p>
+
+<p>But I'm going to use it carefully.</p>
+
+<p>Not:</p>
+
+<blockquote><p>"Hey AI, explain this healthcare system."</p></blockquote>
+
+<p>😂</p>
+
+<p>That's not going to work.</p>
+
+<p>Instead, I'll give it <strong>real context</strong>.</p>
+
+<p>Architecture documentation.</p>
+
+<p>API specifications.</p>
+
+<p>Requirements.</p>
+
+<p>User stories.</p>
+
+<p>Non-sensitive technical documentation.</p>
+
+<p>Database schemas where appropriate.</p>
+
+<p>Test results.</p>
+
+<p>Error logs.</p>
+
+<p>Code.</p>
+
+<p>And I'll ask it targeted questions.</p>
+
+<h2>AI as my onboarding partner</h2>
+
+<p>For example:</p>
+
+<blockquote><p>"Here's the architecture diagram. Explain the components and how data moves through the system. Identify anything I should clarify with the architect."</p></blockquote>
+
+<p>Or:</p>
+
+<blockquote><p>"Here is the API documentation. Group the endpoints by business workflow and identify which ones look critical."</p></blockquote>
+
+<p>Or:</p>
+
+<blockquote><p>"Here is the patient registration workflow. Think like a senior QA engineer and identify ambiguities, failure points and questions I should ask."</p></blockquote>
+
+<p>Or:</p>
+
+<blockquote><p>"Here are the existing automated tests. Identify areas with high business risk but low test coverage."</p></blockquote>
+
+<p>That's a much better use of AI.</p>
+
+<p>AI helps me <strong>process information faster</strong>.</p>
+
+<p>It doesn't become the authority on the product.</p>
+
+<h2>And I can build skills around this</h2>
+
+<p>Remember Part 3?</p>
+
+<p>This is exactly where those skills become useful.</p>
+
+<p>I could create something like:</p>
+
+<pre><code class="language-text">digital-health-qa-review
+</code></pre>
+
+<p>with instructions to think about:</p>
+
+<pre><code class="language-text">Patient identity
+Data integrity
+Authorization
+Clinical workflows
+Auditability
+Interoperability
+API contracts
+Error handling
+Offline behaviour
+Security
+Privacy
+Regression risk
+</code></pre>
+
+<p>Then every time I review a feature, I don't have to start from scratch.</p>
+
+<p>My AI already knows the questions I want it to ask.</p>
+
+<p>That's where the whole series starts connecting.</p>
+
+<h2>I can even use AI to help me build the automation framework</h2>
+
+<p>Once I understand the system, I can use AI to help with:</p>
+
+<ul>
+  <li>framework structure</li>
+  <li>Playwright configuration</li>
+  <li>fixtures</li>
+  <li>Page Objects</li>
+  <li>API clients</li>
+  <li>test data factories</li>
+  <li>environment configuration</li>
+  <li>reporting</li>
+  <li>CI integration</li>
+  <li>reusable utilities</li>
+</ul>
+
+<p>But again:</p>
+
+<p><strong>AI writes code. I own the architecture.</strong></p>
+
+<p>That's an important distinction.</p>
+
+<p>I don't want an AI-generated automation framework that nobody understands six months later.</p>
+
+<p>I want a framework that reflects the project's needs.</p>
+
+<h2>My first automation questions</h2>
+
+<p>Before writing the first test, I want answers to these:</p>
+
+<pre><code class="language-text">What are the critical workflows?
+
+What are the most expensive failures?
+
+What is stable?
+
+What changes frequently?
+
+What tests already exist?
+
+What framework is already being used?
+
+What is the team's coding standard?
+
+How are test environments managed?
+
+How is test data created?
+
+How does CI work?
+
+What needs to run on every PR?
+
+What belongs in nightly regression?
+
+What belongs in release validation?
+
+How will failures be triaged?
+
+Who maintains the tests?
+</code></pre>
+
+<p>That last question is important.</p>
+
+<p>Because automation without ownership eventually becomes archaeology.</p>
+
+<h2>QA leadership is bigger than testing</h2>
+
+<p>This is something I'm also going into the role with.</p>
+
+<p>As a QA Lead, my job isn't simply:</p>
+
+<blockquote><p>"Make sure the software works."</p></blockquote>
+
+<p>It's also about building the <strong>quality system around the software.</strong></p>
+
+<p>That means thinking about:</p>
+
+<pre><code class="language-text">People
+Process
+Product
+Tools
+Automation
+Risk
+Metrics
+Communication
+Continuous improvement
+</code></pre>
+
+<p>I want developers involved early.</p>
+
+<p>I want requirements to be testable.</p>
+
+<p>I want QA involved before the code is finished.</p>
+
+<p>I want automation to run where it provides value.</p>
+
+<p>I want defects to become learning opportunities.</p>
+
+<p>And I want the team to think about quality as something we build into the product, not something QA checks at the very end.</p>
+
+<h2>What does "good QA" look like to me?</h2>
+
+<p>Not:</p>
+
+<blockquote><p>"We executed 10,000 test cases."</p></blockquote>
+
+<p>Not:</p>
+
+<blockquote><p>"Our automation coverage is 90%."</p></blockquote>
+
+<p>Not:</p>
+
+<blockquote><p>"We found 500 bugs."</p></blockquote>
+
+<p>Those numbers can be useful.</p>
+
+<p>But they're not the whole story.</p>
+
+<p>For me, good QA means:</p>
+
+<p><strong>We understand the product.</strong></p>
+
+<p><strong>We understand the risk.</strong></p>
+
+<p><strong>We know what we're testing and why.</strong></p>
+
+<p><strong>We know what we're not testing and why.</strong></p>
+
+<p><strong>Our automation protects the important stuff.</strong></p>
+
+<p><strong>Our failures give us useful information.</strong></p>
+
+<p><strong>Our defects are found as early as possible.</strong></p>
+
+<p><strong>And when something reaches production, we understand how and why it got there.</strong></p>
+
+<p>That's the goal.</p>
+
+<h2>My first-week checklist</h2>
+
+<p>So if I had to reduce this entire article into something I can actually take into the office today, it would look like this:</p>
+
+<h3>Product</h3>
+
+<ul>
+  <li>What problem does this system solve?</li>
+  <li>Who are the users?</li>
+  <li>What are the critical workflows?</li>
+  <li>What are the most important outcomes?</li>
+</ul>
+
+<h3>Domain</h3>
+
+<ul>
+  <li>What healthcare processes does the system support?</li>
+  <li>What terminology do I need to learn?</li>
+  <li>What clinical/business rules exist?</li>
+  <li>What could go seriously wrong?</li>
+</ul>
+
+<h3>Architecture</h3>
+
+<ul>
+  <li>Frontend</li>
+  <li>Backend</li>
+  <li>Database</li>
+  <li>APIs</li>
+  <li>Authentication</li>
+  <li>External systems</li>
+  <li>Integrations</li>
+  <li>Queues/background jobs</li>
+  <li>Notifications</li>
+  <li>Storage</li>
+  <li>CI/CD</li>
+  <li>Monitoring/logging</li>
+</ul>
+
+<h3>Data</h3>
+
+<ul>
+  <li>What data is collected?</li>
+  <li>Where is it stored?</li>
+  <li>Who can access it?</li>
+  <li>How does it move through the system?</li>
+  <li>What happens when data changes?</li>
+  <li>How is test data managed?</li>
+</ul>
+
+<h3>Security</h3>
+
+<ul>
+  <li>Authentication</li>
+  <li>Authorization</li>
+  <li>Role permissions</li>
+  <li>Sensitive data exposure</li>
+  <li>Audit trails</li>
+  <li>Session management</li>
+  <li>API security</li>
+  <li>Logging</li>
+</ul>
+
+<h3>QA</h3>
+
+<ul>
+  <li>Existing test strategy</li>
+  <li>Existing test cases</li>
+  <li>Existing automation</li>
+  <li>Existing defects</li>
+  <li>Production incidents</li>
+  <li>Regression coverage</li>
+  <li>Test environments</li>
+  <li>Test data</li>
+</ul>
+
+<h3>Automation</h3>
+
+<ul>
+  <li>What is worth automating?</li>
+  <li>What is stable?</li>
+  <li>What is high risk?</li>
+  <li>What should be API tested?</li>
+  <li>What should be UI tested?</li>
+  <li>What belongs in CI?</li>
+  <li>What belongs in regression?</li>
+  <li>What should remain manual?</li>
+</ul>
+
+<h2>And then there's the part I'm most excited about</h2>
+
+<p>I'm going to document this.</p>
+
+<p>Not just the final automation framework.</p>
+
+<p>Not just the QA strategy.</p>
+
+<p>The actual journey.</p>
+
+<p>What did I learn in Week 1?</p>
+
+<p>What surprised me?</p>
+
+<p>What did I misunderstand?</p>
+
+<p>What was already working?</p>
+
+<p>What was missing?</p>
+
+<p>What did I automate?</p>
+
+<p>What shouldn't I have automated?</p>
+
+<p>What did AI help with?</p>
+
+<p>Where did AI completely hallucinate? 😂</p>
+
+<p>What did I build?</p>
+
+<p>What did I break?</p>
+
+<p>What did I learn about digital health?</p>
+
+<p>And eventually:</p>
+
+<p><strong>Did the strategy actually work?</strong></p>
+
+<p>That's the interesting part.</p>
+
+<h2>I'm not walking in knowing everything</h2>
+
+<p>And honestly, I'm okay with that.</p>
+
+<p>I'm walking into a new environment today with experience in QA, automation, APIs, enterprise systems and development.</p>
+
+<p>But digital health is a domain I'm still going to learn.</p>
+
+<p>There will be terminology I don't know.</p>
+
+<p>Workflows I don't understand.</p>
+
+<p>Architecture decisions I haven't seen before.</p>
+
+<p>Healthcare standards I need to get familiar with.</p>
+
+<p>And probably a few moments where someone explains something and I nod like:</p>
+
+<blockquote><p>"Yeah, absolutely."</p></blockquote>
+
+<p>while internally thinking:</p>
+
+<blockquote><p>"I have no idea what you just said." 😂</p></blockquote>
+
+<p>That's normal.</p>
+
+<p>The trick isn't pretending you know everything.</p>
+
+<p>The trick is knowing <strong>how to learn the system.</strong></p>
+
+<h2>The experiment starts today</h2>
+
+<p>So that's my approach.</p>
+
+<p>I'm going to start with curiosity.</p>
+
+<p>Understand the product.</p>
+
+<p>Understand the users.</p>
+
+<p>Understand the workflows.</p>
+
+<p>Follow the data.</p>
+
+<p>Map the architecture.</p>
+
+<p>Understand the risks.</p>
+
+<p>Establish a QA baseline.</p>
+
+<p>Then build the strategy.</p>
+
+<p>Then automate the right things.</p>
+
+<p>And keep improving it.</p>
+
+<p>I'm not going to walk into the project screaming:</p>
+
+<blockquote><p><strong>"WHERE IS THE PLAYWRIGHT CONFIG?"</strong></p></blockquote>
+
+<p>😂</p>
+
+<p>First, I want to know what deserves to be tested.</p>
+
+<p>Then I'll worry about how we're going to test it.</p>
+
+<p>Because the best automation framework in the world doesn't save you from misunderstanding the product.</p>
+
+<p>And the most beautiful test suite doesn't matter if you're testing the wrong things.</p>
+
+<h2>One final thought</h2>
+
+<p>I think this is one of the biggest differences between <strong>testing software</strong> and <strong>being a QA engineer.</strong></p>
+
+<p>Testing is an activity.</p>
+
+<p>QA is a way of thinking.</p>
+
+<p>Anyone can execute a test case.</p>
+
+<p>The real skill is understanding:</p>
+
+<blockquote><p><strong>What should we test?</strong></p></blockquote>
+
+<blockquote><p><strong>Why does it matter?</strong></p></blockquote>
+
+<blockquote><p><strong>What could go wrong?</strong></p></blockquote>
+
+<blockquote><p><strong>How would we know?</strong></p></blockquote>
+
+<blockquote><p><strong>What should we automate?</strong></p></blockquote>
+
+<blockquote><p><strong>What shouldn't we automate?</strong></p></blockquote>
+
+<blockquote><p><strong>And how do we build a process that keeps getting better?</strong></p></blockquote>
+
+<p>Today, I get to start answering those questions in a completely new environment.</p>
+
+<p>A new system.</p>
+
+<p>A new domain.</p>
+
+<p>A new team.</p>
+
+<p>A new challenge.</p>
+
+<p>And this time, I'm taking you guys with me.</p>
+
+<p>Let's see what we find. 👀</p>
+
+<p><strong>Day 1 starts now.</strong></p>
+  `
+  },
+  {
+    id: 15,
+    title: "Give Your AI Hands: MCP, Tools and Building Your First AI-Powered QA Workflow",
+    excerpt: "Your AI has the brain. It has the skills. It still doesn't have hands. What MCP actually is, how it's different from a skill, and how to sketch your first AI-powered QA workflow.",
+    date: "August 31, 2026",
+    readTime: "7 min read",
+    category: "AI",
+    imageUrl: "/ai-mcp-hands.jpg",
+    content: `
+<p>Okay.</p>
+
+<p>We've been building up to this one.</p>
+
+<p>In Part 1, we talked about AI becoming more than just a chatbot.</p>
+
+<p>In Part 2, we looked at how we can use AI to become better QA engineers and full-stack developers.</p>
+
+<p>In Part 3, we started giving AI specialised skills.</p>
+
+<p>Frontend skills.</p>
+
+<p>UX skills.</p>
+
+<p>QA skills.</p>
+
+<p>Playwright skills.</p>
+
+<p>Browser skills.</p>
+
+<p>Research skills.</p>
+
+<p>Basically, we're slowly building ourselves an AI engineering toolbox.</p>
+
+<p>But there is one problem.</p>
+
+<p>Our AI knows what to do.</p>
+
+<p>It has the skills.</p>
+
+<p>It has the instructions.</p>
+
+<p>It has the brain.</p>
+
+<p>But...</p>
+
+<p><strong>it still doesn't have hands.</strong></p>
+
+<p>😂</p>
+
+<p>That's where MCP comes in.</p>
+
+<h2>So what the hell is MCP?</h2>
+
+<p>You've probably seen the acronym everywhere lately.</p>
+
+<p><strong>MCP.</strong></p>
+
+<p>Model Context Protocol.</p>
+
+<p>And if you've been following AI development, you've probably seen people casually throwing around phrases like:</p>
+
+<blockquote><p>"Just connect it through MCP."</p></blockquote>
+
+<p>And you're sitting there thinking:</p>
+
+<blockquote><p>"Okabro... but what does that actually mean?" 😂</p></blockquote>
+
+<p>Let's make it simple.</p>
+
+<p>At its core, MCP is a standard way for AI applications to connect to external tools and sources of context.</p>
+
+<p>Instead of every AI application needing a completely different integration for every service, MCP gives them a common protocol for discovering and using capabilities.</p>
+
+<p>The official MCP ecosystem describes it as a protocol for connecting AI applications to tools, resources and other context.</p>
+
+<p>Think about it like this:</p>
+
+<pre><code class="language-text">                    AI
+                     │
+                     │
+                    MCP
+                     │
+       ┌─────────────┼─────────────┐
+       ↓             ↓             ↓
+    GitHub         Jira        Playwright
+       │             │             │
+       ↓             ↓             ↓
+     Code          Tickets       Browser
+</code></pre>
+
+<p>The AI doesn't magically know how to use GitHub.</p>
+
+<p>It doesn't magically know how to read your Jira board.</p>
+
+<p>It doesn't magically know how to drive a browser.</p>
+
+<p><strong>MCP just gives it a standard way to discover and interact with those capabilities.</strong></p>
+
+<p>And that's where things get interesting.</p>
+
+<h2>Skills vs MCP</h2>
+
+<p>This is probably the most important distinction from Part 3.</p>
+
+<p>A <strong>skill</strong> tells AI:</p>
+
+<blockquote><p><strong>How should I approach this task?</strong></p></blockquote>
+
+<p>An <strong>MCP server</strong> can give AI:</p>
+
+<blockquote><p><strong>What can I actually access or do?</strong></p></blockquote>
+
+<p>For example:</p>
+
+<h3>Skill</h3>
+
+<pre><code class="language-text">senior-qa-review
+</code></pre>
+
+<p>might tell AI:</p>
+
+<pre><code class="language-text">Think about:
+- happy paths
+- negative cases
+- boundaries
+- authorization
+- API behaviour
+- data integrity
+- concurrency
+- regression
+</code></pre>
+
+<p>That's the brain and methodology.</p>
+
+<p>Then MCP could give that AI access to:</p>
+
+<pre><code class="language-text">Jira
+GitHub
+Playwright
+Test reports
+Postman
+Database
+CI/CD
+</code></pre>
+
+<p>Now we have:</p>
+
+<pre><code class="language-text">        SKILL
+          │
+    "How to think"
+          │
+          ↓
+         AI
+          │
+         MCP
+          │
+    "What I can use"
+          │
+    ┌─────┼─────┐
+    ↓     ↓     ↓
+  Jira  GitHub Playwright
+</code></pre>
+
+<p><strong>Skills + tools = serious AI workflows.</strong></p>
+
+<h2>So what is an MCP server?</h2>
+
+<p>This is another thing that sounds more complicated than it is.</p>
+
+<p>An MCP server is basically an application that exposes capabilities to an MCP client.</p>
+
+<p>Those capabilities can include things like:</p>
+
+<h3>Tools</h3>
+
+<p>Actions the AI can call.</p>
+
+<p>For example:</p>
+
+<pre><code class="language-text">create_bug()
+search_jira()
+run_tests()
+get_pull_request()
+query_database()
+</code></pre>
+
+<h3>Resources</h3>
+
+<p>Information the AI can read.</p>
+
+<p>For example:</p>
+
+<pre><code class="language-text">project://requirements
+project://test-results
+project://api-documentation
+</code></pre>
+
+<h3>Prompts</h3>
+
+<p>Reusable prompt templates or workflows exposed by the server.</p>
+
+<p>The MCP SDKs support these core concepts directly.</p>
+
+<p>So an MCP server isn't necessarily some giant cloud infrastructure project.</p>
+
+<p>It can literally be a small application sitting on your machine exposing a few useful functions.</p>
+
+<p>And that's where I think developers should start.</p>
+
+<h2>Let's build one</h2>
+
+<p>Because honestly, explaining MCP for 2,000 words without building something would be criminal.</p>
+
+<p>😂</p>
+
+<p>Let's build something that actually makes sense for us.</p>
+
+<h3>A QA MCP server</h3>
+
+<p>Imagine we're working on an application.</p>
+
+<p>We have:</p>
+
+<pre><code class="language-text">Jira
+GitHub
+Playwright
+API tests
+Test reports
+Documentation
+</code></pre>
+
+<p>And we want our AI assistant to investigate a ticket.</p>
+
+<p>We want to be able to say:</p>
+
+<blockquote><p>"Investigate ticket QA-123."</p></blockquote>
+
+<p>And have our AI:</p>
+
+<ol>
+  <li>Read the Jira ticket.</li>
+  <li>Inspect the linked PR.</li>
+  <li>Identify affected areas.</li>
+  <li>Run relevant Playwright tests.</li>
+  <li>Inspect failures.</li>
+  <li>Summarise the risk.</li>
+  <li>Suggest additional tests.</li>
+</ol>
+
+<p>Now we're talking.</p>
+
+<p>That's an actual workflow.</p>
+
+<h2>Our first MCP tool</h2>
+
+<p>Let's keep the first one ridiculously simple.</p>
+
+<p>Imagine we want a tool called:</p>
+
+<pre><code class="language-text">get_ticket
+</code></pre>
+
+<p>The AI gives it:</p>
+
+<pre><code class="language-text">ticket_id: QA-123
+</code></pre>
+
+<p>The MCP server talks to Jira.</p>
+
+<p>Jira returns the ticket.</p>
+
+<p>The MCP server gives the result back to the AI.</p>
+
+<p>The flow becomes:</p>
+
+<pre><code class="language-text">You
+ ↓
+AI
+ ↓
+MCP
+ ↓
+Jira
+ ↓
+MCP
+ ↓
+AI
+ ↓
+You
+</code></pre>
+
+<p>You didn't copy the Jira ticket.</p>
+
+<p>You didn't paste the acceptance criteria.</p>
+
+<p>You didn't switch browser tabs.</p>
+
+<p>You just asked:</p>
+
+<blockquote><p>"What's QA-123 about?"</p></blockquote>
+
+<p>You stopped going to the information.</p>
+
+<p><strong>Your AI can go and get it.</strong></p>
+
+<p><strong>That's the difference.</strong></p>
+
+<h2>MCP doesn't replace your APIs</h2>
+
+<p>This is another misconception worth clearing up.</p>
+
+<p>If Jira already has an API, why do we need MCP?</p>
+
+<p>Because the problem isn't necessarily:</p>
+
+<blockquote><p>"Can software talk to Jira?"</p></blockquote>
+
+<p>Of course it can.</p>
+
+<p>The problem is:</p>
+
+<blockquote><p><strong>"Can an AI agent discover and use that capability in a standard way?"</strong></p></blockquote>
+
+<p>MCP gives AI applications a common interface for discovering available tools and context.</p>
+
+<p>Your MCP server can essentially act as the bridge between the AI and the systems you already use.</p>
+
+<pre><code class="language-text">                 AI
+                  │
+                 MCP
+                  │
+        ┌─────────┼─────────┐
+        ↓         ↓         ↓
+      Jira      GitHub    Playwright
+        │         │         │
+       API       API       CLI
+</code></pre>
+
+<p>The existing APIs don't disappear.</p>
+
+<p>MCP sits above them.</p>
+
+<h2>And this is why MCP is interesting for QA</h2>
+
+<p>Think about what QA actually needs.</p>
+
+<p>We constantly touch ticket management.</p>
+
+<p>Browsers.</p>
+
+<p>APIs.</p>
+
+<p>Databases.</p>
+
+<p>Logs.</p>
+
+<p>Documentation.</p>
+
+<p>The actual application.</p>
+
+<p>And most QA workflows involve stitching all of those things together.</p>
+
+<p>MCP gives us a very interesting opportunity.</p>
+
+<p>Instead of:</p>
+
+<pre><code class="language-text">Open Jira
+ ↓
+Read ticket
+ ↓
+Open GitHub
+ ↓
+Find PR
+ ↓
+Open CI
+ ↓
+Check build
+ ↓
+Open test report
+ ↓
+Open application
+ ↓
+Run tests
+ ↓
+Write bug
+</code></pre>
+
+<p>We could eventually have:</p>
+
+<pre><code class="language-text">"Investigate this ticket."
+</code></pre>
+
+<p>And let the agent orchestrate the boring parts.</p>
+
+<h2>Imagine your AI QA engineer</h2>
+
+<p>Let's say tomorrow you receive:</p>
+
+<blockquote><p><strong>QA-481: Update employee leave calculation</strong></p></blockquote>
+
+<p>Instead of manually investigating everything, you ask:</p>
+
+<blockquote><p>"Investigate QA-481."</p></blockquote>
+
+<p>Your AI could potentially:</p>
+
+<pre><code class="language-text">Reading ticket...
+
+Affected module:
+Leave Management
+
+Linked PR:
+#2841
+
+Files changed:
+leaveCalculator.ts
+leaveService.ts
+
+Potentially affected:
+- Leave balance
+- Leave accrual
+- Leave approval
+
+Existing automated coverage:
+17 tests
+
+Running relevant tests...
+
+2 tests failed.
+
+Expected balance: 14
+Actual balance: 13
+
+Investigating...
+
+The PR changes the accrual calculation for employees
+with partial months.
+
+Recommendation:
+- Confirm the intended rounding rule with the ticket author
+- Add boundary tests for employees who join mid-month
+- Add a regression test for the December to January rollover
+</code></pre>
+
+<p>Notice what that is and what it isn't.</p>
+
+<p>It isn't the AI deciding whether the bug is real.</p>
+
+<p>It's the AI doing the twenty minutes of clicking, reading and correlating that you were going to do before you even got to the interesting part.</p>
+
+<p>You still make the call.</p>
+
+<p>You just make it with the context already in front of you.</p>
+
+<h2>Start smaller than that</h2>
+
+<p>I know that example looks ambitious.</p>
+
+<p>Don't start there.</p>
+
+<p>Start with the one thing you look up ten times a day.</p>
+
+<p>For me it was tickets.</p>
+
+<p>One tool.</p>
+
+<pre><code class="language-text">get_ticket
+</code></pre>
+
+<p>That's it.</p>
+
+<p>Get that working, actually use it for a week, and you'll immediately know what the second tool should be, because you'll feel the gap.</p>
+
+<p>You'll find yourself saying:</p>
+
+<blockquote><p>"Okay but now it needs to see the PR."</p></blockquote>
+
+<blockquote><p>"Okay but now it needs to run the tests."</p></blockquote>
+
+<blockquote><p>"Okay but now it needs to read the report."</p></blockquote>
+
+<p>And that's how the thing gets built. One annoyance at a time.</p>
+
+<p>Not by designing the perfect QA agent on a whiteboard on day one. 😂</p>
+
+<h2>A word of caution, because someone has to say it</h2>
+
+<p>Giving AI hands is genuinely fun.</p>
+
+<p>It's also the point where mistakes stop being theoretical.</p>
+
+<p>A skill that reasons badly gives you a bad opinion.</p>
+
+<p>A tool that acts badly gives you a bad <strong>action.</strong></p>
+
+<p>So be deliberate about it.</p>
+
+<p>Start read-only. Reading tickets, reading PRs, reading reports — those are hard to regret.</p>
+
+<p>Be careful about the ones that write. Creating tickets, pushing code, touching data, hitting anything that isn't a test environment.</p>
+
+<p>And be very careful about what you connect to production.</p>
+
+<p>The answer isn't to avoid it.</p>
+
+<p>The answer is to give it the same scope you'd give a new engineer on their first week.</p>
+
+<p>Access to what they need. Not the keys to everything.</p>
+
+<h2>So where does this leave us?</h2>
+
+<p>Let's zoom out on the whole series for a second.</p>
+
+<pre><code class="language-text">Part 1  →  AI stops being a chatbot
+Part 2  →  You get better at your actual job
+Part 3  →  Skills          =  how it thinks
+Part 4  →  MCP and tools   =  what it can touch
+</code></pre>
+
+<p>The brain came first.</p>
+
+<p>Then the methodology.</p>
+
+<p>Now the hands.</p>
+
+<p>And once your AI can think <em>and</em> reach, the interesting question stops being:</p>
+
+<blockquote><p>"Can AI do this?"</p></blockquote>
+
+<p>and quietly becomes:</p>
+
+<blockquote><p>"What am I still doing manually, and why?"</p></blockquote>
+
+<p>That question is uncomfortable.</p>
+
+<p>It's also the most useful one in engineering right now.</p>
+
+<p>Build the small thing.</p>
+
+<p>Connect one tool.</p>
+
+<p>See what it changes about how you work.</p>
+
+<p>Then come tell me about it. 😂</p>
+  `
+  },
+  {
     id: 14,
     title: "Build Your Own AI Superpowers: The Skills Every Engineer Should Have",
     excerpt: "Stop asking one AI to be good at everything. How to install, call and write your own specialised AI skills for frontend, QA and backend work, and for the parts of the job you keep re-explaining.",
