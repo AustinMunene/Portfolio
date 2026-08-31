@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Interactive3DScene from '../components/Interactive3DScene';
 import TestRunnerSimulation from '../components/TestRunnerSimulation';
+import ManualVsAutomated from '../components/ManualVsAutomated';
 import PerformanceChart from '../components/PerfomanceChart';
 
 const InteractiveDemo: React.FC = () => {
@@ -26,6 +27,14 @@ const InteractiveDemo: React.FC = () => {
           </div>
 
           <div className="space-y-16">
+            <section>
+              <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
+                <span className="h-1 w-6 bg-brand rounded-full" />
+                Manual vs automated, side by side
+              </h2>
+              <ManualVsAutomated />
+            </section>
+
             <section>
               <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
                 <span className="h-1 w-6 bg-brand rounded-full" />
