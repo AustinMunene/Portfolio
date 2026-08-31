@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     title: "Day 1 as a QA Lead: How I Approach a System I've Never Tested Before",
     excerpt: "Today I start as a QA Lead on a digital health system I've never seen. Not a \"here's the perfect QA process\" article — this is the reconnaissance plan I'm actually walking in with, written before I know whether it works.",
     date: "September 1, 2026",
-    readTime: "21 min read",
+    readTime: "25 min read",
     category: "QA & Testing",
     imageUrl: "/qa-lead-day-one.jpg",
     content: `
@@ -829,6 +829,153 @@ Where the major quality gaps are
 
 <p>That's a much better starting point.</p>
 
+<h2>The conversation I actually want on Day 1</h2>
+
+<p>Everything above is stuff I can work out on my own, given enough time.</p>
+
+<p>But there's one hour in the first week that's worth more than the rest of it combined.</p>
+
+<p>The walkthrough with the lead dev.</p>
+
+<p>Someone sitting next to me, sharing their screen, saying "okay so this is where the patient record gets created, and then this bit calls out to..."</p>
+
+<p>That hour is the highest-bandwidth information transfer I'm going to get.</p>
+
+<p>Documentation tells you what a system is supposed to do.</p>
+
+<p><strong>The person who built it tells you what it actually does.</strong></p>
+
+<p>And most of what I want isn't written down anywhere. It's in their head.</p>
+
+<p>So I want to be deliberate about what I ask.</p>
+
+<h3>The question I care about most</h3>
+
+<p>If I only get one, it's this:</p>
+
+<blockquote><p><strong>"What are you afraid of?"</strong></p></blockquote>
+
+<p>Or the slightly less dramatic version:</p>
+
+<blockquote><p>"What breaks most often?"</p></blockquote>
+
+<p>Because I keep saying I want to do risk-based testing.</p>
+
+<p>But risk-based testing needs somebody to tell you where the risk actually is.</p>
+
+<p>And the lead dev already knows.</p>
+
+<p>They know which module everyone tiptoes around.</p>
+
+<p>They know which integration fails quietly on a Friday.</p>
+
+<p>They know which part of the codebase has a comment that says "don't touch this."</p>
+
+<p>None of that is in Jira. 😂</p>
+
+<p>A few more in the same family:</p>
+
+<pre><code class="language-text">What would you rewrite if you had time?
+
+What was the last production incident, and what caused it?
+
+Which bugs keep coming back?
+
+Which part of this system do you not fully understand yourself?
+
+What do you wish QA would catch that we currently don't?
+</code></pre>
+
+<p>That last one matters more than it looks.</p>
+
+<p>It invites the person who builds the thing to tell me what QA is actually for on this team.</p>
+
+<p>Their answer might not match my assumptions at all.</p>
+
+<p>Better to find that out on Day 1 than in month three.</p>
+
+<h3>From a manual testing standpoint</h3>
+
+<p>These are the ones that decide whether I can even start testing this week:</p>
+
+<pre><code class="language-text">Which flows can I safely break, and which must I never touch?
+
+Is there a workflow only one person knows how to run?
+
+Where does the UI report success when the backend actually failed?
+
+What do users complain about most?
+
+Which parts have changed recently?
+
+What is nobody currently testing, and why?
+</code></pre>
+
+<p>The third one is my favourite.</p>
+
+<p>Remember the referral example from earlier?</p>
+
+<blockquote><p>"Referral submitted successfully."</p></blockquote>
+
+<p>Every system has a few of those.</p>
+
+<p>Places where the interface is optimistic and the backend is quietly disagreeing.</p>
+
+<p>The developer usually knows exactly where they are.</p>
+
+<h3>From an automation standpoint</h3>
+
+<p>This is where I want very practical answers, because they determine what's realistic:</p>
+
+<pre><code class="language-text">Are there stable test IDs on the frontend, or am I fighting selectors?
+
+Can I get a seeded account for every role?
+
+Is there an OpenAPI or contract spec, and is it generated or hand-maintained?
+
+Can I run against an ephemeral environment, or is staging shared?
+
+How do I reset test data?
+
+How long does the pipeline take now, and how much longer can it get?
+
+What's already automated, and does anyone actually trust it?
+</code></pre>
+
+<p>A few of these are worth explaining.</p>
+
+<p><strong>Stable test IDs.</strong> I said earlier not to automate against unstable selectors. This is where you find out whether that's your situation, before you've written 200 tests that break on the next CSS refactor.</p>
+
+<p><strong>Hand-maintained specs.</strong> If the API spec is written by hand rather than generated from the code, it will drift. That's not a criticism, it's just physics. It also means the spec itself becomes something worth testing against reality.</p>
+
+<p><strong>Shared staging.</strong> If everyone tests against the same environment, parallel automated runs will interfere with each other and I'll spend months blaming flaky tests for what is actually a test data collision.</p>
+
+<p><strong>"Does anyone trust it?"</strong> This is the real question about existing automation. A suite that everyone re-runs until it goes green isn't coverage. It's decoration. 😂</p>
+
+<h3>One thing I want to be careful about</h3>
+
+<p>Reading that list back, it's a lot of pointed questions.</p>
+
+<p>And I'm the new QA lead.</p>
+
+<p>Walking into someone's codebase on Day 1 with a checklist can very easily come across as an inspection.</p>
+
+<p>That's not what this is.</p>
+
+<p>So I'm going to ask these like someone who's genuinely curious about the thing they built.</p>
+
+<p>Which is true, because I am.</p>
+
+<p>The goal isn't to find out what's wrong with their system.</p>
+
+<p>It's to find out what they already know, so I don't waste three weeks rediscovering it.</p>
+
+<p>And honestly, the answer I'm most interested in is the one that starts:</p>
+
+<blockquote><p>"Well... technically it's supposed to..."</p></blockquote>
+
+<p>That pause is where the bugs live. 😂</p>
+
 <h2>Then comes the question everyone loves...</h2>
 
 <h3>"So when are we automating?"</h3>
@@ -1325,16 +1472,7 @@ Continuous improvement
 
 <h2>My first-week checklist</h2>
 
-<p>So if I had to reduce this entire article into something I can actually take into the office today, it would look like this:</p>
-
-<h3>Product</h3>
-
-<ul>
-  <li>What problem does this system solve?</li>
-  <li>Who are the users?</li>
-  <li>What are the critical workflows?</li>
-  <li>What are the most important outcomes?</li>
-</ul>
+<p>The days above are the plan. This is the part I'd actually carry around, because it's the stuff I know I'll forget to ask about once I'm deep in a workflow:</p>
 
 <h3>Domain</h3>
 
@@ -1343,23 +1481,6 @@ Continuous improvement
   <li>What terminology do I need to learn?</li>
   <li>What clinical/business rules exist?</li>
   <li>What could go seriously wrong?</li>
-</ul>
-
-<h3>Architecture</h3>
-
-<ul>
-  <li>Frontend</li>
-  <li>Backend</li>
-  <li>Database</li>
-  <li>APIs</li>
-  <li>Authentication</li>
-  <li>External systems</li>
-  <li>Integrations</li>
-  <li>Queues/background jobs</li>
-  <li>Notifications</li>
-  <li>Storage</li>
-  <li>CI/CD</li>
-  <li>Monitoring/logging</li>
 </ul>
 
 <h3>Data</h3>
