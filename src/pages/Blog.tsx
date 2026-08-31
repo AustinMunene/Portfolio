@@ -468,6 +468,16 @@ Close
 
 <p>One standard worth understanding is <strong><a href="https://hl7.org/fhir/" target="_blank" rel="noopener noreferrer">HL7 FHIR</a></strong>, which defines a standard way to represent and exchange healthcare information. FHIR is organised around resources such as Patient, Practitioner, Observation, DiagnosticReport, Medication and many others.</p>
 
+<p>But here's the part that catches people out.</p>
+
+<p>Conformance to FHIR is not the same thing as interoperability.</p>
+
+<p>Two systems can both be perfectly FHIR-conformant and still fail to talk to each other, because FHIR is deliberately flexible about what you're allowed to put in a resource.</p>
+
+<p><strong>That flexibility is exactly why profiles and implementation guides exist.</strong></p>
+
+<p>They narrow the standard down to what two specific systems have actually agreed on.</p>
+
 <p>As a QA engineer, I don't necessarily need to become a clinical informatics expert overnight.</p>
 
 <p>But if the system uses FHIR, I absolutely want to understand:</p>
