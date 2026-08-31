@@ -1850,6 +1850,14 @@ Continuous improvement
 <p>Let's see what we find. 👀</p>
 
 <p><strong>Day 1 starts now.</strong></p>
+
+<p>See you in a couple of weeks for the update, where I'll tell you exactly which parts of this article were hopelessly optimistic.</p>
+
+<p>My money is on the five-day plan. 😂</p>
+
+<p>Realistically, Day 1 is going to be 70% waiting for somebody to grant me access to something.</p>
+
+<p>But we move. 🫡</p>
   `
   },
   {
