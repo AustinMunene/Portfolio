@@ -4,21 +4,43 @@ import { motion } from 'framer-motion';
 
 export const careerHistory = [
     {
+      title: 'QA Lead',
+      company: 'Intellisoft Consulting Ltd, Nairobi',
+      period: 'Sept 2026 - Present',
+      description:
+        'Provide hands-on QA execution and day-to-day coordination across digital health and internal systems, working with engineering, product, and implementation teams to strengthen release quality.',
+      responsibilities: [
+        'Coordinate day-to-day QA activities across assigned projects',
+        'Prepare and execute test plans, test cases, test scripts, and regression suites',
+        'Run functional, regression, integration, API, usability, exploratory, and UAT cycles',
+        'Review requirements, user stories, and acceptance criteria for clarity and testability',
+        'Identify, document, track, and follow up on defects in agreed project tools',
+        'Support release readiness checks and provide QA input into release decisions',
+        'Support automation, performance/load, and security testing where required',
+        'Report QA status, defect summaries, and quality improvement recommendations',
+        'Mentor QA interns and juniors, promoting practical QA standards across teams',
+      ],
+      skills: [
+        'QA Leadership', 'Test Planning', 'API Testing', 'Regression Testing',
+        'UAT', 'Release Readiness', 'Security Testing', 'Mentoring',
+      ],
+    },
+    {
       title: 'Lead QA Engineer',
       company: 'Nathan Digital, Nairobi',
-      period: 'Sept 2025 - Present',
+      period: 'Sept 2025 - Aug 2026',
       description:
-        'Oversee the end-to-end QA lifecycle, combining hands-on testing with strategic leadership to deliver high-quality, reliable releases.',
+        'Oversaw the end-to-end QA lifecycle, combining hands-on testing with strategic leadership to deliver high-quality, reliable releases.',
       responsibilities: [
-        'Lead planning, design, and execution of manual and automated test suites',
-        'Design, implement, and maintain Cypress and Playwright frameworks',
-        'Collaborate with developers, product managers, and designers to resolve defects early',
-        'Enforce QA standards, best practices, and testing processes across teams',
-        'Mentor QA engineers on automation strategy, test design, and defect reporting',
-        'Conduct API, usability, performance, and cross-browser testing',
-        'Maintain QA documentation: plans, cases, execution reports, and defect logs',
-        'Drive AI-assisted testing initiatives to improve efficiency and scalability',
-        'Champion continuous improvement to expand coverage and release confidence',
+        'Led planning, design, and execution of manual and automated test suites',
+        'Designed, implemented, and maintained Cypress and Playwright frameworks',
+        'Collaborated with developers, product managers, and designers to resolve defects early',
+        'Enforced QA standards, best practices, and testing processes across teams',
+        'Mentored QA engineers on automation strategy, test design, and defect reporting',
+        'Conducted API, usability, performance, and cross-browser testing',
+        'Maintained QA documentation: plans, cases, execution reports, and defect logs',
+        'Drove AI-assisted testing initiatives to improve efficiency and scalability',
+        'Championed continuous improvement to expand coverage and release confidence',
       ],
       skills: [
         'Cypress', 'Playwright', 'QA Leadership', 'Automation Frameworks',
