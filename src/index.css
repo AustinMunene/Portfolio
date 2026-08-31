@@ -716,6 +716,18 @@ html {
   --tw-prose-td-borders: var(--border);
 }
 
+/* Typography's default paragraph rhythm assumes multi-sentence paragraphs. The
+   posts are written in a deliberate one-sentence-per-paragraph voice - a median
+   of six words - so the default 1.25em band of air above and below each one
+   turns a 3,400-word post into a 41,000px scroll, most of it empty. Tightening
+   the gap keeps the staccato rhythm while cutting the vertical run; the space
+   between paragraphs still reads as a beat, just not as a section break. */
+.prose p {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+
 /* Typography's default blockquote quotes are curly marks injected as pseudo
    elements. Blog posts write their own quotation marks inline, and several
    blockquotes are multi-paragraph asides rather than quotes, so the injected
