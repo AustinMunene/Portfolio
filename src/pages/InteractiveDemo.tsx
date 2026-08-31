@@ -1,11 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import InteractiveCodeEditor from '../components/InteractiveCodeEditor';
 import Interactive3DScene from '../components/Interactive3DScene';
-import InteractiveDataViz from '../components/InteractiveDataViz';
-import CypressTestSimulation from '../components/CypressTestSimulation';
+import TestRunnerSimulation from '../components/TestRunnerSimulation';
 import PerformanceChart from '../components/PerfomanceChart';
-import TailwindDemo from '../components/TailwindDemo';
 
 const InteractiveDemo: React.FC = () => {
   return (
@@ -15,7 +12,7 @@ const InteractiveDemo: React.FC = () => {
           initial={{ y: 20 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-5xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
           <div className="text-center mb-16">
             <span className="text-fg-muted text-sm font-medium tracking-wider uppercase mb-4 block">
@@ -23,7 +20,8 @@ const InteractiveDemo: React.FC = () => {
             </span>
             <h1 className="text-4xl md:text-5xl font-display mb-4 gradient-text">Interactive Demo</h1>
             <p className="text-fg-muted max-w-lg mx-auto">
-              Explore these interactive components showcasing my technical skills and expertise.
+              Testing, taken apart so you can see how it works. Run things, break things,
+              and click anything that looks like it has an explanation behind it.
             </p>
           </div>
 
@@ -31,22 +29,9 @@ const InteractiveDemo: React.FC = () => {
             <section>
               <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
                 <span className="h-1 w-6 bg-brand rounded-full" />
-                Interactive Code Editor
+                Cypress vs Playwright, line by line
               </h2>
-              <InteractiveCodeEditor
-                initialCode={`// Try editing this code and run it\nfunction calculateFibonacci(n) {\n  if (n <= 1) return n;\n  return calculateFibonacci(n - 1) + calculateFibonacci(n - 2);\n}\n\n// Calculate the 10th Fibonacci number\ncalculateFibonacci(10);`}
-                language="javascript"
-                title="Fibonacci Calculator"
-                description="Edit this code to calculate different Fibonacci numbers or try your own code."
-              />
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-brand rounded-full" />
-                Cypress Test Playground
-              </h2>
-              <CypressTestSimulation />
+              <TestRunnerSimulation />
             </section>
 
             <section>
@@ -60,25 +45,9 @@ const InteractiveDemo: React.FC = () => {
             <section>
               <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
                 <span className="h-1 w-6 bg-brand rounded-full" />
-                Tailwind UI Builder
-              </h2>
-              <TailwindDemo />
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-brand rounded-full" />
-                Interactive 3D Scene
+                Module Graph
               </h2>
               <Interactive3DScene />
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-brand rounded-full" />
-                Interactive Data Visualization
-              </h2>
-              <InteractiveDataViz />
             </section>
           </div>
         </motion.div>
