@@ -225,7 +225,11 @@ const LoadTestSimulator: React.FC = () => {
               label={{ value: `p(95) < ${THRESHOLD_MS}ms`, fill: tokens.label, fontSize: 11, position: 'insideTopRight' }}
             />
 
+            {/* Animation off on both series. Switching profile is a comparison
+                between two shapes, and morphing one into the other over 1.5s
+                shows the reader a curve that is briefly neither. */}
             <Area
+              isAnimationActive={false}
               yAxisId="vus"
               type="monotone"
               dataKey="vus"
@@ -236,6 +240,7 @@ const LoadTestSimulator: React.FC = () => {
               strokeWidth={1.5}
             />
             <Line
+              isAnimationActive={false}
               yAxisId="ms"
               type="monotone"
               dataKey="p95"
