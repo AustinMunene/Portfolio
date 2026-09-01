@@ -3,7 +3,31 @@ import { motion } from 'framer-motion';
 import Interactive3DScene from '../components/Interactive3DScene';
 import TestRunnerSimulation from '../components/TestRunnerSimulation';
 import ManualVsAutomated from '../components/ManualVsAutomated';
-import PerformanceChart from '../components/PerfomanceChart';
+import FlakyRunner from '../components/FlakyRunner';
+import LoadTestSimulator from '../components/LoadTestSimulator';
+
+const SECTIONS = [
+  {
+    title: 'Manual vs automated, side by side',
+    element: <ManualVsAutomated />,
+  },
+  {
+    title: 'Cypress vs Playwright, line by line',
+    element: <TestRunnerSimulation />,
+  },
+  {
+    title: 'Why nobody trusts the suite',
+    element: <FlakyRunner />,
+  },
+  {
+    title: 'Load profiles, and what each one asks',
+    element: <LoadTestSimulator />,
+  },
+  {
+    title: 'Module Graph',
+    element: <Interactive3DScene />,
+  },
+];
 
 const InteractiveDemo: React.FC = () => {
   return (
@@ -27,37 +51,15 @@ const InteractiveDemo: React.FC = () => {
           </div>
 
           <div className="space-y-16">
-            <section>
-              <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-brand rounded-full" />
-                Manual vs automated, side by side
-              </h2>
-              <ManualVsAutomated />
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-brand rounded-full" />
-                Cypress vs Playwright, line by line
-              </h2>
-              <TestRunnerSimulation />
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-brand rounded-full" />
-                k6 Performance Test Simulator
-              </h2>
-              <PerformanceChart />
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
-                <span className="h-1 w-6 bg-brand rounded-full" />
-                Module Graph
-              </h2>
-              <Interactive3DScene />
-            </section>
+            {SECTIONS.map(({ title, element }) => (
+              <section key={title}>
+                <h2 className="text-xl font-semibold mb-6 text-fg flex items-center gap-3">
+                  <span className="h-1 w-6 bg-brand rounded-full" />
+                  {title}
+                </h2>
+                {element}
+              </section>
+            ))}
           </div>
         </motion.div>
       </div>
