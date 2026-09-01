@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { careerHistory } from './Career';
-import { blogPosts } from './Blog';
+import { blogPosts } from '../data/posts';
 import HeroSplit from '../components/sections/HeroSplit';
 import FeaturedBento from '../components/sections/FeaturedBento';
 import type { BentoProject } from '../components/sections/FeaturedBento';

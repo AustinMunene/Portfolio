@@ -2,7 +2,8 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
-import { blogPosts, CATEGORY_CHIP_ON_IMAGE } from './Blog';
+import { blogPosts } from '../data/posts';
+import { CATEGORY_CHIP_ON_IMAGE } from '../components/categoryChip';
 
 const BlogPost2: React.FC = () => {
   const { id } = useParams();

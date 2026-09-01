@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SpotlightSurface from '../SpotlightSurface';
-import { CATEGORY_CHIP, CATEGORY_CHIP_ON_IMAGE } from '../../pages/Blog';
+import { CATEGORY_CHIP, CATEGORY_CHIP_ON_IMAGE } from '../categoryChip';
 import { ArrowRight } from 'lucide-react';
 import { useDuration } from '../../hooks/useMobileReducedDuration';
 
