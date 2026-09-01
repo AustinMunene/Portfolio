@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export const careerHistory = [
     {
       title: 'QA Lead',
-      company: 'Intellisoft Consulting Ltd, Nairobi',
+      company: 'IntelliSOFT Consulting Ltd, Nairobi',
       period: 'Sept 2026 - Present',
       description:
         'Provide hands-on QA execution and day-to-day coordination across digital health and internal systems, working with engineering, product, and implementation teams to strengthen release quality.',
