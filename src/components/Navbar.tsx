@@ -76,6 +76,15 @@ const Navbar = () => {
     updateIndicator();
   }, [location.pathname, updateIndicator]);
 
+  /* The position is measured, so anything that changes link widths after the
+     first measurement leaves it stranded: a viewport resize, and the webfont
+     swapping in after the initial paint. */
+  useEffect(() => {
+    window.addEventListener('resize', updateIndicator);
+    document.fonts?.ready.then(updateIndicator);
+    return () => window.removeEventListener('resize', updateIndicator);
+  }, [updateIndicator]);
+
   const navItems = [
     { to: '/career', label: 'Career' },
     { to: '/blog', label: 'Blog' },
@@ -100,7 +109,13 @@ const Navbar = () => {
         </NavLink>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-7" ref={navLinksRef}>
+        {/* `relative` is load-bearing. The underline below is absolutely
+            positioned, and without a positioned ancestor here it resolved
+            against the whole nav row instead: `-bottom-1.5` put it below the
+            pill entirely, and `left-0` started it at the brand mark, so the
+            transform - which is measured from this container - landed it
+            roughly one link to the left of the active one. */}
+        <div className="hidden md:flex items-center space-x-7 relative" ref={navLinksRef}>
           {/* Sliding underline — positioned absolutely and moved via transform
               rather than layoutId / FLIP.  CSS transition handles the slide;
               no framer-motion layout measurements means no mobile flicker. */}
