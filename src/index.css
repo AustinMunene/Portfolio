@@ -727,6 +727,12 @@ html {
   margin-bottom: 0.75em;
 }
 
+/* Anchored headings land under the fixed nav island without this, so a jump
+   from the table of contents hides the very heading it targeted. */
+.prose :is(h2, h3)[id] {
+  scroll-margin-top: 6rem;
+}
+
 
 /* Typography's default blockquote quotes are curly marks injected as pseudo
    elements. Blog posts write their own quotation marks inline, and several

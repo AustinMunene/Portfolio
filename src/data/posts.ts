@@ -19,11 +19,21 @@ export interface BlogPost {
   category: string;
   imageUrl: string;
   content?: string;
+  /** Set on posts that are numbered instalments of a run. */
+  series?: { slug: string; part: number };
 }
+
+/* Posts 12 to 16 were written and published as numbered parts, and each one
+   refers to the others by number in its own body - but nothing linked them, so
+   a reader finishing Part 4 had no route to Part 5 except guessing from dates. */
+export const SERIES: Record<string, { name: string; total: number }> = {
+  'ai-qa-toolbox': { name: 'AI and the QA Toolbox', total: 5 },
+};
 
 export const blogPosts: BlogPost[] = [
   {
     id: 16,
+    series: { slug: 'ai-qa-toolbox', part: 5 },
     title: "Day 1 as a QA Lead: How I Approach a System I've Never Tested Before",
     excerpt: "Today I start as a QA Lead on a digital health system I've never seen. Not a \"here's the perfect QA process\" article — this is the reconnaissance plan I'm actually walking in with, written before I know whether it works.",
     date: "September 1, 2026",
@@ -1870,6 +1880,7 @@ Continuous improvement
   },
   {
     id: 15,
+    series: { slug: 'ai-qa-toolbox', part: 4 },
     title: "Give Your AI Hands: MCP, Tools and Building Your First AI-Powered QA Workflow",
     excerpt: "Your AI has the brain. It has the skills. It still doesn't have hands. What MCP actually is, how it's different from a skill, and how to sketch your first AI-powered QA workflow.",
     date: "August 31, 2026",
@@ -2415,6 +2426,7 @@ Part 4  →  MCP and tools   =  what it can touch
   },
   {
     id: 14,
+    series: { slug: 'ai-qa-toolbox', part: 3 },
     title: "Build Your Own AI Superpowers: The Skills Every Engineer Should Have",
     excerpt: "Stop asking one AI to be good at everything. How to install, call and write your own specialised AI skills for frontend, QA and backend work, and for the parts of the job you keep re-explaining.",
     date: "August 18, 2026",
@@ -3521,6 +3533,7 @@ General
   },
   {
     id: 13,
+    series: { slug: 'ai-qa-toolbox', part: 2 },
     title: "AI Cheat Codes for Engineers: How to Become a Better QA + Full-Stack Dev",
     excerpt: "Twelve ways to use AI that make you a sharper engineer instead of a faster copy-paster. Debugging, breaking features, code review, test data and impact analysis.",
     date: "August 18, 2026",
@@ -3940,6 +3953,7 @@ Users with conflicting permissions
   },
   {
     id: 12,
+    series: { slug: 'ai-qa-toolbox', part: 1 },
     title: "AI Is Not Your Copilot Anymore. It's Your Junior Team",
     excerpt: "Most of us still use AI like a smarter Google search. The bigger shift is delegation: agents with tools, context and guardrails, and what MCP means for engineers and QAs.",
     date: "August 18, 2026",

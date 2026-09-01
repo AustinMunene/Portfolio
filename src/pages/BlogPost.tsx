@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { blogPosts } from '../data/posts';
 import { CATEGORY_CHIP_ON_IMAGE } from '../components/categoryChip';
+import { withHeadingIds } from '../lib/postContent';
+import SeriesNav from '../components/SeriesNav';
+import PostFooterNav from '../components/PostFooterNav';
+import ReadingProgress from '../components/ReadingProgress';
+import TableOfContents from '../components/TableOfContents';
+
+/* Below this, the contents list is longer than the scroll it saves. */
+const TOC_MIN_SECTIONS = 8;
 
 const BlogPost2: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const post = blogPosts.find((p) => p.id === Number(id));
+  const articleRef = useRef<HTMLElement>(null);
+
+  // Heading ids are derived from the body, so this runs once per post rather
+  // than on every render - the longest post is ~6,000 words of HTML.
+  const { html, headings } = useMemo(() => withHeadingIds(post?.content || ''), [post?.content]);
 
   if (!post) {
     return (
@@ -30,8 +43,11 @@ const BlogPost2: React.FC = () => {
 
   return (
     <section className="section-glow relative min-h-screen bg-surface overflow-hidden">
+      <ReadingProgress targetRef={articleRef} />
+
       <div className="container mx-auto px-4 py-24 relative z-10">
         <motion.article
+          ref={articleRef}
           initial={{ y: 20 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
@@ -63,14 +79,20 @@ const BlogPost2: React.FC = () => {
 
           <h1 className="text-4xl md:text-5xl font-display mb-8 gradient-text">{post.title}</h1>
 
+          <SeriesNav post={post} />
+
+          {headings.length >= TOC_MIN_SECTIONS && <TableOfContents headings={headings} />}
+
           {/* Links carry the accent and an underline. They used to be styled as
               muted body text with `prose-a:no-underline`, which was harmless
               while posts linked to nothing, but the posts now link out to real
               projects and a link nobody can see is a link nobody clicks. */}
           <div
             className="prose prose-headings:text-fg prose-a:text-brand prose-a:underline prose-a:underline-offset-4 prose-a:decoration-brand-line hover:prose-a:decoration-brand prose-code:text-fg prose-strong:text-fg max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.content || '' }}
+            dangerouslySetInnerHTML={{ __html: html }}
           />
+
+          <PostFooterNav post={post} />
         </motion.article>
       </div>
     </section>
