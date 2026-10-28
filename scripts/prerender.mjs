@@ -107,7 +107,7 @@ const rssFor = (posts) => {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml(AUTHOR)} — Blog</title>
+    <title>${escapeXml(AUTHOR)} - Blog</title>
     <link>${SITE}/blog</link>
     <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />
     <description>Testing, frontend, AI, and the occasional strong opinion.</description>
@@ -126,24 +126,24 @@ const run = async () => {
   const staticRoutes = [
     {
       route: '/',
-      title: `${AUTHOR} — QA first, frontend as a plus`,
+      title: `${AUTHOR} - QA first, frontend as a plus`,
       description:
         'QA-first engineer in Nairobi. Test automation with Cypress and Playwright, frontend development as a plus, and writing about testing, AI and building things that hold up.',
     },
     {
       route: '/blog',
-      title: `Blog — ${AUTHOR}`,
+      title: `Blog - ${AUTHOR}`,
       description:
         'Mostly what happens when I get bored and start poking at things. Testing, frontend, AI, and the occasional strong opinion.',
     },
     {
       route: '/career',
-      title: `Career — ${AUTHOR}`,
+      title: `Career - ${AUTHOR}`,
       description: 'A timeline of professional growth and achievements in the tech industry.',
     },
     {
       route: '/interactive',
-      title: `Interactive Demo — ${AUTHOR}`,
+      title: `Interactive Demo - ${AUTHOR}`,
       description:
         'Testing, taken apart so you can see how it works. Manual against automated, Cypress against Playwright, run in the browser.',
     },
@@ -157,7 +157,7 @@ const run = async () => {
     await writePage(
       `/blog/${post.id}`,
       render(template, {
-        title: `${post.title} — ${AUTHOR}`,
+        title: `${post.title} - ${AUTHOR}`,
         description: clamp(post.excerpt),
         url: `${SITE}/blog/${post.id}`,
         image: absolute(post.imageUrl),
