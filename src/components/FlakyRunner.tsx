@@ -47,7 +47,7 @@ const TESTS: FlakyTest[] = [
     cause: 'Fixed sleep',
     explanation:
       'Waits a hard-coded 500ms for results to render. On a fast machine that is plenty. On a loaded CI runner it is not, and the assertion fires against an empty list.',
-    fix: 'Wait for the condition, not the clock — assert the list is visible and let the runner retry until it is.',
+    fix: 'Wait for the condition, not the clock - assert the list is visible and let the runner retry until it is.',
   },
   {
     id: 4,
@@ -272,7 +272,7 @@ const FlakyRunner: React.FC = () => {
                 from the test, not the product.
               </p>
               <p>
-                This is how a suite dies. Not in one dramatic moment — it just goes red often enough, for
+                This is how a suite dies. Not in one dramatic moment - it just goes red often enough, for
                 reasons nobody has time to chase, that people start re-running it until it goes green. Once
                 that becomes the habit, a real failure looks exactly like the noise.
               </p>

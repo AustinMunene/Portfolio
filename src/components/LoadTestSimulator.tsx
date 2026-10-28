@@ -50,7 +50,7 @@ const PROFILES: Profile[] = [
       { time: '2m30', vus: 0, p95: 0 },
     ],
     insight:
-      'Two users, two minutes. This is not a performance test — it is a check that the script itself works and the system responds at all. Run it on every deploy. If a smoke test goes red, nothing below it is worth reading.',
+      'Two users, two minutes. This is not a performance test - it is a check that the script itself works and the system responds at all. Run it on every deploy. If a smoke test goes red, nothing below it is worth reading.',
   },
   {
     key: 'load',
@@ -66,7 +66,7 @@ const PROFILES: Profile[] = [
       { time: '6m', vus: 0, p95: 0 },
     ],
     insight:
-      'Ramp to the peak you genuinely expect, hold it, ramp down. Watch the held section rather than the peak — the response time creeping up while load stays flat is the interesting signal, because it usually means something is accumulating.',
+      'Ramp to the peak you genuinely expect, hold it, ramp down. Watch the held section rather than the peak - the response time creeping up while load stays flat is the interesting signal, because it usually means something is accumulating.',
   },
   {
     key: 'stress',
@@ -82,7 +82,7 @@ const PROFILES: Profile[] = [
       { time: '6m', vus: 0, p95: 0 },
     ],
     insight:
-      'Push past the expected peak until something gives. The number you want is not the maximum — it is the point where the curve stops being flat, here somewhere past 200 users. Knowing that number is what lets you answer "can we run the campaign on Friday".',
+      'Push past the expected peak until something gives. The number you want is not the maximum - it is the point where the curve stops being flat, here somewhere past 200 users. Knowing that number is what lets you answer "can we run the campaign on Friday".',
   },
   {
     key: 'spike',
@@ -269,7 +269,7 @@ const LoadTestSimulator: React.FC = () => {
             <span className="text-fg font-medium">
               threshold {breached ? 'breached' : 'met'}
             </span>{' '}
-            — worst p95 was <span className="font-mono text-fg">{worst}ms</span> against a limit of{' '}
+            - worst p95 was <span className="font-mono text-fg">{worst}ms</span> against a limit of{' '}
             <span className="font-mono text-fg">{THRESHOLD_MS}ms</span>.
             {breached && ' In CI this is what fails the build, rather than someone eyeballing a graph.'}
           </p>
@@ -285,7 +285,7 @@ const LoadTestSimulator: React.FC = () => {
             An average hides the people having the worst time. If ninety requests return in 100ms and ten
             take four seconds, the mean is a comfortable 490ms and nobody notices the ten. p95 says
             &ldquo;95 out of 100 were at least this fast&rdquo;, which is a claim about real users rather than
-            about arithmetic. Look at p99 when the tail matters more than the middle — checkout, payments,
+            about arithmetic. Look at p99 when the tail matters more than the middle - checkout, payments,
             anything a person is waiting on.
           </p>
         </div>

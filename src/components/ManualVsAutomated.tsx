@@ -62,7 +62,7 @@ const STEPS: Step[] = [
     manualNote:
       'A person does not know or care what the field is called. They see a box labelled "Promo code" and they type in it.',
     autoNote:
-      'Selector .promo-input no longer exists — the field was renamed to .discount-input last sprint. Nothing is broken for users. This is the test failing, not the product.',
+      'Selector .promo-input no longer exists - the field was renamed to .discount-input last sprint. Nothing is broken for users. This is the test failing, not the product.',
   },
   {
     id: 5,
@@ -73,7 +73,7 @@ const STEPS: Step[] = [
     manualResult: 'pass',
     autoResult: 'skipped',
     autoNote:
-      'Never ran. One renamed class took the rest of this spec down with it, so the discount maths — the thing the spec actually existed to check — went unverified today.',
+      'Never ran. One renamed class took the rest of this spec down with it, so the discount maths - the thing the spec actually existed to check - went unverified today.',
   },
   {
     id: 6,
@@ -398,7 +398,7 @@ const ManualVsAutomated: React.FC = () => {
                     already checked that bit yesterday.
                   </p>
                   <p>
-                    It also cried wolf about a renamed CSS class, and walked straight past a layout bug —
+                    It also cried wolf about a renamed CSS class, and walked straight past a layout bug -
                     because nobody had thought to assert on layout, and a machine only ever checks what it
                     was told to check.
                   </p>

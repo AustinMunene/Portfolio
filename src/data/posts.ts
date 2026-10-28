@@ -35,7 +35,7 @@ export const blogPosts: BlogPost[] = [
     id: 16,
     series: { slug: 'ai-qa-toolbox', part: 5 },
     title: "Day 1 as a QA Lead: How I Approach a System I've Never Tested Before",
-    excerpt: "Today I start as a QA Lead on a digital health system I've never seen. Not a \"here's the perfect QA process\" article — this is the reconnaissance plan I'm actually walking in with, written before I know whether it works.",
+    excerpt: "Today I start as a QA Lead on a digital health system I've never seen. Not a \"here's the perfect QA process\" article - this is the reconnaissance plan I'm actually walking in with, written before I know whether it works.",
     date: "September 1, 2026",
     readTime: "29 min read",
     category: "QA & Testing",
@@ -2375,7 +2375,7 @@ Recommendation:
 
 <p>So be deliberate about it.</p>
 
-<p>Start read-only. Reading tickets, reading PRs, reading reports — those are hard to regret.</p>
+<p>Start read-only. Reading tickets, reading PRs, reading reports - those are hard to regret.</p>
 
 <p>Be careful about the ones that write. Creating tickets, pushing code, touching data, hitting anything that isn't a test environment.</p>
 

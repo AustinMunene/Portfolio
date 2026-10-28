@@ -116,7 +116,7 @@ const Navbar = () => {
             transform - which is measured from this container - landed it
             roughly one link to the left of the active one. */}
         <div className="hidden md:flex items-center space-x-7 relative" ref={navLinksRef}>
-          {/* Sliding underline — positioned absolutely and moved via transform
+          {/* Sliding underline - positioned absolutely and moved via transform
               rather than layoutId / FLIP.  CSS transition handles the slide;
               no framer-motion layout measurements means no mobile flicker. */}
           <div

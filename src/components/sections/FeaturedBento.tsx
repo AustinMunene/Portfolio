@@ -99,7 +99,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
             A production-ready catalog showcasing modern, robust frontends, bulletproof automation systems, and high-fidelity consumer platforms.
           </p>
 
-          {/* Filter Chips — CSS-transition indicator instead of layoutId.
+          {/* Filter Chips - CSS-transition indicator instead of layoutId.
               layoutId triggers FLIP measurements that cause layout
               recalculation flicker on mobile; a positioned div with
               transform + transition achieves the same visual without
@@ -134,7 +134,7 @@ const FeaturedBento = ({ projects }: FeaturedBentoProps) => {
         {/* Asymmetric Bento Masonry Grid.
             AnimatePresence wraps individual cards instead of the whole grid.
             The old mode="wait" pattern removed the entire grid (exit 0.4s),
-            waited, then re-mounted it (enter 0.4s) — a full 0.8s where the
+            waited, then re-mounted it (enter 0.4s) - a full 0.8s where the
             project list was blank, which flashed on phones.  Individual-card
             AnimatePresence lets exiting cards fade out while entering cards
             fade in simultaneously, cutting the perceived transition in half
