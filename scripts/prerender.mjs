@@ -126,9 +126,9 @@ const run = async () => {
   const staticRoutes = [
     {
       route: '/',
-      title: `${AUTHOR} — Frontend + QA Engineer`,
+      title: `${AUTHOR} — QA first, frontend as a plus`,
       description:
-        'Frontend and QA engineer in Nairobi. Test automation with Cypress and Playwright, and writing about testing, AI and building things that hold up.',
+        'QA-first engineer in Nairobi. Test automation with Cypress and Playwright, frontend development as a plus, and writing about testing, AI and building things that hold up.',
     },
     {
       route: '/blog',
